@@ -59,6 +59,7 @@ public class ProductBindTargetView extends TableNavigator implements ISelectionL
 					field, name, type, Utils.OPERATOR_EQUAL, productCode, null);
 			dash.doSetCondition(new ConditionDefinition[]{conditionDefinition});
 			canTransfer = true;
+			
 		}
 	}
 
