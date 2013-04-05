@@ -2,30 +2,31 @@ package com.sg.vim.cocinfo.labelprovider;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 
+import com.mobnut.commons.util.file.FileUtil;
 import com.mongodb.DBObject;
-import com.sg.util.file.FileUtil;
 import com.sg.vim.cocinfo.Activator;
+import com.sg.vim.datamodel.ProductCodeInfo;
 
 public class ProductCodeLabelProvider extends ColumnLabelProvider {
 
   public ProductCodeLabelProvider() {
   }
 
-//  /*
-//   * (non-Javadoc)
-//   * 
-//   * @see org.eclipse.jface.viewers.ColumnLabelProvider#getImage(java.lang.Object)
-//   */
-//  @Override
-//  public Image getImage(Object element) {
-//    if (element instanceof DBObject) {
-//      if (((DBObject) element).get("cocinfo") != null) {
-//        return Activator.getImage("link_16.png");
-//      }
-//    }
-//
-//    return super.getImage(element);
-//  }
+  // /*
+  // * (non-Javadoc)
+  // *
+  // * @see org.eclipse.jface.viewers.ColumnLabelProvider#getImage(java.lang.Object)
+  // */
+  // @Override
+  // public Image getImage(Object element) {
+  // if (element instanceof DBObject) {
+  // if (((DBObject) element).get("cocinfo") != null) {
+  // return Activator.getImage("link_16.png");
+  // }
+  // }
+  //
+  // return super.getImage(element);
+  // }
 
   /*
    * (non-Javadoc)
@@ -35,27 +36,40 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
   @Override
   public String getText(Object element) {
     DBObject data = (DBObject) element;
-    Object productCode = data.get("e_01");
-    Object modelCode = data.get("f_0_2c");
-    Object cocinfo_name = data.get("cocinfo_name");
-    Object cocinfo_id = data.get("cocinfo_id");
+    Object productCode = data.get(ProductCodeInfo.E_02);
+    Object modelCode = data.get(ProductCodeInfo.F_0_2C);
+    Object cocinfo_name = data.get(ProductCodeInfo.COC_NAME);
+    Object cocinfo_id = data.get(ProductCodeInfo.COC_ID);
+    Object cfginfo_name = data.get(ProductCodeInfo.CFG_NAME);
+    Object cfginfo_id = data.get(ProductCodeInfo.CFG_ID);
 
     StringBuilder builder = new StringBuilder();
 
     builder
-        .append("<span style='float:left;padding:4px 4px 4px 4px;FONT-FAMILY:Œ¢»Ì—≈∫⁄;font-size:11pt'>");
+        .append("<span style='float:left;padding:0px 4px 4px 4px;FONT-FAMILY:Œ¢»Ì—≈∫⁄;font-size:11pt'><b>");
 
     builder.append(productCode);
-    builder.append(" ");
+    builder.append(" [");
     builder.append(modelCode);
-    if(cocinfo_id!=null){
+    builder.append(" ]");
+    builder.append("</b><br/><small>");
+    if (cocinfo_id != null) {
       builder.append("<img src=\"");
-      builder.append(FileUtil.getImageURL("link_16.png", Activator.PLUGIN_ID, "image"));
-      builder.append("\"  width='16' height='16' style='padding-right:4px;padding-top:4px;'/>");
-      builder.append("  ");
-      builder.append("<a href=\""+cocinfo_id+"\" target=\"_rwt\">"+cocinfo_name+"</a>");
+      builder.append(FileUtil.getImageURL("link1_1216.png", Activator.PLUGIN_ID, "image"));
+      builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
+      builder.append(" COC: ");
+      builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id + "\" target=\"_rwt\">" + cocinfo_name + "</a>");
     }
-    builder.append("</span>");
+    builder.append("<br/>");
+
+    if (cfginfo_id != null) {
+      builder.append("<img src=\"");
+      builder.append(FileUtil.getImageURL("link2_1216.png", Activator.PLUGIN_ID, "image"));
+      builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
+      builder.append(" ≈‰÷√–Ú∫≈: ");
+      builder.append("<a href=\"com.sg.vim.editor.configcode@" + cfginfo_id + "\" target=\"_rwt\">" + cfginfo_name + "</a>");
+    }
+    builder.append("</small></span>");
 
     return builder.toString();
 

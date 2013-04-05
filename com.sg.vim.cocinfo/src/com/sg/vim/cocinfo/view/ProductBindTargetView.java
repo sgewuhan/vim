@@ -8,18 +8,18 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.mobnut.commons.util.Utils;
 import com.mongodb.DBObject;
 import com.sg.ui.part.FilterPanel;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.filter.ConditionDefinition;
-import com.sg.util.Utils;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
-public class COCInfoView extends TableNavigator implements ISelectionListener {
+public class ProductBindTargetView extends TableNavigator implements ISelectionListener {
 
 	private boolean canTransfer;
 
-	public COCInfoView() {
+	public ProductBindTargetView() {
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class COCInfoView extends TableNavigator implements ISelectionListener {
 			String name = "³µÐÍ´úºÅ";
 			ConditionDefinition conditionDefinition = new ConditionDefinition(
 					field, name, type, Utils.OPERATOR_EQUAL, productCode, null);
-			dash.doSetCondition(conditionDefinition);
+			dash.doSetCondition(new ConditionDefinition[]{conditionDefinition});
 			canTransfer = true;
 		}
 	}

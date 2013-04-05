@@ -1,4 +1,4 @@
-package com.sg.vim.cocinfo;
+package com.sg.vim.cocinfo.handler;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
@@ -16,13 +16,13 @@ import com.sg.vim.datamodel.BasicInfo;
 import com.sg.vim.datamodel.COCInfo;
 import com.sg.vim.datamodel.ModelTransfer;
 
-public class CreateHandler implements ICreateHandler {
+public class CreateCOCHandler implements ICreateHandler {
 
 	private BasicInfo service;
 	private DataObjectCollectionService dataObjectService;
 	private COCInfo cocService;
 
-	public CreateHandler() {
+	public CreateCOCHandler() {
 		service = new BasicInfo();
 		dataObjectService = new DataObjectCollectionService();
 		cocService = new COCInfo();

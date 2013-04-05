@@ -14,11 +14,11 @@ import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.filter.ConditionDefinition;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
-public class ProductCodeView extends TableNavigator implements ISelectionListener {
+public class ConfigCodeView extends TableNavigator implements ISelectionListener {
 
 	private boolean canTransfer;
 
-	public ProductCodeView() {
+	public ConfigCodeView() {
 	}
 
 	/*
