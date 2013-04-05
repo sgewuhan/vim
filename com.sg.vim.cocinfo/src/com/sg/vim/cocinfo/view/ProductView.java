@@ -1,12 +1,10 @@
 package com.sg.vim.cocinfo.view;
 
-import org.eclipse.jface.internal.provisional.action.ToolBarManager2;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 import com.sg.ui.part.view.TableNavigator;
@@ -26,7 +24,9 @@ public class ProductView extends TableNavigator implements IPartListener {
 
   @Override
   public void partActivated(IWorkbenchPart part) {
-
+//    if(part instanceof ProductView){
+//      ((ProductView) part).getViewSite().getActionBars().updateActionBars();
+//    }
   }
 
   @Override
@@ -40,8 +40,10 @@ public class ProductView extends TableNavigator implements IPartListener {
     IEditorReference[] er = page.getEditorReferences();
     if (er == null || er.length == 0) {
       try {
+//        IViewPart v = page.showView(getViewSite().getId());
         page.resetPerspective();
       } catch (Exception e) {
+        // e.printStackTrace();
       }
     }
   }
@@ -58,7 +60,9 @@ public class ProductView extends TableNavigator implements IPartListener {
       getViewSite().getPage().activate(part);
       getViewSite().getPage().hideView(this);
     }
-
+//    if(part instanceof ProductView){
+//      ((ProductView) part).getViewSite().getActionBars().updateActionBars();
+//    }
   }
 
 }

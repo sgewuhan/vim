@@ -1,4 +1,4 @@
-package com.sg.vim.configcode.view;
+package com.sg.vim.cocinfo.view;
 
 import java.util.Iterator;
 
@@ -7,18 +7,19 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
-import com.sg.util.Utils;
+
+import com.mobnut.commons.util.Utils;
 import com.mongodb.DBObject;
 import com.sg.ui.part.FilterPanel;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.filter.ConditionDefinition;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
-public class ProductCodeView extends TableNavigator implements ISelectionListener {
+public class ProductBindTargetView extends TableNavigator implements ISelectionListener {
 
 	private boolean canTransfer;
 
-	public ProductCodeView() {
+	public ProductBindTargetView() {
 	}
 
 	/*

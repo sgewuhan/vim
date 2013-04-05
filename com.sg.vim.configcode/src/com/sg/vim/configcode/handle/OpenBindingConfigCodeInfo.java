@@ -23,7 +23,7 @@ public class OpenBindingConfigCodeInfo extends AbstractHandler {
 		
 		DBObject productCode = (DBObject) selection.getFirstElement();
 		
-		ObjectId cocinfoId = (ObjectId)productCode.get("configcodeinfo");
+		ObjectId cocinfoId = (ObjectId)productCode.get("configcodeinfo_id");
 		if(cocinfoId==null){
 			MessageBox mb = new MessageBox(HandlerUtil.getActiveShell(event),SWT.ICON_WARNING);
 			mb.setText("查看配置序列号信息");

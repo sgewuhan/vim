@@ -6,8 +6,10 @@
       <perspectiveExtension
             targetID="com.sg.vim.perspective.configcode">
          <view
+               closeable="false"
                id="com.sg.vim.configcode"
                minimized="false"
+               ratio="0.4"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
@@ -15,7 +17,7 @@
                closeable="false"
                id="com.sg.vim.productcode"
                minimized="false"
-               ratio="0.7"
+               ratio="0.6"
                relationship="right"
                relative="com.sg.vim.configcode">
          </view>
@@ -24,7 +26,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="com.sg.vim.configcode.view.ProductCodeView"
+            class="com.sg.vim.configcode.view.ConfigCodeView"
             id="com.sg.vim.configcode"
             name="配置序列号"
             restorable="true">
@@ -81,7 +83,7 @@
             provideSelection="true"
             table="com.sg.vim.table.configcode">
          <createEditor
-               createHandler="com.sg.vim.configcode.CreateHandler"
+               createHandler="com.sg.vim.cocinfo.handler.CreateCFGHandler"
                editorId="com.sg.vim.editor.configcode">
          </createEditor>
          <filterAction>
@@ -238,7 +240,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.configcode.handle.BindingConfigCodeToProductcode"
+            class="com.sg.vim.cocinfo.handler.BindingConfigCodeToProductcode"
             commandId="com.sg.vim.configcode.transfertoproductcode">
          <enabledWhen>
             <with

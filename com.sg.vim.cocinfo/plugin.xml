@@ -10,15 +10,22 @@
                id="com.sg.vim.cocinfo"
                minimized="false"
                moveable="false"
-               ratio="0.3"
+               ratio="0.4"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
          <view
                closeable="false"
+               id="com.sg.vim.configcode"
+               minimized="false"
+               relationship="stack"
+               relative="com.sg.vim.cocinfo">
+         </view>
+         <view
+               closeable="false"
                id="com.sg.vim.productcode"
                minimized="false"
-               ratio="0.7"
+               ratio="0.6"
                relationship="right"
                relative="com.sg.vim.cocinfo">
          </view>
@@ -27,7 +34,7 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="com.sg.vim.cocinfo.view.COCInfoView"
+            class="com.sg.vim.cocinfo.view.ProductBindTargetView"
             id="com.sg.vim.cocinfo"
             name="车辆一致性信息"
             restorable="true">
@@ -36,6 +43,12 @@
             class="com.sg.vim.cocinfo.view.ProductView"
             id="com.sg.vim.productcode"
             name="成品码管理"
+            restorable="true">
+      </view>
+      <view
+            class="com.sg.vim.cocinfo.view.ProductBindTargetView"
+            id="com.sg.vim.configcode"
+            name="配置序列号"
             restorable="true">
       </view>
    </extension>
@@ -250,7 +263,7 @@
 			<column column="f_50" name="备注" type="String"></column>         
          </searchAction>
          <createEditor
-               createHandler="com.sg.vim.cocinfo.CreateHandler"
+               createHandler="com.sg.vim.cocinfo.handler.CreateCOCHandler"
                editorId="com.sg.vim.editor.cocinfo">
          </createEditor>
       </navigator>
@@ -270,8 +283,13 @@
                   type="String">
             </column>
             <column
-                  column="cocinfo"
+                  column="cocinfo_name"
                   name="车型一致性信息"
+                  type="String">
+            </column>
+            <column
+                  column="configcodeinfo_name"
+                  name="配置序号信息"
                   type="String">
             </column>
          </filterAction>
@@ -291,6 +309,11 @@
                   name="车型一致性信息"
                   type="String">
             </column>
+            <column
+                  column="configcodeinfo_name"
+                  name="配置序号信息"
+                  type="String">
+            </column>
          </searchAction>
          <queryAction>
             <column
@@ -308,7 +331,35 @@
                   name="车型一致性信息"
                   type="String">
             </column>
+            <column
+                  column="configcodeinfo_name"
+                  name="配置序号信息"
+                  type="String">
+            </column>
          </queryAction>
+      </navigator>
+      <navigator
+            id="com.sg.vim.configcode"
+            provideSelection="true"
+            table="com.sg.vim.table.configcode">
+         <createEditor
+               createHandler="com.sg.vim.cocinfo.handler.CreateCFGHandler"
+               editorId="com.sg.vim.editor.configcode">
+         </createEditor>
+         <filterAction>
+            <column
+                  column="f_0_2c"
+                  name="车型代号"
+                  type="String">
+            </column>
+         </filterAction>
+         <searchAction>
+            <column
+                  column="f_0_2c"
+                  name="车型代号"
+                  type="String">
+            </column>
+         </searchAction>
       </navigator>
    </extension>
    <extension
@@ -479,7 +530,7 @@
             canCreate="true"
             canDelete="true"
             collectionName="productcodeinfo"
-            customItemHeight="38"
+            customItemHeight="72"
             dbName="appportal"
             doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.editor.productcodeinfo"
@@ -501,6 +552,47 @@
                name="成品码"
                type="String"
                width="-1">
+         </column>
+      </table>
+      <table
+            canCreate="true"
+            canDelete="true"
+            collectionName="configcodeinfo"
+            dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
+            editorId="com.sg.vim.editor.configcode"
+            id="com.sg.vim.table.configcode"
+            idfield="_id"
+            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput">
+         <column
+               column="f_0_2c"
+               name="公告车型"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="h_01"
+               name="正式配置序列号"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="h_02"
+               name="临时配置序列号"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="h_03"
+               name="配置描述"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="h_04"
+               name="配置"
+               type="String"
+               width="80">
          </column>
       </table>
    </extension>
@@ -1860,6 +1952,87 @@
             location="after=com.sg.vim.cocpinfoage.advance"
             targetId="systempage">
       </pageExtendsions>
+      <editor
+            collectionName="configcodeinfo"
+            dbName="appportal"
+            id="com.sg.vim.editor.configcode"
+            name="配置序列号">
+         <basicpage
+               description="配置基本信息"
+               id="com.sg.vim.configcode.basicpage1"
+               title="基本信息">
+            <pagecolumn>
+               <section
+                     label="配置序列号">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_0_2c"
+                        label="公告车型"
+                        labelVisible="true"
+                        name="f_0_2c"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="h_01"
+                        label="正式配置序列号"
+                        labelVisible="true"
+                        name="h_01"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="h_02"
+                        label="临时配置序列号"
+                        labelVisible="true"
+                        name="h_02"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="h_03"
+                        label="配置描述"
+                        labelVisible="true"
+                        name="h_03"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="h_04"
+                        label="配置"
+                        labelVisible="true"
+                        name="h_04"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+      </editor>
+      <pageExtendsions
+            id="com.sg.vim.editor.configcode"
+            location="after=com.sg.vim.configcode.basicpage1"
+            targetId="systempage">
+      </pageExtendsions>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -1873,6 +2046,50 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:com.sg.vim.configcode?after=additions">
+         <command
+               commandId="com.sg.vim.configcode.transfertoproductcode"
+               icon="image/bind_32.png"
+               label="绑定到成品码"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:main?after=com.sg.ui.separator3">
+         <command
+               commandId="com.sg.vim.command.copycreate.cocinfo"
+               icon="image/trasfer_24.png"
+               label="创建一致性信息"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.view.basic">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.vim.command.copycreate.configcode"
+               icon="image/trasfer_24.png"
+               label="创建配置序列号"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.view.basic">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -1881,8 +2098,16 @@
             name="绑定到成品码">
       </command>
       <command
-            id="com.sg.vim.cocinfo.openproductcocinfo"
-            name="查看绑定的车型一致性信息">
+            id="com.sg.vim.configcode.transfertoproductcode"
+            name="绑定到成品码">
+      </command>
+      <command
+            id="com.sg.vim.command.copycreate.cocinfo"
+            name="创建一致性信息">
+      </command>
+      <command
+            id="com.sg.vim.command.copycreate.configcode"
+            name="创建配置序列号">
       </command>
    </extension>
    <extension
@@ -1902,8 +2127,42 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.cocinfo.handler.OpenBindingCOCInfo"
-            commandId="com.sg.vim.cocinfo.openproductcocinfo">
+            class="com.sg.vim.cocinfo.handler.BindingConfigCodeToProductcode"
+            commandId="com.sg.vim.configcode.transfertoproductcode">
+         <enabledWhen>
+            <with
+                  variable="activePart">
+               <test
+                     args="canBind"
+                     property="com.sg.vim.test.activePart"
+                     value="true">
+               </test>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.CopyCreateCOCinfo"
+            commandId="com.sg.vim.command.copycreate.cocinfo">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="1">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.CopyCreateConfigCode"
+            commandId="com.sg.vim.command.copycreate.configcode">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="1">
+               </count>
+            </with>
+         </enabledWhen>
       </handler>
    </extension>
    <extension

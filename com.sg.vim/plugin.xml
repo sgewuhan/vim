@@ -11,12 +11,7 @@
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="com.sg.vim.perspective.cocinfo"
-            name="车辆一致性信息">
-      </perspective>
-      <perspective
-            class="com.sg.vim.EditorHidePerspective"
-            id="com.sg.vim.perspective.configcode"
-            name="配置序列号">
+            name="成品码管理">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"

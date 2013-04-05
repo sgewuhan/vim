@@ -19,26 +19,24 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.table.CTableViewer;
-import com.sg.vim.datamodel.COCInfo;
+import com.sg.vim.datamodel.ConfigCodeInfo;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
-public class BindingCOCInfoToProductcode extends AbstractHandler {
+public class BindingConfigCodeToProductcode extends AbstractHandler {
 
-  @Override
   public Object execute(ExecutionEvent event) throws ExecutionException {
     IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
     if (selection.isEmpty()) {
       MessageBox mb = new MessageBox(HandlerUtil.getActiveShell(event), SWT.ICON_INFORMATION);
-      mb.setText("绑定车型一致性信息到成品码");
-      mb.setMessage("请选择需要绑定到成品码的车型一致性信息记录");
+      mb.setText("绑定配置序列号到成品码");
+      mb.setMessage("请选择需要绑定到成品码的配置序列号");
       mb.open();
       return null;
     }
 
-    DBObject cocinfo = (DBObject) selection.getFirstElement();
-    ObjectId cocinfoId = (ObjectId) cocinfo.get(ProductCodeInfo.FIELD_SYSID);
-    String cocinfoName = (String) cocinfo.get(COCInfo.F_0_2_1) + " " + cocinfo.get(COCInfo.F_0_2C)
-        + " " + cocinfo.get(COCInfo.F_0_2a);
+    DBObject configcode = (DBObject) selection.getFirstElement();
+    ObjectId configcodeId = (ObjectId) configcode.get(ConfigCodeInfo.FIELD_SYSID);
+    String configcodeName = (String) configcode.get(ConfigCodeInfo.H_03);
 
     IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);
     TableNavigator part = (TableNavigator) window.getActivePage()
@@ -50,8 +48,8 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
     IStructuredSelection prodCodeSelection = viewer.getSelection();
     if (prodCodeSelection == null || prodCodeSelection.isEmpty()) {
       MessageBox mb = new MessageBox(HandlerUtil.getActiveShell(event), SWT.ICON_INFORMATION);
-      mb.setText("绑定车型一致性信息到成品码");
-      mb.setMessage("请选择需要绑定车型一致性信息的成品码记录");
+      mb.setText("绑定配置序列号到成品码");
+      mb.setMessage("请选择需要绑定配置序列号的成品码记录");
       mb.open();
       return null;
     }
@@ -68,23 +66,22 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
         new BasicDBObject().append("$in", idList));
     DBObject data = new BasicDBObject().append(
         "$set",
-        new BasicDBObject().append(ProductCodeInfo.COC_ID, cocinfoId).append(
-            ProductCodeInfo.COC_NAME, cocinfoName));
+        new BasicDBObject().append(ProductCodeInfo.CFG_ID, configcodeId).append(
+            ProductCodeInfo.CFG_NAME, configcodeName));
     c.update(query, data, false, true);
 
     iter = prodCodeSelection.iterator();
     while (iter.hasNext()) {
       DBObject productCodeData = (DBObject) iter.next();
-      productCodeData.put(ProductCodeInfo.COC_ID, cocinfoId);
-      productCodeData.put(ProductCodeInfo.COC_NAME, cocinfoName);
+      productCodeData.put(ProductCodeInfo.CFG_ID, configcodeId);
+      productCodeData.put(ProductCodeInfo.CFG_NAME, configcodeName);
       viewer.update(productCodeData, null);
     }
 
     MessageBox mb = new MessageBox(HandlerUtil.getActiveShell(event), SWT.ICON_INFORMATION);
-    mb.setText("绑定车型一致性信息到成品码");
-    mb.setMessage("已经成功完成车型一致性信息绑定处理");
+    mb.setText("绑定配置序列号到成品码");
+    mb.setMessage("已经成功将配置序列号绑定处理");
     mb.open();
     return null;
   }
-
 }

@@ -1,4 +1,4 @@
-package com.sg.vim.configcode;
+package com.sg.vim.cocinfo.handler;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
@@ -16,13 +16,13 @@ import com.sg.vim.datamodel.BasicInfo;
 import com.sg.vim.datamodel.ConfigCodeInfo;
 import com.sg.vim.datamodel.ModelTransfer;
 
-public class CreateHandler implements ICreateHandler {
+public class CreateCFGHandler implements ICreateHandler {
 
 	private BasicInfo service;
 	private DataObjectCollectionService dataObjectService;
 	private ConfigCodeInfo configService;
 
-	public CreateHandler() {
+	public CreateCFGHandler() {
 		service = new BasicInfo();
 		dataObjectService = new DataObjectCollectionService();
 		configService = new ConfigCodeInfo();

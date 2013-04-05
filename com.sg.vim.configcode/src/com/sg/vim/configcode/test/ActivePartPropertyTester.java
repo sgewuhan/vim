@@ -3,7 +3,7 @@ package com.sg.vim.configcode.test;
 import org.eclipse.core.expressions.PropertyTester;
 
 import com.sg.util.Utils;
-import com.sg.vim.configcode.view.ProductCodeView;
+import com.sg.vim.configcode.view.ConfigCodeView;
 
 public class ActivePartPropertyTester extends PropertyTester {
 	private static final String ACTIVE_PART= "activePart";
@@ -17,8 +17,8 @@ public class ActivePartPropertyTester extends PropertyTester {
 			Object expectedValue) {
 		if (ACTIVE_PART.equals(property) && !Utils.isNullOrEmpty(args)) {
 			if ("canBind".equals(args[0])) {
-				if (receiver instanceof ProductCodeView) {
-					boolean canBind = ((ProductCodeView) receiver).canBind();
+				if (receiver instanceof ConfigCodeView) {
+					boolean canBind = ((ConfigCodeView) receiver).canBind();
 					return expectedValue.equals(new Boolean(canBind));
 				}
 			}

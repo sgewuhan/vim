@@ -2,9 +2,9 @@ package com.sg.vim.datamodel;
 
 import java.util.Iterator;
 
+import com.mobnut.commons.util.Utils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.sg.util.Utils;
 
 public class ModelTransfer {
 	
