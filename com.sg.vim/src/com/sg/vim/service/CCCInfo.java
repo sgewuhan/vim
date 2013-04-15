@@ -129,6 +129,7 @@ public class CCCInfo extends AuthCollectionService {
 
 	/* (non-Javadoc)
 	 * @see com.mobnut.db.collection.AuthCollectionService#getDefaultSearchColumns()
+	 * 
 	 */
 	@Override
 	public DBObject getDefaultSearchColumns() {
