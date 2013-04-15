@@ -33,6 +33,16 @@
             id="com.sg.vim.perspective.certificate"
             name="合格证管理">
       </perspective>
+      <perspective
+            class="com.sg.vim.EditorHidePerspective"
+            id="com.sg.vim.perspective1"
+            name="环保数据管理">
+      </perspective>
+      <perspective
+            class="com.sg.vim.EditorHidePerspective"
+            id="com.sg.vim.perspective.print"
+            name="打印管理">
+      </perspective>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
