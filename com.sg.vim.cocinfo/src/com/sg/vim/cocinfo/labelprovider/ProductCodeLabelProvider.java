@@ -13,7 +13,6 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ColumnLabelProvider#getImage(java.lang.Object)
-	 * 
 	 */
 	@Override
 	public Image getImage(Object element) {
