@@ -494,7 +494,7 @@
             queryMode="false"
             selectionListener="com.sg.vim.cocinfo.table.ProductCodeTableSelectionListener"
             useHashlookup="false"
-            virtual="true">
+            virtual="false">
          <column
                column="e_01"
                labelProvider="com.sg.vim.cocinfo.labelprovider.ProductCodeLabelProvider"
