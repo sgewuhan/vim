@@ -5,15 +5,16 @@ import com.mobnut.portal.Portal;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
 
-public class ProductCodeInfo extends AuthCollectionService {
+public class ConfigCodeInfo extends AuthCollectionService {
+
+
+	public static final String  H_01="h_01";   //正式配置序列号
+	public static final String  H_02="h_02";   //临时配置序列号
+	public static final String  H_03="h_03";   //配置描述
+	public static final String  H_04="h_04";   //配置
+	public static final String  F_0_5a="f_0_5a";   //
 
 	
-	public static final String CCC_12="ccc_12";                            //公告车型
-	public static final String E_01="e_01";                              //ＣＯＣ
-	public static final String E_02="e_02";              //成品码
-	public static final String H_04="h_04";             //配置
-	public static final String F_0_2C="f_0_2c";                          //颜色
-
 	@Override
 	public DB getDB() {
 		return Portal.getBasicDB();
@@ -24,7 +25,7 @@ public class ProductCodeInfo extends AuthCollectionService {
 	 */
 	@Override
 	protected String getCollectionName() {
-		return "productcodeinfo";
+		return "configcodeinfo";
 	}
 
 	/* (non-Javadoc)
