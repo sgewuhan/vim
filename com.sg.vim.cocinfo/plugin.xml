@@ -1898,6 +1898,8 @@
       <handler
             class="com.sg.vim.cocinfo.handler.OpenBindingCOCInfo"
             commandId="com.sg.vim.cocinfo.openproductcocinfo">
+         <enabledWhen>
+         </enabledWhen>
       </handler>
    </extension>
    <extension
