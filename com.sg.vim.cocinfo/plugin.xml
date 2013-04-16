@@ -18,7 +18,7 @@
                closeable="false"
                id="com.sg.vim.productcode"
                minimized="false"
-               ratio="0.5"
+               ratio="0.7"
                relationship="right"
                relative="com.sg.vim.cocinfo">
          </view>
@@ -33,7 +33,7 @@
             restorable="true">
       </view>
       <view
-            class="com.sg.ui.part.view.TableNavigator"
+            class="com.sg.vim.cocinfo.view.ProductView"
             id="com.sg.vim.productcode"
             name="成品码管理"
             restorable="true">
