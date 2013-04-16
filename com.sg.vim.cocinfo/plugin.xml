@@ -18,7 +18,7 @@
                closeable="false"
                id="com.sg.vim.productcode"
                minimized="false"
-               ratio="0.7"
+               ratio="0.5"
                relationship="right"
                relative="com.sg.vim.cocinfo">
          </view>
@@ -292,6 +292,23 @@
                   type="String">
             </column>
          </searchAction>
+         <queryAction>
+            <column
+                  column="e_01"
+                  name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2c"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="cocinfo_name"
+                  name="车型一致性信息"
+                  type="String">
+            </column>
+         </queryAction>
       </navigator>
    </extension>
    <extension
@@ -462,15 +479,20 @@
             canCreate="true"
             canDelete="true"
             collectionName="productcodeinfo"
-            contentProvider="com.sg.ui.viewer.table.DBCursorContentProvider"
+            customItemHeight="38"
             dbName="appportal"
             doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.editor.productcodeinfo"
             fullSelection="true"
+            headerVisiable="false"
             id="com.sg.vim.table.productcode"
             idfield="_id"
             inputProvider="com.sg.vim.datamodel.ProductCodeInfoInput"
+            limit="200"
+            markupEnabled="true"
             multiSelection="true"
+            queryMode="false"
+            selectionListener="com.sg.vim.cocinfo.table.ProductCodeTableSelectionListener"
             useHashlookup="false"
             virtual="true">
          <column
@@ -478,13 +500,7 @@
                labelProvider="com.sg.vim.cocinfo.labelprovider.ProductCodeLabelProvider"
                name="成品码"
                type="String"
-               width="80">
-         </column>
-         <column
-               column="f_0_2c"
-               name="车辆型号"
-               type="String"
-               width="80">
+               width="-1">
          </column>
       </table>
    </extension>
@@ -1854,16 +1870,6 @@
                commandId="com.sg.vim.cocinfo.transfertoproductcode"
                icon="image/bind_32.png"
                label="绑定到成品码"
-               style="push">
-         </command>
-      </menuContribution>
-      <menuContribution
-            allPopups="false"
-            locationURI="toolbar:com.sg.vim.productcode?after=additions">
-         <command
-               commandId="com.sg.vim.cocinfo.openproductcocinfo"
-               icon="image/link_32.png"
-               label="查看绑定的车型一致性信息"
                style="push">
          </command>
       </menuContribution>
