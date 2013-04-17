@@ -9,11 +9,13 @@ public class ProductCodeInfo extends AuthCollectionService {
 
 	
 	public static final String CCC_12="ccc_12";                            //公告车型
-	public static final String E_01="e_01";                              //ＣＯＣ
+//	public static final String E_01="e_01";                              //ＣＯＣ
 	public static final String E_02="e_02";              //成品码
 	public static final String H_04="h_04";             //配置
 	public static final String F_0_2C="f_0_2c";                          //颜色
-
+	public static final String COC_ID="cocinfo_id";
+	public static final String COC_NAME="cocinfo_name";
+	
 	@Override
 	public DB getDB() {
 		return Portal.getBasicDB();
