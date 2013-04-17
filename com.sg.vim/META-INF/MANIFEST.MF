@@ -19,4 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: com.sg.util,
- com.sg.util.file
+ com.sg.util.file,
+ javax.servlet;version="2.6.0",
+ javax.servlet.http;version="2.6.0"

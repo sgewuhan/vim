@@ -49,6 +49,13 @@
                showTitle="true"
                standalone="false">
          </view>
+         <view
+               closeable="false"
+               id="com.sg.vim.print.printView"
+               minimized="false"
+               relationship="right"
+               relative="com.sg.vim.view.certificate">
+         </view>
        
       </perspectiveExtension>
    </extension>
@@ -76,6 +83,12 @@
             class="com.sg.ui.part.view.TableNavigator"
             id="com.sg.vim.view.certificate"
             name="合格证管理"
+            restorable="true">
+      </view>
+      <view
+            class="com.sg.vim.print.PrintView"
+            id="com.sg.vim.print.printView"
+            name="打印"
             restorable="true">
       </view>
    </extension>
@@ -1401,7 +1414,13 @@
       </table>
    </extension>
    <extension
-         point="com.sg.ui.dataEditor">
+         point="org.eclipse.rap.ui.entrypoint">
+      <entrypoint
+            brandingId="com.mobnut.portal.branding"
+            class="com.sg.vim.print.PrintEntryPoint"
+            id="com.sg.vim.print.clientprint"
+            path="/print">
+      </entrypoint>
    </extension>
 
 </plugin>
