@@ -22,7 +22,7 @@
                minimized="false"
                moveable="false"
                ratio="1"
-               relationship="left"
+               relationship="stack"
                relative="com.sg.vim.view.certificate"
                showTitle="true"
                standalone="false">
@@ -33,7 +33,7 @@
                minimized="false"
                moveable="false"
                ratio="1"
-               relationship="left"
+               relationship="stack"
                relative="com.sg.vim.view.certificate"
                showTitle="true"
                standalone="false">
@@ -44,7 +44,7 @@
                minimized="false"
                moveable="false"
                ratio="0.3"
-               relationship="left"
+               relationship="stack"
                relative="com.sg.vim.view.certificate"
                showTitle="true"
                standalone="false">

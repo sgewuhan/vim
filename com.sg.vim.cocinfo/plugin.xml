@@ -488,7 +488,7 @@
             id="com.sg.vim.table.productcode"
             idfield="_id"
             inputProvider="com.sg.vim.datamodel.ProductCodeInfoInput"
-            limit="200"
+            limit="100"
             markupEnabled="true"
             multiSelection="true"
             queryMode="false"
@@ -1904,8 +1904,6 @@
       <handler
             class="com.sg.vim.cocinfo.handler.OpenBindingCOCInfo"
             commandId="com.sg.vim.cocinfo.openproductcocinfo">
-         <enabledWhen>
-         </enabledWhen>
       </handler>
    </extension>
    <extension
