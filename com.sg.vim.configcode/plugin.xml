@@ -29,12 +29,6 @@
             name="配置序列号"
             restorable="true">
       </view>
-      <view
-            class="com.sg.ui.part.view.TableNavigator"
-            id="com.sg.vim.productcode"
-            name="成品码管理"
-            restorable="true">
-      </view>
    </extension>
    <extension
          point="com.sg.ui.table">
@@ -75,35 +69,6 @@
          <column
                column="h_04"
                name="配置"
-               type="String"
-               width="80">
-         </column>
-      </table>
-      <table
-            canCreate="true"
-            canDelete="true"
-            collectionName="productcodeinfo"
-            contentProvider="com.sg.ui.viewer.table.DBCursorContentProvider"
-            dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
-            editorId="com.sg.vim.editor.productcodeinfo"
-            fullSelection="true"
-            id="com.sg.vim.table.productcode"
-            idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ProductCodeInfoInput"
-            multiSelection="true"
-            useHashlookup="false"
-            virtual="true">
-         <column
-               column="e_01"
-               labelProvider="com.sg.vim.cocinfo.labelprovider.ProductCodeLabelProvider"
-               name="成品码"
-               type="String"
-               width="80">
-         </column>
-         <column
-               column="f_0_2c"
-               name="车辆型号"
                type="String"
                width="80">
          </column>
@@ -239,16 +204,6 @@
                commandId="com.sg.vim.configcode.transfertoproductcode"
                icon="image/bind_32.png"
                label="绑定到成品码"
-               style="push">
-         </command>
-      </menuContribution>
-      <menuContribution
-            allPopups="false"
-            locationURI="toolbar:com.sg.vim.productcode?after=additions">
-         <command
-               commandId="com.sg.vim.configcode.openconfigcodeinfo"
-               icon="image/link_32.png"
-               label="查看绑定的配置序列号信息"
                style="push">
          </command>
       </menuContribution>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Sync
+Bundle-SymbolicName: com.sg.vim.sync;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.sg.vim.sync.Sync
+Bundle-Vendor: SG
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.rap.ui;bundle-version="2.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

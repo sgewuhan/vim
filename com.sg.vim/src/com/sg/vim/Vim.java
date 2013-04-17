@@ -16,11 +16,15 @@ public class Vim implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		Vim.context = bundleContext;
-//		loadTestData();
+//		Vim.context = bundleContext;
+//		loadTestData("A");
+//		loadTestData("B");
+//		loadTestData("C");
+//		loadTestData("D");
+//		loadTestData("E");
 	}
 
-//	private void loadTestData() {
+//	private void loadTestData(String stamp) {
 //		DBCollection collection = DBActivator.getCollection("appportal", "productcodeinfo");
 //		long start = System.currentTimeMillis();
 //		List<DBObject> list = new ArrayList<DBObject>();
@@ -32,7 +36,10 @@ public class Vim implements BundleActivator {
 //			data.put("_cdate", new Date());
 //			data.put("_mdate", new Date());
 //			data.put("_editor", "com.sg.vim.editor.productcodeinfo");
-//			data.put("cocinfo", new ObjectId("51657a3c957cf972aae7d826"));
+//            data.put("e_01", stamp+Integer.toHexString(i).toUpperCase());
+//            data.put("cocinfo_id", new ObjectId("51657a3c957cf972aae7d826"));
+//			data.put("cocinfo_name", "车型ABC"+i+stamp);
+//			data.put("f_0_2c", "车辆型号");
 //			list.add(data);
 //			System.out.println(i);
 //		}

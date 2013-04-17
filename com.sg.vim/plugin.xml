@@ -30,18 +30,6 @@
       </perspective>
    </extension>
    <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-   </extension>
-   <extension
-         point="com.sg.ui.navigator">
-   </extension>
-   <extension
-         point="com.sg.ui.table">
-   </extension>
-   <extension
          point="com.sg.ui.dataEditor">
 
 
