@@ -23,6 +23,11 @@
             id="com.sg.vim.perspective.print"
             name="打印管理">
       </perspective>
+      <perspective
+            class="com.mobnut.admin.AdminPerspectiveFactory"
+            id="com.mobnut.admin.perspective"
+            name="系统管理">
+      </perspective>
    </extension>
    <extension
          point="com.sg.ui.dataEditor">
@@ -81,6 +86,12 @@
             </pagecolumn>
          </basicpage>
       </editor>
+   </extension>
+   <extension
+         point="com.mobnut.portal.portalNotice">
+      <notice
+            noticeCreator="com.mobnut.portal.notice.ImageNoticeCreator">
+      </notice>
    </extension>
    <!--extension
          point="com.sg.ui.dataEditor">

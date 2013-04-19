@@ -13,4 +13,5 @@ Bundle-ClassPath: lib/ojdbc6.jar,
  .
 Export-Package: com.sg.sqldb,
  com.sg.sqldb.service,
- com.sg.sqldb.utility
+ com.sg.sqldb.utility,
+ oracle.net.aso
