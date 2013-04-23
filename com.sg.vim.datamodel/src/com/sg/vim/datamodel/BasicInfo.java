@@ -15,7 +15,13 @@ public class BasicInfo extends AuthCollectionService {
 	public static final String  F_1="f_1";  //轴数
 	public static final String  F_1_1="f_1_1";  //轮胎数
 	public static final String  F_3="f_3";  //轴距
-	public static final String  F_5="f_5";  //前轮距/后轮距
+    public static final String  F_5="f_5";  //前轮距/后轮距
+
+    //*********************zhonghua 424 modify replace F_5**************************
+    public static final String  F_5A="f_5a";  //前轮距/后轮距
+    public static final String  F_5B="f_5b";  //前轮距/后轮距
+	//******************************************************************************
+    
 	public static final String  F_6_1="f_6_1";  //外廓长
 	public static final String  F_7_1="f_7_1";  //外廓高
 	public static final String  F_8="f_8";  //外廓宽

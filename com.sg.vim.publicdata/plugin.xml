@@ -1036,6 +1036,7 @@
             </column>
             <column
                   column="f_5"
+                  labelProvider="com.sg.vim.datamodel.labelprovider.F5LabelProvider"
                   name="前/后轮距"
                   type="String">
             </column>
