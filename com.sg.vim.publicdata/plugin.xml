@@ -1768,6 +1768,7 @@
                            label="转向形式"
                            labelVisible="true"
                            name="f_c34"
+                           option="com.sg.vim.enum.type5"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1786,12 +1787,13 @@
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
+                           editPart="Combo(Read Only)"
                            editable="true"
                            id="c_13"
                            label="转向轴数"
                            labelVisible="true"
                            name="c_13"
+                           option="com.sg.vim.enum.type6"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1884,10 +1886,22 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_5"
-                           label="前/后轮距(mm)"
+                           id="f_5_a"
+                           label="前轮距(mm)"
                            labelVisible="true"
-                           name="f_5"
+                           name="f_5_a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_5_b"
+                           label="后轮距(mm)"
+                           labelVisible="true"
+                           name="f_5_b"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1940,18 +1954,6 @@
                            required="false"
                            type="String">
                      </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_44"
-                           label="最高车速(km/h)"
-                           labelVisible="true"
-                           name="f_44"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
                   </fieldgroup>
                   <fieldgroup
                         columnCount="3">
@@ -1997,6 +1999,18 @@
                            type="String">
                      </field>
                   </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_44"
+                        label="最高车速(km/h)"
+                        labelVisible="true"
+                        name="f_44"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                </section>
                <section
                      label="制动">

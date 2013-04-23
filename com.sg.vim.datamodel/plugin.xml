@@ -114,6 +114,19 @@
                id="方向把">
          </enumerate>
       </enumerate>
+      <enumerate
+            id="com.sg.vim.enum.type6"
+            label="转向轴数">
+         <enumerate
+               id="1">
+         </enumerate>
+         <enumerate
+               id="2">
+         </enumerate>
+         <enumerate
+               id="3">
+         </enumerate>
+      </enumerate>
    </extension>
 
 </plugin>
