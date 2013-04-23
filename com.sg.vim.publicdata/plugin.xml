@@ -1228,6 +1228,20 @@
                <section
                      expand="true"
                      label="车辆基本信息">
+                  <field
+                        computeField="false"
+                        defaultValue="整车"
+                        editPart="Radio"
+                        editable="true"
+                        id="g_01"
+                        label="数据类型"
+                        labelVisible="false"
+                        name="g_01"
+                        option="com.sg.vim.enum.type3"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <fieldgroup
                         columnCount="2">
                      <field
@@ -1280,12 +1294,13 @@
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
+                           editPart="Combo(Read Only)"
                            editable="true"
                            id="c_22"
                            label="车辆类型"
                            labelVisible="true"
                            name="c_22"
+                           option="com.sg.vim.enum.type2"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1353,12 +1368,14 @@
                   </fieldgroup>
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
+                        defaultValue="否"
+                        editPart="Combo(Read Only)"
                         editable="true"
                         id="c_21"
                         label="纯电动标记"
                         labelVisible="true"
                         name="c_21"
+                        option="com.sg.vim.enum.type0"
                         persistable="true"
                         required="false"
                         type="String">
@@ -1915,18 +1932,6 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_25"
-                           label="燃料种类"
-                           labelVisible="true"
-                           name="f_25"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
                            id="c_06"
                            label="排放依据标准"
                            labelVisible="true"
@@ -1935,19 +1940,63 @@
                            required="false"
                            type="String">
                      </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_44"
+                           label="最高车速(km/h)"
+                           labelVisible="true"
+                           name="f_44"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
                   </fieldgroup>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_44"
-                        label="最高车速(km/h)"
-                        labelVisible="true"
-                        name="f_44"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
+                  <fieldgroup
+                        columnCount="3">
+                     <field
+                           computeField="false"
+                           defaultValue="汽油"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_25_1"
+                           label="燃料种类"
+                           labelVisible="true"
+                           name="f_25_1"
+                           option="com.sg.vim.enum.type4"
+                           persistable="true"
+                           required="false"
+                           textMessage="请选择燃料种类"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_25_3"
+                           label="燃料种类"
+                           labelVisible="false"
+                           name="f_25_3"
+                           option="com.sg.vim.enum.type4"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_25_2"
+                           label="燃料种类"
+                           labelVisible="false"
+                           name="f_25_2"
+                           option="com.sg.vim.enum.type4"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
                </section>
                <section
                      label="制动">

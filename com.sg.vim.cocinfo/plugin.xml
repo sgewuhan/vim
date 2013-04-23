@@ -59,33 +59,40 @@
             provideSelection="true"
             table="com.sg.vim.table.cocinfo">
          <filterAction>
+			<!--
 			<column column="f_0_2_1" name="车型名称" type="String"></column>
-			<column column="f_0_2a" name="车型系列代号" type="String"></column>
-			<column column="f_0_1" name=" 车辆制造企业名称" type="String"></column>
-			<column column="f_c0_1" name="车辆制造国" type="String"></column>
-			<column column="f_0_2b" name="单元代号" type="String"></column>
-			<column column="f_0_2b1" name="单元名称" type="String"></column>
-			<column column="f_0_2c" name="车型代号" type="String"></column>
+			-->
+			<column column="f_0_1" name="制造企业名称" type="String"></column>
+			<column column="f_c0_1" name="制造国" type="String"></column>
+			<column column="f_0_2a" name="车型系列代号/名称" type="String"></column>
+			<column column="f_0_2b" name="单元代号/名称" type="String"></column>
+			<column column="f_0_2c" name="车型代号/名称" type="String"></column>
 			<column column="f_c0_2" name="中文品牌" type="String"></column>
 			<column column="f_c0_3" name="英文品牌" type="String"></column>
 			<column column="f_0_4" name="车辆类别" type="String"></column>
+			<!--
 			<column column="f_0_5c" name="基本制造商名称" type="String"></column>
 			<column column="f_0_5d" name="基本制造商地址" type="String"></column>
+			-->
 			<column column="f_0_5a" name="最终制造商名称" type="String"></column>
 			<column column="f_0_5b" name="最终制造商地址" type="String"></column>
 			<column column="f_0_6a" name="法定铭牌的位置" type="String"></column>
 			<column column="f_0_6c" name="车辆识别代号的打刻位置" type="String"></column>
+			<!--
 			<column column="f_c0_7" name="车辆注册类型" type="String"></column>
+			-->
 			<column column="f_21a" name="发动机编号" type="String"></column>
 			<column column="f_21b" name="发动机编号在发动机上的打刻位置" type="String"></column>
 			<column column="ccc_04" name="发动机型号" type="String"></column>
 			<column column="ccc_05" name="发动机类别" type="String"></column>
+			<!--
 			<column column="ccc_06" name="底盘制造商" type="String"></column>
 			<column column="ccc_07" name="底盘CCC证书编号(版本号)" type="String"></column>
 			<column column="ccc_08" name="底盘CCC签发日期" type="Date"></column>
 			<column column="ccc_09" name="阶段2制造商" type="String"></column>
 			<column column="ccc_10" name="阶段2CCC证书编号(版本号)" type="String"></column>
 			<column column="ccc_11" name="阶段2签发日期" type="Date"></column>
+			-->
 			<column column="ccc_01" name="CCC认证过程中车辆的制造阶段" type="String"></column>
 			<column column="ccc_02" name="CCC证书编号(版本号)" type="String"></column>
 			<column column="ccc_03" name="签发日期" type="Date"></column>
@@ -161,106 +168,451 @@
 			<column column="f_50" name="备注" type="String"></column>
          </filterAction>
          <searchAction>
-			<column column="f_0_2_1" name="车型名称" type="String"></column>
-			<column column="f_0_2a" name="车型系列代号" type="String"></column>
-			<column column="f_0_1" name=" 车辆制造企业名称" type="String"></column>
-			<column column="f_c0_1" name="车辆制造国" type="String"></column>
-			<column column="f_0_2b" name="单元代号" type="String"></column>
-			<column column="f_0_2b1" name="单元名称" type="String"></column>
-			<column column="f_0_2c" name="车型代号" type="String"></column>
-			<column column="f_c0_2" name="中文品牌" type="String"></column>
-			<column column="f_c0_3" name="英文品牌" type="String"></column>
-			<column column="f_0_4" name="车辆类别" type="String"></column>
-			<column column="f_0_5c" name="基本制造商名称" type="String"></column>
-			<column column="f_0_5d" name="基本制造商地址" type="String"></column>
-			<column column="f_0_5a" name="最终制造商名称" type="String"></column>
-			<column column="f_0_5b" name="最终制造商地址" type="String"></column>
-			<column column="f_0_6a" name="法定铭牌的位置" type="String"></column>
-			<column column="f_0_6c" name="车辆识别代号的打刻位置" type="String"></column>
-			<column column="f_c0_7" name="车辆注册类型" type="String"></column>
-			<column column="f_21a" name="发动机编号" type="String"></column>
-			<column column="f_21b" name="发动机编号在发动机上的打刻位置" type="String"></column>
-			<column column="ccc_04" name="发动机型号" type="String"></column>
-			<column column="ccc_05" name="发动机类别" type="String"></column>
-			<column column="ccc_06" name="底盘制造商" type="String"></column>
-			<column column="ccc_07" name="底盘CCC证书编号(版本号)" type="String"></column>
-			<column column="ccc_08" name="底盘CCC签发日期" type="Date"></column>
-			<column column="ccc_09" name="阶段2制造商" type="String"></column>
-			<column column="ccc_10" name="阶段2CCC证书编号(版本号)" type="String"></column>
-			<column column="ccc_11" name="阶段2签发日期" type="Date"></column>
-			<column column="ccc_01" name="CCC认证过程中车辆的制造阶段" type="String"></column>
-			<column column="ccc_02" name="CCC证书编号(版本号)" type="String"></column>
-			<column column="ccc_03" name="签发日期" type="Date"></column>
-			<column column="f_1" name="车轴数量" type="Integer"></column>
-			<column column="f_1_1" name="车轮数量" type="Integer"></column>
-			<column column="f_2" name=" 驱动轴位置" type="String"></column>
-			<column column="f_3" name=" 轴距" type="Integer"></column>
-			<column column="f_4_1" name="支承转盘导程" type="String"></column>
-			<column column="f_5" name="轮距" type="Integer"></column>
-			<column column="f_6_1" name="长度" type="Integer"></column>
-			<column column="f_7_1" name="宽度" type="Integer"></column>
-			<column column="f_8" name="高度" type="Integer"></column>
-			<column column="f_6_3" name="车辆前端与牵引装置中心之间的距离" type="Integer"></column>
-			<column column="f_6_5" name="装载区长度" type="Integer"></column>
-			<column column="f_10_1" name="车辆在地面上的投影面积" type="Integer"></column>
-			<column column="f_c1" name="前悬" type="Integer"></column>
-			<column column="f_11" name="后悬" type="Integer"></column>
-			<column column="f_c2" name="接近角" type="Double"></column>
-			<column column="f_c3" name="离去角" type="Double"></column>
-			<column column="f_12_1" name="行驶状态下带车身的车辆质量" type="Integer"></column>
-			<column column="f_14_1" name="额定总质量" type="Integer"></column>
-			<column column="f_c5" name="载质量利用系数" type="String"></column>
-			<column column="f_14_2" name="该质量的轴荷分配" type="Integer"></column>
-			<column column="f_14_3" name="各车轴或车轴组技术上允许的最大质量" type="Integer"></column>
-			<column column="f_15" name="可伸缩轴或可装载轴的位置" type="String"></column>
-			<column column="f_16" name="车顶最大允许载荷" type="Integer"></column>
-			<column column="f_17_1" name="牵引杆式挂车最大牵引质量" type="Integer"></column>
-			<column column="f_17_2" name="半挂车最大牵引质量" type="Integer"></column>
-			<column column="f_17_3" name="中心轴式挂车最大牵引质量" type="Integer"></column>
-			<column column="f_17" name="挂车的最大质量(制动下)" type="Integer"></column>
-			<column column="f_17_4" name="挂车的最大质量(非制动下)" type="Integer"></column>
-			<column column="f_18" name=" 牵引车与挂车的最大组合质量" type="Integer"></column>
-			<column column="f_19_1" name="牵引车与挂车连接点处最大垂直负荷" type="Integer"></column>
-			<column column="f_20" name="制造商名称" type="String"></column>
-			<column column="f_c4" name="发动机型号" type="String"></column>
-			<column column="f_22" name="工作原理" type="String"></column>
-			<column column="f_22_1" name="直接喷射" type="String"></column>
-			<column column="f_23" name="缸数量" type="String"></column>
-			<column column="f_23a" name="排列形式" type="String"></column>
-			<column column="f_24" name="排量" type="Integer"></column>
-			<column column="f_25" name="燃料种类" type="String"></column>
-			<column column="f_26" name="最大净功率" type="Double"></column>
-			<column column="f_26a" name="对应转速" type="Integer"></column>
-			<column column="f_27" name="离合器形式" type="String"></column>
-			<column column="f_28" name="变速器形式" type="String"></column>
-			<column column="f_29" name="速比" type="String"></column>
-			<column column="f_30" name="主传动比" type="String"></column>
-			<column column="f_32" name="轮胎规格" type="String"></column>
-			<column column="f_33_1" name="驱动轴是否装空气悬挂或等效装置" type="String"></column>
-			<column column="f_c6" name="钢板弹簧片数" type="String"></column>
-			<column column="f_34" name="转向助力形式" type="String"></column>
-			<column column="f_35" name="制动装置简要说明" type="String"></column>
-			<column column="f_36" name="挂车制动系统供气管内压力" type="Double"></column>
-			<column column="f_37" name="车身型式" type="String"></column>
-			<column column="f_38" name="车辆颜色" type="String"></column>
-			<column column="f_39" name="罐式车罐容量" type="Double"></column>
-			<column column="f_40" name="起重机的最大力矩能力" type="String"></column>
-			<column column="f_41" name="车门数量" type="Integer"></column>
-			<column column="f_41a" name="车门结构" type="String"></column>
-			<column column="f_c7_1" name="C7 货厢内部长" type="Integer"></column>
-			<column column="f_c7_2" name="C7 货厢内部宽" type="Integer"></column>
-			<column column="f_c7_3" name="C7 货厢内部高" type="Integer"></column>
-			<column column="f_42_1" name="座位数" type="String"></column>
-			<column column="f_42_1a" name="布置方式" type="String"></column>
-			<column column="f_43_1" name="牵引装置CCC证书编号" type="String"></column>
-			<column column="f_43_1a" name="牵引装置试验报告编号" type="String"></column>
-			<column column="f_44" name="最高车速" type="Integer"></column>
-			<column column="f_45" name="声级" type="String"></column>
-			<column column="f_46_1" name="烟气排放物" type="String"></column>
-			<column column="f_46_2" name="CO2排放量/燃油消耗量" type="String"></column>
-			<column column="f_48_1" name="危险货物试验报告编号" type="String"></column>
-			<column column="f_48_2" name="某些动物试验报告编号" type="String"></column>
-			<column column="f_50" name="备注" type="String"></column>         
+            <column
+                  column="f_0_1"
+                  name="制造企业名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_1"
+                  name="制造国"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2a"
+                  name="车型系列代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2b"
+                  name="单元代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2c"
+                  name="车型代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_2"
+                  name="中文品牌"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_3"
+                  name="英文品牌"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_4"
+                  name="车辆类别"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_5a"
+                  name="最终制造商名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_5b"
+                  name="最终制造商地址"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_6a"
+                  name="法定铭牌的位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_6c"
+                  name="车辆识别代号的打刻位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_21a"
+                  name="发动机编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_21b"
+                  name="发动机编号在发动机上的打刻位置"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_04"
+                  name="发动机型号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_05"
+                  name="发动机类别"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_01"
+                  name="CCC认证过程中车辆的制造阶段"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_02"
+                  name="CCC证书编号(版本号)"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_03"
+                  name="签发日期"
+                  type="Date">
+            </column>
+            <column
+                  column="f_1"
+                  name="车轴数量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_1_1"
+                  name="车轮数量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_2"
+                  name=" 驱动轴位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_3"
+                  name=" 轴距"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_4_1"
+                  name="支承转盘导程"
+                  type="String">
+            </column>
+            <column
+                  column="f_5"
+                  name="轮距"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_6_1"
+                  name="长度"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_7_1"
+                  name="宽度"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_8"
+                  name="高度"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_6_3"
+                  name="车辆前端与牵引装置中心之间的距离"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_6_5"
+                  name="装载区长度"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_10_1"
+                  name="车辆在地面上的投影面积"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_c1"
+                  name="前悬"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_11"
+                  name="后悬"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_c2"
+                  name="接近角"
+                  type="Double">
+            </column>
+            <column
+                  column="f_c3"
+                  name="离去角"
+                  type="Double">
+            </column>
+            <column
+                  column="f_12_1"
+                  name="行驶状态下带车身的车辆质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_14_1"
+                  name="额定总质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_c5"
+                  name="载质量利用系数"
+                  type="String">
+            </column>
+            <column
+                  column="f_14_2"
+                  name="该质量的轴荷分配"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_14_3"
+                  name="各车轴或车轴组技术上允许的最大质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_15"
+                  name="可伸缩轴或可装载轴的位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_16"
+                  name="车顶最大允许载荷"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_17_1"
+                  name="牵引杆式挂车最大牵引质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_17_2"
+                  name="半挂车最大牵引质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_17_3"
+                  name="中心轴式挂车最大牵引质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_17"
+                  name="挂车的最大质量(制动下)"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_17_4"
+                  name="挂车的最大质量(非制动下)"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_18"
+                  name=" 牵引车与挂车的最大组合质量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_19_1"
+                  name="牵引车与挂车连接点处最大垂直负荷"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_20"
+                  name="制造商名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_c4"
+                  name="发动机型号"
+                  type="String">
+            </column>
+            <column
+                  column="f_22"
+                  name="工作原理"
+                  type="String">
+            </column>
+            <column
+                  column="f_22_1"
+                  name="直接喷射"
+                  type="String">
+            </column>
+            <column
+                  column="f_23"
+                  name="缸数量"
+                  type="String">
+            </column>
+            <column
+                  column="f_23a"
+                  name="排列形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_24"
+                  name="排量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_25"
+                  name="燃料种类"
+                  type="String">
+            </column>
+            <column
+                  column="f_26"
+                  name="最大净功率"
+                  type="Double">
+            </column>
+            <column
+                  column="f_26a"
+                  name="对应转速"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_27"
+                  name="离合器形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_28"
+                  name="变速器形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_29"
+                  name="速比"
+                  type="String">
+            </column>
+            <column
+                  column="f_30"
+                  name="主传动比"
+                  type="String">
+            </column>
+            <column
+                  column="f_32"
+                  name="轮胎规格"
+                  type="String">
+            </column>
+            <column
+                  column="f_33_1"
+                  name="驱动轴是否装空气悬挂或等效装置"
+                  type="String">
+            </column>
+            <column
+                  column="f_c6"
+                  name="钢板弹簧片数"
+                  type="String">
+            </column>
+            <column
+                  column="f_34"
+                  name="转向助力形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_35"
+                  name="制动装置简要说明"
+                  type="String">
+            </column>
+            <column
+                  column="f_36"
+                  name="挂车制动系统供气管内压力"
+                  type="Double">
+            </column>
+            <column
+                  column="f_37"
+                  name="车身型式"
+                  type="String">
+            </column>
+            <column
+                  column="f_38"
+                  name="车辆颜色"
+                  type="String">
+            </column>
+            <column
+                  column="f_39"
+                  name="罐式车罐容量"
+                  type="Double">
+            </column>
+            <column
+                  column="f_40"
+                  name="起重机的最大力矩能力"
+                  type="String">
+            </column>
+            <column
+                  column="f_41"
+                  name="车门数量"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_41a"
+                  name="车门结构"
+                  type="String">
+            </column>
+            <column
+                  column="f_c7_1"
+                  name="C7 货厢内部长"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_c7_2"
+                  name="C7 货厢内部宽"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_c7_3"
+                  name="C7 货厢内部高"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_42_1"
+                  name="座位数"
+                  type="String">
+            </column>
+            <column
+                  column="f_42_1a"
+                  name="布置方式"
+                  type="String">
+            </column>
+            <column
+                  column="f_43_1"
+                  name="牵引装置CCC证书编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_43_1a"
+                  name="牵引装置试验报告编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_44"
+                  name="最高车速"
+                  type="Integer">
+            </column>
+            <column
+                  column="f_45"
+                  name="声级"
+                  type="String">
+            </column>
+            <column
+                  column="f_46_1"
+                  name="烟气排放物"
+                  type="String">
+            </column>
+            <column
+                  column="f_46_2"
+                  name="CO2排放量/燃油消耗量"
+                  type="String">
+            </column>
+            <column
+                  column="f_48_1"
+                  name="危险货物试验报告编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_48_2"
+                  name="某些动物试验报告编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_50"
+                  name="备注"
+                  type="String">
+            </column>
          </searchAction>
          <createEditor
                createHandler="com.sg.vim.cocinfo.handler.CreateCOCHandler"
@@ -382,20 +734,22 @@
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true">
-            
-				<column column="f_0_2_1" name="车型名称" type="String"></column>
+				<column column="f_0_2a" name="车型系列\n代号/名称" type="String"></column>
     <column
-          column="f_0_2c"
-          name="车型代号"
+          column="f_0_2b"
+          name="单元代号/名称"
           type="String">
     </column>
-				<column column="f_0_2a" name="车型系列代号" type="String"></column>
+            
+    <column
+          column="f_0_2c"
+          name="车型代号/名称"
+          type="String">
+    </column>
 				
 				<columnGroup defaultGroup="true" name="车辆基本信息">
 				<column column="f_0_1" name="车辆制造企业名称" type="String"></column>
 				<column column="f_c0_1" name="车辆制造国" type="String"></column>
-				<column column="f_0_2b" name="单元代号" type="String"></column>
-				<column column="f_0_2b1" name="单元名称" type="String"></column>
 				<column column="f_c0_2" name="中文品牌" type="String"></column>
 				<column column="f_c0_3" name="英文品牌" type="String"></column>
 				<column column="f_0_4" name="车辆类别" type="String"></column>
@@ -612,7 +966,7 @@
             <pagecolumn
                   id="1">
                <section
-                     label="COC编号，车型代号等">
+                     label="基本信息">
                   <!--field
                         computeField="false"
                         editPart="Text(Single Line)"
@@ -655,63 +1009,33 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="f_0_2a"
-                        label="0.2 车型系列代号"
+                        label="0.2 车型系列代号/名称"
                         labelVisible="true"
                         name="f_0_2a"
                         persistable="true"
                         required="false"
                         type="String">
                   </field>
-                  <fieldgroup
-                        columnCount="2">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_0_2b"
-                           label="单元代号"
-                           labelVisible="true"
-                           name="f_0_2b"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_0_2b1"
-                           label="单元名称"
-                           labelVisible="true"
-                           name="f_0_2b1"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                  </fieldgroup>
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
-                        editable="false"
-                        id="f_0_2c"
-                        label="车型代号"
+                        editable="true"
+                        id="f_0_2b"
+                        label="单元代号/名称"
                         labelVisible="true"
-                        name="f_0_2c"
+                        name="f_0_2b"
                         persistable="true"
                         required="false"
                         type="String">
                   </field>
-               </section>
-               <section
-                     label="名称，类别和品牌">
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
-                        editable="false"
-                        id="f_0_2_1"
-                        label="0.2.1 车型名称"
+                        editable="true"
+                        id="f_0_2c"
+                        label="车型代号/名称"
                         labelVisible="true"
-                        name="f_0_2_1"
+                        name="f_0_2c"
                         persistable="true"
                         required="false"
                         type="String">
@@ -745,17 +1069,19 @@
                   </fieldgroup>
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
+                        editPart="Combo(Read Only)"
                         editable="true"
                         id="f_0_4"
                         label="0.4 车辆类别"
                         labelVisible="true"
                         name="f_0_4"
+                        option="com.sg.vim.enum.type1"
                         persistable="true"
                         required="false"
                         type="String">
                   </field>
                </section>
+               <!--zhonghua 根据需求反馈，去掉本节
                <section
                      label="基本车辆制造商">
                   <field
@@ -783,6 +1109,7 @@
                         type="String">
                   </field>
                </section>
+               -->
                <section
                      label="最终制造阶段制造商">
                   <field
@@ -851,6 +1178,7 @@
                         required="false"
                         type="String">
                   </field>
+                  <!--
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
@@ -863,6 +1191,7 @@
                         required="false"
                         type="String">
                   </field>
+                  -->
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
@@ -888,6 +1217,7 @@
                         type="String">
                   </field>
                </section>
+               <!--zhonghua removed to match req424
                <section
                      label="底盘">
                   <field
@@ -990,6 +1320,7 @@
                         type="Date">
                   </field>
                </section>
+               -->
                <section
                      label="CCC证书">
                   <field
