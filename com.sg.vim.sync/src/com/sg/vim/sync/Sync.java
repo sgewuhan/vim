@@ -1,6 +1,7 @@
 package com.sg.vim.sync;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -13,9 +14,11 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.mobnut.commons.Commons;
+import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLResult;
 import com.sg.sqldb.utility.SQLRow;
@@ -73,6 +76,9 @@ public class Sync extends AbstractUIPlugin {
 				Object materialcode = row.getValue("materialcode");// 成品码
 				Object materialname = row.getValue("materialname");// 车型名称
 				Object vehicletype = row.getValue("vehicletype");// 公告车型
+				if (Utils.isNullOrEmptyString(vehicletype)) {
+					continue;
+				}
 				syncItem(c, materialcode, materialname, vehicletype);
 			}
 		} catch (Exception e) {
@@ -84,12 +90,23 @@ public class Sync extends AbstractUIPlugin {
 	private void syncItem(DBCollection c, Object materialcode,
 			Object materialname, Object vehicletype) {
 		try {
+			// 查询有无记录
+
 			DBObject q = new BasicDBObject().append("e_02", materialcode);
-			DBObject o = new BasicDBObject()
-					.append("$set",
-							new BasicDBObject().append("f_0_2c", vehicletype)
-									.append("e_03", materialname));
-			c.update(q, o, true, false);
+			DBCursor cursor = c.find(q);
+			int cnt = cursor.count();
+			if (cnt != 0) {
+				c.insert(new BasicDBObject()
+						.append("f_0_2c", vehicletype)
+						.append("e_03", materialname)
+						.append("e_02", materialcode)
+						.append("_cdate", new Date())
+						.append("_caccount",
+								new BasicDBObject().append("username",
+										"robot-sync").append("userid",
+										"robot-sync")));
+
+			}
 		} catch (Exception e) {
 			Commons.LOGGER.error("error sync product code info", e);
 		}
