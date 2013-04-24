@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Publicdata
 Bundle-SymbolicName: com.sg.vim.publicdata;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.sg.vim.publicdata.Activator
+Bundle-Activator: com.sg.vim.publicdata.PublicData
 Bundle-Vendor: SG
 Require-Bundle: org.eclipse.core.runtime,
  com.sg.ui;bundle-version="1.0.0",
