@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Cocinfo
 Bundle-SymbolicName: com.sg.vim.cocinfo;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.sg.vim.cocinfo.Activator
+Bundle-Activator: com.sg.vim.cocinfo.COCInfoActivator
 Bundle-Vendor: SG
 Require-Bundle: org.eclipse.core.runtime,
  com.sg.ui;bundle-version="1.0.0",

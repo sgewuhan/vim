@@ -1201,8 +1201,8 @@
             collectionName="basicinfo"
             dbName="appportal"
             id="com.sg.vim.editor.basicinfo"
-            labelFieldName="desc"
-            name="公告车型基本信息"
+            labelFieldName="d_23"
+            name="公告车型信息"
             recreateable="true">
          <basicpage
                description="车辆和企业基本信息"
@@ -1603,6 +1603,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_42_1"
+                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
                            label="额定载客(含驾驶员)(人)"
                            labelVisible="true"
                            name="f_42_1"

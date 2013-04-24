@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 
 import com.mobnut.commons.util.file.FileUtil;
 import com.mongodb.DBObject;
-import com.sg.vim.cocinfo.Activator;
+import com.sg.vim.cocinfo.COCInfoActivator;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
 public class ProductCodeLabelProvider extends ColumnLabelProvider {
@@ -21,7 +21,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
   // public Image getImage(Object element) {
   // if (element instanceof DBObject) {
   // if (((DBObject) element).get("cocinfo") != null) {
-  // return Activator.getImage("link_16.png");
+  // return COCInfoActivator.getImage("link_16.png");
   // }
   // }
   //
@@ -55,7 +55,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
     builder.append("</b><br/><small>");
     if (cocinfo_id != null) {
       builder.append("<img src=\"");
-      builder.append(FileUtil.getImageURL("link1_1216.png", Activator.PLUGIN_ID, "image"));
+      builder.append(FileUtil.getImageURL("link1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
       builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
       builder.append(" COC: ");
       builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id + "\" target=\"_rwt\">" + cocinfo_name + "</a>");
@@ -64,7 +64,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
 
     if (cfginfo_id != null) {
       builder.append("<img src=\"");
-      builder.append(FileUtil.getImageURL("link2_1216.png", Activator.PLUGIN_ID, "image"));
+      builder.append(FileUtil.getImageURL("link2_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
       builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
       builder.append(" ≈‰÷√–Ú∫≈: ");
       builder.append("<a href=\"com.sg.vim.editor.configcode@" + cfginfo_id + "\" target=\"_rwt\">" + cfginfo_name + "</a>");

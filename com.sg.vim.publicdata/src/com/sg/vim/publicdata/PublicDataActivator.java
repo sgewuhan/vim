@@ -3,7 +3,7 @@ package com.sg.vim.publicdata;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class PublicData implements BundleActivator {
+public class PublicDataActivator implements BundleActivator {
 
 	private static BundleContext context;
 
@@ -16,7 +16,7 @@ public class PublicData implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		PublicData.context = bundleContext;
+		PublicDataActivator.context = bundleContext;
 	}
 
 	/*
@@ -24,7 +24,7 @@ public class PublicData implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
-		PublicData.context = null;
+		PublicDataActivator.context = null;
 	}
 
 }

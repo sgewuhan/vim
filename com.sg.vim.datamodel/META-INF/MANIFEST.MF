@@ -3,14 +3,17 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Datamodel
 Bundle-SymbolicName: com.sg.vim.datamodel;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.sg.vim.datamodel.Activator
+Bundle-Activator: com.sg.vim.datamodel.DataModelActivator
 Bundle-Vendor: SG
 Require-Bundle: org.eclipse.core.runtime,
  com.mobnut.db;bundle-version="1.0.0",
  com.mobnut.portal;bundle-version="1.0.0",
  com.sg.ui;bundle-version="1.0.0",
  com.mobnut.commons;bundle-version="1.0.0",
- org.eclipse.rap.ui;bundle-version="2.0.0"
+ org.eclipse.rap.ui;bundle-version="2.0.0",
+ org.eclipse.rap.ui.forms
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Export-Package: com.sg.vim.datamodel
+Export-Package: com.sg.vim.datamodel,
+ com.sg.vim.datamodel.labelprovider,
+ com.sg.vim.datamodel.validator
