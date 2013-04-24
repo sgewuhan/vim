@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.sg.sqldb.DDB;
 import com.sg.sqldb.utility.SQLDelegator;
 import com.sg.sqldb.utility.SQLResult;
 import com.sg.sqldb.utility.SQLRow;
@@ -24,11 +23,12 @@ public class SimpleDataService {
 	 *            表名
 	 * @param returnField
 	 *            返回的字段名用,分割
+	 * @param dataSource 
 	 * @return
 	 * @throws Exception
 	 */
 	public static SQLResult insert(final Map<String, Object> data,
-			final String tableName, String returnField) throws Exception {
+			final String tableName, String returnField, String dataSource) throws Exception {
 
 		SQLDelegator sqldelegator = new SQLDelegator() {
 
@@ -66,19 +66,19 @@ public class SimpleDataService {
 				return result;
 			}
 		};
-		SQLResult sRes = sqldelegator.execute(DDB.BASIC_DB);
+		SQLResult sRes = sqldelegator.execute(dataSource);
 		if (returnField == null) {
 			return sRes;
 		} else {
 			Object ouid = sRes.getData().get(0).getValue(0);
-			return SQLUtil.SQL_QUERY(DDB.BASIC_DB, "SELECT " + returnField
+			return SQLUtil.SQL_QUERY(dataSource, "SELECT " + returnField
 					+ " FROM " + tableName + " WHERE SF$OUID = " + ouid);
 		}
 	}
 
 	public static SQLResult update(final Map<String, Object> data,
 			final String tableName, final String key, final Object value,
-			final String returnField) throws Exception {
+			final String returnField, String dataSource) throws Exception {
 		
 		String sql = "UPDATE " + tableName + " SET ";
 
@@ -92,31 +92,31 @@ public class SimpleDataService {
 		}
 
 		sql += " WHERE " + key + " = " + value;
-		SQLUtil.SQL_UPDATE(DDB.BASIC_DB, sql);
+		SQLUtil.SQL_UPDATE(dataSource, sql);
 		
-		return SQLUtil.SQL_QUERY(DDB.BASIC_DB, "SELECT "
+		return SQLUtil.SQL_QUERY(dataSource, "SELECT "
 							+ returnField + " FROM " + tableName + " WHERE "
 							+ key + " = " + value);
 	}
 
-	public static SQLResult select(String tableName, String returnFieldList)
+	public static SQLResult select(String tableName, String returnFieldList, String dataSource)
 			throws Exception {
 		String sql = "";
 		if (returnFieldList == null)
 			sql = "SELECT * FROM " + tableName;
 		else
 			sql = "SELECT " + returnFieldList + " FROM " + tableName;
-		return SQLUtil.SQL_QUERY(DDB.BASIC_DB, sql);
+		return SQLUtil.SQL_QUERY(dataSource, sql);
 	}
 
-	public static String getStringOuidByNumber(String tableName, String number) {
-		BigDecimal ouid = (BigDecimal) getDecimalOuidByNumber(tableName,number);
+	public static String getStringOuidByNumber(String tableName, String number, String dataSource) {
+		BigDecimal ouid = (BigDecimal) getDecimalOuidByNumber(tableName,number,dataSource);
 		return tableName.toLowerCase()+"@"+Long.toHexString(ouid.longValue());
 	}
 
-	public static Object getDecimalOuidByNumber(String tableName, String number) {
+	public static Object getDecimalOuidByNumber(String tableName, String number, String dataSource) {
 		try {
-			SQLResult result = SQLUtil.SQL_QUERY(DDB.BASIC_DB,
+			SQLResult result = SQLUtil.SQL_QUERY(dataSource,
 					"SELECT SF$OUID FROM " + tableName + " WHERE MD$NUMBER = '"
 							+ number + "'");
 			if (!result.isEmpty()) {
@@ -127,8 +127,8 @@ public class SimpleDataService {
 		return null;
 	}
 
-	public static void delete(String tableName, String key, Object value) throws Exception {
-		SQLUtil.SQL_UPDATE(DDB.BASIC_DB, "DELETE FROM "+ tableName + " WHERE "+ key + " = "+value);
+	public static void delete(String tableName, String key, Object value, String dataSource) throws Exception {
+		SQLUtil.SQL_UPDATE(dataSource, "DELETE FROM "+ tableName + " WHERE "+ key + " = "+value);
 	}
 
 
