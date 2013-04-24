@@ -52,7 +52,7 @@ public class ProductBindTargetView extends TableNavigator implements ISelectionL
 			canTransfer = false;
 			return;
 		} else {
-			String field = IVIMFields.F_0_2C;
+			String field = IVIMFields.F_0_2C1;
 			String type = Utils.TYPE_STRING;
 			String name = "³µÐÍ´úºÅ";
 			ConditionDefinition conditionDefinition = new ConditionDefinition(
@@ -69,7 +69,7 @@ public class ProductBindTargetView extends TableNavigator implements ISelectionL
 		Iterator iter = selection.iterator();
 		while (iter.hasNext()) {
 			DBObject data = (DBObject) iter.next();
-			Object itm = data.get(IVIMFields.F_0_2C);
+			Object itm = data.get(IVIMFields.F_0_2C1);
 			if (result != null && !result.equals(itm)) {
 				return null;
 			}
