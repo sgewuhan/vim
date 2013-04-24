@@ -6,14 +6,15 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.mobnut.commons.util.ITransferRule;
+import com.mobnut.commons.util.ModelTransfer;
 import com.mobnut.db.DBActivator;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectCollectionService;
-import com.sg.vim.datamodel.ITransferRule;
-import com.sg.vim.datamodel.ModelTransfer;
+import com.sg.vim.datamodel.IVIMFields;
 
 public class CopyCreateCOCinfo extends AbstractHandler {
 
@@ -34,13 +35,32 @@ public class CopyCreateCOCinfo extends AbstractHandler {
 
     DataObjectCollectionService dataObjectService = new DataObjectCollectionService();
     ITransferRule rule = new ITransferRule() {
-      
+
       @Override
       public Object getValue(DBObject src, String key) {
-        //从公告车型中产生对应的COC信息
-        //1. 处理车辆类型，该字段在BasicInfo中为C22，根据以下规则转为COCInfo中的M1,N1这些东西
-        //2. 处理名称代号这些
-        //3. 处理前后轮距合并
+        // 从公告车型中产生对应的COC信息
+        // 2. 处理名称代号这些
+        // 3. 处理前后轮距合并
+        return src.get(key);
+      }
+
+      @Override
+      public DBObject doPostTransfer(DBObject src, DBObject tgt) {
+        // 1. 处理车辆类型，该字段在BasicInfo中为C22，根据以下规则转为COCInfo中的M1,N1这些东西
+        // GB 18352.3-2005 M是客车，M1是9座以下；M2是9座以上；N1是总质量3500kg以下的载货汽车
+        // 读取C22
+        Object c22 = src.get(IVIMFields.C_22);
+        if ("乘用车及客车".equals(c22)) {
+          tgt.put(IVIMFields.F_0_4, "M1");
+        } else {
+          tgt.put(IVIMFields.F_0_4, "N1");
+        }
+        
+        return tgt;
+      }
+
+      @Override
+      public DBObject doPrepareTransfer(DBObject src) {
         return null;
       }
     };

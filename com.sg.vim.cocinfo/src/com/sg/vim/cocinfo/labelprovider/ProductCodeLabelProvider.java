@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import com.mobnut.commons.util.file.FileUtil;
 import com.mongodb.DBObject;
 import com.sg.vim.cocinfo.COCInfoActivator;
-import com.sg.vim.datamodel.ProductCodeInfo;
+import com.sg.vim.datamodel.IVIMFields;
 
 public class ProductCodeLabelProvider extends ColumnLabelProvider {
 
@@ -36,12 +36,12 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
   @Override
   public String getText(Object element) {
     DBObject data = (DBObject) element;
-    Object productCode = data.get(ProductCodeInfo.E_02);
-    Object modelCode = data.get(ProductCodeInfo.F_0_2C);
-    Object cocinfo_name = data.get(ProductCodeInfo.COC_NAME);
-    Object cocinfo_id = data.get(ProductCodeInfo.COC_ID);
-    Object cfginfo_name = data.get(ProductCodeInfo.CFG_NAME);
-    Object cfginfo_id = data.get(ProductCodeInfo.CFG_ID);
+    Object productCode = data.get(IVIMFields.E_02);
+    Object modelCode = data.get(IVIMFields.F_0_2C);
+    Object cocinfo_name = data.get(IVIMFields.COC_NAME);
+    Object cocinfo_id = data.get(IVIMFields.COC_ID);
+    Object cfginfo_name = data.get(IVIMFields.CFG_NAME);
+    Object cfginfo_id = data.get(IVIMFields.CFG_ID);
 
     StringBuilder builder = new StringBuilder();
 

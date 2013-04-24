@@ -8,12 +8,6 @@ import com.mongodb.DBObject;
 public class ConfigCodeInfo extends AuthCollectionService {
 
 
-	public static final String  H_01="h_01";   //’˝ Ω≈‰÷√–Ú¡–∫≈
-	public static final String  H_02="h_02";   //¡Ÿ ±≈‰÷√–Ú¡–∫≈
-	public static final String  H_03="h_03";   //≈‰÷√√Ë ˆ
-	public static final String  H_04="h_04";   //≈‰÷√
-	public static final String  F_0_5a="f_0_5a";   //
-
 	
 	@Override
 	public DB getDB() {

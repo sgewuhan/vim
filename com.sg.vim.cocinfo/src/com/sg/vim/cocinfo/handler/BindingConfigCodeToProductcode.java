@@ -20,6 +20,7 @@ import com.mongodb.DBObject;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.table.CTableViewer;
 import com.sg.vim.datamodel.ConfigCodeInfo;
+import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
 public class BindingConfigCodeToProductcode extends AbstractHandler {
@@ -36,7 +37,7 @@ public class BindingConfigCodeToProductcode extends AbstractHandler {
 
     DBObject configcode = (DBObject) selection.getFirstElement();
     ObjectId configcodeId = (ObjectId) configcode.get(ConfigCodeInfo.FIELD_SYSID);
-    String configcodeName = (String) configcode.get(ConfigCodeInfo.H_03);
+    String configcodeName = (String) configcode.get(IVIMFields.H_03);
 
     IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);
     TableNavigator part = (TableNavigator) window.getActivePage()
@@ -66,15 +67,15 @@ public class BindingConfigCodeToProductcode extends AbstractHandler {
         new BasicDBObject().append("$in", idList));
     DBObject data = new BasicDBObject().append(
         "$set",
-        new BasicDBObject().append(ProductCodeInfo.CFG_ID, configcodeId).append(
-            ProductCodeInfo.CFG_NAME, configcodeName));
+        new BasicDBObject().append(IVIMFields.CFG_ID, configcodeId).append(
+            IVIMFields.CFG_NAME, configcodeName));
     c.update(query, data, false, true);
 
     iter = prodCodeSelection.iterator();
     while (iter.hasNext()) {
       DBObject productCodeData = (DBObject) iter.next();
-      productCodeData.put(ProductCodeInfo.CFG_ID, configcodeId);
-      productCodeData.put(ProductCodeInfo.CFG_NAME, configcodeName);
+      productCodeData.put(IVIMFields.CFG_ID, configcodeId);
+      productCodeData.put(IVIMFields.CFG_NAME, configcodeName);
       viewer.update(productCodeData, null);
     }
 

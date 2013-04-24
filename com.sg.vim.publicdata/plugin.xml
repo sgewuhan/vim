@@ -254,7 +254,7 @@
                   type="Integer">
             </column>
             <column
-                  column="f_32"
+                  column="f_32s"
                   name="轮胎规格"
                   type="String">
             </column>
@@ -631,7 +631,7 @@
                   type="Integer">
             </column>
             <column
-                  column="f_32"
+                  column="f_32s"
                   name="轮胎规格"
                   type="String">
             </column>
@@ -1031,7 +1031,7 @@
                   type="String">
             </column>
             <column
-                  column="f_32"
+                  column="f_32s"
                   name="轮胎规格"
                   type="String">
             </column>
@@ -1307,10 +1307,10 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_0_2c"
+                           id="f_0_2c1"
                            label="产品型号"
                            labelVisible="true"
-                           name="f_0_2c"
+                           name="f_0_2c1"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1801,18 +1801,6 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_32"
-                           label="轮胎规格"
-                           labelVisible="true"
-                           name="f_32"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
                            id="f_c1"
                            label="前悬(mm)"
                            labelVisible="true"
@@ -1861,10 +1849,10 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_5_a"
+                           id="f_5a"
                            label="前轮距(mm)"
                            labelVisible="true"
-                           name="f_5_a"
+                           name="f_5a"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1873,10 +1861,10 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_5_b"
+                           id="f_5b"
                            label="后轮距(mm)"
                            labelVisible="true"
-                           name="f_5_b"
+                           name="f_5b"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1930,6 +1918,18 @@
                            type="String">
                      </field>
                   </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        id="f_32s"
+                        label="轮胎规格"
+                        labelVisible="true"
+                        name="f_32s"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <fieldgroup
                         columnCount="3">
                      <field

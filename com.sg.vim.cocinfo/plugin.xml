@@ -25,8 +25,8 @@
                closeable="false"
                id="com.sg.vim.productcode"
                minimized="false"
-               ratio="0.6"
-               relationship="right"
+               ratio="0.4"
+               relationship="left"
                relative="com.sg.vim.cocinfo">
          </view>
       </perspectiveExtension>
@@ -967,18 +967,18 @@
                   id="1">
                <section
                      label="基本信息">
-                  <!--field
+                  <field
                         computeField="false"
                         editPart="Text(Single Line)"
                         editable="true"
-                        id="ccc_00"
+                        id="ccc_12"
                         label="车辆一致性证书编号"
                         labelVisible="true"
-                        name="ccc_00"
+                        name="ccc_12"
                         persistable="true"
                         required="false"
                         type="String">
-                  </field-->
+                  </field>
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
@@ -1040,6 +1040,18 @@
                         required="false"
                         type="String">
                   </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_0_2_1"
+                        label="车型名称"
+                        labelVisible="true"
+                        name="f_0_2_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <fieldgroup
                         columnCount="2">
                      <field
@@ -1081,59 +1093,65 @@
                         type="String">
                   </field>
                </section>
-               <!--zhonghua 根据需求反馈，去掉本节
                <section
-                     label="基本车辆制造商">
+                     label="0.5 基本车辆制造商">
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
                         editable="true"
                         id="f_0_5c"
-                        label="0.5 名称"
-                        labelVisible="true"
+                        label="0.5 基本车辆制造商名称"
+                        labelVisible="false"
                         name="f_0_5c"
                         persistable="true"
                         required="false"
+                        textMessage="&lt;填写基本车辆制造商名称，没有时填写不适用&gt;"
                         type="String">
                   </field>
                   <field
                         computeField="false"
                         editPart="Text(Multi Line)"
                         editable="true"
+                        heightHint="40"
                         id="f_0_5d"
                         label="地址"
-                        labelVisible="true"
+                        labelVisible="false"
                         name="f_0_5d"
                         persistable="true"
                         required="false"
+                        textMessage="&lt;填写基本车辆制造商地址，没有时填写不适用&gt;"
                         type="String">
                   </field>
                </section>
-               -->
                <section
                      label="最终制造阶段制造商">
                   <field
                         computeField="false"
+                        defaultValue="北汽银翔汽车有限公司"
                         editPart="Text(Single Line)"
                         editable="true"
                         id="f_0_5a"
                         label="0.5 名称"
-                        labelVisible="true"
+                        labelVisible="false"
                         name="f_0_5a"
                         persistable="true"
                         required="false"
+                        textMessage="&lt;填写最终车辆制造商名称，没有时填写不适用&gt;"
                         type="String">
                   </field>
                   <field
                         computeField="false"
+                        defaultValue="重庆市合川区土场镇三口村"
                         editPart="Text(Multi Line)"
                         editable="true"
+                        heightHint="40"
                         id="f_0_5b"
                         label="地址"
-                        labelVisible="true"
+                        labelVisible="false"
                         name="f_0_5b"
                         persistable="true"
                         required="false"
+                        textMessage="&lt;填写最终车辆制造商地址，没有时填写不适用&gt;"
                         type="String">
                   </field>
                </section>
@@ -1421,14 +1439,44 @@
                            required="false"
                            type="String">
                      </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="1">
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_4_1"
-                           label="4.1 支承转盘导程"
+                           id="f_4_1_1"
+                           label="4.1.1 牵引座前置距最大值(mm)"
                            labelVisible="true"
-                           name="f_4_1"
+                           name="f_4_1_1"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_4_1_2"
+                           label="4.1.2 牵引座前置距最小值(mm)"
+                           labelVisible="true"
+                           name="f_4_1_2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_5a"
+                           label="5 轮距(mm)"
+                           labelVisible="true"
+                           name="f_5a"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1437,10 +1485,10 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="false"
-                           id="f_5"
-                           label="5 轮距(mm)"
+                           id="f_5b"
+                           label="/"
                            labelVisible="true"
-                           name="f_5"
+                           name="f_5b"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1507,18 +1555,6 @@
                            label="6.5 装载区长度(mm)"
                            labelVisible="true"
                            name="f_6_5"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_10_1"
-                           label="10.1 车辆在地面上的投影面积(m2)"
-                           labelVisible="true"
-                           name="f_10_1"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1807,7 +1843,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_23"
-                           label="23 缸数量"
+                           label="23 汽缸数量"
                            labelVisible="true"
                            name="f_23"
                            persistable="true"
@@ -1819,7 +1855,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_23a"
-                           label="排列形式"
+                           label="汽缸排列形式"
                            labelVisible="true"
                            name="f_23a"
                            persistable="true"
@@ -1850,6 +1886,9 @@
                            required="false"
                            type="String">
                      </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
@@ -1867,7 +1906,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_26a"
-                           label="对应转速(min-1)"
+                           label="对应的发动机转速(min-1)"
                            labelVisible="true"
                            name="f_26a"
                            persistable="true"
@@ -1932,11 +1971,24 @@
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
-                        editable="false"
+                        editable="true"
                         id="f_32"
                         label="32 轮胎规格"
                         labelVisible="true"
                         name="f_32"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Combo(Read Only)"
+                        editable="true"
+                        id="f_32a"
+                        label="轮胎规格(合格证)"
+                        labelVisible="true"
+                        name="f_32a"
+                        optionProvider="com.sg.vim.datamodel.option.F32_Option"
                         persistable="true"
                         required="false"
                         type="String">
@@ -2128,12 +2180,13 @@
                         columnCount="2">
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_42_1"
                            label="42.1 座位数(包括驾驶员座)"
                            labelVisible="true"
                            name="f_42_1"
+                           optionProvider="com.sg.vim.datamodel.option.F421_Option"
                            persistable="true"
                            required="false"
                            type="String">

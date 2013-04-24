@@ -13,7 +13,7 @@ import com.mongodb.DBObject;
 import com.sg.ui.part.FilterPanel;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.filter.ConditionDefinition;
-import com.sg.vim.datamodel.ProductCodeInfo;
+import com.sg.vim.datamodel.IVIMFields;
 
 public class ProductBindTargetView extends TableNavigator implements ISelectionListener {
 
@@ -52,7 +52,7 @@ public class ProductBindTargetView extends TableNavigator implements ISelectionL
 			canTransfer = false;
 			return;
 		} else {
-			String field = ProductCodeInfo.F_0_2C;
+			String field = IVIMFields.F_0_2C;
 			String type = Utils.TYPE_STRING;
 			String name = "³µÐÍ´úºÅ";
 			ConditionDefinition conditionDefinition = new ConditionDefinition(
@@ -69,7 +69,7 @@ public class ProductBindTargetView extends TableNavigator implements ISelectionL
 		Iterator iter = selection.iterator();
 		while (iter.hasNext()) {
 			DBObject data = (DBObject) iter.next();
-			Object itm = data.get(ProductCodeInfo.F_0_2C);
+			Object itm = data.get(IVIMFields.F_0_2C);
 			if (result != null && !result.equals(itm)) {
 				return null;
 			}

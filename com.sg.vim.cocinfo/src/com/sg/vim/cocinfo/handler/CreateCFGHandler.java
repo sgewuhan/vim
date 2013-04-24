@@ -3,6 +3,7 @@ package com.sg.vim.cocinfo.handler;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 
+import com.mobnut.commons.util.ModelTransfer;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
@@ -14,7 +15,7 @@ import com.sg.ui.part.editor.IEditorSaveHandler;
 import com.sg.ui.part.editor.field.actions.FilteredOptionsSelector;
 import com.sg.vim.datamodel.BasicInfo;
 import com.sg.vim.datamodel.ConfigCodeInfo;
-import com.sg.vim.datamodel.ModelTransfer;
+import com.sg.vim.datamodel.IVIMFields;
 
 public class CreateCFGHandler implements ICreateHandler {
 
@@ -40,7 +41,7 @@ public class CreateCFGHandler implements ICreateHandler {
 			int i = 0;
 			while (cur.hasNext()) {
 				DBObject data = cur.next();
-				String desc = (String) data.get(BasicInfo.F_0_2C);
+				String desc = (String) data.get(IVIMFields.F_0_2C);
 				selectionList[i] = new Enumerate(data.get("_id").toString(),
 						desc.toString(), data, null);
 				i++;

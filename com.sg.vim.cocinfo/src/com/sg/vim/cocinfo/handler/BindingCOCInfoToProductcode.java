@@ -19,7 +19,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.table.CTableViewer;
-import com.sg.vim.datamodel.COCInfo;
+import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.ProductCodeInfo;
 
 public class BindingCOCInfoToProductcode extends AbstractHandler {
@@ -37,8 +37,8 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
 
     DBObject cocinfo = (DBObject) selection.getFirstElement();
     ObjectId cocinfoId = (ObjectId) cocinfo.get(ProductCodeInfo.FIELD_SYSID);
-    String cocinfoName = (String) cocinfo.get(COCInfo.F_0_2_1) + " " + cocinfo.get(COCInfo.F_0_2C)
-        + " " + cocinfo.get(COCInfo.F_0_2a);
+    String cocinfoName = (String) cocinfo.get(IVIMFields.F_0_2_1) + " " + cocinfo.get(IVIMFields.F_0_2C)
+        + " " + cocinfo.get(IVIMFields.F_0_2a);
 
     IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);
     TableNavigator part = (TableNavigator) window.getActivePage()
@@ -68,15 +68,15 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
         new BasicDBObject().append("$in", idList));
     DBObject data = new BasicDBObject().append(
         "$set",
-        new BasicDBObject().append(ProductCodeInfo.COC_ID, cocinfoId).append(
-            ProductCodeInfo.COC_NAME, cocinfoName));
+        new BasicDBObject().append(IVIMFields.COC_ID, cocinfoId).append(
+            IVIMFields.COC_NAME, cocinfoName));
     c.update(query, data, false, true);
 
     iter = prodCodeSelection.iterator();
     while (iter.hasNext()) {
       DBObject productCodeData = (DBObject) iter.next();
-      productCodeData.put(ProductCodeInfo.COC_ID, cocinfoId);
-      productCodeData.put(ProductCodeInfo.COC_NAME, cocinfoName);
+      productCodeData.put(IVIMFields.COC_ID, cocinfoId);
+      productCodeData.put(IVIMFields.COC_NAME, cocinfoName);
       viewer.update(productCodeData, null);
     }
 

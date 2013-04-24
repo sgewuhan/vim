@@ -6,13 +6,13 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.mobnut.commons.util.ModelTransfer;
 import com.mobnut.db.DBActivator;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectCollectionService;
-import com.sg.vim.datamodel.ModelTransfer;
 
 public class CopyCreateConfigCode extends AbstractHandler {
 
