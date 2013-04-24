@@ -41,7 +41,7 @@ public class CreateCOCHandler implements ICreateHandler {
 			int i = 0;
 			while (cur.hasNext()) {
 				DBObject data = cur.next();
-				String desc = (String) data.get(IVIMFields.F_0_2C);
+				String desc = (String) data.get(IVIMFields.F_0_2C1);
 				selectionList[i] = new Enumerate(data.get("_id").toString(),
 						desc.toString(), data, null);
 				i++;

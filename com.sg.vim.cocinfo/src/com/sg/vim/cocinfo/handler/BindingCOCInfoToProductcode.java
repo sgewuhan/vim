@@ -37,7 +37,7 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
 
     DBObject cocinfo = (DBObject) selection.getFirstElement();
     ObjectId cocinfoId = (ObjectId) cocinfo.get(ProductCodeInfo.FIELD_SYSID);
-    String cocinfoName = (String) cocinfo.get(IVIMFields.F_0_2_1) + " " + cocinfo.get(IVIMFields.F_0_2C)
+    String cocinfoName = (String) cocinfo.get(IVIMFields.F_0_2_1) + " " + cocinfo.get(IVIMFields.F_0_2C1)
         + " " + cocinfo.get(IVIMFields.F_0_2a);
 
     IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindow(event);

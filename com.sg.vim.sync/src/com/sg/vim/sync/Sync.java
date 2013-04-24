@@ -97,7 +97,7 @@ public class Sync extends AbstractUIPlugin {
 			int cnt = cursor.count();
 			if (cnt == 0) {
 				c.insert(new BasicDBObject()
-						.append("f_0_2c", vehicletype)
+						.append("f_0_2c1", vehicletype)
 						.append("e_03", materialname)
 						.append("e_02", materialcode)
 						.append("_cdate", new Date())

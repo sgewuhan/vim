@@ -146,7 +146,7 @@ public class IVIMFields {
   public static final String F_0_2b1 = "f_0_2b1";
   /** 车型代号名称 **/
   public static final String F_0_2C = "f_0_2c";
-  /** 名称 **/
+  /** 公告型号 **/
   public static final String F_0_2C1 = "f_0_2c1";
   /** 0.4 车辆类别 **/
   public static final String F_0_4 = "f_0_4";

@@ -38,7 +38,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
     DBObject data = (DBObject) element;
     Object productCode = data.get(IVIMFields.E_02);
     Object productName = data.get(IVIMFields.E_03);
-    Object modelCode = data.get(IVIMFields.F_0_2C);
+    Object modelCode = data.get(IVIMFields.F_0_2C1);
     Object cocinfo_name = data.get(IVIMFields.COC_NAME);
     Object cocinfo_id = data.get(IVIMFields.COC_ID);
     Object cfginfo_name = data.get(IVIMFields.CFG_NAME);
@@ -50,11 +50,11 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
         .append("<span style='float:left;padding:0px 4px 4px 4px;FONT-FAMILY:Î¢ÈíÑÅºÚ;font-size:11pt'><b>");
 
     builder.append(productCode);
-    builder.append(" ");
-    builder.append(productName);
     builder.append(" [");
     builder.append(modelCode);
     builder.append(" ]");
+    builder.append(" ");
+    builder.append(productName);
     builder.append("</b><br/><small>");
     if (cocinfo_id != null) {
       builder.append("<img src=\"");
