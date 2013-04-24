@@ -1256,6 +1256,18 @@
                      </field>
                      <field
                            computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="d_02"
+                           label="产品ID"
+                           labelVisible="true"
+                           name="d_02"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
                            editPart="DateDrop"
                            editable="true"
                            id="d_01"

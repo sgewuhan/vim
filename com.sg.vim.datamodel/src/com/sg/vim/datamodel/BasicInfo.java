@@ -69,7 +69,7 @@ public class BasicInfo extends AuthCollectionService {
 	public static final String  C_22="c_22";  //车辆类型
 	public static final String  C_23="c_23";  //车辆状态信息
 	public static final String  D_01="d_01";  //生效日期
-//	public static final String  D_02="d_02";  //产品ID zhonghua 424
+	public static final String  D_02="d_02";  //产品ID zhonghua 424
 	public static final String  D_03="d_03";  //法人代表
 	public static final String  D_04="d_04";  //注册地址
 	public static final String  D_05="d_05";  //目录序号
