@@ -29,7 +29,7 @@ import com.sg.sqldb.utility.SQLUtil;
  */
 public class Sync extends AbstractUIPlugin {
 
-	private static final String _delay = "02:27:00";
+	private static final String _delay = "02:40:00";
 
 	private static final String query = "select materialcode,materialname,vehicletype "
 			+ "from VI_CBO_ITEMMASTER where factorycode='001' and materialcode like '88%'";
@@ -95,7 +95,7 @@ public class Sync extends AbstractUIPlugin {
 			DBObject q = new BasicDBObject().append("e_02", materialcode);
 			DBCursor cursor = c.find(q);
 			int cnt = cursor.count();
-			if (cnt != 0) {
+			if (cnt == 0) {
 				c.insert(new BasicDBObject()
 						.append("f_0_2c", vehicletype)
 						.append("e_03", materialname)
