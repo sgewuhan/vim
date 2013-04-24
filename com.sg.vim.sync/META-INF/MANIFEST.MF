@@ -7,7 +7,9 @@ Bundle-Activator: com.sg.vim.sync.Sync
 Bundle-Vendor: SG
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.rap.ui;bundle-version="2.1.0",
- com.sg.sqldb,
- com.mobnut.db;bundle-version="1.0.0"
+ com.mobnut.db;bundle-version="1.0.0",
+ com.sg.sqldb;bundle-version="1.0.0",
+ com.mobnut.commons;bundle-version="1.0.0",
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

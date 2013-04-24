@@ -130,6 +130,8 @@ public class IVIMFields {
   public static final String D_24 = "d_24";
   /** 成品码 **/
   public static final String E_02 = "e_02";
+  /** 成品名称**/
+  public static final String E_03 = "e_03";
   /** 0.1 车辆制造企业名称 **/
   public static final String F_0_1 = "f_0_1";
   /** 0.2.1 车型名称 **/
