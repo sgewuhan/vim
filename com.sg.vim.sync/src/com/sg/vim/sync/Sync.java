@@ -26,7 +26,9 @@ import com.sg.sqldb.utility.SQLUtil;
  */
 public class Sync extends AbstractUIPlugin {
 
-  private static final String query = "select materialcode,materialname,vehicletype "
+  private static final String _delay = "02:07:00";
+
+private static final String query = "select materialcode,materialname,vehicletype "
       + "from VI_CBO_ITEMMASTER where factorycode='001' and materialcode like '88%'";
 
   // The plug-in ID
@@ -71,7 +73,7 @@ public class Sync extends AbstractUIPlugin {
         syncItem(c, materialcode, materialname, vehicletype);
       }
     } catch (Exception e) {
-      e.printStackTrace();
+        Commons.LOGGER.error("error sync product code info",e);
     }
     Commons.LOGGER.info("finish sync product code info");
   }
@@ -83,7 +85,7 @@ public class Sync extends AbstractUIPlugin {
           new BasicDBObject().append("f_0_2c", vehicletype).append("e_03", materialname));
       c.update(q, o, true, false);
     } catch (Exception e) {
-      e.printStackTrace();
+        Commons.LOGGER.error("error sync product code info",e);
     }
   }
 
@@ -100,10 +102,15 @@ public class Sync extends AbstractUIPlugin {
     listener = new JobChangeAdapter() {
       @Override
       public void done(IJobChangeEvent event) {
-        job.schedule(getDelay("02:00:00"));
+        job.schedule(getDelay(_delay));
       }
     };
     job.addJobChangeListener(listener);
+    
+    long delay = getDelay(_delay);
+    Commons.LOGGER.info("service sync product code info start, job will start after "+delay+" millseconds.");
+    job.schedule(delay);
+
   }
 
   /*
