@@ -2386,7 +2386,7 @@
                   </field>
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
+                        editPart="Text(Multi Line)"
                         editable="true"
                         id="h_03"
                         label="配置描述"
