@@ -625,8 +625,13 @@
             table="com.sg.vim.table.productcode">
          <filterAction>
             <column
-                  column="e_01"
+                  column="e_02"
                   name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="e_03"
+                  name="成品名称"
                   type="String">
             </column>
             <column
@@ -647,8 +652,13 @@
          </filterAction>
          <searchAction>
             <column
-                  column="e_01"
+                  column="e_02"
                   name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="e_03"
+                  name="成品名称"
                   type="String">
             </column>
             <column
@@ -657,7 +667,7 @@
                   type="String">
             </column>
             <column
-                  column="cocinfo"
+                  column="cocinfo_name"
                   name="车型一致性信息"
                   type="String">
             </column>
@@ -669,8 +679,13 @@
          </searchAction>
          <queryAction>
             <column
-                  column="e_01"
+                  column="e_02"
                   name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="e_03"
+                  name="成品名称"
                   type="String">
             </column>
             <column
@@ -689,6 +704,32 @@
                   type="String">
             </column>
          </queryAction>
+         <sortAction>
+            <column
+                  column="e_02"
+                  name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="e_03"
+                  name="成品名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2c"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="cocinfo_name"
+                  name="车型一致性信息"
+                  type="String">
+            </column>
+            <column
+                  column="configcodeinfo_name"
+                  name="配置序号信息"
+                  type="String">
+            </column></sortAction>
       </navigator>
       <navigator
             id="com.sg.vim.configcode"

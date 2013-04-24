@@ -37,6 +37,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
   public String getText(Object element) {
     DBObject data = (DBObject) element;
     Object productCode = data.get(IVIMFields.E_02);
+    Object productName = data.get(IVIMFields.E_03);
     Object modelCode = data.get(IVIMFields.F_0_2C);
     Object cocinfo_name = data.get(IVIMFields.COC_NAME);
     Object cocinfo_id = data.get(IVIMFields.COC_ID);
@@ -49,6 +50,8 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
         .append("<span style='float:left;padding:0px 4px 4px 4px;FONT-FAMILY:Î¢ÈíÑÅºÚ;font-size:11pt'><b>");
 
     builder.append(productCode);
+    builder.append(" ");
+    builder.append(productName);
     builder.append(" [");
     builder.append(modelCode);
     builder.append(" ]");
