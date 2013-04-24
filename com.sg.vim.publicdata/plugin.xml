@@ -49,11 +49,6 @@
                   type="String">
             </column>
             <column
-                  column="d_02"
-                  name="产品ID"
-                  type="String">
-            </column>
-            <column
                   column="d_18"
                   name="批次"
                   type="String">
@@ -428,11 +423,6 @@
             <column
                   column="d_23"
                   name="产品号"
-                  type="String">
-            </column>
-            <column
-                  column="d_02"
-                  name="产品ID"
                   type="String">
             </column>
             <column
@@ -842,11 +832,6 @@
                   type="String">
             </column>
             <column
-                  column="d_02"
-                  name="产品ID"
-                  type="String">
-            </column>
-            <column
                   column="d_18"
                   name="批次"
                   type="String">
@@ -1234,10 +1219,10 @@
                         defaultValue="整车"
                         editPart="Radio"
                         editable="true"
-                        id="g_01"
-                        label="数据类型"
-                        labelVisible="false"
-                        name="g_01"
+                        id="c_23"
+                        label="车辆状态信息"
+                        labelVisible="true"
+                        name="c_23"
                         option="com.sg.vim.enum.type3"
                         persistable="true"
                         required="false"
@@ -1253,18 +1238,6 @@
                            label="产品号"
                            labelVisible="true"
                            name="d_23"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="d_02"
-                           label="产品ID"
-                           labelVisible="true"
-                           name="d_02"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1366,33 +1339,21 @@
                            required="false"
                            type="String">
                      </field>
+                     <field
+                           computeField="false"
+                           defaultValue="否"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="c_21"
+                           label="纯电动标记"
+                           labelVisible="true"
+                           name="c_21"
+                           option="com.sg.vim.enum.type0"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
                   </fieldgroup>
-                  <field
-                        computeField="false"
-                        defaultValue="否"
-                        editPart="Combo(Read Only)"
-                        editable="true"
-                        id="c_21"
-                        label="纯电动标记"
-                        labelVisible="true"
-                        name="c_21"
-                        option="com.sg.vim.enum.type0"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_23"
-                        label="车辆状态信息"
-                        labelVisible="true"
-                        name="c_23"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
                </section>
                <section
                      expand="true"
@@ -1763,7 +1724,7 @@
                         columnCount="2">
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
+                           editPart="Combo(Read Only)"
                            editable="true"
                            id="f_c34"
                            label="转向形式"
