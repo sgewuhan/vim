@@ -2457,11 +2457,6 @@
             location="after=com.sg.vim.configcode.basicpage1"
             targetId="systempage">
       </pageExtendsions>
-      <pageExtendsions
-            id="com.sg.vim.editor.cocinfo"
-            location="after=com.sg.vim.cocpinfoage.advance"
-            targetId="htmleditmemopage">
-      </pageExtendsions>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
