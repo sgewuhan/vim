@@ -1,0 +1,25 @@
+<html><body><OBJECT ID="VCertificateVehCert" WIDTH="10" HEIGHT="10" CLASSID="CLSID:77910FEF-6F36-48DA-B5EC-787B0D07BB56">
+</OBJECT>
+
+<script>
+function showbar()
+{
+var VehCert= document.getElementById("VCertificateVehCert");
+VehCert.ViewBarcodeInfo("PER4-54LD-WXQI-DK87");
+}
+function PrintTest(){
+
+var VehCert= document.getElementById("VCertificateVehCert");
+VehCert.Clztxx="QX";
+
+var iRtn=VehCert.PrtParaTbl(1,"PER4-54LD-WXQI-DK87");
+
+if (iRtn==-1){
+alert(VehCert.Veh_ErrorInfo);
+}
+
+}
+
+</script>
+
+</body></html>

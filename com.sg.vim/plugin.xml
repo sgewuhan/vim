@@ -6,7 +6,7 @@
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="perspective.home"
-            name="公告车型基本信息">
+            name="公告车型">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"
@@ -20,8 +20,13 @@
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"
+            id="com.sg.vim.perspective.printdata"
+            name="打印数据">
+      </perspective>
+      <perspective
+            class="com.sg.vim.EditorHidePerspective"
             id="com.sg.vim.perspective.print"
-            name="打印管理">
+            name="打印和上传">
       </perspective>
       <perspective
             class="com.mobnut.admin.AdminPerspectiveFactory"

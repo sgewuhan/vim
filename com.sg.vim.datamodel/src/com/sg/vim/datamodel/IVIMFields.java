@@ -78,11 +78,13 @@ public class IVIMFields {
   public static final String CCC1 = "ccc1";
   /** CCC证书编号(版本号) **/
   public static final String CCC10 = "ccc10";
-  /** 配置 **/
+  /** 配置 id**/
   public static final String CFG_ID = "configcodeinfo_id";
-  /** 配置 **/
+  /** 配置 name**/
   public static final String CFG_NAME = "configcodeinfo_name";
+  /** COC ID**/
   public static final String COC_ID = "cocinfo_id";
+  /**COC name**/
   public static final String COC_NAME = "cocinfo_name";
   /** 生效日期 **/
   public static final String D_01 = "d_01";
@@ -150,7 +152,6 @@ public class IVIMFields {
   public static final String F_0_2C1 = "f_0_2c1";
   /** 0.4 车辆类别 **/
   public static final String F_0_4 = "f_0_4";
-
   /** 0.5 名称 **/
   public static final String F_0_5a = "f_0_5a";
   /** 生产地址 **/
@@ -167,9 +168,6 @@ public class IVIMFields {
   public static final String F_1_1A = "f_1_1a";
   /** 车轮数量 **/
   public static final String F_1_1 = "f_1_1";
-  /** 10.1 车辆在地面上的投影面积(m2) baicxy 不要**/
-  @Deprecated
-  public static final String F_10_1 = "f_10_1";
   /** l1 后悬(mm) **/
   public static final String F_11 = "f_11";
   /** 12.1 行驶状态下带车身的车辆质量（kg） **/
@@ -252,17 +250,10 @@ public class IVIMFields {
   public static final String F_38 = "f_38";
   /** 39 罐式车罐容量(m3) **/
   public static final String F_39 = "f_39";
-  /** 4.1 支承转盘导程  baicyx 没这个**/
-  @Deprecated
-  public static final String F_4_1 = "f_4_1";
-  
   /** 4.1.1 牵引座前置距最大值（mm）**/
   public static final String F_4_1_1 = "f_4_1_1";
-
   /** 4.1.2牵引座前置距最小值(mm)**/
   public static final String F_4_1_2 = "f_4_1_2";
-
-  
   /** 40 起重机的最大力矩能力(kNm) **/
   public static final String F_40 = "f_40";
   /** 41 车门数量 **/
@@ -293,9 +284,6 @@ public class IVIMFields {
   public static final String F_48_1 = "f_48_1";
   /** 48.2 按照运输某些动物的结构要求的试验报告编号 **/
   public static final String F_48_2 = "f_48_2";
-  /** 5 轮距(mm) 这个字段已经分拆为F_5A和F_5B**/
-  @Deprecated
-  public static final String F_5 = "f_5";
   /** 50 备注 **/
   public static final String F_50 = "f_50";
   /** 前轮距 **/
@@ -344,10 +332,8 @@ public class IVIMFields {
   public static final String H_01 = "h_01";
   /** 临时配置序列号 **/
   public static final String H_02 = "h_02";
-
   /** 配置描述 **/
   public static final String H_03 = "h_03";
-
   /** 配置 **/
   public static final String H_04 = "h_04";
 

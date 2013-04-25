@@ -1,5 +1,8 @@
 package com.sg.vim.print;
 
+import org.eclipse.rap.rwt.RWT;
+import org.eclipse.rap.rwt.client.service.JavaScriptExecutor;
+import org.eclipse.rap.rwt.client.service.JavaScriptLoader;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -36,11 +39,10 @@ public class PrintPanel extends Composite {
     printCertButton = new Button(parent, SWT.PUSH);
     printCertButton.setText("打印合格证");
 
-    printCertButton.addSelectionListener(new SelectionAdapter() {
+    queryButton.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-        // doPrintCert();
-        browser.execute("ReadTest()");// 执行Javascript
+          browser.execute("PrintTest();");
       }
     });
     /**
@@ -68,15 +70,9 @@ public class PrintPanel extends Composite {
         doPrintBrand();
       }
     });
-    /**
-     * System.out.println("-----------------------------------1s"); browser = new
-     * Browser(parent,SWT.NONE); //final Text txtURL = new Text( parent, SWT.BORDER );
-     * //txtURL.setText( "http://eclipse.org/rap" ); String str=createBrowserFunctionHTML();
-     * 
-     * //final Text txtHTML = new Text( parent, SWT.BORDER | SWT.MULTI ); //txtHTML.setText( str );
-     * //txtHTML.setLayoutData( new GridData( 600, 700 ) ); //设置文本框大小 browser.setLayoutData( new
-     * GridData( 300,300 ));//设 置所嵌入的浏览器大小 browser.setText(str);
-     **/
+    
+    browser = new Browser(parent, SWT.NONE);
+    browser.setUrl("/vert");
   }
 
   protected void doPrintBrand() {
@@ -99,38 +95,6 @@ public class PrintPanel extends Composite {
 
   }
   
-  private String createBrowserFunctionHTML() {
-    StringBuffer buffer = new StringBuffer();
-    buffer.append("<html>\n");
-    buffer.append("<head>\n");
-    buffer.append("<script language=\"JavaScript\">\n");
-    buffer.append("function ReadTest() {\n");
-    buffer.append("alert(\"2\")\n");
-    buffer.append(" var VehCert= new ActiveXObject(\"VCertificate.VehCert\");\n");
-    buffer.append(" VehCert.ViewBarcodeInfo(\"XXXXX\");\n");
-    buffer.append("    }\n");
-    buffer.append(" function PrintTest(){\n");
-    buffer.append("    var iRtn;\n");
-    buffer.append("    var VehCert= new ActiveXObject(\"VCertificate.VehCert\");\n");
-    buffer.append("    VehCert.Clztxx=\"QX\";\n");
-    buffer.append("    iRtn=VehCert.PrtParaTbl(1,\"XXXXX\");\n");
-    buffer.append("    if (iRtn==-1){\n");
-    buffer.append("    alert(VehCert.Veh_ErrorInfo);\n");
-    buffer.append("    }\n");
-    buffer.append("}\n");
-    buffer.append("</script>\n");
-    buffer.append("</head>\n");
-    buffer.append("<body>\n");
-    buffer.append(" <table align=\"center\" width=\"200\" border=0 >\n");
-    buffer.append("     <tr><td>\n");
-    // buffer.append("      <input type=\"button\" name=\"read\" value=\"read\" onclick=\"ReadTest()\">\n");
-    buffer.append("     </td></tr><tr><td>\n");
-    // buffer.append("      <input type=\"button\" name=\"print\" value=\"print\" onclick=\"PrintTest()\">\n");
-    buffer.append("     </td></tr>\n");
-    buffer.append("     </table></body></html>\n");
-    return buffer.toString();
-  }
-
   public void setVin(String vin) {
     this.vinInput .setText(vin);
   }
