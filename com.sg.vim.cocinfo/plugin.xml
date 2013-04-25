@@ -7,26 +7,25 @@
             targetID="com.sg.vim.perspective.cocinfo">
          <view
                closeable="false"
-               id="com.sg.vim.cocinfo"
+               id="com.sg.vim.productcode"
                minimized="false"
-               moveable="false"
                ratio="0.4"
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
          <view
                closeable="false"
-               id="com.sg.vim.configcode"
+               id="com.sg.vim.cocinfo"
                minimized="false"
-               relationship="stack"
-               relative="com.sg.vim.cocinfo">
+               ratio="0.4"
+               relationship="right"
+               relative="com.sg.vim.productcode">
          </view>
          <view
                closeable="false"
-               id="com.sg.vim.productcode"
+               id="com.sg.vim.configcode"
                minimized="false"
-               ratio="0.4"
-               relationship="left"
+               relationship="stack"
                relative="com.sg.vim.cocinfo">
          </view>
       </perspectiveExtension>
@@ -40,7 +39,7 @@
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.cocinfo.view.ProductView"
+            class="com.sg.ui.part.view.TableNavigator"
             id="com.sg.vim.productcode"
             name="成品码管理"
             restorable="true">

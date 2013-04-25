@@ -15,71 +15,70 @@ import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.filter.ConditionDefinition;
 import com.sg.vim.datamodel.IVIMFields;
 
-public class ProductBindTargetView extends TableNavigator implements ISelectionListener {
+public class ProductBindTargetView extends TableNavigator implements 
+        ISelectionListener {
 
-	private boolean canTransfer;
+    private boolean canTransfer;
 
-	public ProductBindTargetView() {
-	}
+    public ProductBindTargetView() {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.sg.ui.part.view.TableNavigator#createPartControl(org.eclipse.swt.
-	 * widgets.Composite)
-	 */
-	@Override
-	public void createPartControl(Composite parent) {
-		getViewSite().getPage().addPostSelectionListener(
-				"com.sg.vim.productcode", this);
-		super.createPartControl(parent);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.sg.ui.part.view.TableNavigator#createPartControl(org.eclipse.swt. widgets.Composite)
+     */
+    @Override
+    public void createPartControl(Composite parent) {
+        getViewSite().getPage().addPostSelectionListener("com.sg.vim.productcode", this);
 
-	@Override
-	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (selection.isEmpty()) {
-			return;
-		}
+        super.createPartControl(parent);
+    }
 
-		String productCode = getSelectedProductCode((IStructuredSelection) selection);
+    @Override
+    public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+        if (selection.isEmpty()) {
+            return;
+        }
 
-		navi.createFilterPanel();
-		FilterPanel dash = (FilterPanel) navi.getCurrentDashPanel();
+        String productCode = getSelectedProductCode((IStructuredSelection) selection);
 
-		if (productCode == null) {
-			dash.doRemoveAllConditions();
-			canTransfer = false;
-			return;
-		} else {
-			String field = IVIMFields.F_0_2C1;
-			String type = Utils.TYPE_STRING;
-			String name = "车型代号";
-			ConditionDefinition conditionDefinition = new ConditionDefinition(
-					field, name, type, Utils.OPERATOR_EQUAL, productCode, null);
-			dash.doSetCondition(new ConditionDefinition[]{conditionDefinition});
-			canTransfer = true;
-			
-		}
-	}
+        navi.createFilterPanel();
+        FilterPanel dash = (FilterPanel) navi.getCurrentDashPanel();
 
-	private String getSelectedProductCode(IStructuredSelection selection) {
-		String result = null;
-		@SuppressWarnings("rawtypes")
-		Iterator iter = selection.iterator();
-		while (iter.hasNext()) {
-			DBObject data = (DBObject) iter.next();
-			Object itm = data.get(IVIMFields.F_0_2C1);
-			if (result != null && !result.equals(itm)) {
-				return null;
-			}
-			result = (String) itm;
-		}
-		return result;
-	}
+        if (productCode == null) {
+            dash.doRemoveAllConditions();
+            canTransfer = false;
+            return;
+        } else {
+            String field = IVIMFields.F_0_2C1;
+            String type = Utils.TYPE_STRING;
+            String name = "车型代号";
+            ConditionDefinition conditionDefinition = new ConditionDefinition(field, name, type,
+                    Utils.OPERATOR_EQUAL, productCode, null);
+            dash.doSetCondition(new ConditionDefinition[] { conditionDefinition });
+            canTransfer = true;
 
-	public boolean canBind() {
-		return canTransfer;
-	}
+        }
+    }
+
+    private String getSelectedProductCode(IStructuredSelection selection) {
+        String result = null;
+        @SuppressWarnings("rawtypes")
+        Iterator iter = selection.iterator();
+        while (iter.hasNext()) {
+            DBObject data = (DBObject) iter.next();
+            Object itm = data.get(IVIMFields.F_0_2C1);
+            if (result != null && !result.equals(itm)) {
+                return null;
+            }
+            result = (String) itm;
+        }
+        return result;
+    }
+
+    public boolean canBind() {
+        return canTransfer;
+    }
 
 }

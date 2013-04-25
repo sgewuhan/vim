@@ -187,8 +187,8 @@ class ConnectionManager {
 			loadDrivers(dbProps);
 			createPools(dbProps);
 		} catch (Exception e) {
-			Commons.LOGGER.info("不能读取属性文件. "
-					+ "请确保db.properties在CLASSPATH指定的路径中", e);
+			Commons.LOGGER.info("不能读取数据库属性. "
+					+ "请确保db.properties在CLASSPATH指定的路径中，并得到正确的指定");
 			return;
 		}
 	}

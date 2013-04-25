@@ -18,7 +18,7 @@ public class ProductCodeTableSelectionListener implements SelectionListener {
       String[] ids = e.text.split("@");
       try {
         ObjectId cocinfoId = new ObjectId(ids[1]);
-        UIUtils.open(cocinfoId, ids[0], false, false, null);
+        UIUtils.openDialog(cocinfoId, ids[0], false, false, null);
       } catch (Exception e1) {
         e1.printStackTrace();
       }
