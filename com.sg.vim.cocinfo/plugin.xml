@@ -740,14 +740,14 @@
          </createEditor>
          <filterAction>
             <column
-                  column="f_0_2c"
+                  column="f_0_2c1"
                   name="车型代号"
                   type="String">
             </column>
          </filterAction>
          <searchAction>
             <column
-                  column="f_0_2c"
+                  column="f_0_2c1"
                   name="车型代号"
                   type="String">
             </column>
@@ -959,7 +959,7 @@
             idfield="_id"
             inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput">
          <column
-               column="f_0_2c"
+               column="f_0_2c1"
                name="公告车型"
                type="String"
                width="80">
@@ -2392,10 +2392,10 @@
                         computeField="false"
                         editPart="Text(Single Line)"
                         editable="false"
-                        id="f_0_2c"
+                        id="f_0_2c1"
                         label="公告车型"
                         labelVisible="true"
-                        name="f_0_2c"
+                        name="f_0_2c1"
                         persistable="true"
                         required="false"
                         type="String">
