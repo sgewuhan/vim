@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="com.sg.vim.perspective.print">
+            targetID="com.sg.vim.perspective.printdata">
          <view
                closeable="false"
                id="com.sg.vim.view.certificate"
@@ -49,14 +49,21 @@
                showTitle="true"
                standalone="false">
          </view>
+       
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="com.sg.vim.perspective.print">
          <view
                closeable="false"
-               id="com.sg.vim.print.printView"
+               id="com.sg.vim.view.print"
                minimized="false"
-               relationship="right"
-               relative="com.sg.vim.view.certificate">
+               moveable="false"
+               ratio="0.5"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
+               showTitle="false"
+               standalone="true">
          </view>
-       
       </perspectiveExtension>
    </extension>
    <extension
@@ -87,7 +94,7 @@
       </view>
       <view
             class="com.sg.vim.print.PrintView"
-            id="com.sg.vim.print.printView"
+            id="com.sg.vim.view.print"
             name="打印"
             restorable="true">
       </view>
@@ -1416,17 +1423,6 @@
                width="111">
          </column>
       </table>
-   </extension>
-   <extension
-         point="org.eclipse.rap.ui.entrypoint">
-      <entrypoint
-            brandingId="com.mobnut.portal.branding"
-            class="com.sg.vim.print.PrintEntryPoint"
-            id="com.sg.vim.print.clientprint"
-            path="/print">
-      </entrypoint>
-         point="com.sg.ui.dataEditor">
->>>>>>> branch 'master' of https://github.com/sgewuhan/vim.git
    </extension>
    <extension
          point="com.sg.ui.dataEditor">
