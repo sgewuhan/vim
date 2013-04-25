@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import com.mongodb.BasicDBObject;
+
 public class PrintPanel extends Composite {
   private Text vinInput;
   private Button queryButton;
@@ -42,7 +44,9 @@ public class PrintPanel extends Composite {
     queryButton.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-          browser.execute("PrintTest();");
+          BasicDBObject dbo = new BasicDBObject();
+          dbo.put(PrintUtil.mVeh_Bgcazzdyxzzl, "a");
+          PrintUtil.print(browser,dbo);
       }
     });
     /**
@@ -58,7 +62,7 @@ public class PrintPanel extends Composite {
     printCOCButton.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-        doPrintCOC();
+          PrintUtil.test(browser);
       }
     });
 
