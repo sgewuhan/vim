@@ -5,19 +5,20 @@ import org.eclipse.ui.part.ViewPart;
 
 public class PrintView extends ViewPart {
 
-  private PrintPanel panel;
+    public PrintView() {
+        // TODO Auto-generated constructor stub
+    }
 
-  public PrintView() {
-  }
+    @Override
+    public void createPartControl(Composite parent) {
+        // TODO Auto-generated method stub
 
-  @Override
-  public void createPartControl(Composite parent) {
-    panel = new PrintPanel(parent);
-  }
+    }
 
-  @Override
-  public void setFocus() {
-    panel.setFocus();
-  }
+    @Override
+    public void setFocus() {
+        // TODO Auto-generated method stub
+
+    }
 
 }
