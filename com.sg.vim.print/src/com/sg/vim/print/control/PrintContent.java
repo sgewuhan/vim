@@ -141,6 +141,8 @@ public class PrintContent extends Composite {
             return;
         }
         
+        Commons.LOGGER.info("获得成品码："+productCode);
+        
         //获取成品码对应成品码数据 LNBMDLAA6CU000289
         //公告车型 productcodeinfo.f_0_2c
         DBObject productCodeData = null;
