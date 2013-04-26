@@ -1,24 +1,28 @@
 package com.sg.vim.print;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
+import com.sg.vim.print.control.PrintContent;
+
 public class PrintView extends ViewPart {
 
+    private PrintContent content;
+
     public PrintView() {
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void createPartControl(Composite parent) {
-        // TODO Auto-generated method stub
-
+        content = new PrintContent(parent,SWT.NONE);
+        
+        
     }
 
     @Override
     public void setFocus() {
-        // TODO Auto-generated method stub
-
+        content.setFocus();
     }
 
 }
