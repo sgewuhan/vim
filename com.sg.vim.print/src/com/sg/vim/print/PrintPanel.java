@@ -42,7 +42,7 @@ public class PrintPanel extends Composite {
     queryButton.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-          browser.execute("PrintTest();");
+          browser.execute("showbar();");
       }
     });
     /**
