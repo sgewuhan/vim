@@ -15,8 +15,8 @@ import com.sg.vim.datamodel.IVIMFields;
 public class VimUtils {
 
     private static final String SQL_GET_PRODUCINFOR = "select erp_product_code,safety_components_vin,manufacture_date "
-            + "from mes_mp_erp_code_lot_view "
-            + "where safety_components_vin is not null and manufacture_date is not null and vin =";
+            + "from bqyx_mes.mes_mp_erp_code_lot_view "
+            + "where safety_components_vin is not null and manufacture_date is not null and vin ='";
 
     /**
      * 成品码
@@ -52,7 +52,7 @@ public class VimUtils {
      * @throws Exception
      */
     public static SQLRow getProductCode(String vin) throws Exception {
-        SQLResult res = SQLUtil.SQL_QUERY("mes", SQL_GET_PRODUCINFOR + vin);
+        SQLResult res = SQLUtil.SQL_QUERY("mes", SQL_GET_PRODUCINFOR + vin+"'");
         if (res.size() == 0) {
             throw new Exception("MES数据库中没有VIN对应的成品记录");
         }

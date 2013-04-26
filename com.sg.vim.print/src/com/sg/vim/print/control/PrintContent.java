@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.mobnut.commons.Commons;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.ImageResource;
@@ -25,7 +26,11 @@ import com.sg.vim.datamodel.util.VimUtils;
 @SuppressWarnings("restriction")
 public class PrintContent extends Composite {
 
-    private Image bannerImage;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5625010699901031942L;
+	private Image bannerImage;
     private int margin = 12;
     private Text vinInputText;
     private Button queryButton;
@@ -135,7 +140,8 @@ public class PrintContent extends Composite {
             UIUtils.showMessage(getShell(),"查询MES成品记录","成品码不是字符串类型",SWT.ERROR);
             return;
         }
-        //获取成品码对应成品码数据
+        
+        //获取成品码对应成品码数据 LNBMDLAA6CU000289
         //公告车型 productcodeinfo.f_0_2c
         DBObject productCodeData = null;
         try {
