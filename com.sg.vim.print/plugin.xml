@@ -2763,948 +2763,6 @@
          </basicpage>
       </editor>
       <editor
-            collectionName="certificateinfo"
-            dbName="appportal"
-            id="com.sg.vim.print.editor.certificate"
-            name="合格证">
-         <basicpage
-               id="com.sg.vim.print.basicpage1"
-               title="com.sg.vim.print.basicpage1">
-            <pagecolumn>
-               <section
-                     label="com.sg.vim.print.section1">
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_0_1"
-                        label="车辆制造企业名称"
-                        labelVisible="true"
-                        name="f_0_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="e_02"
-                        label="车身颜色"
-                        labelVisible="true"
-                        name="e_02"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_0_2_1"
-                        label="车辆名称"
-                        labelVisible="true"
-                        name="f_0_2_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c0_2"
-                        label="车辆品牌"
-                        labelVisible="true"
-                        name="f_c0_2"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_0_4"
-                        label="车辆型号(类别)"
-                        labelVisible="true"
-                        name="f_0_4"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_0_5b"
-                        label="车辆生产单位地址"
-                        labelVisible="true"
-                        name="f_0_5b"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_1"
-                        label="轴数"
-                        labelVisible="true"
-                        name="f_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_1_1"
-                        label="轮胎数量"
-                        labelVisible="true"
-                        name="f_1_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_3"
-                        label="轴距"
-                        labelVisible="true"
-                        name="f_3"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_5"
-                        label="前轮距/后轮距"
-                        labelVisible="true"
-                        name="f_5"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_6_1"
-                        label="外廓尺寸长"
-                        labelVisible="true"
-                        name="f_6_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_7_1"
-                        label="外廓尺寸高"
-                        labelVisible="true"
-                        name="f_7_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_8"
-                        label="外廓尺寸宽"
-                        labelVisible="true"
-                        name="f_8"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_14_1"
-                        label="总质量"
-                        labelVisible="true"
-                        name="f_14_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_14_2"
-                        label="轴荷"
-                        labelVisible="true"
-                        name="f_14_2"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c4"
-                        label="发动机型号"
-                        labelVisible="true"
-                        name="f_c4"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_24"
-                        label="排量"
-                        labelVisible="true"
-                        name="f_24"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_25"
-                        label="燃料种类"
-                        labelVisible="true"
-                        name="f_25"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_32"
-                        label="轮胎规格"
-                        labelVisible="true"
-                        name="f_32"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_42_1"
-                        label="额定载客"
-                        labelVisible="true"
-                        name="f_42_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_44"
-                        label="最高设计车速"
-                        labelVisible="true"
-                        name="f_44"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c5"
-                        label="载质量利用系数"
-                        labelVisible="true"
-                        name="f_c5"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c6"
-                        label="钢板弹簧片数"
-                        labelVisible="true"
-                        name="f_c6"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c34"
-                        label="转向形式"
-                        labelVisible="true"
-                        name="f_c34"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c7_1"
-                        label="货箱内部尺寸长"
-                        labelVisible="true"
-                        name="f_c7_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c7_2"
-                        label="货箱内部尺寸高"
-                        labelVisible="true"
-                        name="f_c7_2"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_c7_3"
-                        label="货箱内部尺寸宽"
-                        labelVisible="true"
-                        name="f_c7_3"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_01"
-                        label="功率"
-                        labelVisible="true"
-                        name="c_01"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_02"
-                        label="驾驶室准乘人数"
-                        labelVisible="true"
-                        name="c_02"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_03"
-                        label="油耗"
-                        labelVisible="true"
-                        name="c_03"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_04"
-                        label="半挂车鞍座最大允许总质量"
-                        labelVisible="true"
-                        name="c_04"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_05"
-                        label="其他"
-                        labelVisible="true"
-                        name="c_05"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_06"
-                        label="排放标准"
-                        labelVisible="true"
-                        name="c_06"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_07"
-                        label="底盘型号"
-                        labelVisible="true"
-                        name="c_07"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_08"
-                        label="整备质量"
-                        labelVisible="true"
-                        name="c_08"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_09"
-                        label="额定载质量"
-                        labelVisible="true"
-                        name="c_09"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-               </section>
-               <section
-                     label="com.sg.vim.print.section2">
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_10"
-                        label="准牵引总质量"
-                        labelVisible="true"
-                        name="c_10"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_11"
-                        label="合格证＿备注"
-                        labelVisible="true"
-                        name="c_11"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_12"
-                        label="底盘ID"
-                        labelVisible="true"
-                        name="c_12"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_13"
-                        label="转向轴数"
-                        labelVisible="true"
-                        name="c_13"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_14"
-                        label="企业编号"
-                        labelVisible="true"
-                        name="c_14"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_15"
-                        label="后制动操作方式"
-                        labelVisible="true"
-                        name="c_15"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_16"
-                        label="后制动方式"
-                        labelVisible="true"
-                        name="c_16"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_17"
-                        label="企业标准"
-                        labelVisible="true"
-                        name="c_17"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_18"
-                        label="企业其它信息"
-                        labelVisible="true"
-                        name="c_18"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_19"
-                        label="前制动操作方式"
-                        labelVisible="true"
-                        name="c_19"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_20"
-                        label="前制动方式"
-                        labelVisible="true"
-                        name="c_20"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_21"
-                        label="纯电动标记"
-                        labelVisible="true"
-                        name="c_21"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_22"
-                        label="车辆类型"
-                        labelVisible="true"
-                        name="c_22"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_23"
-                        label="车辆状态信息"
-                        labelVisible="true"
-                        name="c_23"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_25"
-                        label="车辆制造日期"
-                        labelVisible="true"
-                        name="c_25"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_26"
-                        label="车辆识别代码/车架号(VIN)"
-                        labelVisible="true"
-                        name="c_26"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_27"
-                        label="状态"
-                        labelVisible="true"
-                        name="c_27"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_28"
-                        label="上传主机硬件信息"
-                        labelVisible="true"
-                        name="c_28"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_29"
-                        label="上传日期"
-                        labelVisible="true"
-                        name="c_29"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_30"
-                        label="公安反馈时间"
-                        labelVisible="true"
-                        name="c_30"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_31"
-                        label="反馈码"
-                        labelVisible="true"
-                        name="c_31"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_32"
-                        label="上传主机地址"
-                        labelVisible="true"
-                        name="c_32"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_33"
-                        label="企业用户名"
-                        labelVisible="true"
-                        name="c_33"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_34"
-                        label="U盾标识"
-                        labelVisible="true"
-                        name="c_34"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_35"
-                        label="更新日期"
-                        labelVisible="true"
-                        name="c_35"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_36"
-                        label="上传标记"
-                        labelVisible="true"
-                        name="c_36"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_37"
-                        label="校验码"
-                        labelVisible="true"
-                        name="c_37"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_38"
-                        label="上传系统版本信息"
-                        labelVisible="true"
-                        name="c_38"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_39"
-                        label="完整合格证编号"
-                        labelVisible="true"
-                        name="c_39"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_40"
-                        label="规则：改动车辆日期"
-                        labelVisible="true"
-                        name="c_40"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_41"
-                        label="操作日期"
-                        labelVisible="true"
-                        name="c_41"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_42"
-                        label="打印唯一码"
-                        labelVisible="true"
-                        name="c_42"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_43"
-                        label="整车合格证编号"
-                        labelVisible="true"
-                        name="c_43"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_44"
-                        label="纸张编号 "
-                        labelVisible="true"
-                        name="c_44"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_45"
-                        label="发证日期"
-                        labelVisible="true"
-                        name="c_45"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_46"
-                        label="底盘合格证编号"
-                        labelVisible="true"
-                        name="c_46"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_47"
-                        label="二维码"
-                        labelVisible="true"
-                        name="c_47"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_48"
-                        label="合格证编号（固定＋国家＋递增）"
-                        labelVisible="true"
-                        name="c_48"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_49"
-                        label="发证时间"
-                        labelVisible="true"
-                        name="c_49"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_50"
-                        label="发动机号"
-                        labelVisible="true"
-                        name="c_50"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="c_51"
-                        label="配置序列号"
-                        labelVisible="true"
-                        name="c_51"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-         </basicpage>
-      </editor>
-      <editor
             collectionName="fuelinfo"
             dbName="appportal"
             id="com.sg.vim.print.editor.fuelid"
@@ -3969,6 +3027,769 @@
             alias="/vert"
             base-name="/html/vert.html">
       </resource>
+   </extension>
+   <extension
+         point="com.sg.ui.dataEditor">
+      <editor
+            collectionName="certificateinfo"
+            dbName="appportal"
+            id="com.sg.vim.print.editor.certificate"
+            name="合格证">
+         <basicpage
+               id="1"
+               title="合格证数据">
+            <pagecolumn>
+               <section
+                     label="基本信息">
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clztxx"
+                        label="车辆状态信息"
+                        name="Veh_Clztxx"
+                        textLimit="2"
+                        tooltips="取值为QX和DP"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zchgzbh"
+                        label="整车合格证编号"
+                        name="Veh_Zchgzbh"
+                        textLimit="14"
+                        tooltips="4位企业代码+10位顺序号成功调用打印方法后可以通过该属性获得15位的整车合格证编号"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Dphgzbh"
+                        label="底盘合格证编号"
+                        name="Veh_Dphgzbh"
+                        textLimit="15"
+                        tooltips="全项方式15位；底盘方式不填"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Fzrq"
+                        label="发证日期"
+                        name="Veh_Fzrq"
+                        textLimit="14"
+                        tooltips="YYYY年MM月DD日"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clzzqymc"
+                        label="车辆制造企业名称"
+                        name="Veh_Clzzqymc"
+                        textLimit="64"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Qyid"
+                        label="企业ID"
+                        name="Veh_Qyid"
+                        textLimit="8"
+                        tooltips="8位公告企业ID"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clfl"
+                        label="车辆分类"
+                        name="Veh_Clfl"
+                        textLimit="26"
+                        tooltips="代替原属性Veh_cllx。如：货车"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clmc"
+                        label="车辆名称"
+                        name="Veh_Clmc"
+                        textLimit="54"
+                        tooltips="如：轿车"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clpp"
+                        label="车辆品牌"
+                        name="Veh_Clpp"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clxh"
+                        label="车辆型号"
+                        name="Veh_Clxh"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Csys"
+                        label="车身颜色"
+                        name="Veh_Csys"
+                        textLimit="70"
+                        tooltips="多种颜色之间用“/”分隔"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clzzrq"
+                        label="车辆制造日期"
+                        name="Veh_Clzzrq"
+                        textLimit="14"
+                        tooltips="YYYY年MM月DD日"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Cpggh"
+                        label="产品公告号"
+                        name="Veh_Cpggh"
+                        textLimit="50"
+                        tooltips="由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ggpc"
+                        label="公告批次"
+                        name="Veh_Ggpc"
+                        textLimit="50"
+                        tooltips="由公告信息获得"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ggsxrq"
+                        label="公告生效日期"
+                        name="Veh_Ggsxrq"
+                        textLimit="14"
+                        tooltips="由公告信息获得,格式: yyyy-MM-dd"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zzbh"
+                        label="纸张编号"
+                        name="Veh_Zzbh"
+                        textLimit="50"
+                        tooltips="可空"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="车辆分类、底盘、发动机">
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Dpxh"
+                        label="底盘型号"
+                        name="Veh_Dpxh"
+                        textLimit="30"
+                        tooltips="对于QX方式时使用"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Dpid"
+                        label="底盘ID"
+                        name="Veh_Dpid"
+                        textLimit="7"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clsbdh"
+                        label="车辆识别代号"
+                        name="Veh_Clsbdh"
+                        textLimit="17"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Cjh"
+                        label="车架号"
+                        name="Veh_Cjh"
+                        textLimit="25"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Fdjh"
+                        label="发动机号"
+                        name="Veh_Fdjh"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Fdjxh"
+                        label="发动机型号"
+                        name="Veh_Fdjxh"
+                        textLimit="20"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="燃料、排放、功率等">
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Rlzl"
+                        label="燃料种类"
+                        name="Veh_Rlzl"
+                        textLimit="30"
+                        tooltips="多种燃料之间用“/”分隔"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Pfbz"
+                        label="排放标准"
+                        name="Veh_Pfbz"
+                        textLimit="60"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Pl"
+                        label="排量"
+                        name="Veh_Pl"
+                        textLimit="5"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Gl"
+                        label="功率"
+                        name="Veh_Gl"
+                        textLimit="7"
+                        tooltips="多种功率之间用“/”分隔"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zxxs"
+                        label="转向形式"
+                        name="Veh_Zxxs"
+                        textLimit="6"
+                        tooltips="如：方向盘"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Yh"
+                        label="油耗"
+                        name="Veh_Yh"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Cddbj"
+                        label="纯电动标记"
+                        name="Veh_Cddbj"
+                        textLimit="1"
+                        tooltips="取值为1（是）、2（否），默认为2。纯电动车辆使用。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zgcs"
+                        label="最高车速"
+                        name="Veh_Zgcs"
+                        textLimit="5"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+            <pagecolumn>
+               <section
+                     label="规格、尺寸等参数">
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Qlj"
+                        label="前轮距"
+                        name="Veh_Qlj"
+                        textLimit="4"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Hlj"
+                        label="后轮距"
+                        name="Veh_Hlj"
+                        textLimit="54"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Lts"
+                        label="轮胎数"
+                        name="Veh_Lts"
+                        textLimit="2"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ltgg"
+                        label="轮胎规格"
+                        name="Veh_Ltgg"
+                        textLimit="20"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Gbthps"
+                        label="钢板弹簧片数"
+                        name="Veh_Gbthps"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zj"
+                        label="轴距"
+                        name="Veh_Zj"
+                        textLimit="60"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zh"
+                        label="轴荷"
+                        name="Veh_Zh"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zs"
+                        label="轴数"
+                        name="Veh_Zs"
+                        textLimit="1"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zxzs"
+                        label="转向轴个数"
+                        name="Veh_Zxzs"
+                        textLimit="1"
+                        tooltips="取值为1、2、3，默认为1。供多转向轴的车辆填写。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Wkc"
+                        label="外廓长"
+                        name="Veh_Wkc"
+                        textLimit="5"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Wkk"
+                        label="外廓宽"
+                        name="Veh_Wkk"
+                        textLimit="4"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Wkg"
+                        label="外廓高"
+                        name="Veh_Wkg"
+                        textLimit="4"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Hxnbc"
+                        label="货厢内部长"
+                        name="Veh_Hxnbc"
+                        textLimit="5"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Hxnbk"
+                        label="货厢内部宽"
+                        name="Veh_Hxnbk"
+                        textLimit="4"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Hxnbg"
+                        label="货厢内部高"
+                        name="Veh_Hxnbg"
+                        textLimit="4"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zzl"
+                        label="总质量"
+                        name="Veh_Zzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Edzzl"
+                        label="额定载质量"
+                        name="Veh_Edzzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zbzl"
+                        label="整备质量"
+                        name="Veh_Zbzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zzllyxs"
+                        label="载质量利用系数"
+                        name="Veh_Zzllyxs"
+                        textLimit="30"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zqyzzl"
+                        label="准牵引总质量"
+                        name="Veh_Zqyzzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Edzk"
+                        label="额定载客"
+                        name="Veh_Edzk"
+                        textLimit="3"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Bgcazzdyxzzl"
+                        label="半挂车鞍座最大允许总质量"
+                        name="Veh_Bgcazzdyxzzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Jsszcrs"
+                        label="驾驶室准乘人数"
+                        name="Veh_Jsszcrs"
+                        textLimit="3"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="其他信息">
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Bz"
+                        label="备注"
+                        name="Veh_Bz"
+                        textLimit="300"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Qybz"
+                        label="企业标准"
+                        name="Veh_Qybz"
+                        textLimit="200"
+                        tooltips="按“xxxx-xxxx《xxxx》”的格式，其中间部分为数字"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Clscdwmc"
+                        label="车辆生产单位名称"
+                        name="Veh_Clscdwmc"
+                        textLimit="64"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Cpscdz"
+                        label="车辆生产单位地址"
+                        name="Veh_Cpscdz"
+                        textLimit="70"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Qyqtxx"
+                        label="企业其它信息"
+                        name="Veh_Qyqtxx"
+                        textLimit="400"
+                        tooltips="该项目内容需要回车换行的地方使用“%%”表示。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Tmxx"
+                        label="合格证条码信息"
+                        name="Veh_Tmxx"
+                        textLimit="1000"
+                        tooltips="调用ViewBarcodeInfo并读取合格证条码后，通过该属性可获得条码信息，具体项目格式见附件一。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Jyw"
+                        label="校验信息"
+                        name="Veh_Jyw"
+                        textLimit="255+"
+                        tooltips="调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_PrinterName"
+                        label="目标打印机的名称"
+                        name="Veh_PrinterName"
+                        textLimit="30"
+                        tooltips="缺省为默认打印机"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_PrintPosLeft"
+                        label="合格证打印的左边距"
+                        name="Veh_PrintPosLeft"
+                        textLimit="5"
+                        tooltips="默认值为15  单位：mm"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_PrintPosTop"
+                        label="合格证打印的上边距"
+                        name="Veh_PrintPosTop"
+                        textLimit="5"
+                        tooltips="默认值为15  单位：mm"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Connect"
+                        label="连接串口"
+                        name="Veh_Connect"
+                        textLimit="5"
+                        tooltips="默认值为COM1"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Baud"
+                        label="串口波特率"
+                        name="Veh_Baud"
+                        textLimit="10"
+                        tooltips="默认值为9600"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Parity"
+                        label="串口奇偶校验"
+                        name="Veh_Parity"
+                        textLimit="5"
+                        tooltips="默认值为N"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Databits"
+                        label="串口数据位"
+                        name="Veh_Databits"
+                        textLimit="5"
+                        tooltips="默认值为8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Stopbits"
+                        label="串口停止位"
+                        name="Veh_Stopbits"
+                        textLimit="5"
+                        tooltips="默认值为1"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_ErrorInfo"
+                        label="记录最近一次出错信息"
+                        name="Veh_ErrorInfo"
+                        textLimit="1000"
+                        tooltips="如果调用方法出错，可以查看该属性值获取出错信息"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Cpggh"
+                        label="产品公告号"
+                        name="Veh_Cpggh"
+                        textLimit="50"
+                        tooltips="由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zzbh"
+                        label="纸张编号"
+                        name="Veh_Zzbh"
+                        textLimit="50"
+                        tooltips="可空"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ggpc"
+                        label="公告批次"
+                        name="Veh_Ggpc"
+                        textLimit="50"
+                        tooltips="由公告信息获得"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ggsxrq"
+                        label="公告生效日期"
+                        name="Veh_Ggsxrq"
+                        textLimit="14"
+                        tooltips="由公告信息获得,格式: yyyy-MM-dd"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Dywym"
+                        label="打印唯一码"
+                        name="Veh_Dywym"
+                        textLimit="50"
+                        tooltips="调用PrtParaTbl成功后，通过该属性可获得合格证打印唯一码，供合格证上传用。"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="国家合格证系统信息">
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Tmxx"
+                        label="合格证条码信息"
+                        name="Veh_Tmxx"
+                        textLimit="1000"
+                        tooltips="调用ViewBarcodeInfo并读取合格证条码后，通过该属性可获得条码信息，具体项目格式见附件一。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Jyw"
+                        label="校验信息"
+                        name="Veh_Jyw"
+                        textLimit="255+"
+                        tooltips="调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_PrinterName"
+                        label="目标打印机的名称"
+                        name="Veh_PrinterName"
+                        textLimit="30"
+                        tooltips="缺省为默认打印机"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_PrintPosLeft"
+                        label="合格证打印的左边距"
+                        name="Veh_PrintPosLeft"
+                        textLimit="5"
+                        tooltips="默认值为15  单位：mm"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_PrintPosTop"
+                        label="合格证打印的上边距"
+                        name="Veh_PrintPosTop"
+                        textLimit="5"
+                        tooltips="默认值为15  单位：mm"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Connect"
+                        label="连接串口"
+                        name="Veh_Connect"
+                        textLimit="5"
+                        tooltips="默认值为COM1"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Baud"
+                        label="串口波特率"
+                        name="Veh_Baud"
+                        textLimit="10"
+                        tooltips="默认值为9600"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Parity"
+                        label="串口奇偶校验"
+                        name="Veh_Parity"
+                        textLimit="5"
+                        tooltips="默认值为N"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Databits"
+                        label="串口数据位"
+                        name="Veh_Databits"
+                        textLimit="5"
+                        tooltips="默认值为8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Stopbits"
+                        label="串口停止位"
+                        name="Veh_Stopbits"
+                        textLimit="5"
+                        tooltips="默认值为1"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Dywym"
+                        label="打印唯一码"
+                        name="Veh_Dywym"
+                        textLimit="50"
+                        tooltips="调用PrtParaTbl成功后，通过该属性可获得合格证打印唯一码，供合格证上传用。"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+      </editor>
    </extension>
 
 </plugin>

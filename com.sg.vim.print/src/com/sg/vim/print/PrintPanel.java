@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import com.mongodb.BasicDBObject;
+import com.sg.vim.datamodel.util.VimUtils;
 
 public class PrintPanel extends Composite {
   private Text vinInput;
@@ -45,8 +46,8 @@ public class PrintPanel extends Composite {
       @Override
       public void widgetSelected(SelectionEvent e) {
           BasicDBObject dbo = new BasicDBObject();
-          dbo.put(PrintUtil.mVeh_Bgcazzdyxzzl, "a");
-          PrintUtil.print(browser,dbo);
+          dbo.put(VimUtils.mVeh_Bgcazzdyxzzl, "a");
+          VimUtils.print(browser,dbo);
       }
     });
     /**
@@ -62,7 +63,7 @@ public class PrintPanel extends Composite {
     printCOCButton.addSelectionListener(new SelectionAdapter() {
       @Override
       public void widgetSelected(SelectionEvent e) {
-          PrintUtil.test(browser);
+          VimUtils.test(browser);
       }
     });
 
