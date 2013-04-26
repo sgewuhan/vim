@@ -34,5 +34,6 @@ Export-Package: com.microsoft.sqlserver.jdbc,
  oracle.jdbc.util,
  oracle.jdbc.xa,
  oracle.jdbc.xa.client,
+ oracle.net.aso,
  oracle.sql,
  oracle.sql.converter

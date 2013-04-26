@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.mongodb.DBObject;
+import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.ImageResource;
 import com.sg.ui.UI;
 import com.sg.ui.UIUtils;
@@ -68,6 +70,7 @@ public class PrintContent extends Composite {
         fd.left = new FormAttachment(headImage,margin*2);
         
         vinInputText = new Text(banner,SWT.BORDER);
+        vinInputText.setTextLimit(17);
         vinInputText.setData(RWT.CUSTOM_VARIANT, "big");
         FormData fd1 = new FormData();
         vinInputText.setLayoutData(fd1);
@@ -112,11 +115,55 @@ public class PrintContent extends Composite {
     }
 
     protected void doQueryButtonPressed() {
-        String inputVin = vinInputText.getText();
-        boolean valid = VimUtils.checkVIN(inputVin);
+        String vin = vinInputText.getText();
+        //检查输入的vin是否合法
+        boolean valid = VimUtils.checkVIN(vin);
         if(!valid){
             UIUtils.showMessage(getShell(),"输入VIN","输入的VIN不合法，请重新输入。",SWT.ERROR);
+            return;
         }
+        //查询数据库是否有对应vin的成品码记录
+        SQLRow row = null;
+        try {
+            row = VimUtils.getProductCode(vin);
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(),"查询MES成品记录",e.getMessage(),SWT.ERROR);
+            return;
+        }
+        Object productCode = row.getValue(VimUtils.FIELD_PRODUCT_CODE);
+        if(!(productCode instanceof String)){
+            UIUtils.showMessage(getShell(),"查询MES成品记录","成品码不是字符串类型",SWT.ERROR);
+            return;
+        }
+        //获取成品码对应成品码数据
+        //公告车型 productcodeinfo.f_0_2c
+        DBObject productCodeData = null;
+        try {
+            productCodeData = VimUtils.getProductCodeInfo((String)productCode);
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(),"查询成品码记录",e.getMessage(),SWT.ERROR);
+            return;
+        }
+        
+        //查询COC绑定数据
+        DBObject cocData = null;
+        try {
+            cocData = VimUtils.getCOCInfo(productCodeData);
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(),"查询成品码车型一致性信息",e.getMessage(),SWT.ERROR);
+            return;
+        }
+        //查询配置数据
+        DBObject confData = null;
+        try {
+            confData = VimUtils.getConfInfo(productCodeData);
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(),"查询成品码车型配置信息",e.getMessage(),SWT.ERROR);
+            return;
+        }
+        //处理底盘有关数据
+        
+        
     }
 
 

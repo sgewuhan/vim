@@ -11,7 +11,9 @@ Require-Bundle: org.eclipse.core.runtime,
  com.sg.ui;bundle-version="1.0.0",
  com.mobnut.commons;bundle-version="1.0.0",
  org.eclipse.rap.ui;bundle-version="2.0.0",
- org.eclipse.rap.ui.forms
+ org.eclipse.rap.ui.forms,
+ com.sg.db,
+ com.sg.sqldb;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.sg.vim.datamodel,
@@ -19,3 +21,4 @@ Export-Package: com.sg.vim.datamodel,
  com.sg.vim.datamodel.option,
  com.sg.vim.datamodel.util,
  com.sg.vim.datamodel.validator
+Import-Package: org.apache.log4j
