@@ -158,7 +158,7 @@ public class IVIMFields {
   public static final String F_0_5b = "f_0_5b";
   /** 0.6 法定铭牌的位置 **/
   public static final String F_0_6a = "f_0_6a";
-  /** 车辆识别代号 **/
+  /** 车辆识别代号 总是空 **/
   public static final String F_0_6b = "f_0_6b";
   /** 车辆识别代号的打刻位置 **/
   public static final String F_0_6C = "f_0_6c";
@@ -232,7 +232,7 @@ public class IVIMFields {
   public static final String F_30 = "f_30";
   /** 32 轮胎规格  **/
   public static final String F_32 = "f_32";
-  /** 32 轮胎规格 **/
+  /** 32 轮胎规格 合格证用**/
   public static final String F_32A = "f_32a";
   /** 32 轮胎规格 公告车型中 使用逗号分割的多项规格，供COC 合格证轮胎规格选取 **/
   public static final String F_32S = "f_32s";
