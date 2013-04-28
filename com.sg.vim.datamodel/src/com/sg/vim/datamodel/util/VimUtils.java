@@ -116,7 +116,7 @@ public class VimUtils {
     public static final String mVeh_Jyw = "Veh_Jyw";// 校验信息 字符 255+
                                                     // 调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。
     public static final String mVeh_Yh = "Veh_Yh";// 油耗 字符 30
-    public static final String mVeh_Cddbj = "Veh_Cddbj";// 纯电动标记 字符 1
+//    public static final String mVeh_Cddbj = "Veh_Cddbj";// 纯电动标记 字符 1
     public static final String mVeh_Cpggh = "Veh_Cpggh";// 公告号
     public static final String mVeh_Ggpc = "Veh_Ggpc";
     public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
@@ -141,6 +141,9 @@ public class VimUtils {
     private static final String mVeh_PrinterName = "Veh_PrinterName";
 
     private static final String mVeh_Zzbh = "Veh_Zzbh";
+    
+	private static final String mVeh_Cddbj = "Veh_Cddbj";
+
 
     public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M" };
@@ -158,9 +161,10 @@ public class VimUtils {
             mVeh_Hxnbc, mVeh_Hxnbk, mVeh_Hxnbg, mVeh_Zzl, mVeh_Edzzl, mVeh_Zbzl, mVeh_Zzllyxs,
             mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
             mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs, mVeh_Tmxx,
-            mVeh_Jyw, mVeh_Yh, mVeh_Cddbj, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
+            mVeh_Jyw, mVeh_Yh, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
             mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
-            mVeh_Stopbits,mVeh_Zzbh};
+            mVeh_Stopbits,mVeh_Zzbh,mVeh_Cddbj};
+
 
     public static void setValues(Browser browser, DBObject dbo){
         StringBuilder sb = new StringBuilder();
@@ -184,7 +188,7 @@ public class VimUtils {
     }
 
     public static void print(Browser browser) {
-        browser.execute("printCert");
+        browser.execute("printCert()");
     }
 
     public static void test(Browser browser) {
@@ -409,7 +413,7 @@ public class VimUtils {
         // Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
         result.put(mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
         // Veh_JsszCrs C_02 驾驶室准乘人数 映射
-        result.put(mVeh_Jsszcrs, cocData.get(IVIMFields.C_02));
+//        result.put(mVeh_Jsszcrs, cocData.get(IVIMFields.C_02));
         // Veh_EDzk F_42_1 额定载客 映射
         result.put(mVeh_Edzk, cocData.get(IVIMFields.F_42_1));
         // Veh_ZgCs F_44 最高车速 映射
@@ -429,7 +433,13 @@ public class VimUtils {
         // Veh_Zxzs C_13 转向轴个数 映射
         result.put(mVeh_Zxzs, cocData.get(IVIMFields.C_13));
         // Veh_CDDbj C_21 纯电动标记 值转换
-        result.put(mVeh_Cddbj, cocData.get(IVIMFields.C_21));
+        //******************************************************这个值设置后有问题
+        Object object = cocData.get(IVIMFields.C_21);
+        if("是".equals(object)){
+        	result.put(mVeh_Cddbj, 1);
+        }else{
+        	result.put(mVeh_Cddbj, 2);
+        }
         // Veh_ClsCDwmC F_0_1 车辆生产单位名称 映射
         result.put(mVeh_Clscdwmc, cocData.get(IVIMFields.F_0_1));
         // Veh_CpsCDz D_04 车辆生产单位地址 映射
