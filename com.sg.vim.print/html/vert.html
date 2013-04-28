@@ -11,8 +11,6 @@ VehCert.ViewBarcodeInfo("PER4-54LD-WXQI-DK87");
 function printCert(){
 var VehCert= document.getElementById("VCertificateVehCert");
 var iRtn=VehCert.PrtParaTbl(1,"FDLS-325D-SKDI-E8EK");
-alert("PrtParaTbl Invoked OK!");
-
 if (iRtn==-1){
 alert(VehCert.Veh_ErrorInfo);
 }
@@ -21,19 +19,19 @@ alert(VehCert.Veh_ErrorInfo);
 function getCerfId(input){
 var VehCert= document.getElementById("VCertificateVehCert");
 var id = VehCert.GetCertificateNO(input,"N3PL-SX32-AEU2-BC6S");
-alert("GetCertificateNO Invoked!");
 return id;
 }
 
 function setValues(
-mVeh_Clztxx,mVeh_Zchgzbh,mVeh_Dphgzbh,mVeh_Fzrq,mVeh_Clzzqymc,mVeh_Qyid,mVeh_Clfl,
-mVeh_Clmc,mVeh_Clpp,mVeh_Clxh,mVeh_Csys,mVeh_Dpxh,mVeh_Dpid,mVeh_Clsbdh,mVeh_Cjh,
-mVeh_Fdjh,mVeh_Fdjxh,mVeh_Rlzl,mVeh_Pfbz,mVeh_Pl,mVeh_Gl,mVeh_Zxxs,mVeh_Qlj,mVeh_Hlj,
-mVeh_Lts,mVeh_Ltgg,mVeh_Gbthps,mVeh_Zj,mVeh_Zh,mVeh_Zs,mVeh_Wkc,mVeh_Wkk,mVeh_Wkg,mVeh_Hxnbc,
-mVeh_Hxnbk,mVeh_Hxnbg,mVeh_Zzl,mVeh_Edzzl,mVeh_Zbzl,mVeh_Zzllyxs,mVeh_Zqyzzl,mVeh_Edzk,
-mVeh_Bgcazzdyxzzl,mVeh_Zgcs,mVeh_Clzzrq,mVeh_Bz,mVeh_Qybz,mVeh_Clscdwmc,
-mVeh_Cpscdz,mVeh_Qyqtxx,mVeh_Zxzs,mVeh_Tmxx,mVeh_Yh,mVeh_Cpggh,mVeh_Ggpc,mVeh_Ggsxrq,
-mVeh_PrinterName,
+			mVeh_Clztxx, mVeh_Zchgzbh, mVeh_Dphgzbh,
+            mVeh_Fzrq, mVeh_Clzzqymc, mVeh_Qyid, mVeh_Clfl, mVeh_Clmc, mVeh_Clpp, mVeh_Clxh,
+            mVeh_Csys, mVeh_Dpxh, mVeh_Dpid, mVeh_Clsbdh, mVeh_Cjh, mVeh_Fdjh, mVeh_Fdjxh,
+            mVeh_Rlzl, mVeh_Pfbz, mVeh_Pl, mVeh_Gl, mVeh_Zxxs, mVeh_Qlj, mVeh_Hlj, mVeh_Lts,
+            mVeh_Ltgg, mVeh_Gbthps, mVeh_Zj, mVeh_Zh, mVeh_Zs, mVeh_Wkc, mVeh_Wkk, mVeh_Wkg,
+            mVeh_Hxnbc, mVeh_Hxnbk, mVeh_Hxnbg, mVeh_Zzl, mVeh_Edzzl, mVeh_Zbzl, mVeh_Zzllyxs,
+            mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
+            mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs, mVeh_Tmxx,
+            mVeh_Jyw, mVeh_Yh, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
             mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
             mVeh_Stopbits,mVeh_Zzbh,mVeh_Cddbj){
 var VehCert= document.getElementById("VCertificateVehCert");
@@ -80,6 +78,7 @@ VehCert.Veh_Zzllyxs=mVeh_Zzllyxs;
 VehCert.Veh_Zqyzzl=mVeh_Zqyzzl;
 VehCert.Veh_Edzk=mVeh_Edzk;
 VehCert.Veh_Bgcazzdyxzzl=mVeh_Bgcazzdyxzzl;
+VehCert.Veh_Jsszcrs=mVeh_Jsszcrs;
 VehCert.Veh_Zgcs=mVeh_Zgcs;
 VehCert.Veh_Clzzrq=mVeh_Clzzrq;
 VehCert.Veh_Bz=mVeh_Bz;
@@ -89,15 +88,12 @@ VehCert.Veh_Cpscdz=mVeh_Cpscdz;
 VehCert.Veh_Qyqtxx=mVeh_Qyqtxx;
 VehCert.Veh_Zxzs=mVeh_Zxzs;
 VehCert.Veh_Tmxx=mVeh_Tmxx;
+VehCert.Veh_Jyw=mVeh_Jyw;
 VehCert.Veh_Yh=mVeh_Yh;
 VehCert.Veh_Cpggh=mVeh_Cpggh;
-alert(VehCert.mVeh_Cpggh);
-alert(VehCert.Veh_Cpggh);
 VehCert.Veh_Ggpc=mVeh_Ggpc;
 VehCert.Veh_Ggsxrq=mVeh_Ggsxrq;
-
-
-VehCert.Veh_Ggsxrq=mVeh_PrinterName;
+VehCert.Veh_PrinterName=mVeh_PrinterName;
 VehCert.Veh_PrintPosLeft=mVeh_PrintPosLeft;
 VehCert.Veh_PrintPosTop=mVeh_PrintPosTop;
 VehCert.Veh_Connect=mVeh_Connect;
@@ -106,6 +102,8 @@ VehCert.Veh_Parity=mVeh_Parity;
 VehCert.Veh_Databits=mVeh_Databits;
 VehCert.Veh_Stopbits=mVeh_Stopbits;
 VehCert.Veh_Zzbh=mVeh_Zzbh;
+VehCert.Veh_Cddbj=mVeh_Cddbj;
+
 
 }
 
