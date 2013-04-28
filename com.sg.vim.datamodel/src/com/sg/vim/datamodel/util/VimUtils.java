@@ -312,6 +312,9 @@ public class VimUtils {
         DBObject dbObject = transferData(cocData, confData, productCodeData, mesRawData, vin, isDP);
         DataObject data = new DataObject(c, dbObject);
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
+        if(debug){
+            editorInput.setEditable(true);
+        }
         return editorInput;
     }
 
