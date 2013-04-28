@@ -159,11 +159,11 @@ public class VimUtils {
             mVeh_Rlzl, mVeh_Pfbz, mVeh_Pl, mVeh_Gl, mVeh_Zxxs, mVeh_Qlj, mVeh_Hlj, mVeh_Lts,
             mVeh_Ltgg, mVeh_Gbthps, mVeh_Zj, mVeh_Zh, mVeh_Zs, mVeh_Wkc, mVeh_Wkk, mVeh_Wkg,
             mVeh_Hxnbc, mVeh_Hxnbk, mVeh_Hxnbg, mVeh_Zzl, mVeh_Edzzl, mVeh_Zbzl, mVeh_Zzllyxs,
-            mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
-            mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs, mVeh_Tmxx,
-            mVeh_Jyw, mVeh_Yh, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
-            mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
-            mVeh_Stopbits,mVeh_Zzbh,mVeh_Cddbj};
+        mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
+        mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs,
+        mVeh_Yh, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
+        mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
+        mVeh_Stopbits,mVeh_Zzbh,mVeh_Cddbj};
 
 
     public static void setValues(Browser browser, DBObject dbo){
@@ -172,6 +172,8 @@ public class VimUtils {
 
         for (int i = 0; i < paraSeq.length; i++) {
             Object value = dbo.get(paraSeq[i]);
+            value= value==null?"":value;
+            System.out.println(paraSeq[i]+">>"+value);
             sb.append("\"");
             value = value == null ? "" : value;
             sb.append(value);
