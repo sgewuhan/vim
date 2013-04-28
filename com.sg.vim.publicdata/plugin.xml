@@ -16,6 +16,18 @@
                               showTitle="true"
                               standalone="false">
                         </view>
+                        <view
+                              id="com.sg.vim.cocinfo"
+                              minimized="false"
+                              relationship="stack"
+                              relative="com.sg.vim.view.basic">
+                        </view>
+                        <view
+                              id="com.sg.vim.configcode"
+                              minimized="false"
+                              relationship="stack"
+                              relative="com.sg.vim.view.basic">
+                        </view>
                      </perspectiveExtension>
                   </extension>
                   <extension
