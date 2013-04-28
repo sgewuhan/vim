@@ -6,17 +6,12 @@
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="perspective.home"
-            name="公告车型">
+            name="车型数据维护">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="com.sg.vim.perspective.cocinfo"
             name="成品码管理">
-      </perspective>
-      <perspective
-            class="com.sg.vim.EditorHidePerspective"
-            id="com.sg.vim.perspective1"
-            name="环保数据管理">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"

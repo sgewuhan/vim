@@ -33,7 +33,8 @@ public class CopyCreateConfigCode extends AbstractHandler {
 		
 		DataObjectCollectionService dataObjectService = new DataObjectCollectionService();
 		DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys());
-		
+	    tgtData.put("basicinfo_id",srcData.get("_id"));
+
 		//准备编辑器的输入数据
 		DBCollection collection = DBActivator.getCollection("appportal", "configcodeinfo");
 		DataObject editData = new DataObject(collection,tgtData);

@@ -56,6 +56,8 @@ public class CreateCOCHandler implements ICreateHandler {
 
 				DBObject tgt = ModelTransfer.transfer(src,
 						dataObjectService.getReservedKeys());
+				tgt.put("basicinfo_id",src.get("_id"));
+
 				DataObject data = new DataObject(cocService.getC(), tgt);
 				UIUtils.create(editorId, data, false, saveHandler);
 			}

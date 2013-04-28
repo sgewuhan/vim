@@ -65,6 +65,9 @@ public class CopyCreateCOCinfo extends AbstractHandler {
       }
     };
     DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys(), rule);
+    
+    tgtData.put("basicinfo_id",srcData.get("_id"));
+    
 
     // 准备编辑器的输入数据
     DBCollection collection = DBActivator.getCollection("appportal", "cocinfo");

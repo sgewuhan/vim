@@ -64,10 +64,14 @@
             id="com.sg.vim.enum.type3"
             label="底盘或整车">
          <enumerate
-               id="整车">
+               id="整车"
+               label="整车"
+               value="QX">
          </enumerate>
          <enumerate
-               id="底盘">
+               id="底盘"
+               label="底盘"
+               value="DP">
          </enumerate>
       </enumerate>
       <enumerate
