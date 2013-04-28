@@ -175,7 +175,8 @@ private DataObjectEditorInput input;
     }
 
     protected void doPrintButtonPressed() {
-        VimUtils.print(browser,dpinput.getData().getData() );
+//    	VimUtils.test(browser);
+        VimUtils.print(browser,input.getData().getData() );
     }
 
     protected void doQueryButtonPressed() {
