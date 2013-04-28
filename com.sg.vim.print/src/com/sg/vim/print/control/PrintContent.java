@@ -285,17 +285,20 @@ private DataObjectEditorInput input;
 
             @Override
             public void done(IJobChangeEvent event) {
+                final IStatus result = event.getJob().getResult();
                 inputContent.getDisplay().asyncExec(new Runnable() {
 
                     @Override
                     public void run() {
-                        try {
-                            resetInputContent();
-                            printButton.setEnabled(true);
-                        } catch (Exception e) {
-                            UIUtils.showMessage(getShell(), "显示合格证数据", "错误:" + e.getMessage(),
-                                    SWT.ERROR);
-                            printButton.setEnabled(false);
+                        if(result.isOK()){
+                            try {
+                                resetInputContent();
+                                printButton.setEnabled(true);
+                            } catch (Exception e) {
+                                UIUtils.showMessage(getShell(), "显示合格证数据", "错误:" + e.getMessage(),
+                                        SWT.ERROR);
+                                printButton.setEnabled(false);
+                            }
                         }
                         setOperationEnable(true);
                     }

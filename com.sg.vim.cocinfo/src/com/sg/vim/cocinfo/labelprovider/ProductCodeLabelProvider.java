@@ -77,7 +77,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
             builder.append(FileUtil.getImageURL("unlink2_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
             builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
             builder.append(" ÅäÖÃĞòºÅ: ");
-            builder.append(tag1);
+            builder.append(tag2);
         } else {
             builder.append("<img src=\"");
             builder.append(FileUtil.getImageURL("link2_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
