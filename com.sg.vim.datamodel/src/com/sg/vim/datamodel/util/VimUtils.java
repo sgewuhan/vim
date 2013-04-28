@@ -175,7 +175,7 @@ public class VimUtils {
         }
 
         sb.append(");");
-        // System.out.println(sb.toString());
+         System.out.println(sb.toString());
         browser.execute(sb.toString());
     }
 
