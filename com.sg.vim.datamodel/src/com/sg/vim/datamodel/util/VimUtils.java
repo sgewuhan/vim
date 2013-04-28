@@ -158,10 +158,10 @@ public class VimUtils {
     private static final String mVeh_PrinterName = null;
 
     private static String mVeh_Zzbh;
-
-    public static void print(Browser browser, DBObject dbo) {
+    
+    public static void setValues(Browser browser, DBObject dbo){
         StringBuilder sb = new StringBuilder();
-        sb.append("printVert(");
+        sb.append("setValues(");
 
         for (int i = 0; i < paraSeq.length; i++) {
             Object value = dbo.get(paraSeq[i]);
@@ -177,6 +177,10 @@ public class VimUtils {
         sb.append(");");
          System.out.println(sb.toString());
         browser.execute(sb.toString());
+    }
+
+    public static void print(Browser browser) {
+        browser.execute("printCert");
     }
 
     public static void test(Browser browser) {

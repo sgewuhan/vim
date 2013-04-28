@@ -178,7 +178,8 @@ public class PrintContent extends Composite {
         // VimUtils.test(browser);
         commit();
         DBObject data = input.getData().getData();
-        VimUtils.print(browser, data);
+        VimUtils.setValues(browser, data);
+        VimUtils.print(browser);
     }
 
     private void commit() {
