@@ -264,7 +264,7 @@ private DataObjectEditorInput input;
                  * 如果已存在此车的整车合格证就不用打印，。打印了底盘合格证后，再打印整车合格证时，在整车合格证位置，打印出整车合格证编号和底盘合格证编号。
                  */
                 Object dpId = cocData.get(IVIMFields.C_12);
-                if (dpId instanceof String) {
+                if ((dpId instanceof String)&&(dpId.toString().length()>0)) {
                     message = "正在查询成品码底盘信息";
                     setNotice(message);
                     // 找到对应的底盘信息
