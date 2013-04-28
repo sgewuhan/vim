@@ -366,7 +366,7 @@ private DataObjectEditorInput input;
         if (hasDP()) {
             sf.setWeights(new int[] { 50, 50 });
         } else {
-            sf.setWeights(new int[] { 100, 0 });
+            sf.setWeights(new int[] { 0, 100 });
         }
         inputContent.layout();
 
