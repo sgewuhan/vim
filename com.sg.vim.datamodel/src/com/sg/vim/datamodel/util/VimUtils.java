@@ -210,7 +210,7 @@ public class VimUtils {
             if (conn == null) {
                 String[] arr1 = new String[] { "LNBMDLAA0CU000319", "LNBMDLAA4CU000484",
                         "LNBMDLAA6CU000485", "LNBMDLAA1CU000572", "LNBMDLAA3CU000573" };
-                String[] arr2 = new String[] { "LNBMDLAA7Cu000480" };
+                String[] arr2 = new String[] { "LNBMDLAA7CU000480" };
                 if (Utils.inArray(vin, arr1)) {
                     SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
                             FIELD_ENGINEE_NUM, "VIN" });
