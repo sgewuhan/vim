@@ -149,7 +149,7 @@ public class PrintContent extends Composite {
         try {
             mesRawData = VimUtils.getProductCode(vin);
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询MES成品记录", e.getMessage(), SWT.ERROR);
+            UIUtils.showMessage(getShell(), "查询MES成品记录", "错误:"+e.getMessage(), SWT.ERROR);
             return;
         }
         Object productCode = mesRawData.getValue(VimUtils.FIELD_PRODUCT_CODE);
@@ -165,7 +165,7 @@ public class PrintContent extends Composite {
         try {
             productCodeData = VimUtils.getProductCodeInfo((String) productCode);
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询成品码记录", e.getMessage(), SWT.ERROR);
+            UIUtils.showMessage(getShell(), "查询成品码记录", "错误:"+e.getMessage(), SWT.ERROR);
             return;
         }
 
@@ -173,14 +173,14 @@ public class PrintContent extends Composite {
         try {
             cocData = VimUtils.getCOCInfo(productCodeData);
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询成品码车型一致性信息", e.getMessage(), SWT.ERROR);
+            UIUtils.showMessage(getShell(), "查询成品码车型一致性信息", "错误:"+e.getMessage(), SWT.ERROR);
             return;
         }
         // 查询配置数据
         try {
             confData = VimUtils.getConfInfo(productCodeData);
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询成品码车型配置信息", e.getMessage(), SWT.ERROR);
+            UIUtils.showMessage(getShell(), "查询成品码车型配置信息", "错误:"+e.getMessage(), SWT.ERROR);
             return;
         }
         // 处理底盘有关数据
@@ -196,7 +196,7 @@ public class PrintContent extends Composite {
                 dpcocData = VimUtils.getCOCInfoById((String) dpId);
                 dpconfData = VimUtils.getConfInfoById((String)dpId);
             } catch (Exception e) {
-                UIUtils.showMessage(getShell(), "查询底盘配置信息", e.getMessage(), SWT.ERROR);
+                UIUtils.showMessage(getShell(), "查询底盘配置信息", "错误:"+e.getMessage(), SWT.ERROR);
                 return;
             }
             
@@ -205,7 +205,7 @@ public class PrintContent extends Composite {
         try {
             resetInputContent();
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "生成合格证数据", e.getMessage(), SWT.ERROR);
+            UIUtils.showMessage(getShell(), "生成合格证数据", "错误:"+e.getMessage(), SWT.ERROR);
         }
 
     }
