@@ -175,7 +175,7 @@ public class VimUtils {
         }
 
         sb.append(");");
-        System.out.println(sb.toString());
+        // System.out.println(sb.toString());
         browser.execute(sb.toString());
     }
 
@@ -207,7 +207,7 @@ public class VimUtils {
 
         if (debug) {
             Connection conn = DDB.getDefault().getConnection("MES_DB");
-            if(conn==null){
+            if (conn == null) {
                 String[] arr1 = new String[] { "LNBMDLAA0CU000319", "LNBMDLAA4CU000484",
                         "LNBMDLAA6CU000485", "LNBMDLAA1CU000572", "LNBMDLAA3CU000573" };
                 String[] arr2 = new String[] { "LNBMDLAA7Cu000480" };
@@ -266,7 +266,8 @@ public class VimUtils {
         DBObject query = new BasicDBObject().append("_id", id);
         DBObject data = c.findOne(query);
         if (data == null) {
-            throw new Exception("成品码绑定的车型一致性记录已不存在，可能是已被删除。\n请重新将该成品码绑定车型一致性数据后重试。");
+            throw new Exception("成品码绑定的车型一致性记录已不存在，可能是已被删除。\n请重新将该成品码绑定车型一致性数据后重试。\n成品码:"
+                    + productCodeData.get(IVIMFields.E_02));
         }
         return data;
     }
@@ -339,7 +340,7 @@ public class VimUtils {
             }
             result.put(mVeh_Csys, colorName);
         }
-        
+
         // Veh_FDjh F_21a 发动机号 映射
         result.put(mVeh_Fdjh, cocData.get(IVIMFields.F_21a));
         // Veh_Rlzl F_25 燃料种类 映射
@@ -435,7 +436,7 @@ public class VimUtils {
             confid = (String) confData.get(IVIMFields.H_02);
         }
         String string = productPublicId + confid;
-        if (!debug&&string.length() != 25) {
+        if (!debug && string.length() != 25) {
             throw new Exception("无法取得正确的产品公告号。\n值转换  由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位");
         }
         result.put(mVeh_Cpggh, string);
