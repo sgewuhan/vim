@@ -16,7 +16,7 @@ alert(VehCert.Veh_ErrorInfo);
 }
 }
 
-function getCerfId(String input){
+function getCerfId(input){
 var VehCert= document.getElementById("VCertificateVehCert");
 var id = VehCert.GetCertificateNO(input,"N3PL-SX32-AEU2-BC6S");
 return id;
@@ -29,8 +29,10 @@ mVeh_Fdjh,mVeh_Fdjxh,mVeh_Rlzl,mVeh_Pfbz,mVeh_Pl,mVeh_Gl,mVeh_Zxxs,mVeh_Qlj,mVeh
 mVeh_Lts,mVeh_Ltgg,mVeh_Gbthps,mVeh_Zj,mVeh_Zh,mVeh_Zs,mVeh_Wkc,mVeh_Wkk,mVeh_Wkg,mVeh_Hxnbc,
 mVeh_Hxnbk,mVeh_Hxnbg,mVeh_Zzl,mVeh_Edzzl,mVeh_Zbzl,mVeh_Zzllyxs,mVeh_Zqyzzl,mVeh_Edzk,
 mVeh_Bgcazzdyxzzl,mVeh_Jsszcrs,mVeh_Zgcs,mVeh_Clzzrq,mVeh_Bz,mVeh_Qybz,mVeh_Clscdwmc,
-mVeh_Cpscdz,mVeh_Qyqtxx,mVeh_Zxzs,mVeh_Tmxx,mVeh_Yh,mVeh_Cddbj,mVeh_Cpggh,mVeh_Ggpc,mVeh_Ggsxrq
-){
+mVeh_Cpscdz,mVeh_Qyqtxx,mVeh_Zxzs,mVeh_Tmxx,mVeh_Yh,mVeh_Cddbj,mVeh_Cpggh,mVeh_Ggpc,mVeh_Ggsxrq,
+mVeh_PrinterName,
+            mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
+            mVeh_Stopbits,mVeh_Zzbh){
 var VehCert= document.getElementById("VCertificateVehCert");
 VehCert.Veh_Clztxx=mVeh_Clztxx;
 VehCert.Veh_Zchgzbh=mVeh_Zchgzbh;
@@ -90,6 +92,17 @@ VehCert.Veh_Cddbj=mVeh_Cddbj;
 VehCert.Veh_Cpggh=mVeh_Cpggh;
 VehCert.Veh_Ggpc=mVeh_Ggpc;
 VehCert.Veh_Ggsxrq=mVeh_Ggsxrq;
+
+
+VehCert.Veh_Ggsxrq=mVeh_PrinterName;
+VehCert.Veh_PrintPosLeft=mVeh_PrintPosLeft;
+VehCert.Veh_PrintPosTop=mVeh_PrintPosTop;
+VehCert.Veh_Connect=mVeh_Connect;
+VehCert.Veh_Baud=mVeh_Baud;
+VehCert.Veh_Parity=mVeh_Parity;
+VehCert.Veh_Databits=mVeh_Databits;
+VehCert.Veh_Stopbits=mVeh_Stopbits;
+VehCert.Veh_Zzbh=mVeh_Zzbh;
 
 }
 

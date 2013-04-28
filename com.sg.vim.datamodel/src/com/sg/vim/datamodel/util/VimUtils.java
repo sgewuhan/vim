@@ -120,6 +120,27 @@ public class VimUtils {
     public static final String mVeh_Cpggh = "Veh_Cpggh";// 公告号
     public static final String mVeh_Ggpc = "Veh_Ggpc";
     public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
+    
+    
+    private static final String mVeh_Dywym = "Veh_Dywym";
+
+    private static final String mVeh_Stopbits = "Veh_Stopbits";
+
+    private static final String mVeh_Databits = "Veh_Databits";
+
+    private static final String mVeh_Parity = "Veh_Parity";
+
+    private static final String mVeh_Baud = "Veh_Baud";
+
+    private static final String mVeh_Connect = "Veh_Connect";
+
+    private static final String mVeh_PrintPosTop = "Veh_PrintPosTop";
+
+    private static final String mVeh_PrintPosLeft = "Veh_PrintPosLeft";
+
+    private static final String mVeh_PrinterName = "Veh_PrinterName";
+
+    private static final String mVeh_Zzbh = "Veh_Zzbh";
 
     public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M" };
@@ -137,28 +158,10 @@ public class VimUtils {
             mVeh_Hxnbc, mVeh_Hxnbk, mVeh_Hxnbg, mVeh_Zzl, mVeh_Edzzl, mVeh_Zbzl, mVeh_Zzllyxs,
             mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
             mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs, mVeh_Tmxx,
-            mVeh_Jyw, mVeh_Yh, mVeh_Cddbj, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq };
+            mVeh_Jyw, mVeh_Yh, mVeh_Cddbj, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
+            mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
+            mVeh_Stopbits,mVeh_Zzbh};
 
-    private static final String mVeh_Dywym = null;
-
-    private static final String mVeh_Stopbits = null;
-
-    private static final String mVeh_Databits = null;
-
-    private static final String mVeh_Parity = null;
-
-    private static final String mVeh_Baud = null;
-
-    private static final String mVeh_Connect = null;
-
-    private static final String mVeh_PrintPosTop = null;
-
-    private static final String mVeh_PrintPosLeft = null;
-
-    private static final String mVeh_PrinterName = null;
-
-    private static String mVeh_Zzbh;
-    
     public static void setValues(Browser browser, DBObject dbo){
         StringBuilder sb = new StringBuilder();
         sb.append("setValues(");
@@ -435,8 +438,8 @@ public class VimUtils {
         result.put(mVeh_Qyid, companyId);
         // Veh_Qybz C_17 企业标准 映射
         result.put(mVeh_Qybz, cocData.get(IVIMFields.C_17));
-        // Veh_Cpggh D_02 产品公告号 值转换 由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位
-        String productPublicId = (String) cocData.get(IVIMFields.D_02);
+        // Veh_Cpggh D_23 产品公告号 值转换 由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位
+        String productPublicId = (String) cocData.get(IVIMFields.D_23);
         // 配置序号
         String confid = (String) confData.get(IVIMFields.H_01);
         if (Utils.isNullOrEmpty(confid)) {
@@ -512,7 +515,7 @@ public class VimUtils {
         // Veh_Zzbh 待测
         result.put(mVeh_Zzbh, "<输入>");
         // Veh_Dywym 待测
-        result.put(mVeh_Dywym, "");// 返回值，不填
+//        result.put(mVeh_Dywym, "");// 返回值，不填
         return result;
     }
 
