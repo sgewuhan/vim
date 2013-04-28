@@ -291,11 +291,13 @@ private DataObjectEditorInput input;
                     public void run() {
                         try {
                             resetInputContent();
-                            setOperationEnable(true);
+                            printButton.setEnabled(true);
                         } catch (Exception e) {
                             UIUtils.showMessage(getShell(), "显示合格证数据", "错误:" + e.getMessage(),
                                     SWT.ERROR);
+                            printButton.setEnabled(false);
                         }
+                        setOperationEnable(true);
                     }
                 });
 
@@ -310,7 +312,6 @@ private DataObjectEditorInput input;
 
     private void setOperationEnable(boolean b) {
         queryButton.setEnabled(b);
-        printButton.setEnabled(b);
         vinInputText.setEnabled(b);
     }
 
