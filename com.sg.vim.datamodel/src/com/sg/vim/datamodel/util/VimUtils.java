@@ -1,5 +1,6 @@
 package com.sg.vim.datamodel.util;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import com.mobnut.db.DBActivator;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.sg.sqldb.DDB;
 import com.sg.sqldb.utility.SQLResult;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.sqldb.utility.SQLUtil;
@@ -202,27 +204,31 @@ public class VimUtils {
      * @throws Exception
      */
     public static SQLRow getProductCode(String vin) throws Exception {
+
         if (debug) {
-            String[] arr1 = new String[] { "LNBMDLAA0CU000319", "LNBMDLAA4CU000484",
-                    "LNBMDLAA6CU000485", "LNBMDLAA1CU000572", "LNBMDLAA3CU000573" };
-            String[] arr2 = new String[] { "LNBMDLAA7Cu000480" };
-            if (Utils.inArray(vin, arr1)) {
-                SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
-                        FIELD_ENGINEE_NUM, "VIN" });
-                row.setValue(FIELD_ENGINEE_NUM, "BJ410A1C10D00129");
-                row.setValue(FIELD_MFT_DATE, "2012-12-21");
-                row.setValue(FIELD_PRODUCT_CODE, "88M321ACB01-U3F1");
-                row.setValue("VIN", vin);
-                return row;
-            }
-            if (Utils.inArray(vin, arr2)) {
-                SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
-                        FIELD_ENGINEE_NUM, "VIN" });
-                row.setValue(FIELD_ENGINEE_NUM, "BJ413AC09D00042");
-                row.setValue(FIELD_MFT_DATE, "2012-12-26");
-                row.setValue(FIELD_PRODUCT_CODE, "88M333ACE01-U3G1");
-                row.setValue("VIN", vin);
-                return row;
+            Connection conn = DDB.getDefault().getConnection("MES_DB");
+            if(conn==null){
+                String[] arr1 = new String[] { "LNBMDLAA0CU000319", "LNBMDLAA4CU000484",
+                        "LNBMDLAA6CU000485", "LNBMDLAA1CU000572", "LNBMDLAA3CU000573" };
+                String[] arr2 = new String[] { "LNBMDLAA7Cu000480" };
+                if (Utils.inArray(vin, arr1)) {
+                    SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
+                            FIELD_ENGINEE_NUM, "VIN" });
+                    row.setValue(FIELD_ENGINEE_NUM, "BJ410A1C10D00129");
+                    row.setValue(FIELD_MFT_DATE, "2012-12-21");
+                    row.setValue(FIELD_PRODUCT_CODE, "88M321ACB01-U3F1");
+                    row.setValue("VIN", vin);
+                    return row;
+                }
+                if (Utils.inArray(vin, arr2)) {
+                    SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
+                            FIELD_ENGINEE_NUM, "VIN" });
+                    row.setValue(FIELD_ENGINEE_NUM, "BJ413AC09D00042");
+                    row.setValue(FIELD_MFT_DATE, "2012-12-26");
+                    row.setValue(FIELD_PRODUCT_CODE, "88M333ACE01-U3G1");
+                    row.setValue("VIN", vin);
+                    return row;
+                }
             }
         }
 
