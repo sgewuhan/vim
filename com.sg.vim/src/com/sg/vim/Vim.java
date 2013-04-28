@@ -9,6 +9,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import com.sg.vim.cocinfo.SyncProductCodeData;
+import com.sg.vim.datamodel.util.VimUtils;
 
 
 public class Vim implements BundleActivator {
@@ -39,6 +40,7 @@ public class Vim implements BundleActivator {
             appProps.load(is);
             syncTime = appProps.getProperty("synchronize.time","02:00:00");
             debug = "true".equalsIgnoreCase(appProps.getProperty("debug","false"));
+            VimUtils.debug = true;
         } catch (Exception e) {
         } finally {
             if (fis != null)

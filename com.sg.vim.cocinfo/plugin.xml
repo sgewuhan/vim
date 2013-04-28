@@ -1700,7 +1700,6 @@
             collectionName="cocinfo"
             customItemHeight="72"
             dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.editor.cocinfo"
             fix="3"
             fullSelection="true"
@@ -1864,8 +1863,6 @@
             collectionName="productcodeinfo"
             customItemHeight="72"
             dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
-            editorId="com.sg.vim.editor.productcodeinfo"
             fullSelection="true"
             headerVisiable="false"
             id="com.sg.vim.table.productcode"
@@ -1891,7 +1888,6 @@
             canDelete="true"
             collectionName="configcodeinfo"
             dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.editor.configcode"
             id="com.sg.vim.table.configcode"
             idfield="_id"
@@ -2634,12 +2630,11 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="f_0_5c"
-                        label="0.5 基本车辆制造商名称"
-                        labelVisible="false"
+                        label="名称"
+                        labelVisible="true"
                         name="f_0_5c"
                         persistable="true"
                         required="false"
-                        textMessage="&lt;填写基本车辆制造商名称，没有时填写不适用&gt;"
                         type="String">
                   </field>
                   <field
@@ -2649,11 +2644,10 @@
                         heightHint="40"
                         id="f_0_5d"
                         label="地址"
-                        labelVisible="false"
+                        labelVisible="true"
                         name="f_0_5d"
                         persistable="true"
                         required="false"
-                        textMessage="&lt;填写基本车辆制造商地址，没有时填写不适用&gt;"
                         type="String">
                   </field>
                </section>
@@ -2661,31 +2655,27 @@
                      label="最终制造阶段制造商">
                   <field
                         computeField="false"
-                        defaultValue="北汽银翔汽车有限公司"
                         editPart="Text(Single Line)"
                         editable="true"
                         id="f_0_5a"
-                        label="0.5 名称"
-                        labelVisible="false"
+                        label="名称"
+                        labelVisible="true"
                         name="f_0_5a"
                         persistable="true"
                         required="false"
-                        textMessage="&lt;填写最终车辆制造商名称，没有时填写不适用&gt;"
                         type="String">
                   </field>
                   <field
                         computeField="false"
-                        defaultValue="重庆市合川区土场镇三口村"
                         editPart="Text(Multi Line)"
                         editable="true"
                         heightHint="40"
                         id="f_0_5b"
                         label="地址"
-                        labelVisible="false"
+                        labelVisible="true"
                         name="f_0_5b"
                         persistable="true"
                         required="false"
-                        textMessage="&lt;填写最终车辆制造商地址，没有时填写不适用&gt;"
                         type="String">
                   </field>
                </section>
@@ -3956,22 +3946,40 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
-            locationURI="toolbar:com.sg.vim.cocinfo?after=additions">
+            locationURI="toolbar:main?after=com.sg.ui.separator3">
          <command
                commandId="com.sg.vim.cocinfo.transfertoproductcode"
-               icon="image/bind_32.png"
-               label="绑定到成品码"
+               icon="image/link1_24.png"
+               label="指定一致性信息"
                style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeWorkbenchWindow.activePerspective">
+                  <equals
+                        value="com.sg.vim.perspective.cocinfo">
+                  </equals>
+               </with>
+            </visibleWhen>
          </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="toolbar:com.sg.vim.configcode?after=additions">
+            locationURI="toolbar:main?after=com.sg.ui.separator3">
          <command
                commandId="com.sg.vim.configcode.transfertoproductcode"
-               icon="image/bind_32.png"
-               label="绑定到成品码"
+               icon="image/link2_24.png"
+               label="指定配置信息"
                style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeWorkbenchWindow.activePerspective">
+                  <equals
+                        value="com.sg.vim.perspective.cocinfo">
+                  </equals>
+               </with>
+            </visibleWhen>
          </command>
       </menuContribution>
       <menuContribution
@@ -4053,28 +4061,56 @@
             class="com.sg.vim.cocinfo.handler.BindingCOCInfoToProductcode"
             commandId="com.sg.vim.cocinfo.transfertoproductcode">
          <enabledWhen>
-            <with
-                  variable="activePart">
-               <test
-                     args="canBind"
-                     property="com.sg.vim.test.activePart"
-                     value="true">
-               </test>
-            </with>
+            <and>
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.cocinfo">
+                  </equals>
+               </with>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+               <with
+                     variable="activePart">
+                  <test
+                        args="canBind"
+                        property="com.sg.vim.test.activePart"
+                        value="true">
+                  </test>
+               </with>
+            </and>
          </enabledWhen>
       </handler>
       <handler
             class="com.sg.vim.cocinfo.handler.BindingConfigCodeToProductcode"
             commandId="com.sg.vim.configcode.transfertoproductcode">
          <enabledWhen>
-            <with
-                  variable="activePart">
-               <test
-                     args="canBind"
-                     property="com.sg.vim.test.activePart"
-                     value="true">
-               </test>
-            </with>
+            <and>
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.configcode">
+                  </equals>
+               </with>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+               <with
+                     variable="activePart">
+                  <test
+                        args="canBind"
+                        property="com.sg.vim.test.activePart"
+                        value="true">
+                  </test>
+               </with>
+            </and>
          </enabledWhen>
       </handler>
       <handler

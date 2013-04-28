@@ -3096,6 +3096,47 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        id="Veh_Cpggh"
+                        label="产品公告号"
+                        name="Veh_Cpggh"
+                        textLimit="50"
+                        tooltips="由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ggpc"
+                        label="公告批次"
+                        name="Veh_Ggpc"
+                        textLimit="50"
+                        tooltips="由公告信息获得"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Ggsxrq"
+                        label="公告生效日期"
+                        name="Veh_Ggsxrq"
+                        textLimit="14"
+                        tooltips="由公告信息获得,格式: yyyy-MM-dd"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        id="Veh_Zzbh"
+                        label="纸张编号"
+                        name="Veh_Zzbh"
+                        textLimit="50"
+                        tooltips="可空"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+            <pagecolumn>
+               <section
+                     label="车辆型号信息">
+                  <field
+                        editPart="Text(Single Line)"
                         id="Veh_Clfl"
                         label="车辆分类"
                         name="Veh_Clfl"
@@ -3146,43 +3187,13 @@
                         tooltips="YYYY年MM月DD日"
                         type="String">
                   </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Cpggh"
-                        label="产品公告号"
-                        name="Veh_Cpggh"
-                        textLimit="50"
-                        tooltips="由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Ggpc"
-                        label="公告批次"
-                        name="Veh_Ggpc"
-                        textLimit="50"
-                        tooltips="由公告信息获得"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Ggsxrq"
-                        label="公告生效日期"
-                        name="Veh_Ggsxrq"
-                        textLimit="14"
-                        tooltips="由公告信息获得,格式: yyyy-MM-dd"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zzbh"
-                        label="纸张编号"
-                        name="Veh_Zzbh"
-                        textLimit="50"
-                        tooltips="可空"
-                        type="String">
-                  </field>
                </section>
+            </pagecolumn>
+         </basicpage>
+         <basicpage
+               id="2"
+               title="合格证参数II">
+            <pagecolumn>
                <section
                      label="车辆分类、底盘、发动机">
                   <field
@@ -3235,6 +3246,8 @@
                         type="String">
                   </field>
                </section>
+            </pagecolumn>
+            <pagecolumn>
                <section
                      label="燃料、排放、功率等">
                   <field
@@ -3307,6 +3320,10 @@
                   </field>
                </section>
             </pagecolumn>
+         </basicpage>
+         <basicpage
+               id="3"
+               title="合格证参数III">
             <pagecolumn>
                <section
                      label="规格、尺寸等参数">
@@ -3431,6 +3448,11 @@
                         textLimit="4"
                         type="String">
                   </field>
+               </section>
+            </pagecolumn>
+            <pagecolumn>
+               <section
+                     label="质量参数">
                   <field
                         editPart="Text(Single Line)"
                         id="Veh_Zzl"
@@ -3496,6 +3518,12 @@
                         type="String">
                   </field>
                </section>
+            </pagecolumn>
+         </basicpage>
+         <basicpage
+               id="4"
+               title="合格证参数IV">
+            <pagecolumn>
                <section
                      label="其他信息">
                   <field
@@ -3542,105 +3570,6 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Tmxx"
-                        label="合格证条码信息"
-                        name="Veh_Tmxx"
-                        textLimit="1000"
-                        tooltips="调用ViewBarcodeInfo并读取合格证条码后，通过该属性可获得条码信息，具体项目格式见附件一。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Jyw"
-                        label="校验信息"
-                        name="Veh_Jyw"
-                        textLimit="255+"
-                        tooltips="调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_PrinterName"
-                        label="目标打印机的名称"
-                        name="Veh_PrinterName"
-                        textLimit="30"
-                        tooltips="缺省为默认打印机"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_PrintPosLeft"
-                        label="合格证打印的左边距"
-                        name="Veh_PrintPosLeft"
-                        textLimit="5"
-                        tooltips="默认值为15  单位：mm"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_PrintPosTop"
-                        label="合格证打印的上边距"
-                        name="Veh_PrintPosTop"
-                        textLimit="5"
-                        tooltips="默认值为15  单位：mm"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Connect"
-                        label="连接串口"
-                        name="Veh_Connect"
-                        textLimit="5"
-                        tooltips="默认值为COM1"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Baud"
-                        label="串口波特率"
-                        name="Veh_Baud"
-                        textLimit="10"
-                        tooltips="默认值为9600"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Parity"
-                        label="串口奇偶校验"
-                        name="Veh_Parity"
-                        textLimit="5"
-                        tooltips="默认值为N"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Databits"
-                        label="串口数据位"
-                        name="Veh_Databits"
-                        textLimit="5"
-                        tooltips="默认值为8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Stopbits"
-                        label="串口停止位"
-                        name="Veh_Stopbits"
-                        textLimit="5"
-                        tooltips="默认值为1"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_ErrorInfo"
-                        label="记录最近一次出错信息"
-                        name="Veh_ErrorInfo"
-                        textLimit="1000"
-                        tooltips="如果调用方法出错，可以查看该属性值获取出错信息"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
                         id="Veh_Cpggh"
                         label="产品公告号"
                         name="Veh_Cpggh"
@@ -3675,16 +3604,9 @@
                         tooltips="由公告信息获得,格式: yyyy-MM-dd"
                         type="String">
                   </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Dywym"
-                        label="打印唯一码"
-                        name="Veh_Dywym"
-                        textLimit="50"
-                        tooltips="调用PrtParaTbl成功后，通过该属性可获得合格证打印唯一码，供合格证上传用。"
-                        type="String">
-                  </field>
                </section>
+            </pagecolumn>
+            <pagecolumn>
                <section
                      label="国家合格证系统信息">
                   <field

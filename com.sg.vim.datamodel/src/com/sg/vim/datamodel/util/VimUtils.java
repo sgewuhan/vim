@@ -23,6 +23,8 @@ import com.sg.vim.datamodel.IVIMFields;
 
 public class VimUtils {
 
+    public static boolean debug = false;
+
     private static final String COL_CONFIGCODEINFO = "configcodeinfo";
 
     private static final String MES_DB = "mes";
@@ -117,6 +119,11 @@ public class VimUtils {
     public static final String mVeh_Ggpc = "Veh_Ggpc";
     public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
 
+    public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
+            "H", "I", "J", "K", "L", "M" };
+    public static final String[] COLOR_NAME = new String[] { "银色", "红色", "白色", "紫色", "蓝色", "金色",
+            "灰色", "绿色", "褐色", "黑色", "黄色", "其他色" };
+
     /**
      * 这个序列需要和html中函数的参数序列一致
      */
@@ -150,7 +157,7 @@ public class VimUtils {
 
     private static String mVeh_Zzbh;
 
-    public static void print(Browser browser, BasicDBObject dbo) {
+    public static void print(Browser browser, DBObject dbo) {
         StringBuilder sb = new StringBuilder();
         sb.append("printVert(");
 
@@ -195,6 +202,30 @@ public class VimUtils {
      * @throws Exception
      */
     public static SQLRow getProductCode(String vin) throws Exception {
+        if (debug) {
+            String[] arr1 = new String[] { "LNBMDLAA0CU000319", "LNBMDLAA4CU000484",
+                    "LNBMDLAA6CU000485", "LNBMDLAA1CU000572", "LNBMDLAA3CU000573" };
+            String[] arr2 = new String[] { "LNBMDLAA7Cu000480" };
+            if (Utils.inArray(vin, arr1)) {
+                SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
+                        FIELD_ENGINEE_NUM, "VIN" });
+                row.setValue(FIELD_ENGINEE_NUM, "BJ410A1C10D00129");
+                row.setValue(FIELD_MFT_DATE, "2012-12-21");
+                row.setValue(FIELD_PRODUCT_CODE, "88M321ACB01-U3F1");
+                row.setValue("VIN", vin);
+                return row;
+            }
+            if (Utils.inArray(vin, arr2)) {
+                SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE, FIELD_MFT_DATE,
+                        FIELD_ENGINEE_NUM, "VIN" });
+                row.setValue(FIELD_ENGINEE_NUM, "BJ413AC09D00042");
+                row.setValue(FIELD_MFT_DATE, "2012-12-26");
+                row.setValue(FIELD_PRODUCT_CODE, "88M333ACE01-U3G1");
+                row.setValue("VIN", vin);
+                return row;
+            }
+        }
+
         SQLResult res = SQLUtil.SQL_QUERY(MES_DB, SQL_GET_PRODUCINFOR + vin + "'");
         if (res.size() == 0) {
             throw new Exception("MES数据库中没有VIN对应的成品记录。\nVIN:" + vin);
@@ -288,8 +319,21 @@ public class VimUtils {
         result.put(mVeh_Clxh, cocData.get(IVIMFields.F_0_2C1));
         // Veh_Dpxh CCC_04 底盘型号 映射
         result.put(mVeh_Dpxh, cocData.get(IVIMFields.CCC_04));
+
         // Veh_Csys F_38 车身颜色 从成品字典取
-        result.put(mVeh_Csys, cocData.get(IVIMFields.F_38));
+        if (!isDP) {
+            String sn = mesRawData.getText(FIELD_PRODUCT_CODE);
+            String colorCode = sn.substring(14, 15);
+            String colorName = (String) cocData.get(IVIMFields.F_38);
+            for (int i = 0; i < COLOR_CODE.length; i++) {
+                if (COLOR_CODE[i].equalsIgnoreCase(colorCode)) {
+                    colorName = COLOR_NAME[i];
+                    break;
+                }
+            }
+            result.put(mVeh_Csys, colorName);
+        }
+        
         // Veh_FDjh F_21a 发动机号 映射
         result.put(mVeh_Fdjh, cocData.get(IVIMFields.F_21a));
         // Veh_Rlzl F_25 燃料种类 映射
@@ -385,7 +429,7 @@ public class VimUtils {
             confid = (String) confData.get(IVIMFields.H_02);
         }
         String string = productPublicId + confid;
-        if (string.length() != 25) {
+        if (!debug&&string.length() != 25) {
             throw new Exception("无法取得正确的产品公告号。\n值转换  由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位");
         }
         result.put(mVeh_Cpggh, string);
@@ -424,15 +468,17 @@ public class VimUtils {
         result.put(mVeh_Cjh, "");
         // Veh_Clzzrq 车辆制造日期
         String mftDate = (String) mesRawData.getValue(FIELD_MFT_DATE);
-        result.put(mVeh_Clzzrq, mftDate);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        Date _date = sdf2.parse(mftDate);
+        string = sdf.format(_date);
+        result.put(mVeh_Clzzrq, string);
         // Veh_Qyqtxx 公告中的其他
         result.put(mVeh_Qyqtxx, cocData.get(IVIMFields.C_18));
 
-        
         // // Veh_Tmxx 条码
         // result.put(mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
         // Veh_Jyw 待测
-//        result.put(mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
+        // result.put(mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
         // Veh_PrinterName 待测
         result.put(mVeh_PrinterName, "<输入>");
         // Veh_PrintPosLeFt 待测
@@ -453,7 +499,7 @@ public class VimUtils {
         result.put(mVeh_Zzbh, "<输入>");
         // Veh_Dywym 待测
         result.put(mVeh_Dywym, "");// 返回值，不填
-        return null;
+        return result;
     }
 
 }

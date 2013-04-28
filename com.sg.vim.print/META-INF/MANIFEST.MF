@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Print
 Bundle-SymbolicName: com.sg.vim.print;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.sg.vim.print.Activator
+Bundle-Activator: com.sg.vim.print.PrintActivator
 Bundle-Vendor: SG
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.rap.ui;bundle-version="2.0.0",

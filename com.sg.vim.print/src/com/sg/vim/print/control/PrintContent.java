@@ -1,7 +1,15 @@
 package com.sg.vim.print.control;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.rap.rwt.RWT;
+import org.eclipse.rap.rwt.service.ServerPushSession;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -19,7 +27,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.ManagedForm;
 
-import com.mobnut.commons.Commons;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.ImageResource;
@@ -29,6 +36,7 @@ import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.MultipageEditablePanel;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.print.PrintActivator;
 
 @SuppressWarnings("restriction")
 public class PrintContent extends Composite {
@@ -47,10 +55,18 @@ public class PrintContent extends Composite {
 
     private SQLRow mesRawData;
     private String vin;
+//    private Label messageLabel;
+    private ServerPushSession pushSession;
+private Button printButton;
+private Browser browser;
+private DataObjectEditorInput dpinput;
+private DataObjectEditorInput input;
 
     public PrintContent(ManagedForm mform, Composite parent, int style) {
         super(parent, style);
-        
+        pushSession = new ServerPushSession();
+        pushSession.start();
+
         this.mform = mform;
         setBackgroundMode(SWT.INHERIT_DEFAULT);
         setLayout(new FormLayout());
@@ -66,11 +82,19 @@ public class PrintContent extends Composite {
         inputContent = createContent();
         fd = new FormData();
         inputContent.setLayoutData(fd);
-        fd.top = new FormAttachment(banner);
+        fd.top = new FormAttachment(banner, margin * 2);
         fd.left = new FormAttachment();
         fd.right = new FormAttachment(100);
         fd.bottom = new FormAttachment(100);
-        inputContent.setLayout(new FillLayout());
+        
+        browser = new Browser(this,SWT.NONE);
+        browser.setUrl("/vert");
+        fd = new FormData();
+        browser.setLayoutData(fd);
+        fd.top = new FormAttachment(banner);
+        fd.left = new FormAttachment();
+        fd.width = margin;
+        fd.height = margin;
     }
 
     private Composite createBanner(PrintContent printContent) {
@@ -114,6 +138,21 @@ public class PrintContent extends Composite {
                 doQueryButtonPressed();
             }
         });
+        
+        printButton = new Button(banner,SWT.PUSH);
+        printButton.setData(RWT.CUSTOM_VARIANT, "whitebutton_s");
+        printButton.setImage(UI.getImage(ImageResource.PRINT_32));
+        fd = new FormData();
+        printButton.setLayoutData(fd);
+        fd.left = new FormAttachment(queryButton, margin);
+        fd.bottom = new FormAttachment(100, -margin);
+        printButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                doPrintButtonPressed();
+            }
+        });
+        printButton.setEnabled(false);
 
         Label line = new Label(banner, SWT.NONE);
         fd = new FormData();
@@ -135,78 +174,162 @@ public class PrintContent extends Composite {
         return banner;
     }
 
+    protected void doPrintButtonPressed() {
+        VimUtils.print(browser,dpinput.getData().getData() );
+    }
+
     protected void doQueryButtonPressed() {
+
         resetData();
-        
         vin = vinInputText.getText();
+
         // 检查输入的vin是否合法
         boolean valid = VimUtils.checkVIN(vin);
         if (!valid) {
             UIUtils.showMessage(getShell(), "输入VIN", "输入的VIN不合法，请重新输入。", SWT.ERROR);
             return;
         }
-        // 查询数据库是否有对应vin的成品码记录
-        try {
-            mesRawData = VimUtils.getProductCode(vin);
-        } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询MES成品记录", "错误:"+e.getMessage(), SWT.ERROR);
-            return;
-        }
-        Object productCode = mesRawData.getValue(VimUtils.FIELD_PRODUCT_CODE);
-        if (!(productCode instanceof String)) {
-            UIUtils.showMessage(getShell(), "查询MES成品记录", "成品码不是字符串类型", SWT.ERROR);
-            return;
-        }
 
-        Commons.LOGGER.info("获得成品码：" + productCode);
+        // inputContent.setLayout(new FormLayout());
+        // Label messageIconLabel = new Label(inputContent,SWT.NONE);
+        // messageIconLabel.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        // StringBuilder builder = new StringBuilder();
+        // builder.append("<img src=\"");
+        // builder.append(FileUtil.getImageURL("loading.gif", UI.PLUGIN_ID, "icons"));
+        // builder.append("\"  width='400' height='400'/><br/>ABCD");
+        // String string = builder.toString();
+        // messageIconLabel.setText(string);
+        // FormData fd = new FormData();
+        // messageIconLabel.setLayoutData(fd);
+        // fd.top = new FormAttachment(50,200);
+        // fd.left = new FormAttachment(50,200);
+        //
+        // messageLabel = new Label(inputContent,SWT.NONE);
+        // messageLabel.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        // messageLabel.setText("组装合格证数据VIN");
+        // fd = new FormData();
+        // messageLabel.setLayoutData(fd);
+        // fd.top = new FormAttachment(messageIconLabel,10);
+        // fd.left = new FormAttachment(messageIconLabel,0);
+        // inputContent.layout();
 
-        // 获取成品码对应成品码数据 LNBMDLAA6CU000289
-        // 公告车型 productcodeinfo.f_0_2c
-        try {
-            productCodeData = VimUtils.getProductCodeInfo((String) productCode);
-        } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询成品码记录", "错误:"+e.getMessage(), SWT.ERROR);
-            return;
-        }
+        Job job = new Job("组装合格证数据VIN" + vin) {
 
-        // 查询COC绑定数据
-        try {
-            cocData = VimUtils.getCOCInfo(productCodeData);
-        } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询成品码车型一致性信息", "错误:"+e.getMessage(), SWT.ERROR);
-            return;
-        }
-        // 查询配置数据
-        try {
-            confData = VimUtils.getConfInfo(productCodeData);
-        } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "查询成品码车型配置信息", "错误:"+e.getMessage(), SWT.ERROR);
-            return;
-        }
-        // 处理底盘有关数据
-        // 判断有无底盘ID
-        /**
-         * 输入VIN时，有底盘型号和底盘ID不为空，而先打印底盘合格证。如果系统中有这台车的底盘合格证就不用打印底盘合格证，就直接打印整车合格证，
-         * 如果已存在此车的整车合格证就不用打印，。打印了底盘合格证后，再打印整车合格证时，在整车合格证位置，打印出整车合格证编号和底盘合格证编号。
-         */
-        Object dpId = cocData.get(IVIMFields.C_12);
-        if(dpId instanceof String){
-            //找到对应的底盘信息
-            try {
-                dpcocData = VimUtils.getCOCInfoById((String) dpId);
-                dpconfData = VimUtils.getConfInfoById((String)dpId);
-            } catch (Exception e) {
-                UIUtils.showMessage(getShell(), "查询底盘配置信息", "错误:"+e.getMessage(), SWT.ERROR);
-                return;
+            @Override
+            protected IStatus run(IProgressMonitor monitor) {
+                // 查询数据库是否有对应vin的成品码记录
+                String message = "正在查询外部数据库中的匹配VIN的成品记录";
+                setNotice(message);
+                try {
+                    mesRawData = VimUtils.getProductCode(vin);
+                } catch (Exception e) {
+                    return new Status(Status.ERROR, PrintActivator.PLUGIN_ID, message, e);
+                }
+                Object productCode = mesRawData.getValue(VimUtils.FIELD_PRODUCT_CODE);
+                if (!(productCode instanceof String)) {
+                    return new Status(Status.ERROR, PrintActivator.PLUGIN_ID,
+                            "查询MES成品记录,MES数据库的成品码不是字符串类型");
+                }
+
+                // 获取成品码对应成品码数据 LNBMDLAA6CU000289
+                // 公告车型 productcodeinfo.f_0_2c
+                message = "正在查询VIM数据库中的成品码记录";
+                setNotice(message);
+                try {
+                    productCodeData = VimUtils.getProductCodeInfo((String) productCode);
+                } catch (Exception e) {
+                    return new Status(Status.ERROR, PrintActivator.PLUGIN_ID, message, e);
+                }
+
+                // 查询COC绑定数据
+                message = "正在查询成品码车型一致性信息";
+                setNotice(message);
+                try {
+                    cocData = VimUtils.getCOCInfo(productCodeData);
+                } catch (Exception e) {
+                    return new Status(Status.ERROR, PrintActivator.PLUGIN_ID, message, e);
+                }
+                // 查询配置数据
+                message = "正在查询成品码车型配置信息";
+                setNotice(message);
+                try {
+                    confData = VimUtils.getConfInfo(productCodeData);
+                } catch (Exception e) {
+                    return new Status(Status.ERROR, PrintActivator.PLUGIN_ID, message, e);
+                }
+                // 处理底盘有关数据
+                // 判断有无底盘ID
+                /**
+                 * 输入VIN时，有底盘型号和底盘ID不为空，而先打印底盘合格证。如果系统中有这台车的底盘合格证就不用打印底盘合格证，就直接打印整车合格证，
+                 * 如果已存在此车的整车合格证就不用打印，。打印了底盘合格证后，再打印整车合格证时，在整车合格证位置，打印出整车合格证编号和底盘合格证编号。
+                 */
+                Object dpId = cocData.get(IVIMFields.C_12);
+                if (dpId instanceof String) {
+                    message = "正在查询成品码底盘信息";
+                    setNotice(message);
+                    // 找到对应的底盘信息
+                    try {
+                        dpcocData = VimUtils.getCOCInfoById((String) dpId);
+                        dpconfData = VimUtils.getConfInfoById((String) dpId);
+                    } catch (Exception e) {
+                        return new Status(Status.ERROR, PrintActivator.PLUGIN_ID, message, e);
+                    }
+
+                }
+
+                return Status.OK_STATUS;
             }
-            
-        }
-        
-        try {
-            resetInputContent();
-        } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "生成合格证数据", "错误:"+e.getMessage(), SWT.ERROR);
-        }
+
+        };
+        job.addJobChangeListener(new JobChangeAdapter() {
+
+            @Override
+            public void done(IJobChangeEvent event) {
+                inputContent.getDisplay().asyncExec(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        try {
+                            resetInputContent();
+                            setOperationEnable(true);
+                        } catch (Exception e) {
+                            UIUtils.showMessage(getShell(), "显示合格证数据", "错误:" + e.getMessage(),
+                                    SWT.ERROR);
+                        }
+                    }
+                });
+
+            }
+
+        });
+        job.setUser(true);
+        setOperationEnable(false);
+        job.schedule();
+
+    }
+
+    private void setOperationEnable(boolean b) {
+        queryButton.setEnabled(b);
+        printButton.setEnabled(b);
+        vinInputText.setEnabled(b);
+    }
+
+    protected void setNotice(final String message) {
+        // final Display display = inputContent.getDisplay();
+        // display.asyncExec(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // BusyIndicator.showWhile(display,new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // messageLabel.setText(message);
+        // inputContent.layout();
+        // }
+        // });
+        // }
+        // });
 
     }
 
@@ -215,26 +338,44 @@ public class PrintContent extends Composite {
         for (int i = 0; i < children.length; i++) {
             children[i].dispose();
         }
-        Composite editArea = inputContent;
-        if(hasDP()){
-            SashForm sf = new SashForm(inputContent, SWT.HORIZONTAL);
-            Composite dpEditArea = new Composite(sf,SWT.NONE);
-            DataObjectEditorInput dpinput = VimUtils.getCerfInput(dpcocData,dpconfData,productCodeData,mesRawData,null,vin,true);
-            fillEditArea(dpEditArea, dpinput);
-            editArea = new Composite(sf,SWT.NONE);
+
+        inputContent.setLayout(new FillLayout());
+        SashForm sf = new SashForm(inputContent, SWT.HORIZONTAL);
+        Composite dpEditArea = new Composite(sf, SWT.NONE);
+        dpEditArea.setLayout(new FillLayout());
+        Composite editArea = new Composite(sf, SWT.NONE);
+        editArea.setLayout(new FillLayout());
+
+        if (hasDP()) {
+            dpinput = VimUtils.getCerfInput(dpcocData, dpconfData,
+                    productCodeData, mesRawData, null, vin, true);
+            MultipageEditablePanel folder = fillEditArea(dpEditArea, dpinput);
+            folder.getItem(0).setText("底盘 合格证参数I");
         }
-        DataObjectEditorInput input= VimUtils.getCerfInput(cocData,confData,productCodeData,mesRawData,null,vin,false);
-        fillEditArea(editArea, input);
+
+        input = VimUtils.getCerfInput(cocData, confData, productCodeData,
+                mesRawData, null, vin, false);
+        MultipageEditablePanel folder = fillEditArea(editArea, input);
+        folder.getItem(0).setText("整车 合格证参数I");
+
+        if (hasDP()) {
+            sf.setWeights(new int[] { 50, 50 });
+        } else {
+            sf.setWeights(new int[] { 100, 0 });
+        }
+        inputContent.layout();
+
     }
 
-    private void fillEditArea(Composite parent, DataObjectEditorInput input) {
+    private MultipageEditablePanel fillEditArea(Composite parent, DataObjectEditorInput input) {
         MultipageEditablePanel folder = new MultipageEditablePanel(parent, SWT.TOP | SWT.FLAT);
         folder.setMessageManager(mform.getForm().getMessageManager());
-        folder.createContents(mform,input);        
+        folder.createContents(mform, input);
+        return folder;
     }
 
     private boolean hasDP() {
-        return dpcocData!=null||dpconfData!=null;
+        return dpcocData != null || dpconfData != null;
     }
 
     private void resetData() {
@@ -244,11 +385,19 @@ public class PrintContent extends Composite {
         confData = null;
         dpcocData = null;
         dpconfData = null;
-        productCodeData = null;        
+        productCodeData = null;
+        dpinput = null;
+        input = null;
     }
 
     private Composite createContent() {
         return new Composite(this, SWT.NONE);
+    }
+
+    @Override
+    public void dispose() {
+        pushSession.stop();
+        super.dispose();
     }
 
 }
