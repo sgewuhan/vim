@@ -1,63 +1,68 @@
 package com.sg.vim;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import com.sg.vim.cocinfo.SyncProductCodeData;
+
+
 public class Vim implements BundleActivator {
 
-	private static BundleContext context;
+    private static BundleContext context;
+    
+    static BundleContext getContext() {
+        return context;
+    }
 
-	static BundleContext getContext() {
-		return context;
-	}
+    private static boolean debug;
+    private String syncTime;
+    private SyncProductCodeData job;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext bundleContext) throws Exception {
-//		Vim.context = bundleContext;
-//		loadTestData("A");
-//		loadTestData("B");
-//		loadTestData("C");
-//		loadTestData("D");
-//		loadTestData("E");
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
+     */
+    public void start(BundleContext bundleContext) throws Exception {
+        Vim.context = bundleContext;
+        InputStream is = null;
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(System.getProperty("user.dir") + "/conf/vim.properties");
+            is = new BufferedInputStream(fis);
+            Properties appProps = new Properties();
+            appProps.load(is);
+            syncTime = appProps.getProperty("synchronize.time","02:00:00");
+            debug = "true".equalsIgnoreCase(appProps.getProperty("debug","false"));
+        } catch (Exception e) {
+        } finally {
+            if (fis != null)
+                fis.close();
+            if (is != null)
+                is.close();
+        }
+        
+        job = new SyncProductCodeData() ;
+        job.start(syncTime);
+    }
 
-//	private void loadTestData(String stamp) {
-//		DBCollection collection = DBActivator.getCollection("appportal", "productcodeinfo");
-//		long start = System.currentTimeMillis();
-//		List<DBObject> list = new ArrayList<DBObject>();
-//		System.out.println(start);
-//		for(int i=0;i<500000;i++){
-//			BasicDBObject data = new BasicDBObject();
-//			data.put("_caccount", new BasicDBObject().append("username", "钟华").append("userid", "zhonghua"));
-//			data.put("_maccount", new BasicDBObject().append("username", "钟华").append("userid", "zhonghua"));
-//			data.put("_cdate", new Date());
-//			data.put("_mdate", new Date());
-//			data.put("_editor", "com.sg.vim.editor.productcodeinfo");
-//            data.put("e_01", stamp+Integer.toHexString(i).toUpperCase());
-//            data.put("cocinfo_id", new ObjectId("51657a3c957cf972aae7d826"));
-//			data.put("cocinfo_name", "车型ABC"+i+stamp);
-//			data.put("f_0_2c", "车辆型号");
-//			list.add(data);
-//			System.out.println(i);
-//		}
-//		long end1 = System.currentTimeMillis();
-//		System.out.println("build data"+(end1-start));
-//		collection.insert(list);
-//		long end2 = System.currentTimeMillis();
-//		System.out.println("insert data"+(end2-start));
-//		
-//		
-//	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext bundleContext) throws Exception {
+        job.stop();
+        Vim.context = null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext bundleContext) throws Exception {
-		Vim.context = null;
-	}
+    public static boolean isDebug() {
+        return debug;
+    }
 
 }

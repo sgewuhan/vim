@@ -2,7 +2,7 @@ package com.sg.vim.data;
 
 import com.mobnut.db.collection.AuthCollectionService;
 import com.sg.ui.model.input.BusinessObjectListInput;
-import com.sg.vim.service.CertificateInfo;
+import com.sg.vim.remove.service.CertificateInfo;
 
 public class CentificateInfoInput extends BusinessObjectListInput {
 

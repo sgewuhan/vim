@@ -12,6 +12,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.rap.ui;bundle-version="2.0.0",
  com.sg.vim.datamodel,
  com.mobnut.commons,
- org.eclipse.core.expressions;bundle-version="3.4.401"
+ org.eclipse.core.expressions;bundle-version="3.4.401",
+ com.sg.sqldb,
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Export-Package: com.sg.vim.cocinfo

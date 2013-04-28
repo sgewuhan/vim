@@ -1,4 +1,4 @@
-package com.sg.vim.service;
+package com.sg.vim.remove.service;
 
 
 import com.mobnut.db.collection.AuthCollectionService;

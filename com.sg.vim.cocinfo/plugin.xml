@@ -4007,6 +4007,21 @@
                </with>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.sg.vim.command.importproductdata"
+               icon="image/import_24.png"
+               label="导入成品数据"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeWorkbenchWindow.activePerspective">
+                  <equals
+                        value="com.sg.vim.perspective.cocinfo">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -4026,6 +4041,10 @@
       <command
             id="com.sg.vim.command.copycreate.configcode"
             name="创建配置序列号">
+      </command>
+      <command
+            id="com.sg.vim.command.importproductdata"
+            name="导入成品数据">
       </command>
    </extension>
    <extension
@@ -4081,6 +4100,10 @@
                </count>
             </with>
          </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.ImportProductData"
+            commandId="com.sg.vim.command.importproductdata">
       </handler>
    </extension>
    <extension
