@@ -55,12 +55,12 @@ public class PrintContent extends Composite {
 
     private SQLRow mesRawData;
     private String vin;
-//    private Label messageLabel;
+    // private Label messageLabel;
     private ServerPushSession pushSession;
-private Button printButton;
-private Browser browser;
-private DataObjectEditorInput dpinput;
-private DataObjectEditorInput input;
+    private Button printButton;
+    private Browser browser;
+    private DataObjectEditorInput dpinput;
+    private DataObjectEditorInput input;
 
     public PrintContent(ManagedForm mform, Composite parent, int style) {
         super(parent, style);
@@ -86,8 +86,8 @@ private DataObjectEditorInput input;
         fd.left = new FormAttachment();
         fd.right = new FormAttachment(100);
         fd.bottom = new FormAttachment(100);
-        
-        browser = new Browser(this,SWT.NONE);
+
+        browser = new Browser(this, SWT.NONE);
         browser.setUrl("/vert");
         fd = new FormData();
         browser.setLayoutData(fd);
@@ -138,8 +138,8 @@ private DataObjectEditorInput input;
                 doQueryButtonPressed();
             }
         });
-        
-        printButton = new Button(banner,SWT.PUSH);
+
+        printButton = new Button(banner, SWT.PUSH);
         printButton.setData(RWT.CUSTOM_VARIANT, "whitebutton_s");
         printButton.setImage(UI.getImage(ImageResource.PRINT_32));
         fd = new FormData();
@@ -175,8 +175,15 @@ private DataObjectEditorInput input;
     }
 
     protected void doPrintButtonPressed() {
-//    	VimUtils.test(browser);
-        VimUtils.print(browser,input.getData().getData() );
+        // VimUtils.test(browser);
+        commit();
+        DBObject data = input.getData().getData();
+        VimUtils.print(browser, data);
+    }
+
+    private void commit() {
+        mform.commit(false);
+        mform.commit(true);
     }
 
     protected void doQueryButtonPressed() {
@@ -265,7 +272,7 @@ private DataObjectEditorInput input;
                  * 如果已存在此车的整车合格证就不用打印，。打印了底盘合格证后，再打印整车合格证时，在整车合格证位置，打印出整车合格证编号和底盘合格证编号。
                  */
                 Object dpId = cocData.get(IVIMFields.C_12);
-                if ((dpId instanceof String)&&(dpId.toString().length()>0)) {
+                if ((dpId instanceof String) && (dpId.toString().length() > 0)) {
                     message = "正在查询成品码底盘信息";
                     setNotice(message);
                     // 找到对应的底盘信息
@@ -291,7 +298,7 @@ private DataObjectEditorInput input;
 
                     @Override
                     public void run() {
-                        if(result.isOK()){
+                        if (result.isOK()) {
                             try {
                                 resetInputContent();
                                 printButton.setEnabled(true);
@@ -352,14 +359,14 @@ private DataObjectEditorInput input;
         editArea.setLayout(new FillLayout());
 
         if (hasDP()) {
-            dpinput = VimUtils.getCerfInput(dpcocData, dpconfData,
-                    productCodeData, mesRawData, null, vin, true);
+            dpinput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
+                    null, vin, true);
             MultipageEditablePanel folder = fillEditArea(dpEditArea, dpinput);
             folder.getItem(0).setText("底盘 合格证参数I");
         }
 
-        input = VimUtils.getCerfInput(cocData, confData, productCodeData,
-                mesRawData, null, vin, false);
+        input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
+                false);
         MultipageEditablePanel folder = fillEditArea(editArea, input);
         folder.getItem(0).setText("整车 合格证参数I");
 
