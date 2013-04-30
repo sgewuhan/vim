@@ -64,7 +64,7 @@ public class CopyCreateCOCinfo extends AbstractHandler {
         return null;
       }
     };
-    DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys(), rule);
+    DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys(DataObjectCollectionService.CLONE_RESERVED), rule);
     
     tgtData.put("basicinfo_id",srcData.get("_id"));
     

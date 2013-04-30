@@ -32,7 +32,7 @@ public class CopyCreateConfigCode extends AbstractHandler {
 		DBObject srcData = (DBObject)selected;
 		
 		DataObjectCollectionService dataObjectService = new DataObjectCollectionService();
-		DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys());
+		DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys(DataObjectCollectionService.CLONE_RESERVED));
 	    tgtData.put("basicinfo_id",srcData.get("_id"));
 
 		//准备编辑器的输入数据

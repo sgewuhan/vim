@@ -55,7 +55,7 @@ public class CreateCFGHandler implements ICreateHandler {
 				DBObject src = (DBObject) option.getValue();
 
 				DBObject tgt = ModelTransfer.transfer(src,
-						dataObjectService.getReservedKeys());
+				        dataObjectService.getReservedKeys(DataObjectCollectionService.CLONE_RESERVED));
                 tgt.put("basicinfo_id",src.get("_id"));
 
 				DataObject data = new DataObject(configService.getC(), tgt);
