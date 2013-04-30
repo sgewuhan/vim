@@ -2300,6 +2300,16 @@
                </section>
             </pagecolumn>
          </basicpage>
+         <versionControl>
+            <fieldname
+                  fieldname="c_23"></fieldname>
+            <fieldname
+                  fieldname="f_c0_2">
+            </fieldname>
+            <fieldname
+                  fieldname="d_20">
+            </fieldname>
+         </versionControl>
       </editor>
       <pageExtendsions
             id="com.sg.vim.editor.basicinfo"

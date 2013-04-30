@@ -19,4 +19,5 @@ Export-Package: com.microsoft.sqlserver.jdbc,
  com.sg.sqldb.service,
  com.sg.sqldb.utility,
  microsoft.sql,
- oracle.net.aso
+ oracle.net.aso,
+ oracle.security.o3logon
