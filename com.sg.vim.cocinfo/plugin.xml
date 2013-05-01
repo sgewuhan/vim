@@ -3757,7 +3757,7 @@
                   </field>
                </section>
                <section
-                     label="其他">
+                     label="其他参数">
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
@@ -3796,19 +3796,39 @@
                         required="false"
                         type="String">
                   </field>
+               </section>
+               <section
+                     label="46.2 CO2排放量/燃油消耗量">
                   <field
                         computeField="false"
-                        editPart="Text(Multi Line)"
+                        editPart="Text(Single Line)"
                         editable="true"
                         heightHint="120"
                         id="f_46_2"
-                        label="46.2 CO2排放量/燃油消耗量"
+                        label="CCC认证引用的标准号"
                         labelVisible="true"
                         name="f_46_2"
                         persistable="true"
                         required="false"
                         type="String">
                   </field>
+                  <field
+                        computeField="false"
+                        ctableId="com.sg.vim.cocinfo.table.co2"
+                        defaultValueProvider="com.sg.vim.cocinfo.defaultvalue.CO2Default"
+                        editPart="Table"
+                        editable="true"
+                        id="f_46_3"
+                        label="CO2 排放量"
+                        labelVisible="false"
+                        name="f_46_3"
+                        persistable="true"
+                        required="false"
+                        type="DBList">
+                  </field>
+               </section>
+               <section
+                     label="试验报告以及备注">
                   <fieldgroup
                         columnCount="1">
                      <field
@@ -4151,6 +4171,46 @@
             properties="activePart"
             type="java.lang.Object">
       </propertyTester>
+   </extension>
+   <extension
+         point="com.sg.ui.table">
+      <table
+            canCreate="false"
+            canDelete="false"
+            fullSelection="false"
+            hasBorder="true"
+            headerVisiable="true"
+            id="com.sg.vim.cocinfo.table.co2"
+            lineVisiable="true"
+            multiSelection="false"
+            useHashlookup="false"
+            virtual="false">
+         <column
+               column="location"
+               editingSupport="com.sg.ui.viewer.table.StringEditingSupport"
+               name="  "
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="co2"
+               editingSupport="com.sg.ui.viewer.table.StringEditingSupport"
+               moveable="false"
+               name="CO2 排放量"
+               style="SWT.RIGHT"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="fuelqty"
+               editingSupport="com.sg.ui.viewer.table.StringEditingSupport"
+               moveable="false"
+               name="燃料种类消耗量"
+               style="SWT.RIGHT"
+               type="String"
+               width="80">
+         </column>
+      </table>
    </extension>
 
 </plugin>
