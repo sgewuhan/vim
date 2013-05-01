@@ -2302,13 +2302,7 @@
          </basicpage>
          <versionControl>
             <fieldname
-                  fieldname="c_23"></fieldname>
-            <fieldname
-                  fieldname="f_c0_2">
-            </fieldname>
-            <fieldname
-                  fieldname="d_20">
-            </fieldname>
+                  fieldname="$all"></fieldname>
          </versionControl>
       </editor>
       <pageExtendsions
