@@ -10,6 +10,7 @@ import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.service.ServerPushSession;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -41,6 +42,24 @@ import com.sg.vim.print.PrintActivator;
 @SuppressWarnings("restriction")
 public class PrintContent extends Composite {
 
+    public class PrintCertResultFunction extends BrowserFunction {
+
+        PrintCertResultFunction(Browser browser, String name) {
+            super(browser, name);
+        }
+
+        @Override
+        public Object function(Object[] arguments) {
+            System.out.println(arguments);
+            if(arguments!=null){
+                for (int i = 0; i < arguments.length; i++) {
+                    System.out.println(arguments[i]);
+                }
+            }
+            return null;
+        }
+    }
+
     private Image bannerImage;
     private int margin = 12;
     private Text vinInputText;
@@ -61,6 +80,7 @@ public class PrintContent extends Composite {
     private Browser browser;
     private DataObjectEditorInput dpinput;
     private DataObjectEditorInput input;
+    private PrintCertResultFunction printCertResultFunction;
 
     public PrintContent(ManagedForm mform, Composite parent, int style) {
         super(parent, style);
@@ -89,6 +109,7 @@ public class PrintContent extends Composite {
 
         browser = new Browser(this, SWT.NONE);
         browser.setUrl("/vert");
+        printCertResultFunction = new PrintCertResultFunction(browser, "printCertResult");
         fd = new FormData();
         browser.setLayoutData(fd);
         fd.top = new FormAttachment(banner);
@@ -409,6 +430,7 @@ public class PrintContent extends Composite {
 
     @Override
     public void dispose() {
+        printCertResultFunction.dispose();
         pushSession.stop();
         super.dispose();
     }
