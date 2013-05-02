@@ -14,6 +14,13 @@ var iRtn=VehCert.PrtParaTbl(1,"FDLS-325D-SKDI-E8EK");
 if (iRtn==-1){
 alert(VehCert.Veh_ErrorInfo);
 }
+alert(VehCert.Veh_Zchgzbh);
+alert(VehCert.Veh_Tmxx);
+alert(VehCert.Veh_Jyw);
+alert(VehCert.Veh_Dywym);
+
+printCertResult(VehCert.Veh_Zchgzbh,VehCert.Veh_Tmxx,VehCert.Veh_Jyw,VehCert.Veh_Dywym);
+
 }
 
 function getCerfId(input){
@@ -76,8 +83,6 @@ VehCert.Veh_Zzl=mVeh_Zzl;
 VehCert.Veh_Edzzl=mVeh_Edzzl;
 VehCert.Veh_Zbzl=mVeh_Zbzl;
 VehCert.Veh_Zzllyxs=mVeh_Zzllyxs;
-
-
 VehCert.Veh_Zqyzzl=mVeh_Zqyzzl;
 VehCert.Veh_Edzk=mVeh_Edzk;
 VehCert.Veh_Bgcazzdyxzzl=mVeh_Bgcazzdyxzzl;
@@ -104,7 +109,7 @@ VehCert.Veh_Databits=mVeh_Databits;
 VehCert.Veh_Stopbits=mVeh_Stopbits;
 VehCert.Veh_Zzbh=mVeh_Zzbh;
 VehCert.Veh_Cddbj=mVeh_Cddbj;
-alert("ok!");
+
 }
 
 function setValues2(
