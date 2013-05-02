@@ -194,7 +194,7 @@ public class VimUtils {
     }
 
     public static void test(Browser browser) {
-        browser.execute("showbar()");
+        browser.execute("showBar()");
     }
 
     /**

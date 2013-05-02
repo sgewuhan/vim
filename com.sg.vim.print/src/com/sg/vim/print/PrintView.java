@@ -4,8 +4,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.ManagedForm;
+import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
 import com.sg.vim.print.control.PrintContent;
@@ -20,8 +20,9 @@ public class PrintView extends ViewPart {
     @Override
     public void createPartControl(Composite parent) {
         FormToolkit toolkit = new FormToolkit( parent.getDisplay() );
-        ScrolledForm form = toolkit.createScrolledForm( parent );
-        ManagedForm mform = new ManagedForm(toolkit, form);
+        Form form = toolkit.createForm( parent );
+        
+        ManagedForm mform = new ManagedForm(form);
         Composite body = form.getBody();
         body.setLayout(new FillLayout());
         content = new PrintContent(mform,body,SWT.NONE);

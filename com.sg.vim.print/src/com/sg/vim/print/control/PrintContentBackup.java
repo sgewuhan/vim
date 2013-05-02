@@ -1,28 +1,17 @@
 package com.sg.vim.print.control;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.service.ServerPushSession;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
@@ -51,7 +40,7 @@ import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 
 @SuppressWarnings("restriction")
-public class PrintContent extends Composite {
+public class PrintContentBackup extends Composite {
 
     private class PrintCertResultFunction extends BrowserFunction {
 
@@ -100,30 +89,25 @@ public class PrintContent extends Composite {
     private DBObject dpcocData;
     private DBObject dpconfData;
     private DBObject productCodeData;
+    private Composite inputContent;
+    private ManagedForm mform;
 
     private SQLRow mesRawData;
     private String vin;
     private ServerPushSession pushSession;
     private Button printButton;
     private Browser certBrowser;
+    private DataObjectEditorInput dpinput;
+    private DataObjectEditorInput input;
     private PrintCertResultFunction printCertResultFunction;
     private BarResultFunction barResultFunction;
-    private ScrolledComposite dataPreview;
-    private PrintModule[] modules;
-    private ManagedForm mform;
-    private TreeViewer navigator;
-    private SashForm contentPanel;
-    private Composite editorArea;
 
-    public PrintContent(ManagedForm mform, Composite parent, int style) {
+    public PrintContentBackup(ManagedForm mform, Composite parent, int style) {
         super(parent, style);
-        this.mform = mform;
-        initModule();
-
-
         pushSession = new ServerPushSession();
         pushSession.start();
 
+        this.mform = mform;
         setBackgroundMode(SWT.INHERIT_DEFAULT);
         setLayout(new FormLayout());
         bannerImage = UI.getImage(ImageResource.PRINT_96);
@@ -135,13 +119,13 @@ public class PrintContent extends Composite {
         fd.height = bannerImage.getBounds().height + margin * 2;
         fd.right = new FormAttachment(100);
 
-        contentPanel = createContent();
+        inputContent = createContent();
         fd = new FormData();
-        contentPanel.setLayoutData(fd);
+        inputContent.setLayoutData(fd);
         fd.top = new FormAttachment(banner, margin * 2);
-        fd.left = new FormAttachment(0, margin);
-        fd.right = new FormAttachment(100,-margin);
-        fd.bottom = new FormAttachment(100,-margin);
+        fd.left = new FormAttachment();
+        fd.right = new FormAttachment(100);
+        fd.bottom = new FormAttachment(100);
 
         certBrowser = new Browser(this, SWT.NONE);
         certBrowser.setUrl("/vert");
@@ -153,18 +137,9 @@ public class PrintContent extends Composite {
         fd.left = new FormAttachment();
         fd.width = margin;
         fd.height = margin;
-
     }
 
-    private void initModule() {
-        modules = new PrintModule[4];
-        modules[0] = new CertPrintModule();
-        modules[1] = new COCPrintModule();
-        modules[2] = new FuelCardPrintModule();
-        modules[3] = new EnvProtectionCardPrintModule();
-    }
-
-    private Composite createBanner(PrintContent printContent) {
+    private Composite createBanner(PrintContentBackup printContent) {
         Composite banner = new Composite(this, SWT.NONE);
         banner.setLayout(new FormLayout());
         Label headImage = new Label(banner, SWT.NONE);
@@ -242,9 +217,16 @@ public class PrintContent extends Composite {
     }
 
     protected void doPrintButtonPressed() {
-        // DBObject data = input.getData().getData();
-        // VimUtils.setValues(certBrowser, data);
-        // VimUtils.print(certBrowser);
+        // VimUtils.test(browser);
+        commit();
+        DBObject data = input.getData().getData();
+        VimUtils.setValues(certBrowser, data);
+        VimUtils.print(certBrowser);
+    }
+
+    private void commit() {
+        mform.commit(false);
+        mform.commit(true);
     }
 
     protected void doQueryButtonPressed() {
@@ -258,6 +240,29 @@ public class PrintContent extends Composite {
             UIUtils.showMessage(getShell(), "输入VIN", "输入的VIN不合法，请重新输入。", SWT.ERROR);
             return;
         }
+
+        // inputContent.setLayout(new FormLayout());
+        // Label messageIconLabel = new Label(inputContent,SWT.NONE);
+        // messageIconLabel.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        // StringBuilder builder = new StringBuilder();
+        // builder.append("<img src=\"");
+        // builder.append(FileUtil.getImageURL("loading.gif", UI.PLUGIN_ID, "icons"));
+        // builder.append("\"  width='400' height='400'/><br/>ABCD");
+        // String string = builder.toString();
+        // messageIconLabel.setText(string);
+        // FormData fd = new FormData();
+        // messageIconLabel.setLayoutData(fd);
+        // fd.top = new FormAttachment(50,200);
+        // fd.left = new FormAttachment(50,200);
+        //
+        // messageLabel = new Label(inputContent,SWT.NONE);
+        // messageLabel.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        // messageLabel.setText("组装合格证数据VIN");
+        // fd = new FormData();
+        // messageLabel.setLayoutData(fd);
+        // fd.top = new FormAttachment(messageIconLabel,10);
+        // fd.left = new FormAttachment(messageIconLabel,0);
+        // inputContent.layout();
 
         Job job = new Job("组装合格证数据VIN" + vin) {
 
@@ -332,13 +337,13 @@ public class PrintContent extends Composite {
             @Override
             public void done(IJobChangeEvent event) {
                 final IStatus result = event.getJob().getResult();
-                getDisplay().asyncExec(new Runnable() {
+                inputContent.getDisplay().asyncExec(new Runnable() {
 
                     @Override
                     public void run() {
                         if (result.isOK()) {
                             try {
-                                setModuleInput();
+                                resetInputContent();
                                 printButton.setEnabled(true);
                             } catch (Exception e) {
                                 UIUtils.showMessage(getShell(), "显示合格证数据", "错误:" + e.getMessage(),
@@ -383,22 +388,49 @@ public class PrintContent extends Composite {
 
     }
 
-    private void setModuleInput() throws Exception {
-
-        Map<String, Object> para = new HashMap<String, Object>();
-        para.put(PrintModule.PARA_COC_DATA, cocData);
-        para.put(PrintModule.PARA_CONF_DATA, confData);
-        para.put(PrintModule.PARA_DPCOC_DATA, dpcocData);
-        para.put(PrintModule.PARA_DPCONF_DATA, dpconfData);
-        para.put(PrintModule.PARA_PRODUCT_CODE_DATA, productCodeData);
-        para.put(PrintModule.PARA_MES_RAW_DATA, mesRawData);
-        para.put(PrintModule.PARA_VIN, vin);
-
-        for (int i = 0; i < modules.length; i++) {
-            modules[i].setInput(para);
+    private void resetInputContent() throws Exception {
+        Control[] children = inputContent.getChildren();
+        for (int i = 0; i < children.length; i++) {
+            children[i].dispose();
         }
-        navigator.refresh(true);
 
+        inputContent.setLayout(new FillLayout());
+        SashForm sf = new SashForm(inputContent, SWT.HORIZONTAL);
+        Composite dpEditArea = new Composite(sf, SWT.NONE);
+        dpEditArea.setLayout(new FillLayout());
+        Composite editArea = new Composite(sf, SWT.NONE);
+        editArea.setLayout(new FillLayout());
+
+        if (hasDP()) {
+            dpinput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
+                    null, vin, true);
+            MultipageEditablePanel folder = fillEditArea(dpEditArea, dpinput);
+            folder.getItem(0).setText("底盘 合格证参数I");
+        }
+
+        input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
+                false);
+        MultipageEditablePanel folder = fillEditArea(editArea, input);
+        folder.getItem(0).setText("整车 合格证参数I");
+
+        if (hasDP()) {
+            sf.setWeights(new int[] { 50, 50 });
+        } else {
+            sf.setWeights(new int[] { 0, 100 });
+        }
+        inputContent.layout();
+
+    }
+
+    private MultipageEditablePanel fillEditArea(Composite parent, DataObjectEditorInput input) {
+        MultipageEditablePanel folder = new MultipageEditablePanel(parent, SWT.TOP | SWT.FLAT);
+        folder.setMessageManager(mform.getForm().getMessageManager());
+        folder.createContents(mform, input);
+        return folder;
+    }
+
+    private boolean hasDP() {
+        return dpcocData != null || dpconfData != null;
     }
 
     private void resetData() {
@@ -409,82 +441,12 @@ public class PrintContent extends Composite {
         dpcocData = null;
         dpconfData = null;
         productCodeData = null;
-        // input = null;
+        dpinput = null;
+        input = null;
     }
 
-    private SashForm createContent() {
-
-        SashForm sash = new SashForm(this, SWT.HORIZONTAL);
-        Composite navigatorPanel = new Composite(sash, SWT.NONE);
-        navigatorPanel.setLayout(new FillLayout());
-        navigator = new TreeViewer(navigatorPanel, SWT.BORDER | SWT.FULL_SELECTION|SWT.NO_SCROLL);
-        navigator.getTree().setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        navigator.getTree().setData(RWT.CUSTOM_ITEM_HEIGHT, 58);
-        navigator.setContentProvider(new ITreeContentProvider() {
-
-            @Override
-            public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-            }
-
-            @Override
-            public void dispose() {
-            }
-
-            @Override
-            public boolean hasChildren(Object element) {
-                return ((PrintModule) element).hasSubModules();
-            }
-
-            @Override
-            public Object getParent(Object element) {
-                return ((PrintModule) element).getParentModules();
-            }
-
-            @Override
-            public Object[] getElements(Object inputElement) {
-                return (Object[]) inputElement;
-            }
-
-            @Override
-            public Object[] getChildren(Object parentElement) {
-                return ((PrintModule) parentElement).getSubModules();
-            }
-        });
-        navigator.setLabelProvider(new LabelProvider() {
-
-            @Override
-            public String getText(Object element) {
-                return ((PrintModule) element).getText();
-            }
-
-        });
-
-        navigator.setInput(modules);
-        navigator.expandAll();
-
-        navigator.addDoubleClickListener(new IDoubleClickListener() {
-            @Override
-            public void doubleClick(DoubleClickEvent event) {
-                IStructuredSelection is = (IStructuredSelection) event.getSelection();
-                if (is.isEmpty()) {
-                    return;
-                }
-
-                Object item = is.getFirstElement();
-                if (item instanceof PrintModule) {
-                    showData(((PrintModule) item));
-                }
-            }
-        });
-        dataPreview = new ScrolledComposite(sash, SWT.BORDER|SWT.V_SCROLL);
-        editorArea = new Composite(dataPreview,SWT.NONE);
-        editorArea.setLayout(new FillLayout());
-
-        dataPreview.setContent(editorArea);
-        dataPreview.setExpandVertical(true);
-        dataPreview.setExpandHorizontal(true);
-        dataPreview.setMinSize( editorArea.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
-        return sash;
+    private Composite createContent() {
+        return new Composite(this, SWT.NONE);
     }
 
     @Override
@@ -493,30 +455,6 @@ public class PrintContent extends Composite {
         barResultFunction.dispose();
         pushSession.stop();
         super.dispose();
-    }
-
-    private void showData(PrintModule printModule) {
-
-        Control[] children = editorArea.getChildren();
-        for (int i = 0; i < children.length; i++) {
-            children[i].dispose();
-        }
-
-        
-        
-        DataObjectEditorInput input = printModule.getInput();
-        if (input != null) {
-            MultipageEditablePanel folder = new MultipageEditablePanel(editorArea, SWT.TOP
-                    | SWT.FLAT);
-            folder.setMessageManager(mform.getForm().getMessageManager());
-            folder.createContents(mform, printModule.getInput());
-            dataPreview.setMinSize( editorArea.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
-        }
-        
-        
-//        editorArea.layout();
-        contentPanel.setWeights(new int[]{1,3});
-        layout();
     }
 
 }

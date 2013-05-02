@@ -4,9 +4,12 @@
 		CLASSID="CLSID:77910FEF-6F36-48DA-B5EC-787B0D07BB56"> </OBJECT>
 
 	<script type="text/javascript">
-		function showbar() {
+		function showBar() {
 			var VehCert = document.getElementById("VCertificateVehCert");
 			VehCert.ViewBarcodeInfo("PER4-54LD-WXQI-DK87");
+			
+			barResult(VehCert.Veh_Tmxx);
+			
 		}
 
 		function printCert() {
@@ -16,8 +19,7 @@
 				alert(VehCert.Veh_ErrorInfo);
 			}
 
-			printCertResult(VehCert.Veh_Zchgzbh, VehCert.Veh_Tmxx,
-					VehCert.Veh_Jyw, VehCert.Veh_Dywym);
+			printCertResult(VehCert.Veh_Zchgzbh, VehCert.Veh_Jyw, VehCert.Veh_Dywym);
 
 		}
 
