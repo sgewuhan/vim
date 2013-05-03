@@ -1,4 +1,4 @@
-package com.sg.vim.print.control;
+package com.sg.vim.print.module;
 
 import java.util.Map;
 
@@ -6,6 +6,13 @@ import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
+import com.sg.vim.print.module.action.AllCertPrintAction;
+import com.sg.vim.print.module.action.AllCertUploadAction;
+import com.sg.vim.print.module.action.DPCertPrintAction;
+import com.sg.vim.print.module.action.DPCertUploadAction;
+import com.sg.vim.print.module.action.ModuleAction;
+import com.sg.vim.print.module.action.QxCertPrintAction;
+import com.sg.vim.print.module.action.QxCertUploadAction;
 
 public class CertPrintModule extends PrintModule {
 
@@ -38,13 +45,21 @@ public class CertPrintModule extends PrintModule {
                         "image"));
             }
             builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
-            builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:14pt'>整车合格证</span>");
+            builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:11pt'>机动车出厂合格证</span>");
             return builder.toString();
         }
 
         @Override
         public DataObjectEditorInput getInput() {
             return input;
+        }
+
+        @Override
+        public ModuleAction[] getActions() {
+            QxCertPrintAction action1 = new QxCertPrintAction();
+            QxCertUploadAction action2 = new QxCertUploadAction();
+            
+            return new ModuleAction[]{action1,action2};
         }
 
     }
@@ -78,7 +93,7 @@ public class CertPrintModule extends PrintModule {
                         "image"));
             }
             builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
-            builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:14pt'>底盘合格证</span>");
+            builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:11pt'>底盘合格证</span>");
             return builder.toString();
 
         }
@@ -86,6 +101,14 @@ public class CertPrintModule extends PrintModule {
         @Override
         public DataObjectEditorInput getInput() {
             return dpInput;
+        }
+
+        @Override
+        public ModuleAction[] getActions() {
+            DPCertPrintAction action1 = new DPCertPrintAction();
+            DPCertUploadAction action2 = new DPCertUploadAction();
+            
+            return new ModuleAction[]{action1,action2};
         }
 
     }
@@ -117,7 +140,7 @@ public class CertPrintModule extends PrintModule {
             builder.append(FileUtil.getImageURL("folder_48.png", PrintActivator.PLUGIN_ID, "image"));
         }
         builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
-        builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:14pt'>合格证</span>");
+        builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:11pt'>合格证</span>");
 
         return builder.toString();
     }
@@ -147,6 +170,14 @@ public class CertPrintModule extends PrintModule {
     @Override
     public DataObjectEditorInput getInput() {
         return input;
+    }
+
+    @Override
+    public ModuleAction[] getActions() {
+        AllCertPrintAction action1 = new AllCertPrintAction();
+        AllCertUploadAction action2 = new AllCertUploadAction();
+        
+        return new ModuleAction[]{action1,action2};
     }
 
 }

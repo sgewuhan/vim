@@ -1,10 +1,11 @@
-package com.sg.vim.print.control;
+package com.sg.vim.print.module;
 
 import java.util.Map;
 
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.vim.print.module.action.ModuleAction;
 
 public abstract class PrintModule {
     public static final String PARA_VIN = "vin";
@@ -46,5 +47,7 @@ public abstract class PrintModule {
     }
 
     public abstract DataObjectEditorInput getInput();
+
+    public abstract ModuleAction[] getActions() ;
     
 }

@@ -49,6 +49,12 @@ import com.sg.ui.part.MultipageEditablePanel;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
+import com.sg.vim.print.module.COCPrintModule;
+import com.sg.vim.print.module.CertPrintModule;
+import com.sg.vim.print.module.EnvProtectionCardPrintModule;
+import com.sg.vim.print.module.FuelCardPrintModule;
+import com.sg.vim.print.module.PrintModule;
+import com.sg.vim.print.module.action.ModuleAction;
 
 @SuppressWarnings("restriction")
 public class PrintContent extends Composite {
@@ -265,7 +271,6 @@ public class PrintContent extends Composite {
             protected IStatus run(IProgressMonitor monitor) {
                 // 查询数据库是否有对应vin的成品码记录
                 String message = "正在查询外部数据库中的匹配VIN的成品记录";
-                setNotice(message);
                 try {
                     mesRawData = VimUtils.getProductCode(vin);
                 } catch (Exception e) {
@@ -280,7 +285,6 @@ public class PrintContent extends Composite {
                 // 获取成品码对应成品码数据 LNBMDLAA6CU000289
                 // 公告车型 productcodeinfo.f_0_2c
                 message = "正在查询VIM数据库中的成品码记录";
-                setNotice(message);
                 try {
                     productCodeData = VimUtils.getProductCodeInfo((String) productCode);
                 } catch (Exception e) {
@@ -289,7 +293,6 @@ public class PrintContent extends Composite {
 
                 // 查询COC绑定数据
                 message = "正在查询成品码车型一致性信息";
-                setNotice(message);
                 try {
                     cocData = VimUtils.getCOCInfo(productCodeData);
                 } catch (Exception e) {
@@ -297,7 +300,6 @@ public class PrintContent extends Composite {
                 }
                 // 查询配置数据
                 message = "正在查询成品码车型配置信息";
-                setNotice(message);
                 try {
                     confData = VimUtils.getConfInfo(productCodeData);
                 } catch (Exception e) {
@@ -312,7 +314,6 @@ public class PrintContent extends Composite {
                 Object dpId = cocData.get(IVIMFields.C_12);
                 if ((dpId instanceof String) && (dpId.toString().length() > 0)) {
                     message = "正在查询成品码底盘信息";
-                    setNotice(message);
                     // 找到对应的底盘信息
                     try {
                         dpcocData = VimUtils.getCOCInfoById((String) dpId);
@@ -341,7 +342,7 @@ public class PrintContent extends Composite {
                                 setModuleInput();
                                 printButton.setEnabled(true);
                             } catch (Exception e) {
-                                UIUtils.showMessage(getShell(), "显示合格证数据", "错误:" + e.getMessage(),
+                                UIUtils.showMessage(getShell(), "组合机动车完整数据", "错误:" + e.getMessage(),
                                         SWT.ERROR);
                                 printButton.setEnabled(false);
                             }
@@ -362,25 +363,6 @@ public class PrintContent extends Composite {
     private void setOperationEnable(boolean b) {
         queryButton.setEnabled(b);
         vinInputText.setEnabled(b);
-    }
-
-    protected void setNotice(final String message) {
-        // final Display display = inputContent.getDisplay();
-        // display.asyncExec(new Runnable() {
-        //
-        // @Override
-        // public void run() {
-        // BusyIndicator.showWhile(display,new Runnable() {
-        //
-        // @Override
-        // public void run() {
-        // messageLabel.setText(message);
-        // inputContent.layout();
-        // }
-        // });
-        // }
-        // });
-
     }
 
     private void setModuleInput() throws Exception {
@@ -502,7 +484,28 @@ public class PrintContent extends Composite {
             children[i].dispose();
         }
 
-        
+        editorArea.setLayout(new FormLayout());
+        Composite toolbar = new Composite(editorArea,SWT.NONE);
+        FormData fd = new FormData();
+        toolbar.setLayoutData(fd);
+        fd.top = new FormAttachment();
+        fd.left = new FormAttachment();
+        fd.right = new FormAttachment(100);
+        fd.height = 38;
+        ModuleAction[] actions = printModule.getActions();
+        for (int i = 0; i < actions.length; i++) {
+            Button button = new Button(toolbar,SWT.PUSH);
+            final ModuleAction moduleAction = actions[i];
+            button.setImage(moduleAction.getImage());
+            button.setToolTipText(actions[i].getText());
+            button.setData(RWT.CUSTOM_VARIANT, "whitebutton_s");
+            button.addSelectionListener(new SelectionAdapter() {
+                @Override
+                public void widgetSelected(SelectionEvent e) {
+                    moduleAction.run();
+                }
+            });
+        }
         
         DataObjectEditorInput input = printModule.getInput();
         if (input != null) {
@@ -511,6 +514,12 @@ public class PrintContent extends Composite {
             folder.setMessageManager(mform.getForm().getMessageManager());
             folder.createContents(mform, printModule.getInput());
             dataPreview.setMinSize( editorArea.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
+            fd = new FormData();
+            folder.setLayoutData(fd);
+            fd.top = new FormAttachment(toolbar,margin);
+            fd.bottom = new FormAttachment(100);
+            fd.right = new FormAttachment(100);
+            fd.left = new FormAttachment();
         }
         
         
