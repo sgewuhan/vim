@@ -16,6 +16,8 @@ public class CertPrintModule extends PrintModule {
     public static final String NAME = "CertPrintModule";
     private QXCertPrintModule qxCertPrintModule;
     private DPCertPrintModule dpCertPrintModule;
+	private DataObjectEditorInput dpinput;
+	private DataObjectEditorInput input;
 
     public CertPrintModule() {
         super();
@@ -71,11 +73,10 @@ public class CertPrintModule extends PrintModule {
     @Override
     public void setInput(Map<String, Object> para) throws Exception {
         super.setInput(para);
-        DataObjectEditorInput input;
         if (hasDP()) {
-            input = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
+            dpinput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
                     null, vin, true);
-            dpCertPrintModule.setInputData(input);
+            dpCertPrintModule.setInputData(dpinput);
         }
 
         input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
@@ -89,7 +90,7 @@ public class CertPrintModule extends PrintModule {
 
     @Override
     public DataObjectEditorInput getInput() {
-        return null;
+        return input;
     }
 
     @Override
