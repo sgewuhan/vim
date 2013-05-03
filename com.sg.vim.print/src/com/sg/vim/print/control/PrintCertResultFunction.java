@@ -3,6 +3,7 @@ package com.sg.vim.print.control;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
+import com.mobnut.commons.util.Utils;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.module.DPCertPrintModule;
 import com.sg.vim.print.module.PrintModule;
@@ -19,12 +20,16 @@ public class PrintCertResultFunction extends BrowserFunction {
 
     @Override
     public Object function(Object[] arguments) {
-        // Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw, VehCert.Veh_Dywym
+        // Veh_ErrorInfo,Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw, VehCert.Veh_Dywym
         if (arguments != null) {
-            Object mVeh_Clztxx = arguments[0];
-            Object mVeh_Zchgzbh = arguments[1];
-            Object mVeh_Jyw = arguments[2];
-            Object mVeh_Veh_Dywym = arguments[3];
+        	Object mVeh_ErrorInfo = arguments[0];
+        	if(!Utils.isNullOrEmptyString(mVeh_ErrorInfo)){
+        		return null;
+        	}
+            Object mVeh_Clztxx = arguments[1];
+            Object mVeh_Zchgzbh = arguments[2];
+            Object mVeh_Jyw = arguments[3];
+            Object mVeh_Veh_Dywym = arguments[4];
             PrintModule currentModule = null;
             if (mVeh_Clztxx != null && "dp".equalsIgnoreCase(mVeh_Clztxx.toString())) {
                 currentModule = dpModule;
