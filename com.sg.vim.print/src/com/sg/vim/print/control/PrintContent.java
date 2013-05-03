@@ -34,11 +34,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.forms.IFormPart;
-import org.eclipse.ui.forms.IManagedForm;
-import org.eclipse.ui.forms.IMessageManager;
 import org.eclipse.ui.forms.ManagedForm;
-import org.eclipse.ui.forms.editor.IFormPage;
+import org.eclipse.ui.forms.widgets.Form;
 
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
@@ -47,7 +44,6 @@ import com.sg.ui.UI;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.MultipageEditablePanel;
-import com.sg.ui.part.editor.field.AbstractFieldPart;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
@@ -87,10 +83,12 @@ public class PrintContent extends Composite {
     private Composite editorArea;
     private Composite toolbar;
     private MultipageEditablePanel folder;
+    private Form form;
 
-    public PrintContent(ManagedForm mform, Composite parent, int style) {
-        super(parent, style);
+    public PrintContent(ManagedForm mform, Form form, int style) {
+        super(form.getBody(), style);
         this.mform = mform;
+        this.form = form;
         initModule();
 
         pushSession = new ServerPushSession();
@@ -540,7 +538,7 @@ public class PrintContent extends Composite {
         if (input != null) {
             folder = new MultipageEditablePanel(editorArea, SWT.TOP
                     | SWT.FLAT);
-            folder.setMessageManager(mform.getForm().getMessageManager());
+            folder.setMessageManager(form.getMessageManager());
             folder.createContents(mform, printModule.getInput());
             dataPreview.setMinSize(editorArea.computeSize(SWT.DEFAULT, SWT.DEFAULT));
         }

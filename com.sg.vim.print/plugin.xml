@@ -3131,7 +3131,7 @@
                         presentation="com.sg.vim.print.presentation.Veh_Zzbh_Presentation"
                         required="true"
                         textLimit="7"
-                        tooltips="可空"
+                        tooltips="必须是长度7位的数字"
                         type="String">
                   </field>
                </section>

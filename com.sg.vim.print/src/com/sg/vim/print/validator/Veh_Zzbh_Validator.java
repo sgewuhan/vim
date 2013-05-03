@@ -17,17 +17,16 @@ public class Veh_Zzbh_Validator implements IFieldInputValidator {
     @Override
     public boolean validate(DataObject data, FieldConfigurator fieldConfigurator,
             Object valueForUpdate, IMessageManager messageManager, Control control) {
-        //7位，数字类型
+        // 7位，数字类型
         if (valueForUpdate instanceof String) {
-            boolean matched = Utils.isPatternMatched(valueForUpdate,"(\\d+)");
+            boolean matched = Utils.isPatternMatched(valueForUpdate, "(\\d+)");
             if (!matched) {
-              messageManager.addMessage(fieldConfigurator.getId(), "必须输入数字", null,
-                  IMessageProvider.ERROR, control);
-              return false;
+                messageManager.addMessage(fieldConfigurator.getId(), "必须长度7位数字", null,
+                        IMessageProvider.ERROR, control);
+                return false;
             }
-          }
-          messageManager.removeMessage(fieldConfigurator.getId(), control);
-          return true;
+        }
+        messageManager.removeMessage(fieldConfigurator.getId(), control);
+        return true;
     }
-
 }
