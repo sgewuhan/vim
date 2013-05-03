@@ -12,22 +12,6 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
     public ProductCodeLabelProvider() {
     }
 
-    // /*
-    // * (non-Javadoc)
-    // *
-    // * @see org.eclipse.jface.viewers.ColumnLabelProvider#getImage(java.lang.Object)
-    // */
-    // @Override
-    // public Image getImage(Object element) {
-    // if (element instanceof DBObject) {
-    // if (((DBObject) element).get("cocinfo") != null) {
-    // return COCInfoActivator.getImage("link_16.png");
-    // }
-    // }
-    //
-    // return super.getImage(element);
-    // }
-
     /*
      * (non-Javadoc)
      * 

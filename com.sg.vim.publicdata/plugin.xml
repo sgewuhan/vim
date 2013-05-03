@@ -1240,7 +1240,7 @@
                         name="c_23"
                         option="com.sg.vim.enum.type3"
                         persistable="true"
-                        required="false"
+                        required="true"
                         type="String">
                   </field>
                   <fieldgroup

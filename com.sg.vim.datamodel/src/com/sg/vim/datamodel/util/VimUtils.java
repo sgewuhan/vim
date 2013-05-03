@@ -122,7 +122,7 @@ public class VimUtils {
     public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
     
     
-    private static final String mVeh_Dywym = "Veh_Dywym";
+//    private static final String mVeh_Dywym = "Veh_Dywym";//´òÓ¡Î¨Ò»Âë
 
     private static final String mVeh_Stopbits = "Veh_Stopbits";
 

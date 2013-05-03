@@ -6,117 +6,25 @@ import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
+import com.sg.vim.print.control.PrintContent;
 import com.sg.vim.print.module.action.AllCertPrintAction;
 import com.sg.vim.print.module.action.AllCertUploadAction;
-import com.sg.vim.print.module.action.DPCertPrintAction;
-import com.sg.vim.print.module.action.DPCertUploadAction;
 import com.sg.vim.print.module.action.ModuleAction;
-import com.sg.vim.print.module.action.QxCertPrintAction;
-import com.sg.vim.print.module.action.QxCertUploadAction;
 
 public class CertPrintModule extends PrintModule {
 
-    public class QXCertPrintModule extends PrintModule {
+    public static final String NAME = "CertPrintModule";
+    private QXCertPrintModule qxCertPrintModule;
+    private DPCertPrintModule dpCertPrintModule;
 
-        @Override
-        public PrintModule[] getSubModules() {
-            return null;
-        }
-
-        @Override
-        public PrintModule getParentModules() {
-            return null;
-        }
-
-        @Override
-        public boolean hasSubModules() {
-            return false;
-        }
-
-        @Override
-        public String getText() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("<img src=\"");
-            if (isEnable()) {
-                builder.append(FileUtil.getImageURL("certqx_48.png", PrintActivator.PLUGIN_ID,
-                        "image"));
-            } else {
-                builder.append(FileUtil.getImageURL("certqx_d_48.png", PrintActivator.PLUGIN_ID,
-                        "image"));
-            }
-            builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
-            builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:11pt'>机动车出厂合格证</span>");
-            return builder.toString();
-        }
-
-        @Override
-        public DataObjectEditorInput getInput() {
-            return input;
-        }
-
-        @Override
-        public ModuleAction[] getActions() {
-            QxCertPrintAction action1 = new QxCertPrintAction();
-            QxCertUploadAction action2 = new QxCertUploadAction();
-            
-            return new ModuleAction[]{action1,action2};
-        }
-
-    }
-
-    public class DPCertPrintModule extends PrintModule {
-
-        @Override
-        public PrintModule[] getSubModules() {
-            return null;
-        }
-
-        @Override
-        public PrintModule getParentModules() {
-            return null;
-        }
-
-        @Override
-        public boolean hasSubModules() {
-            return false;
-        }
-
-        @Override
-        public String getText() {
-            StringBuilder builder = new StringBuilder();
-            builder.append("<img src=\"");
-            if (isEnable()) {
-                builder.append(FileUtil
-                        .getImageURL("doc_48.png", PrintActivator.PLUGIN_ID, "image"));
-            } else {
-                builder.append(FileUtil.getImageURL("doc_d_48.png", PrintActivator.PLUGIN_ID,
-                        "image"));
-            }
-            builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
-            builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:11pt'>底盘合格证</span>");
-            return builder.toString();
-
-        }
-
-        @Override
-        public DataObjectEditorInput getInput() {
-            return dpInput;
-        }
-
-        @Override
-        public ModuleAction[] getActions() {
-            DPCertPrintAction action1 = new DPCertPrintAction();
-            DPCertUploadAction action2 = new DPCertUploadAction();
-            
-            return new ModuleAction[]{action1,action2};
-        }
-
+    public CertPrintModule() {
+        super();
+        qxCertPrintModule = new QXCertPrintModule();
+        dpCertPrintModule = new DPCertPrintModule();
     }
 
     @Override
     public PrintModule[] getSubModules() {
-        QXCertPrintModule qxCertPrintModule = new QXCertPrintModule();
-        DPCertPrintModule dpCertPrintModule = new DPCertPrintModule();
         return new PrintModule[] { qxCertPrintModule, dpCertPrintModule };
     }
 
@@ -140,27 +48,39 @@ public class CertPrintModule extends PrintModule {
             builder.append(FileUtil.getImageURL("folder_48.png", PrintActivator.PLUGIN_ID, "image"));
         }
         builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
-        builder.append("<br/><span style='FONT-FAMILY:微软雅黑;font-size:11pt'>合格证</span>");
+        builder.append("<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><b>合格证</b></span><br/><small>");
+        if (canPrintData()) {
+            builder.append(getIcon("print_16.png", 16, 16));
+            builder.append("<a href=\"" + _PRINT + "@" + getName()
+                    + "\" target=\"_rwt\">打印</a>   ");
+        }
+        if (canUploadData()) {
+            builder.append(getIcon("upload_16.png", 16, 16));
+            builder.append("<a href=\"" + _UPLOAD + "@" + getName()
+                    + "\" target=\"_rwt\">上传</a>   ");
+        }
+        builder.append("</small>");
 
         return builder.toString();
     }
 
-    private DataObjectEditorInput dpInput;
-    private DataObjectEditorInput input;
-
+    private boolean canUploadData() {
+        return true;
+    }
 
     @Override
     public void setInput(Map<String, Object> para) throws Exception {
         super.setInput(para);
+        DataObjectEditorInput input;
         if (hasDP()) {
-            dpInput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
+            input = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
                     null, vin, true);
-        } else {
-            dpInput = null;
+            dpCertPrintModule.setInputData(input);
         }
 
         input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
                 false);
+        qxCertPrintModule.setInputData(input);
     }
 
     private boolean hasDP() {
@@ -169,15 +89,41 @@ public class CertPrintModule extends PrintModule {
 
     @Override
     public DataObjectEditorInput getInput() {
-        return input;
+        return null;
     }
 
     @Override
     public ModuleAction[] getActions() {
         AllCertPrintAction action1 = new AllCertPrintAction();
         AllCertUploadAction action2 = new AllCertUploadAction();
-        
-        return new ModuleAction[]{action1,action2};
+
+        return new ModuleAction[] { action1, action2 };
+    }
+
+    @Override
+    public String getHeadText() {
+        return "<span style='FONT-FAMILY:微软雅黑;font-size:15pt'>合格证</span>";
+    }
+
+    @Override
+    public void fireEvent(String eventCode, PrintContent pc) {
+        if (eventCode.equals(_PRINT)) {
+            pc.doPrint(this);
+        }
+    }
+
+    /**
+     * 有无底盘数据
+     * 
+     * @return
+     */
+    public boolean hasDPData() {
+        return dpCertPrintModule.getInput()!=null;
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 
 }

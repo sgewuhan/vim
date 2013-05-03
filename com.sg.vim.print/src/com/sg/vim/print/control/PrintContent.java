@@ -9,9 +9,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -32,6 +29,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -51,9 +49,10 @@ import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.module.COCPrintModule;
 import com.sg.vim.print.module.CertPrintModule;
-import com.sg.vim.print.module.EnvProtectionCardPrintModule;
+import com.sg.vim.print.module.DPCertPrintModule;
 import com.sg.vim.print.module.FuelCardPrintModule;
 import com.sg.vim.print.module.PrintModule;
+import com.sg.vim.print.module.QXCertPrintModule;
 import com.sg.vim.print.module.action.ModuleAction;
 
 @SuppressWarnings("restriction")
@@ -67,11 +66,24 @@ public class PrintContent extends Composite {
 
         @Override
         public Object function(Object[] arguments) {
-            // VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw, VehCert.Veh_Dywym
-            System.out.println(arguments);
+            // Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw, VehCert.Veh_Dywym
             if (arguments != null) {
-                for (int i = 0; i < arguments.length; i++) {
-                    System.out.println(arguments[i]);
+                Object mVeh_Clztxx = arguments[0];
+                Object mVeh_Zchgzbh = arguments[1];
+                Object mVeh_Jyw = arguments[2];
+                Object mVeh_Veh_Dywym = arguments[3];
+                PrintModule module = null;
+                if(mVeh_Clztxx!=null&&"dp".equalsIgnoreCase(mVeh_Clztxx.toString())){
+                    module = (DPCertPrintModule) getModulebyName(modules,
+                            DPCertPrintModule.NAME);
+                }else if(mVeh_Clztxx!=null&&"qx".equalsIgnoreCase(mVeh_Clztxx.toString())){
+                    module = (QXCertPrintModule) getModulebyName(modules,
+                            QXCertPrintModule.NAME);
+                }
+                if(module!=null){
+                    module.setCallbackProperties("Veh_Zchgzbh",mVeh_Zchgzbh);
+                    module.setCallbackProperties("Veh_Jyw",mVeh_Jyw);
+                    module.setCallbackProperties("Veh_Veh_Dywym",mVeh_Veh_Dywym);
                 }
             }
             return null;
@@ -120,12 +132,12 @@ public class PrintContent extends Composite {
     private TreeViewer navigator;
     private SashForm contentPanel;
     private Composite editorArea;
+    private Composite toolbar;
 
     public PrintContent(ManagedForm mform, Composite parent, int style) {
         super(parent, style);
         this.mform = mform;
         initModule();
-
 
         pushSession = new ServerPushSession();
         pushSession.start();
@@ -146,8 +158,8 @@ public class PrintContent extends Composite {
         contentPanel.setLayoutData(fd);
         fd.top = new FormAttachment(banner, margin * 2);
         fd.left = new FormAttachment(0, margin);
-        fd.right = new FormAttachment(100,-margin);
-        fd.bottom = new FormAttachment(100,-margin);
+        fd.right = new FormAttachment(100, -margin);
+        fd.bottom = new FormAttachment(100, -margin);
 
         certBrowser = new Browser(this, SWT.NONE);
         certBrowser.setUrl("/vert");
@@ -163,11 +175,10 @@ public class PrintContent extends Composite {
     }
 
     private void initModule() {
-        modules = new PrintModule[4];
+        modules = new PrintModule[3];
         modules[0] = new CertPrintModule();
         modules[1] = new COCPrintModule();
         modules[2] = new FuelCardPrintModule();
-        modules[3] = new EnvProtectionCardPrintModule();
     }
 
     private Composite createBanner(PrintContent printContent) {
@@ -342,8 +353,8 @@ public class PrintContent extends Composite {
                                 setModuleInput();
                                 printButton.setEnabled(true);
                             } catch (Exception e) {
-                                UIUtils.showMessage(getShell(), "组合机动车完整数据", "错误:" + e.getMessage(),
-                                        SWT.ERROR);
+                                UIUtils.showMessage(getShell(), "组合机动车完整数据",
+                                        "错误:" + e.getMessage(), SWT.ERROR);
                                 printButton.setEnabled(false);
                             }
                         }
@@ -399,7 +410,7 @@ public class PrintContent extends Composite {
         SashForm sash = new SashForm(this, SWT.HORIZONTAL);
         Composite navigatorPanel = new Composite(sash, SWT.NONE);
         navigatorPanel.setLayout(new FillLayout());
-        navigator = new TreeViewer(navigatorPanel, SWT.BORDER | SWT.FULL_SELECTION|SWT.NO_SCROLL);
+        navigator = new TreeViewer(navigatorPanel, SWT.BORDER | SWT.FULL_SELECTION | SWT.NO_SCROLL);
         navigator.getTree().setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         navigator.getTree().setData(RWT.CUSTOM_ITEM_HEIGHT, 58);
         navigator.setContentProvider(new ITreeContentProvider() {
@@ -441,32 +452,69 @@ public class PrintContent extends Composite {
 
         });
 
-        navigator.setInput(modules);
-        navigator.expandAll();
-
-        navigator.addDoubleClickListener(new IDoubleClickListener() {
+        navigator.getTree().addSelectionListener(new SelectionAdapter() {
             @Override
-            public void doubleClick(DoubleClickEvent event) {
-                IStructuredSelection is = (IStructuredSelection) event.getSelection();
-                if (is.isEmpty()) {
-                    return;
-                }
+            public void widgetSelected(SelectionEvent e) {
+                if (e.detail == RWT.HYPERLINK) {
+                    String[] args = e.text.split("@");
 
-                Object item = is.getFirstElement();
-                if (item instanceof PrintModule) {
-                    showData(((PrintModule) item));
+                    PrintModule module = getModulebyName(modules, args[1]);
+                    if (module != null) {
+                        module.fireEvent(args[0], PrintContent.this);
+                    }
+
                 }
             }
         });
-        dataPreview = new ScrolledComposite(sash, SWT.BORDER|SWT.V_SCROLL);
-        editorArea = new Composite(dataPreview,SWT.NONE);
+
+        navigator.setInput(modules);
+        navigator.expandAll();
+
+        Composite rightpanel = new Composite(sash, SWT.BORDER | SWT.V_SCROLL);
+        rightpanel.setLayout(new FormLayout());
+        toolbar = new Composite(rightpanel, SWT.NONE);
+        FormData fd = new FormData();
+        toolbar.setLayoutData(fd);
+        fd.top = new FormAttachment();
+        fd.left = new FormAttachment();
+        fd.right = new FormAttachment(100);
+        fd.height = 46;
+        toolbar.setLayout(new RowLayout(SWT.HORIZONTAL));
+
+        dataPreview = new ScrolledComposite(rightpanel, SWT.V_SCROLL);
+        fd = new FormData();
+        dataPreview.setLayoutData(fd);
+        fd.top = new FormAttachment(toolbar, margin);
+        fd.left = new FormAttachment();
+        fd.right = new FormAttachment(100);
+        fd.bottom = new FormAttachment(100);
+
+        editorArea = new Composite(dataPreview, SWT.NONE);
         editorArea.setLayout(new FillLayout());
 
         dataPreview.setContent(editorArea);
         dataPreview.setExpandVertical(true);
         dataPreview.setExpandHorizontal(true);
-        dataPreview.setMinSize( editorArea.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
+        dataPreview.setMinSize(editorArea.computeSize(SWT.DEFAULT, SWT.DEFAULT));
         return sash;
+    }
+
+    protected PrintModule getModulebyName(PrintModule[] modules, String className) {
+        if (modules == null) {
+            return null;
+        }
+        for (int i = 0; i < modules.length; i++) {
+            if (modules[i].getName().equals(className)) {
+                return modules[i];
+            } else {
+                PrintModule child = getModulebyName(modules[i].getSubModules(), className);
+                if (child != null) {
+                    return child;
+                }
+            }
+
+        }
+        return null;
     }
 
     @Override
@@ -477,24 +525,24 @@ public class PrintContent extends Composite {
         super.dispose();
     }
 
-    private void showData(PrintModule printModule) {
+    public void showData(PrintModule printModule) {
 
         Control[] children = editorArea.getChildren();
         for (int i = 0; i < children.length; i++) {
             children[i].dispose();
         }
+        children = toolbar.getChildren();
+        for (int i = 0; i < children.length; i++) {
+            children[i].dispose();
+        }
 
-        editorArea.setLayout(new FormLayout());
-        Composite toolbar = new Composite(editorArea,SWT.NONE);
-        FormData fd = new FormData();
-        toolbar.setLayoutData(fd);
-        fd.top = new FormAttachment();
-        fd.left = new FormAttachment();
-        fd.right = new FormAttachment(100);
-        fd.height = 38;
+        Label title = new Label(toolbar, SWT.NONE);
+        title.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
+        title.setText(printModule.getHeadText());
+        new Label(toolbar, SWT.SEPARATOR | SWT.VERTICAL);
         ModuleAction[] actions = printModule.getActions();
         for (int i = 0; i < actions.length; i++) {
-            Button button = new Button(toolbar,SWT.PUSH);
+            Button button = new Button(toolbar, SWT.PUSH);
             final ModuleAction moduleAction = actions[i];
             button.setImage(moduleAction.getImage());
             button.setToolTipText(actions[i].getText());
@@ -506,26 +554,30 @@ public class PrintContent extends Composite {
                 }
             });
         }
-        
+
         DataObjectEditorInput input = printModule.getInput();
         if (input != null) {
             MultipageEditablePanel folder = new MultipageEditablePanel(editorArea, SWT.TOP
                     | SWT.FLAT);
             folder.setMessageManager(mform.getForm().getMessageManager());
             folder.createContents(mform, printModule.getInput());
-            dataPreview.setMinSize( editorArea.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
-            fd = new FormData();
-            folder.setLayoutData(fd);
-            fd.top = new FormAttachment(toolbar,margin);
-            fd.bottom = new FormAttachment(100);
-            fd.right = new FormAttachment(100);
-            fd.left = new FormAttachment();
+            dataPreview.setMinSize(editorArea.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+        }
+
+        toolbar.layout();
+        editorArea.layout();
+        contentPanel.setWeights(new int[] { 1, 3 });
+    }
+
+    public void doPrint(CertPrintModule certPrintModule) {
+
+        //如果有底盘合格证数据先打印底盘合格证
+        if(certPrintModule.hasDPData()){
+             DBObject data = certPrintModule.getInput().getData().getData();
+             VimUtils.setValues(certBrowser, data);
+             VimUtils.print(certBrowser);
         }
         
-        
-//        editorArea.layout();
-        contentPanel.setWeights(new int[]{1,3});
-        layout();
     }
 
 }
