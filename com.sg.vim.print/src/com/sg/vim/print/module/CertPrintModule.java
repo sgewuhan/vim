@@ -127,4 +127,12 @@ public class CertPrintModule extends PrintModule {
         return NAME;
     }
 
+    public DPCertPrintModule getDpCertPrintModule() {
+        return dpCertPrintModule;
+    }
+
+    public QXCertPrintModule getQxCertPrintModule() {
+        return qxCertPrintModule;
+    }
+
 }

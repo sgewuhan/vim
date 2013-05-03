@@ -3043,6 +3043,7 @@
                      label="基本信息">
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clztxx"
                         label="车辆状态信息"
                         name="Veh_Clztxx"
@@ -3124,9 +3125,12 @@
                   <field
                         editPart="Text(Single Line)"
                         id="Veh_Zzbh"
+                        inputValidator="com.sg.vim.print.validator.Veh_Zzbh_Validator"
                         label="纸张编号"
                         name="Veh_Zzbh"
-                        textLimit="50"
+                        presentation="com.sg.vim.print.presentation.Veh_Zzbh_Presentation"
+                        required="true"
+                        textLimit="7"
                         tooltips="可空"
                         type="String">
                   </field>
@@ -3511,6 +3515,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Jsszcrs"
                         label="驾驶室准乘人数"
                         name="Veh_Jsszcrs"
