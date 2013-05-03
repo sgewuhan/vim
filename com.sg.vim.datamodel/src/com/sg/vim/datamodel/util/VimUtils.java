@@ -172,6 +172,8 @@ public class VimUtils {
 
         for (int i = 0; i < paraSeq.length; i++) {
             Object value = dbo.get(paraSeq[i]);
+            value = doTransferBeforeInvokePrint(paraSeq[i],value);
+            
             value= value==null?"":value;
             System.out.println(paraSeq[i]+">>"+value);
             sb.append("\"");
@@ -188,6 +190,7 @@ public class VimUtils {
          System.out.println(sb.toString());
         browser.execute(sb.toString());
     }
+
 
     public static void print(Browser browser) {
         browser.execute("printCert()");
@@ -414,7 +417,7 @@ public class VimUtils {
         result.put(mVeh_Zqyzzl, cocData.get(IVIMFields.C_10));
         // Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
         result.put(mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
-        // Veh_JsszCrs C_02 驾驶室准乘人数 映射
+        // Veh_JsszCrs C_02 驾驶室准乘人数 映射 不填
 //        result.put(mVeh_Jsszcrs, cocData.get(IVIMFields.C_02));
         // Veh_EDzk F_42_1 额定载客 映射
         result.put(mVeh_Edzk, cocData.get(IVIMFields.F_42_1));
@@ -435,7 +438,6 @@ public class VimUtils {
         // Veh_Zxzs C_13 转向轴个数 映射
         result.put(mVeh_Zxzs, cocData.get(IVIMFields.C_13));
         // Veh_CDDbj C_21 纯电动标记 值转换
-        //******************************************************这个值设置后有问题
         Object object = cocData.get(IVIMFields.C_21);
         if("是".equals(object)){
         	result.put(mVeh_Cddbj, 1);
@@ -505,9 +507,9 @@ public class VimUtils {
         // Veh_Qyqtxx 公告中的其他
         result.put(mVeh_Qyqtxx, cocData.get(IVIMFields.C_18));
 
-        // // Veh_Tmxx 条码
+        // // Veh_Tmxx 条码 不填
         // result.put(mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
-        // Veh_Jyw 待测
+        // Veh_Jyw 待测 校验不填
         // result.put(mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
         // Veh_PrinterName 待测
         result.put(mVeh_PrinterName, "<输入>");
@@ -525,11 +527,28 @@ public class VimUtils {
         result.put(mVeh_Databits, "8");
         // Veh_Stopbits 待测
         result.put(mVeh_Stopbits, "1");
-        // Veh_Zzbh 待测
-        result.put(mVeh_Zzbh, "<输入>");
+        
+        
+        // Veh_Zzbh 纸张编号
+        //*****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
+        //比如，输入110，input中的值还是110，但是显示为000110，同时需要在传递到合格证打印OCX的值也需要改变为000110
+        //参见doTransferBeforeInvokePrint()
+        result.put(mVeh_Zzbh, "");
+        
         // Veh_Dywym 待测
 //        result.put(mVeh_Dywym, "");// 返回值，不填
         return result;
+    }
+    
+
+    private static Object doTransferBeforeInvokePrint(String key, Object value) {
+        if(key.equals(mVeh_Zzbh)){//处理纸张编号
+            try{
+                int i = Integer.parseInt(value.toString());
+                return String.format("%07d",i);
+            }catch(Exception e){}
+        }
+        return value;
     }
 
 }
