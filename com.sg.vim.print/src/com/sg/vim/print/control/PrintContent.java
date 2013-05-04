@@ -559,7 +559,7 @@ public class PrintContent extends Composite {
             VimUtils.setValues(certBrowser, data);
             VimUtils.print(certBrowser);
             if(dpmodule.getError()!=null||qxmodule.getError()!=null){
-            	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+dpmodule.getError(), SWT.ICON_ERROR);
+            	UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n"+dpmodule.getError(), SWT.ICON_ERROR);
             	return;
             }
         }
@@ -568,7 +568,7 @@ public class PrintContent extends Composite {
         VimUtils.setValues(certBrowser, data);
         VimUtils.print(certBrowser);
         if(dpmodule.getError()!=null){
-        	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+qxmodule.getError(), SWT.ICON_ERROR);
+        	UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n"+qxmodule.getError(), SWT.ICON_ERROR);
         	return;
         }
 
