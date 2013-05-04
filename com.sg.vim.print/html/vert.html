@@ -7,7 +7,6 @@
 		function showBar() {
 			var VehCert = document.getElementById("VCertificateVehCert");
 			VehCert.ViewBarcodeInfo("PER4-54LD-WXQI-DK87");
-			
 			barResult(VehCert.Veh_Tmxx);
 			
 		}
@@ -15,11 +14,7 @@
 		function printCert() {
 			var VehCert = document.getElementById("VCertificateVehCert");
 			var iRtn = VehCert.PrtParaTbl(1, "FDLS-325D-SKDI-E8EK");
-			if (iRtn == -1) {
-				alert(VehCert.Veh_ErrorInfo);
-			}
-
-			printCertResult(VehCert.Veh_ErrorInfo, VehCert.Veh_Clztxx, VehCert.Veh_Zchgzbh, VehCert.Veh_Jyw, VehCert.Veh_Dywym);
+			printCertResult(iRtn,VehCert.Veh_ErrorInfo, VehCert.Veh_Clztxx, VehCert.Veh_Zchgzbh, VehCert.Veh_Jyw, VehCert.Veh_Dywym);
 
 		}
 
@@ -46,6 +41,8 @@
 			var VehCert = document.getElementById("VCertificateVehCert");
 			VehCert.Veh_Clztxx = mVeh_Clztxx;
 			VehCert.Veh_Zchgzbh = mVeh_Zchgzbh;
+						alert(VehCert.Veh_Zchgzbh);
+			
 			VehCert.Veh_Dphgzbh = mVeh_Dphgzbh;
 			VehCert.Veh_Fzrq = mVeh_Fzrq;
 			VehCert.Veh_Clzzqymc = mVeh_Clzzqymc;
@@ -110,43 +107,8 @@
 			VehCert.Veh_Stopbits = mVeh_Stopbits;
 			VehCert.Veh_Zzbh = mVeh_Zzbh;
 			VehCert.Veh_Cddbj = mVeh_Cddbj;
+						alert("values setted!");
 
-		}
-
-		function setValues2(mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl,
-				mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq, mVeh_Bz, mVeh_Qybz,
-				mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs, mVeh_Yh,
-				mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq, mVeh_PrinterName,
-				mVeh_PrintPosLeft, mVeh_PrintPosTop, mVeh_Connect, mVeh_Baud,
-				mVeh_Parity, mVeh_Databits, mVeh_Stopbits, mVeh_Zzbh,
-				mVeh_Cddbj) {
-			var VehCert = document.getElementById("VCertificateVehCert");
-			VehCert.Veh_Zqyzzl = mVeh_Zqyzzl;
-			VehCert.Veh_Edzk = mVeh_Edzk;
-			VehCert.Veh_Bgcazzdyxzzl = mVeh_Bgcazzdyxzzl;
-			VehCert.Veh_Jsszcrs = mVeh_Jsszcrs;
-			VehCert.Veh_Zgcs = mVeh_Zgcs;
-			VehCert.Veh_Clzzrq = mVeh_Clzzrq;
-			VehCert.Veh_Bz = mVeh_Bz;
-			VehCert.Veh_Qybz = mVeh_Qybz;
-			VehCert.Veh_Clscdwmc = mVeh_Clscdwmc;
-			VehCert.Veh_Cpscdz = mVeh_Cpscdz;
-			VehCert.Veh_Qyqtxx = mVeh_Qyqtxx;
-			VehCert.Veh_Zxzs = mVeh_Zxzs;
-			VehCert.Veh_Yh = mVeh_Yh;
-			VehCert.Veh_Cpggh = mVeh_Cpggh;
-			VehCert.Veh_Ggpc = mVeh_Ggpc;
-			VehCert.Veh_Ggsxrq = mVeh_Ggsxrq;
-			VehCert.Veh_PrinterName = mVeh_PrinterName;
-			VehCert.Veh_PrintPosLeft = mVeh_PrintPosLeft;
-			VehCert.Veh_PrintPosTop = mVeh_PrintPosTop;
-			VehCert.Veh_Connect = mVeh_Connect;
-			VehCert.Veh_Baud = mVeh_Baud;
-			VehCert.Veh_Parity = mVeh_Parity;
-			VehCert.Veh_Databits = mVeh_Databits;
-			VehCert.Veh_Stopbits = mVeh_Stopbits;
-			VehCert.Veh_Zzbh = mVeh_Zzbh;
-			VehCert.Veh_Cddbj = mVeh_Cddbj;
 		}
 	</script>
 

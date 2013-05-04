@@ -558,13 +558,19 @@ public class PrintContent extends Composite {
             DBObject data = dpmodule.getInput().getData().getData();
             VimUtils.setValues(certBrowser, data);
             VimUtils.print(certBrowser);
-            System.out.println("print dp ok");
+            if(dpmodule.getError()!=null||qxmodule.getError()!=null){
+            	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+dpmodule.getError()+"\n"+qxmodule.getError(), SWT.ICON_ERROR);
+            	return;
+            }
         }
 
-        DBObject data = qxmodule.getInput().getData().getData();
-        VimUtils.setValues(certBrowser, data);
-        VimUtils.print(certBrowser);
-        System.out.println("print ok");
+//        DBObject data = qxmodule.getInput().getData().getData();
+//        VimUtils.setValues(certBrowser, data);
+//        VimUtils.print(certBrowser);
+//        if(dpmodule.getError()!=null){
+//        	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+qxmodule.getError(), SWT.ICON_ERROR);
+//        	return;
+//        }
 
     }
 
