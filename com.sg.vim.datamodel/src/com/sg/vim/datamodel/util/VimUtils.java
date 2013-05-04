@@ -357,6 +357,9 @@ public class VimUtils {
                 }
             }
             result.put(mVeh_Csys, colorName);
+        }else{
+            String colorName = (String) cocData.get(IVIMFields.F_38);
+            result.put(mVeh_Csys, colorName);
         }
 
         // Veh_FDjh F_21a ·¢¶¯»úºÅ Ó³Éä
