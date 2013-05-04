@@ -1303,7 +1303,7 @@
                            label="车辆类型"
                            labelVisible="true"
                            name="c_22"
-                           option="com.sg.vim.enum.type2"
+                           optionProvider="com.sg.vim.datamodel.option.C_22_Option"
                            persistable="true"
                            required="false"
                            type="String">

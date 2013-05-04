@@ -175,9 +175,10 @@ public class VimUtils {
             value = doTransferBeforeInvokePrint(paraSeq[i],value);
             
             value= value==null?"":value;
+            value = value.toString().replaceAll("\n", "%%");
+            value = value.toString().replaceAll("\r", "%%");
             System.out.println(paraSeq[i]+">>"+value);
             sb.append("\"");
-            value = value == null ? "" : value;
             sb.append(value);
             sb.append("\"");
             if (i < paraSeq.length - 1) {

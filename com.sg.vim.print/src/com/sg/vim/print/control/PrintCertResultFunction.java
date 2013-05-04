@@ -22,20 +22,24 @@ public class PrintCertResultFunction extends BrowserFunction {
     public Object function(Object[] arguments) {
         // Veh_ErrorInfo,Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw, VehCert.Veh_Dywym
         if (arguments != null) {
-        	Object mVeh_ErrorInfo = arguments[0];
-        	if(!Utils.isNullOrEmptyString(mVeh_ErrorInfo)){
-        		return null;
-        	}
-            Object mVeh_Clztxx = arguments[1];
-            Object mVeh_Zchgzbh = arguments[2];
-            Object mVeh_Jyw = arguments[3];
-            Object mVeh_Veh_Dywym = arguments[4];
+        	Object jsReturn = arguments[0];
+        	Object mVeh_ErrorInfo = arguments[1];
+            Object mVeh_Clztxx = arguments[2];
+            Object mVeh_Zchgzbh = arguments[3];
+            Object mVeh_Jyw = arguments[4];
+            Object mVeh_Veh_Dywym = arguments[5];
+            
+            System.out.println(jsReturn);
             PrintModule currentModule = null;
             if (mVeh_Clztxx != null && "dp".equalsIgnoreCase(mVeh_Clztxx.toString())) {
                 currentModule = dpModule;
             } else if (mVeh_Clztxx != null && "qx".equalsIgnoreCase(mVeh_Clztxx.toString())) {
                 currentModule = qxModule;
             }
+        	if(!Utils.isNullOrEmptyString(mVeh_ErrorInfo)){
+        		currentModule.setError(mVeh_ErrorInfo.toString());
+        		return null;
+        	}
             if (currentModule != null) {
                 currentModule.setCallbackProperties("Veh_Zchgzbh", mVeh_Zchgzbh);
                 currentModule.setCallbackProperties("Veh_Jyw", mVeh_Jyw);

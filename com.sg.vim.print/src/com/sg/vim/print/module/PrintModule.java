@@ -32,6 +32,7 @@ public abstract class PrintModule {
     protected DBObject confData;
     protected DBObject cocData;
     private HashMap<String, Object> callbackProperties;
+	private String error;
     
     public void setCallbackProperties(String key, Object value) {
         if(callbackProperties==null){
@@ -95,5 +96,11 @@ public abstract class PrintModule {
     }
 
     public abstract String getName();
+	public void setError(String error){
+		this.error = error;
+	}
+	public String getError(){
+		return error;
+	}
     
 }
