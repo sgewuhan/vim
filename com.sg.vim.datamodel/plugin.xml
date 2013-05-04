@@ -61,6 +61,16 @@
          </enumerate>
       </enumerate>
       <enumerate
+            id="com.sg.vim.enum.type2.1"
+            label="车辆类型带名称_底盘">
+         <enumerate
+               id="二类底盘">
+         </enumerate>
+         <enumerate
+               id="三类底盘">
+         </enumerate>
+      </enumerate>
+      <enumerate
             id="com.sg.vim.enum.type3"
             label="底盘或整车">
          <enumerate
