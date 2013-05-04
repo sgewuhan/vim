@@ -342,8 +342,11 @@ public class VimUtils {
         result.put(mVeh_Clmc, cocData.get(IVIMFields.F_0_2_1));
         // Veh_Clxh F_0_2C1 车辆型号 映射
         result.put(mVeh_Clxh, cocData.get(IVIMFields.F_0_2C1));
+        
         // Veh_Dpxh CCC_04 底盘型号 映射
-        result.put(mVeh_Dpxh, cocData.get(IVIMFields.CCC_04));
+        if(!isDP){
+            result.put(mVeh_Dpxh, cocData.get(IVIMFields.CCC_04));
+        }
 
         // Veh_Csys F_38 车身颜色 从成品字典取
         if (!isDP) {
