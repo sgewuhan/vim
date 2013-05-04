@@ -62,22 +62,16 @@ public class IVIMFields {
   public static final String CCC_06 = "ccc_06";
   /** 车辆一致性证书ID **/
   public static final String CCC_12 = "ccc_12";
-  /** 型号 **/
-  public static final String CCC04 = "ccc04";
-  /** 类别 **/
-  public static final String CCC05 = "ccc05";
-  /** 制造商 **/
-  public static final String CCC06 = "ccc06";
   /** CCC证书编号(版本号) **/
-  public static final String CCC07 = "ccc07";
+  public static final String CCC_07 = "ccc_07";
   /** 签发日期 **/
-  public static final String CCC08 = "ccc08";
+  public static final String CCC_08 = "ccc_08";
   /** 制造商 **/
-  public static final String CCC09 = "ccc09";
+  public static final String CCC09 = "ccc_09";
   /** 签发日期 **/
-  public static final String CCC1 = "ccc1";
+  public static final String CCC_1 = "ccc_1";
   /** CCC证书编号(版本号) **/
-  public static final String CCC10 = "ccc10";
+  public static final String CCC_10 = "ccc_10";
   /** 配置 id**/
   public static final String CFG_ID = "configcodeinfo_id";
   /** 配置 name**/

@@ -2487,6 +2487,7 @@
             dbName="appportal"
             id="com.sg.vim.editor.cocinfo"
             name="车辆一致性信息"
+            saveHandler="com.sg.vim.datamodel.savehandler.COCSave"
             titleToolTips="车辆一致性信息">
          <basicpage
                description="第一部分 车辆总体信息"

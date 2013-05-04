@@ -19,5 +19,6 @@ Bundle-ActivationPolicy: lazy
 Export-Package: com.sg.vim.datamodel,
  com.sg.vim.datamodel.labelprovider,
  com.sg.vim.datamodel.option,
+ com.sg.vim.datamodel.savehandler,
  com.sg.vim.datamodel.util,
  com.sg.vim.datamodel.validator
