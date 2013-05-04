@@ -159,9 +159,9 @@ public class IVIMFields {
   /** 1 车轴数量 **/
   public static final String F_1 = "f_1";
   /** 轮胎数 **/
-  public static final String F_1_1A = "f_1_1a";
-  /** 车轮数量 **/
   public static final String F_1_1 = "f_1_1";
+  /** 车轮数量 **/
+  public static final String F_1_1A = "f_1_1a";
   /** l1 后悬(mm) **/
   public static final String F_11 = "f_11";
   /** 12.1 行驶状态下带车身的车辆质量（kg） **/

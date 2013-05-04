@@ -393,8 +393,8 @@ public class VimUtils {
         result.put(mVeh_Gbthps, cocData.get(IVIMFields.F_C6));
         // Veh_FDjxh F_C4 发动机型号 映射
         result.put(mVeh_Fdjxh, cocData.get(IVIMFields.F_C4));
-        // Veh_Lts F_1_1a 轮胎数 映射
-        result.put(mVeh_Lts, cocData.get(IVIMFields.F_1_1A));
+        // Veh_Lts F_1_1 轮胎数 映射
+        result.put(mVeh_Lts, cocData.get(IVIMFields.F_1_1));
         // Veh_Ltgg F_32A 轮胎规格 映射 轮胎规格合格证
         result.put(mVeh_Ltgg, cocData.get(IVIMFields.F_32A));
         // Veh_Qlj F_5a 前轮距 映射

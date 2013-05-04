@@ -2932,10 +2932,10 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="false"
-                           id="f_1_1"
+                           id="f_1_1a"
                            label="车轮数量"
                            labelVisible="true"
-                           name="f_1_1"
+                           name="f_1_1a"
                            persistable="true"
                            required="false"
                            type="String">
