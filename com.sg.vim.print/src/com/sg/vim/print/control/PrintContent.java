@@ -560,6 +560,7 @@ public class PrintContent extends Composite {
             VimUtils.print(certBrowser);
             if(dpmodule.getError()!=null||qxmodule.getError()!=null){
             	UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n"+dpmodule.getError(), SWT.ICON_ERROR);
+            	return;
             }
         }
 
