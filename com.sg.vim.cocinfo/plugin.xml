@@ -2931,7 +2931,7 @@
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
-                           editable="false"
+                           editable="true"
                            id="f_1_1a"
                            label="车轮数量"
                            labelVisible="true"
@@ -3493,6 +3493,18 @@
                            type="String">
                      </field>
                   </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_1_1"
+                        label="轮胎数"
+                        labelVisible="true"
+                        name="f_1_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
