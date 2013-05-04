@@ -65,7 +65,7 @@ public class EnvProtectionCardPrintModule extends PrintModule {
     }
 
     @Override
-    public void fireEvent(String eventCode,PrintContent pc) {
+    public void fireEvent(String eventCode,String[] arg,PrintContent pc) {
         if(_OPENEDITOR.equals(eventCode)){
             pc.showData(this);
         }

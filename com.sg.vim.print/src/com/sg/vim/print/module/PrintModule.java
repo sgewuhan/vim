@@ -21,6 +21,7 @@ public abstract class PrintModule {
     public static final String PARA_COC_DATA = "cocData";
 
     protected static final String _OPENEDITOR = "_OPENEDITOR";
+    protected static final String _OPENCOC = "_OPEN_COC";
     protected static final String _PRINT = "_PRINT";
     protected static final String _UPLOAD = "_UPLOAD";
 
@@ -85,7 +86,7 @@ public abstract class PrintModule {
         return getInput() != null;
     }
 
-    public abstract void fireEvent(String eventCode, PrintContent printContent);
+    public abstract void fireEvent(String eventCode, String[] args, PrintContent printContent);
 
     protected String getIcon(String filename, int width, int height) {
         StringBuffer builder = new StringBuffer();

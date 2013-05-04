@@ -418,7 +418,7 @@ public class PrintContent extends Composite {
 
                     PrintModule module = getModulebyName(modules, args[1]);
                     if (module != null) {
-                        module.fireEvent(args[0], PrintContent.this);
+                        module.fireEvent(args[0], args,PrintContent.this);
                     }
 
                 }
@@ -559,18 +559,18 @@ public class PrintContent extends Composite {
             VimUtils.setValues(certBrowser, data);
             VimUtils.print(certBrowser);
             if(dpmodule.getError()!=null||qxmodule.getError()!=null){
-            	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+dpmodule.getError()+"\n"+qxmodule.getError(), SWT.ICON_ERROR);
+            	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+dpmodule.getError(), SWT.ICON_ERROR);
             	return;
             }
         }
 
-//        DBObject data = qxmodule.getInput().getData().getData();
-//        VimUtils.setValues(certBrowser, data);
-//        VimUtils.print(certBrowser);
-//        if(dpmodule.getError()!=null){
-//        	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+qxmodule.getError(), SWT.ICON_ERROR);
-//        	return;
-//        }
+        DBObject data = qxmodule.getInput().getData().getData();
+        VimUtils.setValues(certBrowser, data);
+        VimUtils.print(certBrowser);
+        if(dpmodule.getError()!=null){
+        	UIUtils.showMessage(getShell(), "打印", "打印数据发生错误\n"+qxmodule.getError(), SWT.ICON_ERROR);
+        	return;
+        }
 
     }
 

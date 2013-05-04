@@ -1,6 +1,9 @@
 package com.sg.vim.print.module;
 
+import org.bson.types.ObjectId;
+
 import com.mobnut.commons.util.file.FileUtil;
+import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
@@ -60,6 +63,11 @@ public class QXCertPrintModule extends PrintModule {
         // builder.append(getIcon("upload_16.png",16,16));
         // builder.append("<a href=\"" + _UPLOAD + "\" target=\"_rwt\">ÉÏ´«</a>   ");
         // }
+        
+        if (cocData != null) {
+            builder.append("<a href=\"" + _OPENCOC + "@" + getName()+ "@" + cocData.get("_id")
+                    + "\" target=\"_rwt\">coc  </a>   ");
+        }
         builder.append("</small>");
 
         return builder.toString();
@@ -87,9 +95,15 @@ public class QXCertPrintModule extends PrintModule {
     }
 
     @Override
-    public void fireEvent(String eventCode, PrintContent pc) {
+    public void fireEvent(String eventCode, String arg[],PrintContent pc) {
         if (_OPENEDITOR.equals(eventCode)) {
             pc.showData(this);
+        }else if (_OPENCOC.equals(eventCode)) {
+            try {
+                UIUtils.openDialog(new ObjectId(arg[2]), "com.sg.vim.editor.cocinfo", true, false, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

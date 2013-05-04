@@ -76,11 +76,13 @@ public class CertPrintModule extends PrintModule {
         if (hasDP()) {
             dpinput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
                     null, vin, true);
+            dpCertPrintModule.setInput(para);
             dpCertPrintModule.setInputData(dpinput);
         }
 
         input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
                 false);
+        qxCertPrintModule.setInput(para);
         qxCertPrintModule.setInputData(input);
     }
 
@@ -107,7 +109,7 @@ public class CertPrintModule extends PrintModule {
     }
 
     @Override
-    public void fireEvent(String eventCode, PrintContent pc) {
+    public void fireEvent(String eventCode, String[] arg,PrintContent pc) {
         if (eventCode.equals(_PRINT)) {
             pc.doPrint(this);
         }

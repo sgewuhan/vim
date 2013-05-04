@@ -416,9 +416,21 @@ public class VimUtils {
         // Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
         result.put(mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
         // Veh_JsszCrs C_02 驾驶室准乘人数 映射 全项不填，底盘必填
-        result.put(mVeh_Jsszcrs, cocData.get(IVIMFields.C_02));
+        Object c_02 = cocData.get(IVIMFields.C_02);
+        if(isDP){
+        	if(!debug&&Utils.isNullOrEmptyString(c_02)){
+                throw new Exception("驾驶室准乘人数在底盘合格证数据中不可为空");
+        	}
+        	result.put(mVeh_Jsszcrs, c_02);
+        }
         // Veh_EDzk F_42_1 额定载客 映射
-        result.put(mVeh_Edzk, cocData.get(IVIMFields.F_42_1));
+        Object f_42_1 = cocData.get(IVIMFields.F_42_1);
+        if(!isDP){
+        	if(!debug&&Utils.isNullOrEmptyString(f_42_1)){
+                throw new Exception("额定载客数在全项合格证数据中不可为空");
+        	}
+        	result.put(mVeh_Edzk, f_42_1);
+        }
         // Veh_ZgCs F_44 最高车速 映射
         result.put(mVeh_Zgcs, cocData.get(IVIMFields.F_44));
         // Veh_Clpp F_C0_2 车辆品牌 映射
@@ -483,7 +495,7 @@ public class VimUtils {
         String seq = isDP ? DBUtil.getIncreasedID(ids, "Veh_DPhgzbh", "0", 10) : DBUtil
                 .getIncreasedID(ids, "Veh_ZChgzbh", "0", 10);
         string = companyId + seq;
-        if (string.length() != 14) {
+        if (!debug&&string.length() != 14) {
             throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
         }
         result.put(mVeh_Zchgzbh, string);
