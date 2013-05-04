@@ -418,8 +418,8 @@ public class VimUtils {
         result.put(mVeh_Zqyzzl, cocData.get(IVIMFields.C_10));
         // Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
         result.put(mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
-        // Veh_JsszCrs C_02 驾驶室准乘人数 映射 不填
-//        result.put(mVeh_Jsszcrs, cocData.get(IVIMFields.C_02));
+        // Veh_JsszCrs C_02 驾驶室准乘人数 映射 全项不填，底盘必填
+        result.put(mVeh_Jsszcrs, cocData.get(IVIMFields.C_02));
         // Veh_EDzk F_42_1 额定载客 映射
         result.put(mVeh_Edzk, cocData.get(IVIMFields.F_42_1));
         // Veh_ZgCs F_44 最高车速 映射
