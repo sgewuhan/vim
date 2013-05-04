@@ -466,7 +466,7 @@ public class VimUtils {
         result.put(mVeh_Cpscdz, cocData.get(IVIMFields.D_04));
         // Veh_QyiD C_14 企业ID 映射
         String companyId = (String) cocData.get(IVIMFields.C_14);
-        result.put(mVeh_Qyid, companyId);
+        result.put(mVeh_Qyid, companyId+"0000");
         // Veh_Qybz C_17 企业标准 映射
         result.put(mVeh_Qybz, cocData.get(IVIMFields.C_17));
         // Veh_Cpggh D_23 产品公告号 值转换 由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位
