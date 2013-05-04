@@ -33,6 +33,7 @@ class ConnectionManager {
 	/**
 	 * 返回唯一实例.如果是第一次调用此方法,则创建实例
 	 * 
+	 * 
 	 * @return DBConnectionManager 唯一实例
 	 */
 	static synchronized public ConnectionManager getInstance() {
