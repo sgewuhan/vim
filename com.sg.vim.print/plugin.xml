@@ -3613,25 +3613,7 @@
             </pagecolumn>
             <pagecolumn>
                <section
-                     label="国家合格证系统信息">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Tmxx"
-                        label="合格证条码信息"
-                        name="Veh_Tmxx"
-                        textLimit="1000"
-                        tooltips="调用ViewBarcodeInfo并读取合格证条码后，通过该属性可获得条码信息，具体项目格式见附件一。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Jyw"
-                        label="校验信息"
-                        name="Veh_Jyw"
-                        textLimit="255+"
-                        tooltips="调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。"
-                        type="String">
-                  </field>
+                     label="打印机">
                   <field
                         editPart="Text(Single Line)"
                         id="Veh_PrinterName"
@@ -3702,15 +3684,6 @@
                         name="Veh_Stopbits"
                         textLimit="5"
                         tooltips="默认值为1"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Dywym"
-                        label="打印唯一码"
-                        name="Veh_Dywym"
-                        textLimit="50"
-                        tooltips="调用PrtParaTbl成功后，通过该属性可获得合格证打印唯一码，供合格证上传用。"
                         type="String">
                   </field>
                </section>
