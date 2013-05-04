@@ -9,6 +9,7 @@ import org.eclipse.swt.browser.Browser;
 
 import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
+import com.mobnut.db.utils.DBUtil;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -116,13 +117,12 @@ public class VimUtils {
     public static final String mVeh_Jyw = "Veh_Jyw";// 校验信息 字符 255+
                                                     // 调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。
     public static final String mVeh_Yh = "Veh_Yh";// 油耗 字符 30
-//    public static final String mVeh_Cddbj = "Veh_Cddbj";// 纯电动标记 字符 1
+    // public static final String mVeh_Cddbj = "Veh_Cddbj";// 纯电动标记 字符 1
     public static final String mVeh_Cpggh = "Veh_Cpggh";// 公告号
     public static final String mVeh_Ggpc = "Veh_Ggpc";
     public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
-    
-    
-//    private static final String mVeh_Dywym = "Veh_Dywym";//打印唯一码
+
+    // private static final String mVeh_Dywym = "Veh_Dywym";//打印唯一码
 
     private static final String mVeh_Stopbits = "Veh_Stopbits";
 
@@ -141,9 +141,8 @@ public class VimUtils {
     private static final String mVeh_PrinterName = "Veh_PrinterName";
 
     private static final String mVeh_Zzbh = "Veh_Zzbh";
-    
-	private static final String mVeh_Cddbj = "Veh_Cddbj";
 
+    private static final String mVeh_Cddbj = "Veh_Cddbj";
 
     public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M" };
@@ -159,25 +158,24 @@ public class VimUtils {
             mVeh_Rlzl, mVeh_Pfbz, mVeh_Pl, mVeh_Gl, mVeh_Zxxs, mVeh_Qlj, mVeh_Hlj, mVeh_Lts,
             mVeh_Ltgg, mVeh_Gbthps, mVeh_Zj, mVeh_Zh, mVeh_Zs, mVeh_Wkc, mVeh_Wkk, mVeh_Wkg,
             mVeh_Hxnbc, mVeh_Hxnbk, mVeh_Hxnbg, mVeh_Zzl, mVeh_Edzzl, mVeh_Zbzl, mVeh_Zzllyxs,
-        mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
-        mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs,
-        mVeh_Yh, mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq ,mVeh_PrinterName,
-        mVeh_PrintPosLeft,mVeh_PrintPosTop,mVeh_Connect,mVeh_Baud,mVeh_Parity,mVeh_Databits,
-        mVeh_Stopbits,mVeh_Zzbh,mVeh_Cddbj};
+            mVeh_Zqyzzl, mVeh_Edzk, mVeh_Bgcazzdyxzzl, mVeh_Jsszcrs, mVeh_Zgcs, mVeh_Clzzrq,
+            mVeh_Bz, mVeh_Qybz, mVeh_Clscdwmc, mVeh_Cpscdz, mVeh_Qyqtxx, mVeh_Zxzs, mVeh_Yh,
+            mVeh_Cpggh, mVeh_Ggpc, mVeh_Ggsxrq, mVeh_PrinterName, mVeh_PrintPosLeft,
+            mVeh_PrintPosTop, mVeh_Connect, mVeh_Baud, mVeh_Parity, mVeh_Databits, mVeh_Stopbits,
+            mVeh_Zzbh, mVeh_Cddbj };
 
-
-    public static void setValues(Browser browser, DBObject dbo){
+    public static void setValues(Browser browser, DBObject dbo) {
         StringBuilder sb = new StringBuilder();
         sb.append("setValues(");
 
         for (int i = 0; i < paraSeq.length; i++) {
             Object value = dbo.get(paraSeq[i]);
-            value = doTransferBeforeInvokePrint(paraSeq[i],value);
-            
-            value= value==null?"":value;
+            value = doTransferBeforeInvokePrint(paraSeq[i], value);
+
+            value = value == null ? "" : value;
             value = value.toString().replaceAll("\n", "%%");
             value = value.toString().replaceAll("\r", "%%");
-            System.out.println(paraSeq[i]+">>"+value);
+            System.out.println(paraSeq[i] + ">>" + value);
             sb.append("\"");
             sb.append(value);
             sb.append("\"");
@@ -187,11 +185,10 @@ public class VimUtils {
         }
 
         sb.append(");");
-        if(debug)
-         System.out.println(sb.toString());
+        if (debug)
+            System.out.println(sb.toString());
         browser.execute(sb.toString());
     }
-
 
     public static void print(Browser browser) {
         browser.execute("printCert()");
@@ -330,7 +327,7 @@ public class VimUtils {
         DBObject dbObject = transferData(cocData, confData, productCodeData, mesRawData, vin, isDP);
         DataObject data = new DataObject(c, dbObject);
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-        if(debug){
+        if (debug) {
             editorInput.setEditable(true);
         }
         return editorInput;
@@ -440,10 +437,10 @@ public class VimUtils {
         result.put(mVeh_Zxzs, cocData.get(IVIMFields.C_13));
         // Veh_CDDbj C_21 纯电动标记 值转换
         Object object = cocData.get(IVIMFields.C_21);
-        if("是".equals(object)){
-        	result.put(mVeh_Cddbj, 1);
-        }else{
-        	result.put(mVeh_Cddbj, 2);
+        if ("是".equals(object)) {
+            result.put(mVeh_Cddbj, 1);
+        } else {
+            result.put(mVeh_Cddbj, 2);
         }
         // Veh_ClsCDwmC F_0_1 车辆生产单位名称 映射
         result.put(mVeh_Clscdwmc, cocData.get(IVIMFields.F_0_1));
@@ -482,13 +479,14 @@ public class VimUtils {
         // Veh_ZChgzbh 整车合格证编号 返回 返回值4位企业代码+10位顺序号成功调用打印方法后可以通过该属性获得15位的整车合格证编号
 
         // 编辑时处理
-        // DBCollection ids = DBActivator.getCollection(DB_NAME, "ids");
-        // String seq = DBUtil.getIncreasedID(ids, "Veh_ZChgzbh", "0", 10);
-        // string = companyId+seq;
-        // if(string.length()!=14){
-        // throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
-        // }
-        // result.put(mVeh_Zchgzbh, );
+        DBCollection ids = DBActivator.getCollection(DB_NAME, "ids");
+        String seq = isDP ? DBUtil.getIncreasedID(ids, "Veh_DPhgzbh", "0", 10) : DBUtil
+                .getIncreasedID(ids, "Veh_ZChgzbh", "0", 10);
+        string = companyId + seq;
+        if (string.length() != 14) {
+            throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
+        }
+        result.put(mVeh_Zchgzbh, string);
 
         // Veh_Dphgzbh 全项方式15位；底盘方式不填 级联
         // result.put(mVeh_Dphgzbh, cocData.get(IVIMFields.F_0_1));
@@ -513,7 +511,7 @@ public class VimUtils {
         // Veh_Jyw 待测 校验不填
         // result.put(mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
         // Veh_PrinterName 待测
-        result.put(mVeh_PrinterName, "<输入>");
+        result.put(mVeh_PrinterName, "");
         // Veh_PrintPosLeFt 待测
         result.put(mVeh_PrintPosLeft, "15");
         // Veh_PrintPosTop 待测
@@ -528,26 +526,25 @@ public class VimUtils {
         result.put(mVeh_Databits, "8");
         // Veh_Stopbits 待测
         result.put(mVeh_Stopbits, "1");
-        
-        
+
         // Veh_Zzbh 纸张编号
-        //*****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
-        //比如，输入110，input中的值还是110，但是显示为000110，同时需要在传递到合格证打印OCX的值也需要改变为000110
-        //参见doTransferBeforeInvokePrint()
+        // *****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
+        // 比如，输入110，input中的值还是110，但是显示为000110，同时需要在传递到合格证打印OCX的值也需要改变为000110
+        // 参见doTransferBeforeInvokePrint()
         result.put(mVeh_Zzbh, "");
-        
+
         // Veh_Dywym 待测
-//        result.put(mVeh_Dywym, "");// 返回值，不填
+        // result.put(mVeh_Dywym, "");// 返回值，不填
         return result;
     }
-    
 
     private static Object doTransferBeforeInvokePrint(String key, Object value) {
-        if(key.equals(mVeh_Zzbh)){//处理纸张编号
-            try{
+        if (key.equals(mVeh_Zzbh)) {// 处理纸张编号
+            try {
                 int i = Integer.parseInt(value.toString());
-                return String.format("%07d",i);
-            }catch(Exception e){}
+                return String.format("%07d", i);
+            } catch (Exception e) {
+            }
         }
         return value;
     }

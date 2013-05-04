@@ -35,6 +35,23 @@
             noticeCreator="com.mobnut.portal.notice.ImageNoticeCreator">
       </notice>
    </extension>
+   <extension
+         point="com.mobnut.admin.seq">
+      <seq
+            collectionname="ids"
+            dbname="appportal"
+            id="com.sg.vim.seq.qxhgz"
+            name="整车合格证顺序号"
+            seqname="Veh_ZChgzbh">
+      </seq>
+      <seq
+            collectionname="ids"
+            dbname="appportal"
+            id="com.sg.vim.seq.dphgz"
+            name="底盘合格证顺序号"
+            seqname="Veh_DPhgzbh">
+      </seq>
+   </extension>
    <!--extension
          point="com.sg.ui.dataEditor">
       <basicpage
