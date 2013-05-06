@@ -491,9 +491,9 @@ public class VimUtils {
         // Veh_CDDbj C_21 纯电动标记 值转换
         Object object = cocData.get(IVIMFields.C_21);
         if ("是".equals(object)) {
-            result.put(mVeh_Cddbj, 1);
+            result.put(mVeh_Cddbj, "1");
         } else {
-            result.put(mVeh_Cddbj, 2);
+            result.put(mVeh_Cddbj, "2");
         }
         // Veh_ClsCDwmC F_0_1 车辆生产单位名称 映射
         result.put(mVeh_Clscdwmc, cocData.get(IVIMFields.F_0_1));
