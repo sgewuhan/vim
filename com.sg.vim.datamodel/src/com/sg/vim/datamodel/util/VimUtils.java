@@ -414,7 +414,7 @@ public class VimUtils {
         // Veh_PFbz C_06 排放标准 映射
         result.put(mVeh_Pfbz, cocData.get(IVIMFields.C_06));
         // Veh_Yh C_03 油耗 映射
-        result.put(mVeh_Yh, cocData.get(IVIMFields.C_03));
+        result.put(mVeh_Yh, cocData.get(IVIMFields.D_16));//取C_03还是D_16?
         // Veh_WkC F_6_1 外廓长 映射
         result.put(mVeh_Wkc, cocData.get(IVIMFields.F_6_1));
         // Veh_Wkk F_7_1 外廓宽 映射
