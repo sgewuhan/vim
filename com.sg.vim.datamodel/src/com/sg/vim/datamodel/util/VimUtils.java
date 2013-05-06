@@ -31,9 +31,11 @@ import com.sg.ui.registry.config.DataEditorConfigurator;
 import com.sg.vim.datamodel.DataModelActivator;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
+import com.sg.vim.datamodel.vidcservice.ArrayOfNameValuePair;
 import com.sg.vim.datamodel.vidcservice.ArrayOfString;
 import com.sg.vim.datamodel.vidcservice.CertificateInfo;
 import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
+import com.sg.vim.datamodel.vidcservice.OperateResult;
 
 public class VimUtils {
 
@@ -620,7 +622,12 @@ public class VimUtils {
             cis.getCertificateInfo().add(certificateInfo);
         }
 
-        vidService.uploadInsertEnt(cis);
+        OperateResult r = vidService.uploadInsertEnt(cis);
+        int rCode = r.getResultCode();
+        System.out.println(rCode);
+        ArrayOfNameValuePair detail = r.getResultDetail();
+        System.out.println(detail);
+        System.out.println("ok");
     }
 
     public static void uploadCert2(List<DBObject> certList, String memo) throws Exception {
@@ -738,7 +745,7 @@ public class VimUtils {
         // s:string
         // 校验码，由打印接口生成
         String value = (String) data.get(mVeh_Jyw);
-        Assert.isNotNull(value, "打印校验码不可为空");
+        // Assert.isNotNull(value, "打印校验码不可为空");
         info.setHDUSER(value);
 
         // 12
@@ -752,8 +759,8 @@ public class VimUtils {
         // 纯电动标记
         // s:string
         //
-        value = data.get(mVeh_Cddbj).toString();
-        Assert.isNotNull(value, "纯电动标记不可为空");
+        value = (String) data.get(mVeh_Cddbj);
+        // Assert.isNotNull(value, "纯电动标记不可为空");
         info.setCDDBJ(value);
         //
         // 14
@@ -762,7 +769,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clfl);
-        Assert.isNotNull(value, "车辆类型不可为空");
+        // Assert.isNotNull(value, "车辆类型不可为空");
         info.setCLLX(value);
 
         //
@@ -772,7 +779,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clscdwmc);
-        Assert.isNotNull(value, "车辆生产单位名称不可为空");
+        // Assert.isNotNull(value, "车辆生产单位名称不可为空");
         info.setCLSCDWMC(value);
         //
         // 16
@@ -781,7 +788,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clztxx);
-        Assert.isNotNull(value, "车辆状态信息不可为空");
+        // Assert.isNotNull(value, "车辆状态信息不可为空");
         info.setCLZTXX(value);
         //
         // 17
@@ -802,7 +809,7 @@ public class VimUtils {
         // 由打印接口生成
         //
         value = (String) data.get(mVeh_Dywym);
-        Assert.isNotNull(value, "打印唯一码不可为空");
+        // Assert.isNotNull(value, "打印唯一码不可为空");
         info.setDYWYM(value);
         // 19
         // QYID
@@ -810,7 +817,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Qyid);
-        Assert.isNotNull(value, "企业编号不可为空");
+        // Assert.isNotNull(value, "企业编号不可为空");
         info.setQYID(value);
         //
         // 20
@@ -819,7 +826,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Yh);
-        Assert.isNotNull(value, "油耗不可为空");
+        // Assert.isNotNull(value, "油耗不可为空");
         info.setYH(value);
         //
         // 21
@@ -828,7 +835,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Zchgzbh);
-        Assert.isNotNull(value, "整车合格证编号不可为空");
+        // Assert.isNotNull(value, "整车合格证编号不可为空");
         info.setZCHGZBH(value);
         //
         // 22
@@ -837,7 +844,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Zxzs);
-        Assert.isNotNull(value, "转向轴数不可为空");
+        // Assert.isNotNull(value, "转向轴数不可为空");
         info.setZXZS(value);
         //
         // 23
@@ -846,7 +853,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Zzbh);
-        Assert.isNotNull(value, "纸张编号不可为空");
+        // Assert.isNotNull(value, "纸张编号不可为空");
         info.setZXZS(value);
         //
         // 24
@@ -882,7 +889,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clmc);
-        Assert.isNotNull(value, "车辆名称不可为空");
+//        Assert.isNotNull(value, "车辆名称不可为空");
         info.setCLMC(value);
         //
         // 28
@@ -891,7 +898,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clpp);
-        Assert.isNotNull(value, "车辆品牌不可为空");
+//        Assert.isNotNull(value, "车辆品牌不可为空");
         info.setCLPP(value);
         //
         // 29
@@ -900,7 +907,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clsbdh);
-        Assert.isNotNull(value, "车辆识别代号不可为空");
+//        Assert.isNotNull(value, "车辆识别代号不可为空");
         info.setCLSBDH(value);
         //
         // 30
@@ -909,7 +916,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clxh);
-        Assert.isNotNull(value, "车辆型号不可为空");
+//        Assert.isNotNull(value, "车辆型号不可为空");
         info.setCLXH(value);
         //
         // 31
@@ -918,7 +925,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clzzqymc);
-        Assert.isNotNull(value, "车辆制造企业名称不可为空");
+//        Assert.isNotNull(value, "车辆制造企业名称不可为空");
         info.setCLZZQYMC(value);
         //
         // 32
@@ -927,7 +934,7 @@ public class VimUtils {
         // s:dateTime
         //
         value = (String) data.get(mVeh_Clzzrq);
-        Assert.isNotNull(value, "车辆制造日期");
+//        Assert.isNotNull(value, "车辆制造日期");
         Date dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
         nowGregorianCalendar = new GregorianCalendar();
         nowGregorianCalendar.setTime(dValue);
@@ -940,7 +947,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Cpggh);
-        Assert.isNotNull(value, "产品号不可为空");
+//        Assert.isNotNull(value, "产品号不可为空");
         info.setCPH(value);
         //
         // 34
@@ -949,7 +956,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Cpscdz);
-        Assert.isNotNull(value, "产品生产地址不可为空");
+//        Assert.isNotNull(value, "产品生产地址不可为空");
         info.setCPSCDZ(value);
         //
         // 35
@@ -967,7 +974,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Dphgzbh);
-        Assert.isNotNull(value, "底盘合格证编号不可为空");
+//        Assert.isNotNull(value, "底盘合格证编号不可为空");
         info.setDPHGZBH(value);
         //
         // 37
