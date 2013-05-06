@@ -752,7 +752,7 @@ public class VimUtils {
         // 纯电动标记
         // s:string
         //
-        value = (String) data.get(mVeh_Cddbj);
+        value = data.get(mVeh_Cddbj).toString();
         Assert.isNotNull(value, "纯电动标记不可为空");
         info.setCDDBJ(value);
         //
@@ -928,7 +928,7 @@ public class VimUtils {
         //
         value = (String) data.get(mVeh_Clzzrq);
         Assert.isNotNull(value, "车辆制造日期");
-        Date dValue = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+        Date dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
         nowGregorianCalendar = new GregorianCalendar();
         nowGregorianCalendar.setTime(dValue);
         xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
