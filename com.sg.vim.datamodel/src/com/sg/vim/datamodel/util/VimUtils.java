@@ -35,6 +35,7 @@ import com.sg.vim.datamodel.vidcservice.ArrayOfNameValuePair;
 import com.sg.vim.datamodel.vidcservice.ArrayOfString;
 import com.sg.vim.datamodel.vidcservice.CertificateInfo;
 import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
+import com.sg.vim.datamodel.vidcservice.NameValuePair;
 import com.sg.vim.datamodel.vidcservice.OperateResult;
 
 public class VimUtils {
@@ -624,10 +625,22 @@ public class VimUtils {
 
         OperateResult r = vidService.uploadInsertEnt(cis);
         int rCode = r.getResultCode();
-        System.out.println(rCode);
         ArrayOfNameValuePair detail = r.getResultDetail();
-        System.out.println(detail);
+        GetResultMessage(r);
         System.out.println("ok");
+    }
+    
+    static String GetResultMessage(OperateResult oResult)
+    {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append(String.format("²Ù×÷½á¹û:%s\r\n", oResult.getResultCode()));
+
+        for (NameValuePair nvp : oResult.getResultDetail().getNameValuePair())
+        {
+            sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
+        }
+        return sb.toString();
     }
 
     public static void uploadCert2(List<DBObject> certList, String memo) throws Exception {
