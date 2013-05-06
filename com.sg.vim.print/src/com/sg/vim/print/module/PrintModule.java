@@ -41,12 +41,6 @@ public abstract class PrintModule {
         }
         callbackProperties.put(key, value);
     }
-    public Object getCallbackProperties(String key){
-        if(callbackProperties!=null){
-            return callbackProperties.get(key);
-        } 
-        return null;
-    }
 
     public abstract PrintModule[] getSubModules();
 

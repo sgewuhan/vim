@@ -134,7 +134,7 @@
             fullSelection="true"
             id="com.sg.vim.table.ccc"
             idfield="_id"
-            inputProvider="com.sg.vim.data.CCCInfoInput">
+            inputProvider="com.sg.vim.remove.data.CCCInfoInput">
          <column
                column="ccc_12"
                name="车辆一致性证书ID"
@@ -780,7 +780,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.certificate"
             idfield="_id"
-            inputProvider="com.sg.vim.data.CentificateInfoInput"
+            inputProvider="com.sg.vim.remove.data.CentificateInfoInput"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -1263,7 +1263,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.fuelid"
             idfield="_id"
-            inputProvider="com.sg.vim.data.FuelLogoInfoInput"
+            inputProvider="com.sg.vim.remove.data.FuelLogoInfoInput"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -1356,7 +1356,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.nameplate"
             idfield="_id"
-            inputProvider="com.sg.vim.data.NamePlateInfoinput"
+            inputProvider="com.sg.vim.remove.data.NamePlateInfoinput"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"

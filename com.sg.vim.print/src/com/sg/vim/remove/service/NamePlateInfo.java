@@ -5,7 +5,7 @@ import com.mobnut.db.collection.AuthCollectionService;
 import com.mobnut.portal.Portal;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
-
+@Deprecated
 public class NamePlateInfo extends AuthCollectionService{
 	public static final String  K_01 = "k_01" ;  // Ó¢ÎÄÆ·ÅÆ
 	public static final String  G_01 = "g_01" ;  // VIN

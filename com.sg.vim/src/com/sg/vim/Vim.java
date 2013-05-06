@@ -40,7 +40,10 @@ public class Vim implements BundleActivator {
             appProps.load(is);
             syncTime = appProps.getProperty("synchronize.time","02:00:00");
             debug = "true".equalsIgnoreCase(appProps.getProperty("debug","false"));
-            VimUtils.debug = true;
+            VimUtils.HARDWAREID  = appProps.getProperty("vidc.hardware");
+            VimUtils.HD_USER=appProps.getProperty("vidc.user");
+            
+            VimUtils.debug = debug;
         } catch (Exception e) {
         } finally {
             if (fis != null)

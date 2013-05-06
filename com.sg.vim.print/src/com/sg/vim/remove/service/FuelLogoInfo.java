@@ -4,7 +4,7 @@ import com.mobnut.db.collection.AuthCollectionService;
 import com.mobnut.portal.Portal;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
-
+@Deprecated
 public class FuelLogoInfo extends AuthCollectionService
 {
 	public static final String  F_0_1="f_0_1";   //生产企业

@@ -3,8 +3,14 @@ package com.sg.vim.datamodel.util;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.bson.types.ObjectId;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.browser.Browser;
 
 import com.mobnut.commons.util.Utils;
@@ -22,11 +28,20 @@ import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.editor.IEditorSaveHandler;
 import com.sg.ui.registry.config.DataEditorConfigurator;
+import com.sg.vim.datamodel.DataModelActivator;
 import com.sg.vim.datamodel.IVIMFields;
+import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
+import com.sg.vim.datamodel.vidcservice.ArrayOfString;
+import com.sg.vim.datamodel.vidcservice.CertificateInfo;
+import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
 
 public class VimUtils {
 
     public static boolean debug = false;
+
+    public static String HARDWAREID;
+
+    public static String HD_USER;
 
     private static final String COL_CONFIGCODEINFO = "configcodeinfo";
 
@@ -117,32 +132,53 @@ public class VimUtils {
     public static final String mVeh_Jyw = "Veh_Jyw";// 校验信息 字符 255+
                                                     // 调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。
     public static final String mVeh_Yh = "Veh_Yh";// 油耗 字符 30
-    // public static final String mVeh_Cddbj = "Veh_Cddbj";// 纯电动标记 字符 1
+
     public static final String mVeh_Cpggh = "Veh_Cpggh";// 公告号
     public static final String mVeh_Ggpc = "Veh_Ggpc";
     public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
 
-    // private static final String mVeh_Dywym = "Veh_Dywym";//打印唯一码
+    public static final String mVeh_Dywym = "Veh_Dywym";// 打印唯一码
 
-    private static final String mVeh_Stopbits = "Veh_Stopbits";
+    public static final String mVeh_Stopbits = "Veh_Stopbits";
 
-    private static final String mVeh_Databits = "Veh_Databits";
+    public static final String mVeh_Databits = "Veh_Databits";
 
-    private static final String mVeh_Parity = "Veh_Parity";
+    public static final String mVeh_Parity = "Veh_Parity";
 
-    private static final String mVeh_Baud = "Veh_Baud";
+    public static final String mVeh_Baud = "Veh_Baud";
 
-    private static final String mVeh_Connect = "Veh_Connect";
+    public static final String mVeh_Connect = "Veh_Connect";
 
-    private static final String mVeh_PrintPosTop = "Veh_PrintPosTop";
+    public static final String mVeh_PrintPosTop = "Veh_PrintPosTop";
 
-    private static final String mVeh_PrintPosLeft = "Veh_PrintPosLeft";
+    public static final String mVeh_PrintPosLeft = "Veh_PrintPosLeft";
 
-    private static final String mVeh_PrinterName = "Veh_PrinterName";
+    public static final String mVeh_PrinterName = "Veh_PrinterName";
 
-    private static final String mVeh_Zzbh = "Veh_Zzbh";
+    public static final String mVeh_Zzbh = "Veh_Zzbh";
 
-    private static final String mVeh_Cddbj = "Veh_Cddbj";
+    public static final String mVeh_Cddbj = "Veh_Cddbj";
+
+    /**** 以下属性在打印时没有，但在上传时有 *****/
+
+    /**
+     * 后制动方式
+     */
+    public static final String mVeh__Hzdfs = "Veh_Hzdfs";
+
+    /**
+     * 后制动操作方式
+     */
+    public static final String mVeh__Hzdczfs = "Veh_Hzdczfs";
+
+    public static final String mVeh__Qzdczfs = "Veh_Qzdczfs";
+
+    public static final String mVeh__Qzdfs = "Veh_Qzdfs";
+
+    public static final String mVeh__Wzghzbh = "Veh_Wzghzbh";
+
+    public static final String mVeh__Pzxlh = "Veh_Pzxlh";
+    /***/
 
     public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M" };
@@ -175,7 +211,6 @@ public class VimUtils {
             value = value == null ? "" : value;
             value = value.toString().replaceAll("\n", "%%");
             value = value.toString().replaceAll("\r", "%%");
-            System.out.println(paraSeq[i] + ">>" + value);
             sb.append("\"");
             sb.append(value);
             sb.append("\"");
@@ -342,9 +377,9 @@ public class VimUtils {
         result.put(mVeh_Clmc, cocData.get(IVIMFields.F_0_2_1));
         // Veh_Clxh F_0_2C1 车辆型号 映射
         result.put(mVeh_Clxh, cocData.get(IVIMFields.F_0_2C1));
-        
+
         // Veh_Dpxh CCC_04 底盘型号 映射
-        if(!isDP){
+        if (!isDP) {
             result.put(mVeh_Dpxh, cocData.get(IVIMFields.CCC_04));
         }
 
@@ -360,7 +395,7 @@ public class VimUtils {
                 }
             }
             result.put(mVeh_Csys, colorName);
-        }else{
+        } else {
             String colorName = (String) cocData.get(IVIMFields.F_38);
             result.put(mVeh_Csys, colorName);
         }
@@ -423,19 +458,19 @@ public class VimUtils {
         result.put(mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
         // Veh_JsszCrs C_02 驾驶室准乘人数 映射 全项不填，底盘必填
         Object c_02 = cocData.get(IVIMFields.C_02);
-        if(isDP){
-        	if(!debug&&Utils.isNullOrEmptyString(c_02)){
+        if (isDP) {
+            if (!debug && Utils.isNullOrEmptyString(c_02)) {
                 throw new Exception("驾驶室准乘人数在底盘合格证数据中不可为空");
-        	}
-        	result.put(mVeh_Jsszcrs, c_02);
+            }
+            result.put(mVeh_Jsszcrs, c_02);
         }
         // Veh_EDzk F_42_1 额定载客 映射
         Object f_42_1 = cocData.get(IVIMFields.F_42_1);
-        if(!isDP){
-        	if(!debug&&Utils.isNullOrEmptyString(f_42_1)){
+        if (!isDP) {
+            if (!debug && Utils.isNullOrEmptyString(f_42_1)) {
                 throw new Exception("额定载客数在全项合格证数据中不可为空");
-        	}
-        	result.put(mVeh_Edzk, f_42_1);
+            }
+            result.put(mVeh_Edzk, f_42_1);
         }
         // Veh_ZgCs F_44 最高车速 映射
         result.put(mVeh_Zgcs, cocData.get(IVIMFields.F_44));
@@ -466,7 +501,7 @@ public class VimUtils {
         result.put(mVeh_Cpscdz, cocData.get(IVIMFields.D_04));
         // Veh_QyiD C_14 企业ID 映射
         String companyId = (String) cocData.get(IVIMFields.C_14);
-        result.put(mVeh_Qyid, companyId+"0000");
+        result.put(mVeh_Qyid, companyId + "0000");
         // Veh_Qybz C_17 企业标准 映射
         result.put(mVeh_Qybz, cocData.get(IVIMFields.C_17));
         // Veh_Cpggh D_23 产品公告号 值转换 由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位
@@ -501,7 +536,7 @@ public class VimUtils {
         String seq = isDP ? DBUtil.getIncreasedID(ids, "Veh_DPhgzbh", "0", 10) : DBUtil
                 .getIncreasedID(ids, "Veh_ZChgzbh", "0", 10);
         string = companyId + seq;
-        if (!debug&&string.length() != 14) {
+        if (!debug && string.length() != 14) {
             throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
         }
         result.put(mVeh_Zchgzbh, string);
@@ -549,10 +584,19 @@ public class VimUtils {
         // *****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
         // 比如，输入110，input中的值还是110，但是显示为000110，同时需要在传递到合格证打印OCX的值也需要改变为000110
         // 参见doTransferBeforeInvokePrint()
-        result.put(mVeh_Zzbh, "");
+        // result.put(mVeh_Zzbh, "");
 
         // Veh_Dywym 待测
         // result.put(mVeh_Dywym, "");// 返回值，不填
+
+        /** 以下是打印不需要的参数，但是在上传时需要的参数 **/
+        result.put(mVeh__Hzdczfs, cocData.get(IVIMFields.C_15));
+        result.put(mVeh__Hzdfs, cocData.get(IVIMFields.C_16));
+        result.put(mVeh__Qzdczfs, cocData.get(IVIMFields.C_19));
+        result.put(mVeh__Qzdfs, cocData.get(IVIMFields.C_20));
+        result.put(mVeh__Pzxlh, confid);
+        // 完整合格证编号需要在打印后传递
+
         return result;
     }
 
@@ -567,4 +611,750 @@ public class VimUtils {
         return value;
     }
 
+    public void uploadCert(List<DBObject> certList) throws Exception {
+        CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
+        ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
+
+        for (int i = 0; i < certList.size(); i++) {
+            CertificateInfo certificateInfo = getCertificateInfo(certList.get(i));
+            cis.getCertificateInfo().add(certificateInfo);
+        }
+
+        vidService.uploadInsertEnt(cis);
+    }
+
+    public void uploadCert2(List<DBObject> certList, String memo) throws Exception {
+        CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
+        ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
+
+        for (int i = 0; i < certList.size(); i++) {
+            CertificateInfo certificateInfo = getCertificateInfo(certList.get(i));
+            cis.getCertificateInfo().add(certificateInfo);
+        }
+
+        vidService.uploadOverTimeEnt(cis, memo);
+    }
+
+    public void updateCert(List<DBObject> certList, String memo) throws Exception {
+        CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
+        ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
+
+        for (int i = 0; i < certList.size(); i++) {
+            CertificateInfo certificateInfo = getCertificateInfo(certList.get(i));
+            cis.getCertificateInfo().add(certificateInfo);
+        }
+
+        vidService.uploadUpdateEnt(cis, memo);
+    }
+
+    public void deleteCert(List<String> certNumberList, String memo) {
+        CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
+        ArrayOfString wzhgzbhs = new ArrayOfString();
+        for (int i = 0; i < certNumberList.size(); i++) {
+            wzhgzbhs.getString().add(certNumberList.get(i));
+        }
+
+        vidService.uploadDeleteEnt(wzhgzbhs, memo);
+    }
+
+    private CertificateInfo getCertificateInfo(DBObject data) throws Exception {
+        CertificateInfo info = new CertificateInfo();
+
+        // 序号
+        // 属性
+        // 中文名称
+        // 数据类型
+        //
+        // （soap描述）
+        // 说明
+        //
+        // 1
+        // VEHICLE_STATUS
+        // 状态
+        // s:string
+        // 系统生成，无需操作，状态说明见表六
+        //
+        // 2
+        // CLIENT_HARDWARE_INFO
+        // 上传主机硬件信息
+        // s:string
+        Assert.isNotNull(HARDWAREID, "HARDWAREID不可为空，请检查vim.properties文件是否设置了属性vidc.hardware");
+        info.setCLIENTHARDWAREINFO(HARDWAREID);
+        //
+        //
+        // 3
+        // CREATETIME
+        // 上传日期
+        // s:dateTime
+        // 系统生成，无需操作。
+        //
+        // 4
+        // FEEDBACK_TIME
+        // 公安反馈时间
+        // s:dateTime
+        // 系统生成，无需操作。
+        //
+        // 5
+        // H_ID
+        // 反馈码
+        // s:string
+        // 系统生成，无需操作。
+        //
+        // 6
+        // HD_HOST
+        // 上传主机地址
+        // s:string
+        // 系统获取，无需操作。
+        //
+        // 7
+        // HD_USER
+        // 企业用户名
+        // s:string
+        //
+        Assert.isNotNull(HD_USER, "HD_USER不可为空，请检查vim.properties文件是否设置了属性vidc.user");
+        info.setHDUSER(HD_USER);
+        //
+        // 8
+        // UKEY
+        // U盾标识
+        // s:string
+        // 系统自动获取，要求上传主机上已经插入U盾。
+        //
+        // 9
+        // UPDATETIME
+        // 更新日期
+        // s:dateTime
+        // 系统生成，无需操作。
+        //
+        // 10
+        // UPSEND_TAG
+        // 上传标记
+        // s:string
+        // 系统生成，无需操作。
+        //
+        // 11
+        // VERCODE
+        // 校验码
+        // s:string
+        // 校验码，由打印接口生成
+        String value = (String) data.get(mVeh_Jyw);
+        Assert.isNotNull(value, "打印校验码不可为空");
+        info.setHDUSER(value);
+
+        // 12
+        // VERSION
+        // 上传系统版本信息
+        // s:string
+        // 系统生成，无需操作。
+        //
+        // 13
+        // CDDBJ
+        // 纯电动标记
+        // s:string
+        //
+        value = (String) data.get(mVeh_Cddbj);
+        Assert.isNotNull(value, "纯电动标记不可为空");
+        info.setCDDBJ(value);
+        //
+        // 14
+        // CLLX
+        // 车辆类型
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clfl);
+        Assert.isNotNull(value, "车辆类型不可为空");
+        info.setCLLX(value);
+
+        //
+        // 15
+        // CLSCDWMC
+        // 车辆生产单位名称
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clscdwmc);
+        Assert.isNotNull(value, "车辆生产单位名称不可为空");
+        info.setCLSCDWMC(value);
+        //
+        // 16
+        // CLZTXX
+        // 车辆状态信息
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clztxx);
+        Assert.isNotNull(value, "车辆状态信息不可为空");
+        info.setCLZTXX(value);
+        //
+        // 17
+        // CZRQ
+        // 操作日期
+        // s:string
+        //
+        GregorianCalendar nowGregorianCalendar = new GregorianCalendar();
+        XMLGregorianCalendar xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(
+                nowGregorianCalendar);
+        info.setCZRQ(xmlDatetime); // 操作日期
+
+        //
+        // 18
+        // DYWYM
+        // 打印唯一码
+        // s:string
+        // 由打印接口生成
+        //
+        value = (String) data.get(mVeh_Dywym);
+        Assert.isNotNull(value, "打印唯一码不可为空");
+        info.setDYWYM(value);
+        // 19
+        // QYID
+        // 企业编号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Qyid);
+        Assert.isNotNull(value, "企业编号不可为空");
+        info.setQYID(value);
+        //
+        // 20
+        // YH
+        // 油耗
+        // s:string
+        //
+        value = (String) data.get(mVeh_Yh);
+        Assert.isNotNull(value, "油耗不可为空");
+        info.setYH(value);
+        //
+        // 21
+        // ZCHGZBH
+        // 整车合格证编号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zchgzbh);
+        Assert.isNotNull(value, "整车合格证编号不可为空");
+        info.setZCHGZBH(value);
+        //
+        // 22
+        // ZXZS
+        // 转向轴数
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zxzs);
+        Assert.isNotNull(value, "转向轴数不可为空");
+        info.setZXZS(value);
+        //
+        // 23
+        // ZZBH
+        // 纸张编号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zzbh);
+        Assert.isNotNull(value, "纸张编号不可为空");
+        info.setZXZS(value);
+        //
+        // 24
+        // BGCAZZDYXZZL
+        // 外挂车鞍座最大允许总质量
+        // s:string
+        //
+        value = (String) data.get(mVeh_Bgcazzdyxzzl);
+        // Assert.isNotNull(value, "外挂车鞍座最大允许总质量不可为空");
+        info.setBGCAZZDYXZZL(value);
+        //
+        // 25
+        // BZ
+        // 备注
+        // s:string
+        //
+        value = (String) data.get(mVeh_Bz);
+        // Assert.isNotNull(value, "备注不可为空");
+        info.setBZ(value);
+        //
+        // 26
+        // CJH
+        // 车架号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Cjh);
+        // Assert.isNotNull(value, "车架号不可为空");
+        info.setCJH(value);
+        //
+        // 27
+        // CLMC
+        // 车辆名称
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clmc);
+        Assert.isNotNull(value, "车辆名称不可为空");
+        info.setCLMC(value);
+        //
+        // 28
+        // CLPP
+        // 车辆品牌
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clpp);
+        Assert.isNotNull(value, "车辆品牌不可为空");
+        info.setCLPP(value);
+        //
+        // 29
+        // CLSBDH
+        // 车辆识别代号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clsbdh);
+        Assert.isNotNull(value, "车辆识别代号不可为空");
+        info.setCLSBDH(value);
+        //
+        // 30
+        // CLXH
+        // 车辆型号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clxh);
+        Assert.isNotNull(value, "车辆型号不可为空");
+        info.setCLXH(value);
+        //
+        // 31
+        // CLZZQYMC
+        // 车辆制造企业名称
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clzzqymc);
+        Assert.isNotNull(value, "车辆制造企业名称不可为空");
+        info.setCLZZQYMC(value);
+        //
+        // 32
+        // CLZZRQ
+        // 车辆制造日期
+        // s:dateTime
+        //
+        value = (String) data.get(mVeh_Clzzrq);
+        Assert.isNotNull(value, "车辆制造日期");
+        Date dValue = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+        nowGregorianCalendar = new GregorianCalendar();
+        nowGregorianCalendar.setTime(dValue);
+        xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
+        info.setCLZZRQ(xmlDatetime);
+        //
+        // 33
+        // CPH
+        // 产品号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Cpggh);
+        Assert.isNotNull(value, "产品号不可为空");
+        info.setCPH(value);
+        //
+        // 34
+        // CPSCDZ
+        // 产品生产地址
+        // s:string
+        //
+        value = (String) data.get(mVeh_Cpscdz);
+        Assert.isNotNull(value, "产品生产地址不可为空");
+        info.setCPSCDZ(value);
+        //
+        // 35
+        // CSYS
+        // 车身颜色
+        // s:string
+        //
+        value = (String) data.get(mVeh_Csys);
+        // Assert.isNotNull(value, "车身颜色不可为空");
+        info.setCSYS(value);
+        //
+        // 36
+        // DPHGZBH
+        // 底盘合格证编号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Dphgzbh);
+        Assert.isNotNull(value, "底盘合格证编号不可为空");
+        info.setDPHGZBH(value);
+        //
+        // 37
+        // DPID
+        // 底盘ID
+        // s:string
+        //
+        value = (String) data.get(mVeh_Dpid);
+        // Assert.isNotNull(value, "底盘ID不可为空");
+        info.setDPID(value);
+        //
+        // 38
+        // DPXH
+        // 底盘型号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Dpxh);
+        // Assert.isNotNull(value, "底盘型号不可为空");
+        info.setDPXH(value);
+        //
+        // 39
+        // EDZK
+        // 额定载客
+        // s:string
+        //
+        value = (String) data.get(mVeh_Edzk);
+        // Assert.isNotNull(value, "额定载客不可为空");
+        info.setEDZK(value);
+        //
+        // 40
+        // EDZZL
+        // 额定载质量
+        // s:string
+        //
+        value = (String) data.get(mVeh_Edzzl);
+        // Assert.isNotNull(value, "额定载质量不可为空");
+        info.setEDZZL(value);
+        //
+        // 41
+        // FDJH
+        // 发动机号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Fdjh);
+        // Assert.isNotNull(value, "发动机号不可为空");
+        info.setFDJH(value);
+        //
+        // 42
+        // FDJXH
+        // 发动机型号
+        // s:string
+        //
+        value = (String) data.get(mVeh_Fdjxh);
+        // Assert.isNotNull(value, "发动机型号不可为空");
+        info.setFDJXH(value);
+        //
+        // 43
+        // FZRQ
+        // 发证日期
+        // s:dateTime
+        //
+        value = (String) data.get(mVeh_Fzrq);
+        // Assert.isNotNull(value, "发证日期不可为空");
+        dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
+        nowGregorianCalendar = new GregorianCalendar();
+        nowGregorianCalendar.setTime(dValue);
+        xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
+        info.setFZRQ(xmlDatetime);
+        //
+        // 44
+        // GBTHPS
+        // 钢板弹簧片数
+        // s:string
+        //
+        value = (String) data.get(mVeh_Gbthps);
+        // Assert.isNotNull(value, "钢板弹簧片数不可为空");
+        info.setGBTHPS(value);
+        //
+        // 45
+        // GGSXRQ
+        // 公告生效日期
+        // s:dateTime
+        //
+        value = (String) data.get(mVeh_Ggsxrq);
+        // Assert.isNotNull(value, "公告生效日期不可为空");
+        dValue = new SimpleDateFormat("yyyy-MM-dd").parse(value);
+        nowGregorianCalendar = new GregorianCalendar();
+        nowGregorianCalendar.setTime(dValue);
+        xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
+        info.setGGSXRQ(xmlDatetime);
+        //
+        // 46
+        // GL
+        // 功率
+        // s:string
+        //
+        value = (String) data.get(mVeh_Gl);
+        // Assert.isNotNull(value, "功率不可为空");
+        info.setGL(value);
+        //
+        // 47
+        // HLJ
+        // 后轮距
+        // s:string
+        //
+        value = (String) data.get(mVeh_Hlj);
+        // Assert.isNotNull(value, "后轮距不可为空");
+        info.setHLJ(value);
+        //
+        // 48
+        // HXNBC
+        // 货箱内部长
+        // s:string
+        //
+        value = (String) data.get(mVeh_Hxnbc);
+        // Assert.isNotNull(value, "货箱内部长不可为空");
+        info.setHXNBC(value);
+        //
+        // 49
+        // HXNBG
+        // 货箱内部高
+        // s:string
+        //
+        value = (String) data.get(mVeh_Hxnbg);
+        // Assert.isNotNull(value, "货箱内部高");
+        info.setHXNBG(value);
+        //
+        // 50
+        // HXNBK
+        // 货箱内部宽
+        // s:string
+        //
+        value = (String) data.get(mVeh_Hxnbk);
+        // Assert.isNotNull(value, "货箱内部宽");
+        info.setHXNBK(value);
+        //
+        // 51
+        // HZDCZFS
+        // 后制动操作方式
+        // s:string
+        //
+        value = (String) data.get(mVeh__Hzdczfs);
+        // Assert.isNotNull(value, "后制动操作方式");
+        info.setHZDCZFS(value);
+        //
+        // 52
+        // HZDFS
+        // 后制动方式
+        // s:string
+        //
+        value = (String) data.get(mVeh__Hzdfs);
+        // Assert.isNotNull(value, "后制动方式");
+        info.setHZDFS(value);
+        //
+        // 53
+        // JSSZCRS
+        // 驾驶室准乘人数
+        // s:string
+        //
+        value = (String) data.get(mVeh_Clxh);
+        // Assert.isNotNull(value, "驾驶室准乘人数不可为空");
+        info.setJSSZCRS(value);
+        //
+        // 54
+        // LTGG
+        // 轮胎规格
+        // s:string
+        //
+        value = (String) data.get(mVeh_Ltgg);
+        // Assert.isNotNull(value, "轮胎规格不可为空");
+        info.setLTGG(value);
+        //
+        // 55
+        // LTS
+        // 轮胎数
+        // s:string
+        //
+        value = (String) data.get(mVeh_Lts);
+        // Assert.isNotNull(value, "轮胎数不可为空");
+        info.setLTS(value);
+        //
+        // 56
+        // PC
+        // 批次
+        // s:string
+        //
+        value = (String) data.get(mVeh_Ggpc);
+        // Assert.isNotNull(value, "批次不可为空");
+        info.setPC(value);
+        //
+        // 57
+        // PFBZ
+        // 排放标准
+        // s:string
+        //
+        value = (String) data.get(mVeh_Pfbz);
+        // Assert.isNotNull(value, "排放标准不可为空");
+        info.setPFBZ(value);
+        //
+        // 58
+        // PL
+        // 排量
+        // s:string
+        //
+        value = (String) data.get(mVeh_Pl);
+        // Assert.isNotNull(value, "排量不可为空");
+        info.setPL(value);
+        //
+        // 59
+        // QLJ
+        // 前轮距
+        // s:string
+        //
+        value = (String) data.get(mVeh_Qlj);
+        // Assert.isNotNull(value, "前轮距不可为空");
+        info.setQLJ(value);
+        //
+        // 60
+        // QYBZ
+        // 企业标准
+        // s:string
+        //
+        value = (String) data.get(mVeh_Qybz);
+        // Assert.isNotNull(value, " 企业标准不可为空");
+        info.setQYBZ(value);
+        //
+        // 61
+        // QYQTXX
+        // 企业其他信息
+        // s:string
+        //
+        value = (String) data.get(mVeh_Qyqtxx);
+        // Assert.isNotNull(value, "企业其他信息不可为空");
+        info.setQYQTXX(value);
+        //
+        // 62
+        // QZDCZFS
+        // 前制动操作方式
+        // s:string
+        //
+        value = (String) data.get(mVeh__Qzdczfs);
+        // Assert.isNotNull(value, "前制动操作方式不可为空");
+        info.setQZDCZFS(value);
+        //
+        // 63
+        // QZDFS
+        // 前制动方式
+        // s:string
+        //
+        value = (String) data.get(mVeh__Qzdfs);
+        // Assert.isNotNull(value, "前制动方式不可为空");
+        info.setQZDFS(value);
+        //
+        // 64
+        // RLZL
+        // 燃料种类
+        // s:string
+        //
+        value = (String) data.get(mVeh_Rlzl);
+        // Assert.isNotNull(value, "燃料种类不可为空");
+        info.setRLZL(value);
+        //
+        // 65
+        // WKC
+        // 外廓长
+        // s:string
+        //
+        value = (String) data.get(mVeh_Wkc);
+        // Assert.isNotNull(value, "外廓长不可为空");
+        info.setWKC(value);
+        //
+        // 66
+        // WKG
+        // 外廓高
+        // s:string
+        //
+        value = (String) data.get(mVeh_Wkg);
+        // Assert.isNotNull(value, "外廓高不可为空");
+        info.setWKG(value);
+        //
+        // 67
+        // WKK
+        // 外廓宽
+        // s:string
+        //
+        value = (String) data.get(mVeh_Wkk);
+        // Assert.isNotNull(value, "外廓宽不可为空");
+        info.setWKK(value);
+        //
+        // 68
+        // ZBZL
+        // 整备质量
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zbzl);
+        // Assert.isNotNull(value, "整备质量不可为空");
+        info.setZBZL(value);
+        //
+        // 69
+        // ZGCS
+        // 最高车速
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zgcs);
+        // Assert.isNotNull(value, "最高车速不可为空");
+        info.setZGCS(value);
+        //
+        // 70
+        // ZH
+        // 轴荷
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zh);
+        // Assert.isNotNull(value, "轴荷不可为空");
+        info.setZH(value);
+        //
+        // 71
+        // ZJ
+        // 轴距
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zj);
+        // Assert.isNotNull(value, "轴距不可为空");
+        info.setZJ(value);
+        //
+        // 72
+        // ZQYZZL
+        // 准牵引总质量
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zqyzzl);
+        // Assert.isNotNull(value, "准牵引总质量不可为空");
+        info.setZQYZZL(value);
+        //
+        // 73
+        // ZS
+        // 轴数
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zs);
+        // Assert.isNotNull(value, "轴数不可为空");
+        info.setZS(value);
+        //
+        // 74
+        // ZXXS
+        // 转向形式
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zxxs);
+        // Assert.isNotNull(value, "转向形式不可为空");
+        info.setZXXS(value);
+        //
+        // 75
+        // ZZL
+        // 总质量
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zzl);
+        // Assert.isNotNull(value, "总质量不可为空");
+        info.setZZL(value);
+        //
+        // 76
+        // ZZLLYXS
+        // 载质量利用系数
+        // s:string
+        //
+        value = (String) data.get(mVeh_Zzllyxs);
+        // Assert.isNotNull(value, "载质量利用系数不可为空");
+        info.setZZLLYXS(value);
+        //
+        // 77
+        // WZHGZBH
+        // 完整合格证编号
+        // s:string
+        //
+        value = (String) data.get(mVeh__Wzghzbh);
+        // Assert.isNotNull(value, "完整合格证编号不可为空");
+        info.setWZHGZBH(value);
+        //
+        // 78
+        // PZXLH
+        // 配置序列号
+        // s:string
+
+        value = (String) data.get(mVeh__Pzxlh);
+        // Assert.isNotNull(value, "配置序列号不可为空");
+        info.setPZXLH(value);
+        return info;
+    }
 }

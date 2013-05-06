@@ -4,7 +4,7 @@ import com.mobnut.db.collection.AuthCollectionService;
 import com.mobnut.portal.Portal;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
-
+@Deprecated
 public class CertificateInfo extends AuthCollectionService {
 	
 	

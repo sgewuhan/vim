@@ -4,6 +4,7 @@ import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
 import com.mobnut.commons.util.Utils;
+import com.sg.ui.model.DataObject;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.module.DPCertPrintModule;
 import com.sg.vim.print.module.PrintModule;
@@ -25,7 +26,7 @@ public class PrintCertResultFunction extends BrowserFunction {
         	Object jsReturn = arguments[0];
         	Object mVeh_ErrorInfo = arguments[1];
             Object mVeh_Clztxx = arguments[2];
-            Object mVeh_Zchgzbh = arguments[3];
+            Object mVeh__Wzghzbh = arguments[3];
             Object mVeh_Jyw = arguments[4];
             Object mVeh_Veh_Dywym = arguments[5];
             
@@ -41,13 +42,14 @@ public class PrintCertResultFunction extends BrowserFunction {
         		return null;
         	}
             if (currentModule != null) {
-                currentModule.setCallbackProperties("Veh_Zchgzbh", mVeh_Zchgzbh);
-                currentModule.setCallbackProperties("Veh_Jyw", mVeh_Jyw);
-                currentModule.setCallbackProperties("Veh_Veh_Dywym", mVeh_Veh_Dywym);
+                DataObject data = currentModule.getInput().getData();
+                data.setValue(VimUtils.mVeh__Wzghzbh, mVeh__Wzghzbh);
+                data.setValue(VimUtils.mVeh_Jyw, mVeh_Jyw);
+                data.setValue(VimUtils.mVeh_Dywym, mVeh_Veh_Dywym);
             }
 
             if (currentModule == dpModule) {
-                qxModule.getInput().getData().setValue(VimUtils.mVeh_Dphgzbh, mVeh_Zchgzbh);// 将底盘生成的合格证号写入到整车数据中
+                qxModule.getInput().getData().setValue(VimUtils.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
 
             }
         }

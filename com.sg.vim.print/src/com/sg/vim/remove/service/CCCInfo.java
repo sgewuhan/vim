@@ -4,7 +4,7 @@ import com.mobnut.db.collection.AuthCollectionService;
 import com.mobnut.portal.Portal;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
-
+@Deprecated
 public class CCCInfo extends AuthCollectionService {
 
 	public static final String  CCC_12="ccc_12";   //车辆一致性证书ID
