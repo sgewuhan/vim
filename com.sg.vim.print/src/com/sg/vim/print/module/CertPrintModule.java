@@ -18,6 +18,7 @@ public class CertPrintModule extends PrintModule {
     private DPCertPrintModule dpCertPrintModule;
 	private DataObjectEditorInput dpinput;
 	private DataObjectEditorInput input;
+    private boolean canUploadData;
 
     public CertPrintModule() {
         super();
@@ -66,8 +67,12 @@ public class CertPrintModule extends PrintModule {
         return builder.toString();
     }
 
-    private boolean canUploadData() {
-        return true;
+    public boolean canUploadData() {
+        return canUploadData;
+    }
+    
+    public void setCanUploadData(boolean b){
+        canUploadData = b;
     }
 
     @Override
@@ -112,6 +117,8 @@ public class CertPrintModule extends PrintModule {
     public void fireEvent(String eventCode, String[] arg,PrintContent pc) {
         if (eventCode.equals(_PRINT)) {
             pc.doPrint(this);
+        }else if(eventCode.contains(_UPLOAD)){
+            pc.doUpload(this);
         }
     }
 

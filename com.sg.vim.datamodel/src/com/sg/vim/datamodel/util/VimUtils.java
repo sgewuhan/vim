@@ -611,7 +611,7 @@ public class VimUtils {
         return value;
     }
 
-    public void uploadCert(List<DBObject> certList) throws Exception {
+    public static void uploadCert(List<DBObject> certList) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
 
@@ -623,7 +623,7 @@ public class VimUtils {
         vidService.uploadInsertEnt(cis);
     }
 
-    public void uploadCert2(List<DBObject> certList, String memo) throws Exception {
+    public static void uploadCert2(List<DBObject> certList, String memo) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
 
@@ -635,7 +635,7 @@ public class VimUtils {
         vidService.uploadOverTimeEnt(cis, memo);
     }
 
-    public void updateCert(List<DBObject> certList, String memo) throws Exception {
+    public static void updateCert(List<DBObject> certList, String memo) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
 
@@ -647,7 +647,7 @@ public class VimUtils {
         vidService.uploadUpdateEnt(cis, memo);
     }
 
-    public void deleteCert(List<String> certNumberList, String memo) {
+    public static void deleteCert(List<String> certNumberList, String memo) {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfString wzhgzbhs = new ArrayOfString();
         for (int i = 0; i < certNumberList.size(); i++) {
@@ -657,7 +657,7 @@ public class VimUtils {
         vidService.uploadDeleteEnt(wzhgzbhs, memo);
     }
 
-    private CertificateInfo getCertificateInfo(DBObject data) throws Exception {
+    private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
         CertificateInfo info = new CertificateInfo();
 
         // ÐòºÅ

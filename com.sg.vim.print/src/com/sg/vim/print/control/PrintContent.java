@@ -1,6 +1,8 @@
 package com.sg.vim.print.control;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -17,6 +19,7 @@ import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.service.ServerPushSession;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -37,11 +40,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.ManagedForm;
 import org.eclipse.ui.forms.widgets.Form;
 
+import com.mobnut.commons.util.Utils;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.ImageResource;
 import com.sg.ui.UI;
 import com.sg.ui.UIUtils;
+import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.MultipageEditablePanel;
 import com.sg.vim.datamodel.IVIMFields;
@@ -53,7 +58,6 @@ import com.sg.vim.print.module.DPCertPrintModule;
 import com.sg.vim.print.module.FuelCardPrintModule;
 import com.sg.vim.print.module.PrintModule;
 import com.sg.vim.print.module.QXCertPrintModule;
-import com.sg.vim.print.module.action.ModuleAction;
 
 @SuppressWarnings("restriction")
 public class PrintContent extends Composite {
@@ -73,8 +77,8 @@ public class PrintContent extends Composite {
     private ServerPushSession pushSession;
     private Button printButton;
     private Browser certBrowser;
-    private PrintCertResultFunction printCertResultFunction;
-    private BarResultFunction barResultFunction;
+    private BrowserFunction printCertResultFunction;
+    private BrowserFunction barResultFunction;
     private ScrolledComposite dataPreview;
     private PrintModule[] modules;
     private ManagedForm mform;
@@ -115,13 +119,76 @@ public class PrintContent extends Composite {
 
         certBrowser = new Browser(this, SWT.NONE);
         certBrowser.setUrl("/vert");
-        printCertResultFunction = new PrintCertResultFunction(certBrowser, "printCertResult");
-        printCertResultFunction.setDpModule(((CertPrintModule) modules[0])
-                .getDpCertPrintModule());
-        printCertResultFunction.setQxModule(((CertPrintModule) modules[0])
-                .getQxCertPrintModule());
+        printCertResultFunction = new BrowserFunction(certBrowser, "printCertResult") {
 
-        barResultFunction = new BarResultFunction(certBrowser, "barResult");
+            // jsreturn,Veh_ErrorInfo,Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw,
+            // VehCert.Veh_Dywym
+            public Object function(Object[] arguments) {
+                if (arguments != null) {
+                    // Object jsReturn = arguments[0];
+                    Object mVeh_ErrorInfo = arguments[1];
+                    Object mVeh_Clztxx = arguments[2];
+                    Object mVeh__Wzghzbh = arguments[3];
+                    Object mVeh_Jyw = arguments[4];
+                    Object mVeh_Veh_Dywym = arguments[5];
+                    PrintModule currentModule = null;
+                    DPCertPrintModule dpCertPrintModule = ((CertPrintModule) modules[0])
+                            .getDpCertPrintModule();
+                    QXCertPrintModule qxCertPrintModule = ((CertPrintModule) modules[0])
+                            .getQxCertPrintModule();
+                    if (mVeh_Clztxx != null && "dp".equalsIgnoreCase(mVeh_Clztxx.toString())) {
+                        currentModule = dpCertPrintModule;
+                    } else if (mVeh_Clztxx != null && "qx".equalsIgnoreCase(mVeh_Clztxx.toString())) {
+                        currentModule = qxCertPrintModule;
+                    }
+                    if (!Utils.isNullOrEmptyString(mVeh_ErrorInfo)) {
+                        currentModule.setError(mVeh_ErrorInfo.toString());
+                    } else {
+                        if (currentModule != null) {
+                            DataObject data = currentModule.getInput().getData();
+                            data.setValue(VimUtils.mVeh__Wzghzbh, mVeh__Wzghzbh);
+                            data.setValue(VimUtils.mVeh_Jyw, mVeh_Jyw);
+                            data.setValue(VimUtils.mVeh_Dywym, mVeh_Veh_Dywym);
+                        }
+                        if (currentModule == dpCertPrintModule) {
+                            qxCertPrintModule.getInput().getData()
+                                    .setValue(VimUtils.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
+                        }
+                    }
+                }
+                return super.function(arguments);
+            }
+
+        };
+
+        barResultFunction = new BrowserFunction(certBrowser, "barResult") {
+
+            @Override
+            public Object function(Object[] arguments) {
+                if (arguments != null) {
+                    Object mVeh_Tmxx = arguments[0];
+                    Object mVeh_Clztxx = arguments[1];
+                    DPCertPrintModule dpCertPrintModule = ((CertPrintModule) modules[0])
+                            .getDpCertPrintModule();
+                    QXCertPrintModule qxCertPrintModule = ((CertPrintModule) modules[0])
+                            .getQxCertPrintModule();
+                    PrintModule currentModule = null;
+                    if (mVeh_Clztxx != null && "dp".equalsIgnoreCase(mVeh_Clztxx.toString())) {
+                        currentModule = dpCertPrintModule;
+                    } else if (mVeh_Clztxx != null && "qx".equalsIgnoreCase(mVeh_Clztxx.toString())) {
+                        currentModule = qxCertPrintModule;
+                    }
+                    if (currentModule != null) {
+                        DataObject data = currentModule.getInput().getData();
+                        data.setValue(VimUtils.mVeh_Tmxx, mVeh_Tmxx);
+                    }
+
+                }
+
+                return super.function(arguments);
+            }
+
+        };
         fd = new FormData();
         certBrowser.setLayoutData(fd);
         fd.top = new FormAttachment(banner);
@@ -136,7 +203,6 @@ public class PrintContent extends Composite {
         modules[0] = new CertPrintModule();
         modules[1] = new COCPrintModule();
         modules[2] = new FuelCardPrintModule();
-
     }
 
     private Composite createBanner(PrintContent printContent) {
@@ -360,6 +426,8 @@ public class PrintContent extends Composite {
         dpcocData = null;
         dpconfData = null;
         productCodeData = null;
+        ((CertPrintModule) modules[0]).setCanUploadData(false);
+
         // input = null;
     }
 
@@ -418,7 +486,7 @@ public class PrintContent extends Composite {
 
                     PrintModule module = getModulebyName(modules, args[1]);
                     if (module != null) {
-                        module.fireEvent(args[0], args,PrintContent.this);
+                        module.fireEvent(args[0], args, PrintContent.this);
                     }
 
                 }
@@ -498,20 +566,22 @@ public class PrintContent extends Composite {
         title.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         title.setText(printModule.getHeadText());
         new Label(toolbar, SWT.SEPARATOR | SWT.VERTICAL);
-        ModuleAction[] actions = printModule.getActions();
-        for (int i = 0; i < actions.length; i++) {
-            Button button = new Button(toolbar, SWT.PUSH);
-            final ModuleAction moduleAction = actions[i];
-            button.setImage(moduleAction.getImage());
-            button.setToolTipText(actions[i].getText());
-            button.setData(RWT.CUSTOM_VARIANT, "whitebutton_s");
-            button.addSelectionListener(new SelectionAdapter() {
-                @Override
-                public void widgetSelected(SelectionEvent e) {
-                    moduleAction.run();
-                }
-            });
-        }
+
+        /** 暂时不提供此功能 **/
+        // ModuleAction[] actions = printModule.getActions();
+        // for (int i = 0; i < actions.length; i++) {
+        // Button button = new Button(toolbar, SWT.PUSH);
+        // final ModuleAction moduleAction = actions[i];
+        // button.setImage(moduleAction.getImage());
+        // button.setToolTipText(actions[i].getText());
+        // button.setData(RWT.CUSTOM_VARIANT, "whitebutton_s");
+        // button.addSelectionListener(new SelectionAdapter() {
+        // @Override
+        // public void widgetSelected(SelectionEvent e) {
+        // moduleAction.run();
+        // }
+        // });
+        // }
 
         Button commitButton = new Button(toolbar, SWT.PUSH);
         commitButton.setData(RWT.CUSTOM_VARIANT, "whitebutton_s");
@@ -520,15 +590,15 @@ public class PrintContent extends Composite {
         commitButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                if(folder!=null&&(!folder.isDisposed())){
-                    
+                if (folder != null && (!folder.isDisposed())) {
+
                     mform.commit(false);
-                    
+
                     boolean checked = folder.validCheck();
-                    if(!checked){
-                        
+                    if (!checked) {
+
                     }
-                    
+
                     mform.commit(true);
                 }
             }
@@ -536,8 +606,7 @@ public class PrintContent extends Composite {
 
         DataObjectEditorInput input = printModule.getInput();
         if (input != null) {
-            folder = new MultipageEditablePanel(editorArea, SWT.TOP
-                    | SWT.FLAT);
+            folder = new MultipageEditablePanel(editorArea, SWT.TOP | SWT.FLAT);
             folder.setMessageManager(form.getMessageManager());
             folder.createContents(mform, printModule.getInput());
             dataPreview.setMinSize(editorArea.computeSize(SWT.DEFAULT, SWT.DEFAULT));
@@ -548,7 +617,6 @@ public class PrintContent extends Composite {
         contentPanel.setWeights(new int[] { 1, 3 });
     }
 
-
     public void doPrint(CertPrintModule certPrintModule) {
 
         // 如果有底盘合格证数据先打印底盘合格证
@@ -558,19 +626,49 @@ public class PrintContent extends Composite {
             DBObject data = dpmodule.getInput().getData().getData();
             VimUtils.setValues(certBrowser, data);
             VimUtils.print(certBrowser);
-            if(dpmodule.getError()!=null||qxmodule.getError()!=null){
-            	UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n"+dpmodule.getError(), SWT.ICON_ERROR);
-            	return;
+            if (dpmodule.getError() != null || qxmodule.getError() != null) {
+                UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n" + dpmodule.getError(),
+                        SWT.ICON_ERROR);
+                return;
             }
         }
 
         DBObject data = qxmodule.getInput().getData().getData();
         VimUtils.setValues(certBrowser, data);
         VimUtils.print(certBrowser);
-        if(dpmodule.getError()!=null){
-        	UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n"+qxmodule.getError(), SWT.ICON_ERROR);
-        	return;
+        if (dpmodule.getError() != null) {
+            UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + qxmodule.getError(),
+                    SWT.ICON_ERROR);
+            return;
         }
+
+        // 设置模块为可上传
+        ((CertPrintModule) modules[0]).setCanUploadData(true);
+
+    }
+
+    public void doUpload(CertPrintModule certPrintModule) {
+
+        List<DBObject> list = new ArrayList<DBObject>();
+        PrintModule[] sb = certPrintModule.getSubModules();
+        for(int i=0;i<sb.length;i++){
+            DataObjectEditorInput input = sb[i].getInput();
+            if(input!=null){
+                DBObject moduleData = input.getData().getData();
+                if(moduleData!=null){
+                    list.add(moduleData);
+                }
+            }
+        }
+        try {
+            VimUtils.uploadCert(list);
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(), "上传", "合格证数据上传时发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
+            return;
+        }
+
+        ((CertPrintModule) modules[0]).setCanUploadData(false);
+        navigator.update(certPrintModule, null);
 
     }
 
