@@ -644,6 +644,7 @@ public class PrintContent extends Composite {
 
         // 设置模块为可上传
         ((CertPrintModule) modules[0]).setCanUploadData(true);
+        navigator.update(certPrintModule, null);
 
     }
 
