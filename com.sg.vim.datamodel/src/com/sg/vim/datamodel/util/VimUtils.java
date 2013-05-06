@@ -626,8 +626,8 @@ public class VimUtils {
         OperateResult r = vidService.uploadInsertEnt(cis);
         int rCode = r.getResultCode();
         ArrayOfNameValuePair detail = r.getResultDetail();
-        GetResultMessage(r);
-        System.out.println("ok");
+        String result = GetResultMessage(r);
+        System.out.println(result);
     }
     
     static String GetResultMessage(OperateResult oResult)
