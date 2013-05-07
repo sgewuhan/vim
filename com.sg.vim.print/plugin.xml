@@ -4378,5 +4378,25 @@
          </basicpage>
       </editor>
    </extension>
+   <extension
+         point="com.mobnut.admin.adminFunction">
+      <adminFunction
+            id="com.sg.vim.print.function.printersetting"
+            image="image/printer_48.png"
+            label="打印设置"
+            run="com.sg.vim.print.function.PrinterSetting"
+            tooltip="设置系统的打印机">
+      </adminFunction>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.sg.vim.print.editor.PrinterSetting"
+            default="false"
+            icon="image/print_16.png"
+            id="com.sg.vim.print.editor.printersetting"
+            name="打印设置">
+      </editor>
+   </extension>
 
 </plugin>

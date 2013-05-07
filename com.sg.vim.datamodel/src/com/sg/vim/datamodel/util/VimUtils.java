@@ -162,16 +162,9 @@ public class VimUtils {
 
     public static final String mVeh_Cddbj = "Veh_Cddbj";
 
-    /**** 以下属性在打印时没有，但在上传时有 *****/
-
-    /**
-     * 后制动方式
-     */
+    //**** 以下属性在打印时没有，但在上传时有 *****/
     public static final String mVeh__Hzdfs = "Veh_Hzdfs";
 
-    /**
-     * 后制动操作方式
-     */
     public static final String mVeh__Hzdczfs = "Veh_Hzdczfs";
 
     public static final String mVeh__Qzdczfs = "Veh_Qzdczfs";
@@ -181,8 +174,13 @@ public class VimUtils {
     public static final String mVeh__Wzghzbh = "Veh_Wzghzbh";
 
     public static final String mVeh__Pzxlh = "Veh_Pzxlh";
-    /***/
 
+    
+    //*********以下字段用于打印机设置数据的保存
+    public static final String mVeh_A_PrinterFunction = "Veh_A_PrinterFunction";
+    public static final String mVeh_A_PrinterDesc = "Veh_A_PrinterDesc";
+    //*******/
+    
     public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M" };
     public static final String[] COLOR_NAME = new String[] { "银色", "红色", "白色", "紫色", "蓝色", "金色",
