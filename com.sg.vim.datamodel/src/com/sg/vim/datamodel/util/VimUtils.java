@@ -759,7 +759,7 @@ public class VimUtils {
         // 校验码，由打印接口生成
         String value = (String) data.get(mVeh_Jyw);
         // Assert.isNotNull(value, "打印校验码不可为空");
-        info.setHDUSER(value);
+        info.setVERCODE(value);
 
         // 12
         // VERSION
@@ -867,7 +867,7 @@ public class VimUtils {
         //
         value = (String) data.get(mVeh_Zzbh);
         // Assert.isNotNull(value, "纸张编号不可为空");
-        info.setZXZS(value);
+        info.setZZBH(value);
         //
         // 24
         // BGCAZZDYXZZL
