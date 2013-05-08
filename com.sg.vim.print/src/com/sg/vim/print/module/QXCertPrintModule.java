@@ -5,6 +5,7 @@ import org.bson.types.ObjectId;
 import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
 import com.sg.vim.print.module.action.ModuleAction;
@@ -64,7 +65,7 @@ public class QXCertPrintModule extends PrintModule {
         // builder.append("<a href=\"" + _UPLOAD + "\" target=\"_rwt\">ÉÏ´«</a>   ");
         // }
         
-        if (cocData != null) {
+        if (VimUtils.debug&&cocData != null) {
             builder.append("<a href=\"" + _OPENCOC + "@" + getName()+ "@" + cocData.get("_id")
                     + "\" target=\"_rwt\">coc  </a>   ");
         }
@@ -111,6 +112,24 @@ public class QXCertPrintModule extends PrintModule {
     @Override
     public String getName() {
         return NAME;
+    }
+
+    @Override
+    public String getInputPaperNumber() {
+        if(paperNumber!=null){
+            return String.format("%" + 0 + 7 + "d", paperNumber);
+        }else{
+            return "";
+        }
+    }
+    
+    @Override
+    public String getDisplayedPaperNumber() {
+        if(paperNumber==null){
+            return "";
+        }else{
+            return "<span style='FONT-FAMILY:Î¢ÈíÑÅºÚ;font-size:11pt'><br/><ins>No.</ins>: "+getInputPaperNumber()+"</span>";
+        }
     }
 
 }

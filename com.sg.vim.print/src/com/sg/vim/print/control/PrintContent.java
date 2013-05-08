@@ -11,9 +11,10 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.service.ServerPushSession;
@@ -41,6 +42,9 @@ import org.eclipse.ui.forms.ManagedForm;
 import org.eclipse.ui.forms.widgets.Form;
 
 import com.mobnut.commons.util.Utils;
+import com.mobnut.db.DBActivator;
+import com.mobnut.db.utils.DBUtil;
+import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.ImageResource;
@@ -88,6 +92,7 @@ public class PrintContent extends Composite {
     private Composite toolbar;
     private MultipageEditablePanel folder;
     private Form form;
+    private CertPrintModuleSeqEditingSupport editingSupport;
 
     public PrintContent(ManagedForm mform, Form form, int style) {
         super(form.getBody(), style);
@@ -154,6 +159,8 @@ public class PrintContent extends Composite {
                             qxCertPrintModule.getInput().getData()
                                     .setValue(VimUtils.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
                         }
+                        
+                        currentModule.save();
                     }
                 }
                 return super.function(arguments);
@@ -217,7 +224,7 @@ public class PrintContent extends Composite {
 
         Label title = new Label(banner, SWT.NONE);
         title.setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
-        title.setText("<span style='color:rgb(255,100,0), FONT-FAMILY:微软雅黑;font-size:16pt'>请输入VIM代码：</span>");
+        title.setText("<span style='color:rgb(255,100,0), FONT-FAMILY:微软雅黑;font-size:16pt'>请输入VIN代码：</span>");
         fd = new FormData();
         title.setLayoutData(fd);
         fd.left = new FormAttachment(headImage, margin * 2);
@@ -415,7 +422,6 @@ public class PrintContent extends Composite {
             modules[i].setInput(para);
         }
         navigator.refresh(true);
-
     }
 
     private void resetData() {
@@ -436,7 +442,8 @@ public class PrintContent extends Composite {
         SashForm sash = new SashForm(this, SWT.HORIZONTAL);
         Composite navigatorPanel = new Composite(sash, SWT.NONE);
         navigatorPanel.setLayout(new FillLayout());
-        navigator = new TreeViewer(navigatorPanel, SWT.BORDER | SWT.FULL_SELECTION | SWT.NO_SCROLL);
+        navigator = new TreeViewer(navigatorPanel, SWT.BORDER | SWT.FULL_SELECTION | SWT.CHECK);
+        // navigator.getTree().setLinesVisible(true);
         navigator.getTree().setData(RWT.MARKUP_ENABLED, Boolean.TRUE);
         navigator.getTree().setData(RWT.CUSTOM_ITEM_HEIGHT, 58);
         navigator.setContentProvider(new ITreeContentProvider() {
@@ -469,14 +476,25 @@ public class PrintContent extends Composite {
                 return ((PrintModule) parentElement).getSubModules();
             }
         });
-        navigator.setLabelProvider(new LabelProvider() {
-
+        TreeViewerColumn col = new TreeViewerColumn(navigator, SWT.LEFT);
+        col.getColumn().setWidth(300);
+        col.setLabelProvider(new ColumnLabelProvider() {
             @Override
             public String getText(Object element) {
                 return ((PrintModule) element).getText();
             }
-
         });
+
+        col = new TreeViewerColumn(navigator, SWT.LEFT);
+        col.getColumn().setWidth(260);
+        col.setLabelProvider(new ColumnLabelProvider() {
+            @Override
+            public String getText(Object element) {
+                return ((PrintModule) element).getDisplayedPaperNumber();
+            }
+        });
+        editingSupport = new CertPrintModuleSeqEditingSupport(navigator);
+        col.setEditingSupport(editingSupport);
 
         navigator.getTree().addSelectionListener(new SelectionAdapter() {
             @Override
@@ -495,6 +513,7 @@ public class PrintContent extends Composite {
 
         navigator.setInput(modules);
         navigator.expandAll();
+        UIUtils.enableTreeViewerEditing(navigator);
 
         Composite rightpanel = new Composite(sash, SWT.BORDER | SWT.V_SCROLL);
         rightpanel.setLayout(new FormLayout());
@@ -619,53 +638,72 @@ public class PrintContent extends Composite {
 
     public void doPrint(CertPrintModule certPrintModule) {
 
-        // 如果有底盘合格证数据先打印底盘合格证
-        PrintModule dpmodule = getModulebyName(modules, DPCertPrintModule.NAME);
-        PrintModule qxmodule = getModulebyName(modules, QXCertPrintModule.NAME);
-        if (dpmodule.getInput() != null) {
-            DBObject data = dpmodule.getInput().getData().getData();
+        if (!VimUtils.debug) {
+
+            // 如果有底盘合格证数据先打印底盘合格证
+            PrintModule dpmodule = getModulebyName(modules, DPCertPrintModule.NAME);
+            PrintModule qxmodule = getModulebyName(modules, QXCertPrintModule.NAME);
+            if (dpmodule.getInput() != null) {
+                setHGZPaperNumber(dpmodule);
+                DBObject data = dpmodule.getInput().getData().getData();
+                VimUtils.setValues(certBrowser, data);
+                VimUtils.print(certBrowser);
+                if (dpmodule.getError() != null || qxmodule.getError() != null) {
+                    UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n" + dpmodule.getError(),
+                            SWT.ICON_ERROR);
+                    return;
+                }
+            }
+
+            DBObject data = qxmodule.getInput().getData().getData();
             VimUtils.setValues(certBrowser, data);
             VimUtils.print(certBrowser);
-            if (dpmodule.getError() != null || qxmodule.getError() != null) {
-                UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n" + dpmodule.getError(),
+            if (dpmodule.getError() != null) {
+                UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + qxmodule.getError(),
                         SWT.ICON_ERROR);
                 return;
             }
-        }
 
-        DBObject data = qxmodule.getInput().getData().getData();
-        VimUtils.setValues(certBrowser, data);
-        VimUtils.print(certBrowser);
-        if (dpmodule.getError() != null) {
-            UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + qxmodule.getError(),
-                    SWT.ICON_ERROR);
-            return;
         }
-
         // 设置模块为可上传
+        ((CertPrintModule) modules[0]).setHasPrint(true);
         ((CertPrintModule) modules[0]).setCanUploadData(true);
         navigator.update(certPrintModule, null);
 
     }
 
-    public void doUpload(CertPrintModule certPrintModule) {
+    private void setHGZPaperNumber(PrintModule module) {
+        Integer inputPageNumber = module.getPaperNumber();
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        String pnum;
+        if(inputPageNumber!=null){
+            pnum = String.format("%07d", inputPageNumber.intValue());
+        }else{
+            pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
+        }
+        module.getInput().getData().setValue(VimUtils.mVeh_Zzbh, pnum);
+    }
 
-        List<DBObject> list = new ArrayList<DBObject>();
-        PrintModule[] sb = certPrintModule.getSubModules();
-        for(int i=0;i<sb.length;i++){
-            DataObjectEditorInput input = sb[i].getInput();
-            if(input!=null){
-                DBObject moduleData = input.getData().getData();
-                if(moduleData!=null){
-                    list.add(moduleData);
+    public void doUpload(CertPrintModule certPrintModule) {
+        if (!VimUtils.debug) {
+            List<DBObject> list = new ArrayList<DBObject>();
+            PrintModule[] sb = certPrintModule.getSubModules();
+            for (int i = 0; i < sb.length; i++) {
+                DataObjectEditorInput input = sb[i].getInput();
+                if (input != null) {
+                    DBObject moduleData = input.getData().getData();
+                    if (moduleData != null) {
+                        list.add(moduleData);
+                    }
                 }
             }
-        }
-        try {
-            VimUtils.uploadCert(list);
-        } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "上传", "合格证数据上传时发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
-            return;
+            try {
+                VimUtils.uploadCert(list);
+            } catch (Exception e) {
+                UIUtils.showMessage(getShell(), "上传", "合格证数据上传时发生错误\n" + e.getMessage(),
+                        SWT.ICON_ERROR);
+                return;
+            }
         }
 
         ((CertPrintModule) modules[0]).setCanUploadData(false);

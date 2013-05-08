@@ -1,9 +1,6 @@
 package com.sg.vim.print.module;
 
-import org.bson.types.ObjectId;
-
 import com.mobnut.commons.util.file.FileUtil;
-import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
@@ -90,5 +87,6 @@ public class COCPrintModule extends PrintModule {
     public String getName() {
         return NAME;
     }
+
 
 }

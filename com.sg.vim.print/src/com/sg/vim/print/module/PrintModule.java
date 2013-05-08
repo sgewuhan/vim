@@ -34,6 +34,10 @@ public abstract class PrintModule {
     protected DBObject cocData;
     private HashMap<String, Object> callbackProperties;
 	private String error;
+	
+    protected Integer paperNumber;
+    private boolean hasPrint = false;
+
     
     public void setCallbackProperties(String key, Object value) {
         if(callbackProperties==null){
@@ -62,6 +66,8 @@ public abstract class PrintModule {
         this.dpcocData = (DBObject) para.get(PARA_DPCOC_DATA);
         this.confData = (DBObject) para.get(PARA_CONF_DATA);
         this.cocData = (DBObject) para.get(PARA_COC_DATA);
+        paperNumber = null;
+        hasPrint = false;
     }
 
     public abstract DataObjectEditorInput getInput();
@@ -97,5 +103,41 @@ public abstract class PrintModule {
 	public String getError(){
 		return error;
 	}
+
+    public String getInputPaperNumber() {
+        return "";
+    }
     
+    public String getDisplayedPaperNumber() {
+        return "";
+    }
+
+    public void setInputPaperNumber(int i) {
+        paperNumber = i;
+        
+    }
+    
+    public Integer getPaperNumber(){
+        return paperNumber;
+    }
+
+    public boolean canInputPaperNumber() {
+        return false;
+    }
+    
+    public boolean isHasPrint() {
+        return hasPrint;
+    }
+
+    public void setHasPrint(boolean hasPrint) {
+        this.hasPrint = hasPrint;
+    }
+
+    public void save() {
+        DataObjectEditorInput input = getInput();
+        if(input!=null){
+            input.save();
+        }
+    }
+
 }

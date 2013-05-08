@@ -1,4 +1,4 @@
-package com.sg.vim.print.editor;
+package com.sg.vim.print.function;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +8,11 @@ import org.eclipse.jface.util.Util;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.ColumnViewer;
-import org.eclipse.jface.viewers.ColumnViewerEditor;
-import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
-import org.eclipse.jface.viewers.ColumnViewerEditorActivationStrategy;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
-import org.eclipse.jface.viewers.FocusCellOwnerDrawHighlighter;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.TableViewerEditor;
-import org.eclipse.jface.viewers.TableViewerFocusCellManager;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.swt.SWT;
@@ -32,14 +25,18 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 
 import com.mobnut.commons.util.Utils;
+import com.mobnut.commons.util.file.FileUtil;
 import com.mobnut.db.DBActivator;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.sg.ui.ImageResource;
+import com.sg.ui.UI;
+import com.sg.ui.UIUtils;
 import com.sg.vim.datamodel.util.VimUtils;
 
-public class PrinterSetting extends EditorPart {
+public class PrinterSettingEditor extends EditorPart {
 
     public static final String[] functionsNameList = new String[] { "打印合格证", "打印车辆一致性证书", "打印燃油标识" };
 
@@ -162,35 +159,6 @@ public class PrinterSetting extends EditorPart {
 
     }
 
-    private static final class EditorActivationStrategy extends
-            ColumnViewerEditorActivationStrategy {
-
-        private EditorActivationStrategy(ColumnViewer viewer) {
-            super(viewer);
-
-            setEnableEditorActivationWithKeyboard(true);
-        }
-
-        @Override
-        protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
-            // boolean result;
-            if (event.eventType == ColumnViewerEditorActivationEvent.MOUSE_DOUBLE_CLICK_SELECTION) {
-                return true;
-            } else if (event.character == '\r') {
-                return true;
-            } else {
-                return false;
-            }
-
-            // if (event.character == '\r') {
-            // result = true;
-            // } else {
-            // result = super.isEditorActivationEvent(event);
-            // }
-            // return result;
-        }
-    }
-
     public class AddActionPrintItem extends PrinterItem {
 
         public AddActionPrintItem() {
@@ -198,7 +166,9 @@ public class PrinterSetting extends EditorPart {
 
         public String getText(String parameter) {
             if (VimUtils.mVeh_PrinterName.equals(parameter)) {
-                return "<a href=\"create\" target=\"_rwt\">注册新打印机</a>";
+                String image = "<img src='"+FileUtil.getImageURL(ImageResource.ADD_16, UI.PLUGIN_ID)+"'  width='16' height='16'/>";
+
+                return "<small>"+image+"<a href=\"create\" target=\"_rwt\">注册新打印机</a></small>";
             } else {
                 return "";
             }
@@ -240,12 +210,13 @@ public class PrinterSetting extends EditorPart {
             String text = (String) getValue(parameter);
             if (parameter.equals(VimUtils.mVeh_PrinterName)) {
                 if (!Utils.isNullOrEmpty(text)) {
-                    text = text + "     <a href=\"remove@" + index + "\" target=\"_rwt\">删除</a>";
+                    String image = "<img src='"+FileUtil.getImageURL(ImageResource.DELETE_16, UI.PLUGIN_ID)+"'  width='16' height='16'/>";
+                    text = "     <span  style='float:right;padding:0px'><small>"+ image+"<a href=\"remove@"
+                            + index + "\" target=\"_rwt\">删除</a></small></span>" + text;
                 }
             }
             return text;
         }
-
     }
 
     private TableViewer viewer;
@@ -253,7 +224,7 @@ public class PrinterSetting extends EditorPart {
     private DBCollection collection;
     private boolean isDirty;
 
-    public PrinterSetting() {
+    public PrinterSettingEditor() {
     }
 
     @Override
@@ -329,16 +300,8 @@ public class PrinterSetting extends EditorPart {
                 }
             }
         });
-        // *********************************设置表格可以编辑*********************************
-        ColumnViewerEditorActivationStrategy activationStrategy = new EditorActivationStrategy(
-                viewer);
-        FocusCellOwnerDrawHighlighter highlighter = new FocusCellOwnerDrawHighlighter(viewer);
-        TableViewerFocusCellManager focusManager = new TableViewerFocusCellManager(viewer,
-                highlighter);
-        int feature = ColumnViewerEditor.TABBING_HORIZONTAL
-                | ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR;
-        TableViewerEditor.create(viewer, focusManager, activationStrategy, feature);
-        // *********************************************************************************
+
+        UIUtils.enableTableViewerEditing(viewer);
 
         TableViewerColumn col = createEditableColumn("打印机名", VimUtils.mVeh_PrinterName, 180);
         col.setEditingSupport(new StringEditingSpport(VimUtils.mVeh_PrinterName, true));

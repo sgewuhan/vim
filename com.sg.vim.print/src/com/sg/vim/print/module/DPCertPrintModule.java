@@ -5,6 +5,7 @@ import org.bson.types.ObjectId;
 import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
 import com.sg.vim.print.module.action.DPCertPrintAction;
@@ -62,7 +63,7 @@ public class DPCertPrintModule extends PrintModule {
         // builder.append("<a href=\"" + _UPLOAD + "\" target=\"_rwt\">ÉÏ´«</a>   ");
         // }
         
-        if(dpcocData!=null){
+        if(VimUtils.debug&&dpcocData!=null){
             builder.append("<a href=\"" + _OPENCOC + "@" + getName()+ "@" + dpcocData.get("_id")
                     + "\" target=\"_rwt\">  coc  </a>   ");
         }
@@ -111,5 +112,27 @@ public class DPCertPrintModule extends PrintModule {
         return NAME;
     }
 
+    @Override
+    public String getInputPaperNumber() {
+        if(paperNumber!=null){
+            return String.format("%" + 0 + 7 + "d", paperNumber);
+        }else{
+            return "";
+        }
+    }
+    
+    @Override
+    public String getDisplayedPaperNumber() {
+        if(paperNumber==null){
+//            StringBuffer builder = new StringBuffer();
+//            builder.append("<img src=\"");
+//            builder.append(FileUtil.getImageURL("seq_48.png", PrintActivator.PLUGIN_ID, "image"));
+//            builder.append("\"  width='"+48+"' height='"+48+"' />");
+//            return builder.toString();
+            return "";
+        }else{
+            return "<span style='FONT-FAMILY:Î¢ÈíÑÅºÚ;font-size:11pt'><br/><ins>No.</ins>: "+getInputPaperNumber()+"</span>";
+        }
+    }
 
 }

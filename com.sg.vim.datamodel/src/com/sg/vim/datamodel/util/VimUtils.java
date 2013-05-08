@@ -31,7 +31,6 @@ import com.sg.ui.registry.config.DataEditorConfigurator;
 import com.sg.vim.datamodel.DataModelActivator;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
-import com.sg.vim.datamodel.vidcservice.ArrayOfNameValuePair;
 import com.sg.vim.datamodel.vidcservice.ArrayOfString;
 import com.sg.vim.datamodel.vidcservice.CertificateInfo;
 import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
@@ -51,6 +50,8 @@ public class VimUtils {
     private static final String MES_DB = "mes";
 
     private static final String COL_COCINFO = "cocinfo";
+    
+    public static final String COL_CERF = "certificate";
 
     private static final String COL_PRODUCTCODEINFO = "productcodeinfo";
 
@@ -74,8 +75,6 @@ public class VimUtils {
      * 制造日期
      */
     public static final String FIELD_MFT_DATE = "manufacture_date";
-
-    public static final String COL_CERF = "certificateinfo";
 
     public static final String mVeh_Clztxx = "Veh_Clztxx";// 车辆状态信息 字符 2 取值为QX和DP
     public static final String mVeh_Zchgzbh = "Veh_Zchgzbh";// 整车合格证编号 字符 14
@@ -207,8 +206,6 @@ public class VimUtils {
 
         for (int i = 0; i < paraSeq.length; i++) {
             Object value = dbo.get(paraSeq[i]);
-            value = doTransferBeforeInvokePrint(paraSeq[i], value);
-
             value = value == null ? "" : value;
             value = value.toString().replaceAll("\n", "%%");
             value = value.toString().replaceAll("\r", "%%");
@@ -601,17 +598,6 @@ public class VimUtils {
         return result;
     }
 
-    private static Object doTransferBeforeInvokePrint(String key, Object value) {
-        if (key.equals(mVeh_Zzbh)) {// 处理纸张编号
-            try {
-                int i = Integer.parseInt(value.toString());
-                return String.format("%07d", i);
-            } catch (Exception e) {
-            }
-        }
-        return value;
-    }
-
     public static void uploadCert(List<DBObject> certList) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
@@ -623,9 +609,9 @@ public class VimUtils {
 
         OperateResult r = vidService.uploadInsertEnt(cis);
         int rCode = r.getResultCode();
-        ArrayOfNameValuePair detail = r.getResultDetail();
-        String result = GetResultMessage(r);
-        System.out.println(result);
+        if(rCode==1){
+            throw new Exception(GetResultMessage(r));
+        }
     }
     
     static String GetResultMessage(OperateResult oResult)
@@ -650,7 +636,11 @@ public class VimUtils {
             cis.getCertificateInfo().add(certificateInfo);
         }
 
-        vidService.uploadOverTimeEnt(cis, memo);
+        OperateResult r = vidService.uploadOverTimeEnt(cis, memo);
+        int rCode = r.getResultCode();
+        if(rCode==1){
+            throw new Exception(GetResultMessage(r));
+        }
     }
 
     public static void updateCert(List<DBObject> certList, String memo) throws Exception {
@@ -662,17 +652,25 @@ public class VimUtils {
             cis.getCertificateInfo().add(certificateInfo);
         }
 
-        vidService.uploadUpdateEnt(cis, memo);
+        OperateResult r = vidService.uploadUpdateEnt(cis, memo);
+        int rCode = r.getResultCode();
+        if(rCode==1){
+            throw new Exception(GetResultMessage(r));
+        }
     }
 
-    public static void deleteCert(List<String> certNumberList, String memo) {
+    public static void deleteCert(List<String> certNumberList, String memo) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfString wzhgzbhs = new ArrayOfString();
         for (int i = 0; i < certNumberList.size(); i++) {
             wzhgzbhs.getString().add(certNumberList.get(i));
         }
 
-        vidService.uploadDeleteEnt(wzhgzbhs, memo);
+       OperateResult r = vidService.uploadDeleteEnt(wzhgzbhs, memo);
+       int rCode = r.getResultCode();
+       if(rCode==1){
+           throw new Exception(GetResultMessage(r));
+       }
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {

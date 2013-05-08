@@ -51,6 +51,13 @@
             name="底盘合格证顺序号"
             seqname="Veh_DPhgzbh">
       </seq>
+      <seq
+            collectionname="ids"
+            dbname="appportal"
+            id="com.sg.vim.seq.ggzzzh"
+            name="合格证纸张顺序号"
+            seqname="Veh_Zzbh">
+      </seq>
    </extension>
    <!--extension
          point="com.sg.ui.dataEditor">
