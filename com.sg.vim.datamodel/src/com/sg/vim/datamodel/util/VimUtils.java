@@ -50,7 +50,7 @@ public class VimUtils {
     private static final String MES_DB = "mes";
 
     private static final String COL_COCINFO = "cocinfo";
-    
+
     public static final String COL_CERF = "certificate";
 
     private static final String COL_PRODUCTCODEINFO = "productcodeinfo";
@@ -161,7 +161,7 @@ public class VimUtils {
 
     public static final String mVeh_Cddbj = "Veh_Cddbj";
 
-    //**** 以下属性在打印时没有，但在上传时有 *****/
+    // **** 以下属性在打印时没有，但在上传时有 *****/
     public static final String mVeh__Hzdfs = "Veh_Hzdfs";
 
     public static final String mVeh__Hzdczfs = "Veh_Hzdczfs";
@@ -174,12 +174,11 @@ public class VimUtils {
 
     public static final String mVeh__Pzxlh = "Veh_Pzxlh";
 
-    
-    //*********以下字段用于打印机设置数据的保存
+    // *********以下字段用于打印机设置数据的保存
     public static final String mVeh_A_PrinterFunction = "Veh_A_PrinterFunction";
     public static final String mVeh_A_PrinterDesc = "Veh_A_PrinterDesc";
-    //*******/
-    
+    // *******/
+
     public static final String[] COLOR_CODE = new String[] { "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M" };
     public static final String[] COLOR_NAME = new String[] { "银色", "红色", "白色", "紫色", "蓝色", "金色",
@@ -409,7 +408,7 @@ public class VimUtils {
         // Veh_PFbz C_06 排放标准 映射
         result.put(mVeh_Pfbz, cocData.get(IVIMFields.C_06));
         // Veh_Yh C_03 油耗 映射
-        result.put(mVeh_Yh, cocData.get(IVIMFields.D_16));//取C_03还是D_16?
+        result.put(mVeh_Yh, cocData.get(IVIMFields.D_16));// 取C_03还是D_16?
         // Veh_WkC F_6_1 外廓长 映射
         result.put(mVeh_Wkc, cocData.get(IVIMFields.F_6_1));
         // Veh_Wkk F_7_1 外廓宽 映射
@@ -609,19 +608,17 @@ public class VimUtils {
 
         OperateResult r = vidService.uploadInsertEnt(cis);
         int rCode = r.getResultCode();
-        if(rCode==1){
+        if (rCode == 1) {
             throw new Exception(GetResultMessage(r));
         }
     }
-    
-    static String GetResultMessage(OperateResult oResult)
-    {
+
+    static String GetResultMessage(OperateResult oResult) {
         StringBuffer sb = new StringBuffer();
 
         sb.append(String.format("操作结果:%s\r\n", oResult.getResultCode()));
 
-        for (NameValuePair nvp : oResult.getResultDetail().getNameValuePair())
-        {
+        for (NameValuePair nvp : oResult.getResultDetail().getNameValuePair()) {
             sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
         }
         return sb.toString();
@@ -638,7 +635,7 @@ public class VimUtils {
 
         OperateResult r = vidService.uploadOverTimeEnt(cis, memo);
         int rCode = r.getResultCode();
-        if(rCode==1){
+        if (rCode == 1) {
             throw new Exception(GetResultMessage(r));
         }
     }
@@ -654,7 +651,7 @@ public class VimUtils {
 
         OperateResult r = vidService.uploadUpdateEnt(cis, memo);
         int rCode = r.getResultCode();
-        if(rCode==1){
+        if (rCode == 1) {
             throw new Exception(GetResultMessage(r));
         }
     }
@@ -666,11 +663,11 @@ public class VimUtils {
             wzhgzbhs.getString().add(certNumberList.get(i));
         }
 
-       OperateResult r = vidService.uploadDeleteEnt(wzhgzbhs, memo);
-       int rCode = r.getResultCode();
-       if(rCode==1){
-           throw new Exception(GetResultMessage(r));
-       }
+        OperateResult r = vidService.uploadDeleteEnt(wzhgzbhs, memo);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(GetResultMessage(r));
+        }
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
@@ -755,7 +752,7 @@ public class VimUtils {
         // 校验码，由打印接口生成
         String value = (String) data.get(mVeh_Jyw);
         // Assert.isNotNull(value, "打印校验码不可为空");
-        info.setHDUSER(value);
+        info.setVERCODE(value);
 
         // 12
         // VERSION
@@ -863,7 +860,7 @@ public class VimUtils {
         //
         value = (String) data.get(mVeh_Zzbh);
         // Assert.isNotNull(value, "纸张编号不可为空");
-        info.setZXZS(value);
+        info.setZZBH(value);
         //
         // 24
         // BGCAZZDYXZZL
@@ -898,7 +895,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clmc);
-//        Assert.isNotNull(value, "车辆名称不可为空");
+        // Assert.isNotNull(value, "车辆名称不可为空");
         info.setCLMC(value);
         //
         // 28
@@ -907,7 +904,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clpp);
-//        Assert.isNotNull(value, "车辆品牌不可为空");
+        // Assert.isNotNull(value, "车辆品牌不可为空");
         info.setCLPP(value);
         //
         // 29
@@ -916,7 +913,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clsbdh);
-//        Assert.isNotNull(value, "车辆识别代号不可为空");
+        // Assert.isNotNull(value, "车辆识别代号不可为空");
         info.setCLSBDH(value);
         //
         // 30
@@ -925,7 +922,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clxh);
-//        Assert.isNotNull(value, "车辆型号不可为空");
+        // Assert.isNotNull(value, "车辆型号不可为空");
         info.setCLXH(value);
         //
         // 31
@@ -934,7 +931,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Clzzqymc);
-//        Assert.isNotNull(value, "车辆制造企业名称不可为空");
+        // Assert.isNotNull(value, "车辆制造企业名称不可为空");
         info.setCLZZQYMC(value);
         //
         // 32
@@ -943,7 +940,7 @@ public class VimUtils {
         // s:dateTime
         //
         value = (String) data.get(mVeh_Clzzrq);
-//        Assert.isNotNull(value, "车辆制造日期");
+        // Assert.isNotNull(value, "车辆制造日期");
         Date dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
         nowGregorianCalendar = new GregorianCalendar();
         nowGregorianCalendar.setTime(dValue);
@@ -956,7 +953,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Cpggh);
-//        Assert.isNotNull(value, "产品号不可为空");
+        // Assert.isNotNull(value, "产品号不可为空");
         info.setCPH(value);
         //
         // 34
@@ -965,7 +962,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Cpscdz);
-//        Assert.isNotNull(value, "产品生产地址不可为空");
+        // Assert.isNotNull(value, "产品生产地址不可为空");
         info.setCPSCDZ(value);
         //
         // 35
@@ -983,7 +980,7 @@ public class VimUtils {
         // s:string
         //
         value = (String) data.get(mVeh_Dphgzbh);
-//        Assert.isNotNull(value, "底盘合格证编号不可为空");
+        // Assert.isNotNull(value, "底盘合格证编号不可为空");
         info.setDPHGZBH(value);
         //
         // 37
