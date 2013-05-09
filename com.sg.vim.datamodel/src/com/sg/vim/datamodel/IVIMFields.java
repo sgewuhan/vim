@@ -393,8 +393,8 @@ public class IVIMFields {
     public static final String mVeh_Yh = "Veh_Yh";// 油耗 字符 30
 
     public static final String mVeh_Cpggh = "Veh_Cpggh";// 公告号
-    public static final String mVeh_Ggpc = "Veh_Ggpc";
-    public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";
+    public static final String mVeh_Ggpc = "Veh_Ggpc";//公告批次
+    public static final String mVeh_Ggsxrq = "Veh_Ggsxrq";//公告生效日期
 
     public static final String mVeh_Dywym = "Veh_Dywym";// 打印唯一码
 
@@ -441,11 +441,22 @@ public class IVIMFields {
     /**打印日期**/
     public static final String PRINTDATE = "pnt_date";
     public static final String PRINTACCOUNT = "pnt_account";
+    public static final String UPLOADDATE = "upl_date";
+    public static final String UPLOADACCOUNT = "upl_account";
+
     public static final String LIFECYCLE = "lifecycle";
-    public static final Object LC_PRINTED = "已打印";
+    public static final String LC_PRINTED = "已打印";
+    public static final String LC_UPLOADED = "已上传";
     
     
     public static final String[] PRINTER_FUNCTIONS = new String[] { "打印合格证", "打印车辆一致性证书", "打印燃油标识" };
+    public static final String ACTION_REC = "action_rec";
+    public static final String ACTION_REC_DATE = "act_date";
+    public static final String ACTION_REC_TYPE = "act_type";
+    public static final String ACTION_REC_ACCOUNT = "act_account";
+    public static final String ACTION_REC_MEMO = "act_memo";
+    public static final String ACTION_REC_TYPE_VALUE_PRINT = "打印";
+    public static final Object ACTION_REC_TYPE_VALUE_UPLOAD = "上传";
 
 
 }

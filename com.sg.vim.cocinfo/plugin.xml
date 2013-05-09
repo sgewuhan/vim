@@ -1864,7 +1864,7 @@
             customItemHeight="72"
             dbName="appportal"
             fullSelection="true"
-            headerVisiable="true"
+            headerVisiable="false"
             id="com.sg.vim.table.productcode"
             idfield="_id"
             inputProvider="com.sg.vim.datamodel.ProductCodeInfoInput"

@@ -91,10 +91,15 @@ public abstract class PrintModule {
     public boolean canPrintData() {
         return getInput() != null;
     }
-    
 
     public void setLifecycle(String lifecycle) {
         this.lifecycle = lifecycle;
+        PrintModule[] sm = getSubModules();
+        if (sm != null) {
+            for (int i = 0; i < sm.length; i++) {
+                sm[i].setLifecycle(lifecycle);
+            }
+        }
     }
 
     public abstract void fireEvent(String eventCode, String[] args, PrintContent printContent);
@@ -172,7 +177,7 @@ public abstract class PrintModule {
     }
 
     public static IContentProvider getContentProvider() {
-       return new ITreeContentProvider() {
+        return new ITreeContentProvider() {
 
             @Override
             public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -203,10 +208,9 @@ public abstract class PrintModule {
             }
         };
     }
-    
 
     public void doPrint(PrintContent pc) {
-        
+
     }
 
     public DBObject getData() {
@@ -214,6 +218,6 @@ public abstract class PrintModule {
     }
 
     public void setValue(String key, Object value) {
-        getInput().getData().setValue(key, value)   ;     
+        getInput().getData().setValue(key, value);
     }
 }

@@ -17,6 +17,7 @@ import org.eclipse.swt.browser.Browser;
 import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
 import com.mobnut.db.utils.DBUtil;
+import com.mobnut.portal.user.UserSessionContext;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -1305,10 +1306,11 @@ public class VimUtils {
         DBCollection col = DBActivator.getCollection("appportal", "printers");
         DBObject data = col.findOne(new BasicDBObject().append(IVIMFields.mVeh_A_PrinterFunction,
                 printfunctionName));
-        if(data!=null){
-            HashMap<String, String> result = new HashMap<String,String>();
+        if (data != null) {
+            HashMap<String, String> result = new HashMap<String, String>();
             result.put(IVIMFields.mVeh_PrinterName, (String) data.get(IVIMFields.mVeh_PrinterName));
-            result.put(IVIMFields.mVeh_PrintPosLeft, (String) data.get(IVIMFields.mVeh_PrintPosLeft));
+            result.put(IVIMFields.mVeh_PrintPosLeft,
+                    (String) data.get(IVIMFields.mVeh_PrintPosLeft));
             result.put(IVIMFields.mVeh_PrintPosTop, (String) data.get(IVIMFields.mVeh_PrintPosTop));
             result.put(IVIMFields.mVeh_Connect, (String) data.get(IVIMFields.mVeh_Connect));
             result.put(IVIMFields.mVeh_Baud, (String) data.get(IVIMFields.mVeh_Baud));
@@ -1318,5 +1320,25 @@ public class VimUtils {
             return result;
         }
         return null;
+    }
+
+    public static void saveUploadData(List<ObjectId> idList) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
+                .append(IVIMFields.ACTION_REC_MEMO, "");
+
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
+                .append(IVIMFields.UPLOADDATE, date).append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+
+        col.update(query, update, false, true);
+
     }
 }

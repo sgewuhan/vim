@@ -98,7 +98,7 @@ public class CertificateInfo extends AuthCollectionService {
 	 */
 	@Override
 	protected String getCollectionName() {
-		return "certificateinfo";
+		return "certificate";
 	}
 
 	/* (non-Javadoc)

@@ -10,7 +10,7 @@
                id="com.sg.vim.view.certificate"
                minimized="false"
                moveable="false"
-               ratio="1"
+               ratio="0.4"
                relationship="left"
                relative="org.eclipse.ui.editorss"
                showTitle="true"
@@ -110,6 +110,236 @@
             id="com.sg.vim.view.certificate"
             provideSelection="true"
             table="com.sg.vim.table.certificate">
+         <filterAction>
+            <column
+                  column="lifecycle"
+                  name="状态"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clsbdh"
+                  name="车辆识别代号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clztxx"
+                  name="车辆状态信息"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Wzghzbh"
+                  name="完整合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Zzbh"
+                  name="纸张编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clmc"
+                  name="车辆名称"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clxh"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Pzxlh"
+                  name="配置序列号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Fzrq"
+                  name="发证日期"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Zchgzbh"
+                  name="整车合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Dphgzbh"
+                  name="底盘合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clfl"
+                  name="车辆分类"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clpp"
+                  name="车辆品牌"
+                  type="String">
+            </column>
+            <column
+                  column="pnt_date"
+                  name="打印日期"
+                  type="String">
+            </column>
+            <column
+                  column="pnt_account"
+                  name="打印者"
+                  type="String">
+            </column></filterAction>
+         <queryAction>
+            <column
+                  column="lifecycle"
+                  name="状态"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clsbdh"
+                  name="车辆识别代号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clztxx"
+                  name="车辆状态信息"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Wzghzbh"
+                  name="完整合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Zzbh"
+                  name="纸张编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clmc"
+                  name="车辆名称"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clxh"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Pzxlh"
+                  name="配置序列号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Fzrq"
+                  name="发证日期"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Zchgzbh"
+                  name="整车合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Dphgzbh"
+                  name="底盘合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clfl"
+                  name="车辆分类"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clpp"
+                  name="车辆品牌"
+                  type="String">
+            </column>
+            <column
+                  column="pnt_date"
+                  name="打印日期"
+                  type="String">
+            </column>
+            <column
+                  column="pnt_account"
+                  name="打印者"
+                  type="String">
+            </column>
+         </queryAction>
+         <searchAction>
+            <column
+                  column="lifecycle"
+                  name="状态"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clsbdh"
+                  name="车辆识别代号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clztxx"
+                  name="车辆状态信息"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Wzghzbh"
+                  name="完整合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Zzbh"
+                  name="纸张编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clmc"
+                  name="车辆名称"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clxh"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Pzxlh"
+                  name="配置序列号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Fzrq"
+                  name="发证日期"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Zchgzbh"
+                  name="整车合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Dphgzbh"
+                  name="底盘合格证编号"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clfl"
+                  name="车辆分类"
+                  type="String">
+            </column>
+            <column
+                  column="Veh_Clpp"
+                  name="车辆品牌"
+                  type="String">
+            </column>
+            <column
+                  column="pnt_date"
+                  name="打印日期"
+                  type="String">
+            </column>
+            <column
+                  column="pnt_account"
+                  name="打印者"
+                  type="String">
+            </column>
+         </searchAction>
       </navigator>
       <navigator
             id="com.sg.vim.view.fuelid"
@@ -764,489 +994,6 @@
                name="10.1 车辆在地面上的投影面积(m2)"
                type="String"
                width="184">
-         </column>
-      </table>
-      <table
-            canCreate="true"
-            canDelete="true"
-            collectionName="certificateinfo"
-            customItemHeight="72"
-            dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
-            editorId="com.sg.vim.print.editor.certificate"
-            fix="2"
-            fullSelection="true"
-            hasBorder="false"
-            headerVisiable="true"
-            id="com.sg.vim.table.certificate"
-            idfield="_id"
-            inputProvider="com.sg.vim.remove.data.CentificateInfoInput"
-            lineVisiable="true"
-            markupEnabled="false"
-            multiSelection="true"
-            useHashlookup="false"
-            virtual="true">
-         <column
-               column="f_0_1"
-               name="车辆制造企业名称"
-               type="String"
-               width="83">
-         </column>
-         <column
-               column="e_02"
-               name="车身颜色"
-               type="String"
-               width="89">
-         </column>
-         <column
-               column="f_0_2_1"
-               name="车辆名称"
-               type="String"
-               width="91">
-         </column>
-         <column
-               column="f_c0_2"
-               name="车辆品牌"
-               type="String"
-               width="92">
-         </column>
-         <column
-               column="f_0_4"
-               name="车辆型号(类别)"
-               type="String"
-               width="96">
-         </column>
-         <column
-               column="f_0_5b"
-               name="车辆生产单位地址"
-               type="String"
-               width="106">
-         </column>
-         <column
-               column="f_1"
-               name="轴数"
-               type="String"
-               width="107">
-         </column>
-         <column
-               column="f_1_1"
-               name="轮胎数量"
-               type="String"
-               width="109">
-         </column>
-         <column
-               column="f_3"
-               name="轴距"
-               type="String"
-               width="110">
-         </column>
-         <column
-               column="f_5"
-               name="前轮距/后轮距"
-               type="String"
-               width="111">
-         </column>
-         <column
-               column="f_6_1"
-               name="外廓尺寸长"
-               type="String"
-               width="112">
-         </column>
-         <column
-               column="f_7_1"
-               name="外廓尺寸高"
-               type="String"
-               width="113">
-         </column>
-         <column
-               column="f_8"
-               name="外廓尺寸宽"
-               type="String"
-               width="114">
-         </column>
-         <column
-               column="f_14_1"
-               name="总质量"
-               type="String"
-               width="115">
-         </column>
-         <column
-               column="f_14_2"
-               name="轴荷"
-               type="String"
-               width="116">
-         </column>
-         <column
-               column="f_c4"
-               name="发动机型号"
-               type="String"
-               width="117">
-         </column>
-         <column
-               column="f_24"
-               name="排量"
-               type="String"
-               width="119">
-         </column>
-         <column
-               column="f_25"
-               name="燃料种类"
-               type="String"
-               width="120">
-         </column>
-         <column
-               column="f_32"
-               name="轮胎规格"
-               type="String"
-               width="121">
-         </column>
-         <column
-               column="f_42_1"
-               name="额定载客"
-               type="String"
-               width="127">
-         </column>
-         <column
-               column="f_44"
-               name="最高设计车速"
-               type="String"
-               width="128">
-         </column>
-         <column
-               column="f_c5"
-               name="载质量利用系数"
-               type="String"
-               width="133">
-         </column>
-         <column
-               column="f_c6"
-               name="钢板弹簧片数"
-               type="String"
-               width="134">
-         </column>
-         <column
-               column="f_c34"
-               name="转向形式"
-               type="String"
-               width="141">
-         </column>
-         <column
-               column="f_c7_1"
-               name="货箱内部尺寸长"
-               type="String"
-               width="148">
-         </column>
-         <column
-               column="f_c7_2"
-               name="货箱内部尺寸高"
-               type="String"
-               width="152">
-         </column>
-         <column
-               column="f_c7_3"
-               name="货箱内部尺寸宽"
-               type="String"
-               width="157">
-         </column>
-         <column
-               column="c_01"
-               name="功率"
-               type="String"
-               width="158">
-         </column>
-         <column
-               column="c_02"
-               name="驾驶室准乘人数"
-               type="String"
-               width="159">
-         </column>
-         <column
-               column="c_03"
-               name="油耗"
-               type="String"
-               width="160">
-         </column>
-         <column
-               column="c_04"
-               name="半挂车鞍座最大允许总质量"
-               type="String"
-               width="161">
-         </column>
-         <column
-               column="c_05"
-               name="其他"
-               type="String"
-               width="162">
-         </column>
-         <column
-               column="c_06"
-               name="排放标准"
-               type="String"
-               width="163">
-         </column>
-         <column
-               column="c_07"
-               name="底盘型号"
-               type="String"
-               width="164">
-         </column>
-         <column
-               column="c_08"
-               name="整备质量"
-               type="String"
-               width="165">
-         </column>
-         <column
-               column="c_09"
-               name="额定载质量"
-               type="String"
-               width="166">
-         </column>
-         <column
-               column="c_10"
-               name="准牵引总质量"
-               type="String"
-               width="167">
-         </column>
-         <column
-               column="c_11"
-               name="合格证＿备注"
-               type="String"
-               width="168">
-         </column>
-         <column
-               column="c_12"
-               name="底盘ID"
-               type="String"
-               width="169">
-         </column>
-         <column
-               column="c_13"
-               name="转向轴数"
-               type="String"
-               width="170">
-         </column>
-         <column
-               column="c_14"
-               name="企业编号"
-               type="String"
-               width="171">
-         </column>
-         <column
-               column="c_15"
-               name="后制动操作方式"
-               type="String"
-               width="172">
-         </column>
-         <column
-               column="c_16"
-               name="后制动方式"
-               type="String"
-               width="173">
-         </column>
-         <column
-               column="c_17"
-               name="企业标准"
-               type="String"
-               width="174">
-         </column>
-         <column
-               column="c_18"
-               name="企业其它信息"
-               type="String"
-               width="175">
-         </column>
-         <column
-               column="c_19"
-               name="前制动操作方式"
-               type="String"
-               width="176">
-         </column>
-         <column
-               column="c_20"
-               name="前制动方式"
-               type="String"
-               width="177">
-         </column>
-         <column
-               column="c_21"
-               name="纯电动标记"
-               type="String"
-               width="178">
-         </column>
-         <column
-               column="c_22"
-               name="车辆类型"
-               type="String"
-               width="179">
-         </column>
-         <column
-               column="c_23"
-               name="车辆状态信息"
-               type="String"
-               width="180">
-         </column>
-         <column
-               column="c_25"
-               name="车辆制造日期"
-               type="String"
-               width="181">
-         </column>
-         <column
-               column="c_26"
-               name="车辆识别代码/车架号(VIN)"
-               type="String"
-               width="182">
-         </column>
-         <column
-               column="c_27"
-               name="状态"
-               type="String"
-               width="183">
-         </column>
-         <column
-               column="c_28"
-               name="上传主机硬件信息"
-               type="String"
-               width="184">
-         </column>
-         <column
-               column="c_29"
-               name="上传日期"
-               type="String"
-               width="185">
-         </column>
-         <column
-               column="c_30"
-               name="公安反馈时间"
-               type="String"
-               width="186">
-         </column>
-         <column
-               column="c_31"
-               name="反馈码"
-               type="String"
-               width="187">
-         </column>
-         <column
-               column="c_32"
-               name="上传主机地址"
-               type="String"
-               width="188">
-         </column>
-         <column
-               column="c_33"
-               name="企业用户名"
-               type="String"
-               width="189">
-         </column>
-         <column
-               column="c_34"
-               name="U盾标识"
-               type="String"
-               width="190">
-         </column>
-         <column
-               column="c_35"
-               name="更新日期"
-               type="String"
-               width="191">
-         </column>
-         <column
-               column="c_36"
-               name="上传标记"
-               type="String"
-               width="192">
-         </column>
-         <column
-               column="c_37"
-               name="校验码"
-               type="String"
-               width="193">
-         </column>
-         <column
-               column="c_38"
-               name="上传系统版本信息"
-               type="String"
-               width="194">
-         </column>
-         <column
-               column="c_39"
-               name="完整合格证编号"
-               type="String"
-               width="195">
-         </column>
-         <column
-               column="c_40"
-               name="规则：改动车辆日期"
-               type="String"
-               width="196">
-         </column>
-         <column
-               column="c_41"
-               name="操作日期"
-               type="String"
-               width="197">
-         </column>
-         <column
-               column="c_42"
-               name="打印唯一码"
-               type="String"
-               width="198">
-         </column>
-         <column
-               column="c_43"
-               name="整车合格证编号"
-               type="String"
-               width="199">
-         </column>
-         <column
-               column="c_44"
-               name="纸张编号 "
-               type="String"
-               width="200">
-         </column>
-         <column
-               column="c_45"
-               name="发证日期"
-               type="String"
-               width="201">
-         </column>
-         <column
-               column="c_46"
-               name="底盘合格证编号"
-               type="String"
-               width="202">
-         </column>
-         <column
-               column="c_47"
-               name="二维码"
-               type="String"
-               width="203">
-         </column>
-         <column
-               column="c_48"
-               name="合格证编号（固定＋国家＋递增）"
-               type="String"
-               width="204">
-         </column>
-         <column
-               column="c_49"
-               name="发证时间"
-               type="String"
-               width="205">
-         </column>
-         <column
-               column="c_50"
-               name="发动机号"
-               type="String"
-               width="206">
-         </column>
-         <column
-               column="c_51"
-               name="配置序列号"
-               type="String"
-               width="207">
          </column>
       </table>
       <table
@@ -3031,13 +2778,15 @@
    <extension
          point="com.sg.ui.dataEditor">
       <editor
-            collectionName="certificateinfo"
+            collectionName="certificate"
             dbName="appportal"
             id="com.sg.vim.print.editor.certificate"
+            labelFieldName="Veh_Clxh"
             name="整车合格证">
          <basicpage
+               description="车辆基本信息"
                id="1"
-               title="合格证数据">
+               title="车辆基本信息">
             <pagecolumn>
                <section
                      label="基本信息">
@@ -3053,6 +2802,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Zchgzbh"
                         label="整车合格证编号"
                         name="Veh_Zchgzbh"
@@ -3062,6 +2812,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Dphgzbh"
                         label="底盘合格证编号"
                         name="Veh_Dphgzbh"
@@ -3071,6 +2822,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Fzrq"
                         label="发证日期"
                         name="Veh_Fzrq"
@@ -3080,6 +2832,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clzzqymc"
                         label="车辆制造企业名称"
                         name="Veh_Clzzqymc"
@@ -3088,6 +2841,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Qyid"
                         label="企业ID"
                         name="Veh_Qyid"
@@ -3097,6 +2851,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Cpggh"
                         label="产品公告号"
                         name="Veh_Cpggh"
@@ -3106,6 +2861,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggpc"
                         label="公告批次"
                         name="Veh_Ggpc"
@@ -3115,6 +2871,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggsxrq"
                         label="公告生效日期"
                         name="Veh_Ggsxrq"
@@ -3124,23 +2881,22 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Zzbh"
-                        inputValidator="com.sg.vim.print.validator.Veh_Zzbh_Validator"
                         label="纸张编号"
                         name="Veh_Zzbh"
-                        presentation="com.sg.vim.print.presentation.Veh_Zzbh_Presentation"
-                        required="true"
+                        required="false"
                         textLimit="7"
                         tooltips="必须是长度7位的数字"
                         type="String">
                   </field>
                </section>
-            </pagecolumn>
-            <pagecolumn>
                <section
+                     expand="false"
                      label="车辆型号信息">
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clfl"
                         label="车辆分类"
                         name="Veh_Clfl"
@@ -3150,6 +2906,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clmc"
                         label="车辆名称"
                         name="Veh_Clmc"
@@ -3159,6 +2916,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clpp"
                         label="车辆品牌"
                         name="Veh_Clpp"
@@ -3167,6 +2925,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clxh"
                         label="车辆型号"
                         name="Veh_Clxh"
@@ -3175,6 +2934,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Csys"
                         label="车身颜色"
                         name="Veh_Csys"
@@ -3184,6 +2944,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clzzrq"
                         label="车辆制造日期"
                         name="Veh_Clzzrq"
@@ -3192,355 +2953,12 @@
                         type="String">
                   </field>
                </section>
-            </pagecolumn>
-         </basicpage>
-         <basicpage
-               id="2"
-               title="合格证参数II">
-            <pagecolumn>
                <section
-                     label="车辆分类、底盘、发动机">
+                     expand="false"
+                     label="公告信息">
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Dpxh"
-                        label="底盘型号"
-                        name="Veh_Dpxh"
-                        textLimit="30"
-                        tooltips="对于QX方式时使用"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Dpid"
-                        label="底盘ID"
-                        name="Veh_Dpid"
-                        textLimit="7"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Clsbdh"
-                        label="车辆识别代号"
-                        name="Veh_Clsbdh"
-                        textLimit="17"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Cjh"
-                        label="车架号"
-                        name="Veh_Cjh"
-                        textLimit="25"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Fdjh"
-                        label="发动机号"
-                        name="Veh_Fdjh"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Fdjxh"
-                        label="发动机型号"
-                        name="Veh_Fdjxh"
-                        textLimit="20"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-            <pagecolumn>
-               <section
-                     label="燃料、排放、功率等">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Rlzl"
-                        label="燃料种类"
-                        name="Veh_Rlzl"
-                        textLimit="30"
-                        tooltips="多种燃料之间用“/”分隔"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Pfbz"
-                        label="排放标准"
-                        name="Veh_Pfbz"
-                        textLimit="60"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Pl"
-                        label="排量"
-                        name="Veh_Pl"
-                        textLimit="5"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Gl"
-                        label="功率"
-                        name="Veh_Gl"
-                        textLimit="7"
-                        tooltips="多种功率之间用“/”分隔"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zxxs"
-                        label="转向形式"
-                        name="Veh_Zxxs"
-                        textLimit="6"
-                        tooltips="如：方向盘"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Yh"
-                        label="油耗"
-                        name="Veh_Yh"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Cddbj"
-                        label="纯电动标记"
-                        name="Veh_Cddbj"
-                        textLimit="1"
-                        tooltips="取值为1（是）、2（否），默认为2。纯电动车辆使用。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zgcs"
-                        label="最高车速"
-                        name="Veh_Zgcs"
-                        textLimit="5"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-         </basicpage>
-         <basicpage
-               id="3"
-               title="合格证参数III">
-            <pagecolumn>
-               <section
-                     label="规格、尺寸等参数">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Qlj"
-                        label="前轮距"
-                        name="Veh_Qlj"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hlj"
-                        label="后轮距"
-                        name="Veh_Hlj"
-                        textLimit="54"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Lts"
-                        label="轮胎数"
-                        name="Veh_Lts"
-                        textLimit="2"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Ltgg"
-                        label="轮胎规格"
-                        name="Veh_Ltgg"
-                        textLimit="20"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Gbthps"
-                        label="钢板弹簧片数"
-                        name="Veh_Gbthps"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zj"
-                        label="轴距"
-                        name="Veh_Zj"
-                        textLimit="60"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zh"
-                        label="轴荷"
-                        name="Veh_Zh"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zs"
-                        label="轴数"
-                        name="Veh_Zs"
-                        textLimit="1"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zxzs"
-                        label="转向轴个数"
-                        name="Veh_Zxzs"
-                        textLimit="1"
-                        tooltips="取值为1、2、3，默认为1。供多转向轴的车辆填写。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Wkc"
-                        label="外廓长"
-                        name="Veh_Wkc"
-                        textLimit="5"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Wkk"
-                        label="外廓宽"
-                        name="Veh_Wkk"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Wkg"
-                        label="外廓高"
-                        name="Veh_Wkg"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hxnbc"
-                        label="货厢内部长"
-                        name="Veh_Hxnbc"
-                        textLimit="5"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hxnbk"
-                        label="货厢内部宽"
-                        name="Veh_Hxnbk"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hxnbg"
-                        label="货厢内部高"
-                        name="Veh_Hxnbg"
-                        textLimit="4"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-            <pagecolumn>
-               <section
-                     label="质量参数">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zzl"
-                        label="总质量"
-                        name="Veh_Zzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Edzzl"
-                        label="额定载质量"
-                        name="Veh_Edzzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zbzl"
-                        label="整备质量"
-                        name="Veh_Zbzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zzllyxs"
-                        label="载质量利用系数"
-                        name="Veh_Zzllyxs"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zqyzzl"
-                        label="准牵引总质量"
-                        name="Veh_Zqyzzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Edzk"
-                        label="额定载客"
-                        name="Veh_Edzk"
-                        textLimit="3"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Bgcazzdyxzzl"
-                        label="半挂车鞍座最大允许总质量"
-                        name="Veh_Bgcazzdyxzzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="Veh_Jsszcrs"
-                        label="驾驶室准乘人数"
-                        name="Veh_Jsszcrs"
-                        textLimit="3"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-         </basicpage>
-         <basicpage
-               id="4"
-               title="合格证参数IV">
-            <pagecolumn>
-               <section
-                     label="其他信息">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Bz"
-                        label="备注"
-                        name="Veh_Bz"
-                        textLimit="300"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Qybz"
                         label="企业标准"
                         name="Veh_Qybz"
@@ -3550,6 +2968,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clscdwmc"
                         label="车辆生产单位名称"
                         name="Veh_Clscdwmc"
@@ -3558,6 +2977,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Cpscdz"
                         label="车辆生产单位地址"
                         name="Veh_Cpscdz"
@@ -3566,15 +2986,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Qyqtxx"
-                        label="企业其它信息"
-                        name="Veh_Qyqtxx"
-                        textLimit="400"
-                        tooltips="该项目内容需要回车换行的地方使用“%%”表示。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Cpggh"
                         label="产品公告号"
                         name="Veh_Cpggh"
@@ -3584,15 +2996,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Zzbh"
-                        label="纸张编号"
-                        name="Veh_Zzbh"
-                        textLimit="50"
-                        tooltips="可空"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggpc"
                         label="公告批次"
                         name="Veh_Ggpc"
@@ -3602,6 +3006,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggsxrq"
                         label="公告生效日期"
                         name="Veh_Ggsxrq"
@@ -3613,91 +3018,489 @@
             </pagecolumn>
             <pagecolumn>
                <section
-                     label="打印机">
+                     label="车辆分类、底盘、发动机">
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_PrinterName"
-                        label="目标打印机的名称"
-                        name="Veh_PrinterName"
+                        editable="false"
+                        id="Veh_Dpxh"
+                        label="底盘型号"
+                        name="Veh_Dpxh"
                         textLimit="30"
-                        tooltips="缺省为默认打印机"
+                        tooltips="对于QX方式时使用"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_PrintPosLeft"
-                        label="合格证打印的左边距"
-                        name="Veh_PrintPosLeft"
-                        textLimit="5"
-                        tooltips="默认值为15  单位：mm"
+                        editable="false"
+                        id="Veh_Dpid"
+                        label="底盘ID"
+                        name="Veh_Dpid"
+                        textLimit="7"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_PrintPosTop"
-                        label="合格证打印的上边距"
-                        name="Veh_PrintPosTop"
-                        textLimit="5"
-                        tooltips="默认值为15  单位：mm"
+                        editable="false"
+                        id="Veh_Clsbdh"
+                        label="车辆识别代号"
+                        name="Veh_Clsbdh"
+                        textLimit="17"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Connect"
-                        label="连接串口"
-                        name="Veh_Connect"
-                        textLimit="5"
-                        tooltips="默认值为COM1"
+                        editable="false"
+                        id="Veh_Cjh"
+                        label="车架号"
+                        name="Veh_Cjh"
+                        textLimit="25"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Baud"
-                        label="串口波特率"
-                        name="Veh_Baud"
-                        textLimit="10"
-                        tooltips="默认值为9600"
+                        editable="false"
+                        id="Veh_Fdjh"
+                        label="发动机号"
+                        name="Veh_Fdjh"
+                        textLimit="30"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Parity"
-                        label="串口奇偶校验"
-                        name="Veh_Parity"
-                        textLimit="5"
-                        tooltips="默认值为N"
+                        editable="false"
+                        id="Veh_Fdjxh"
+                        label="发动机型号"
+                        name="Veh_Fdjxh"
+                        textLimit="20"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="燃料、排放、功率等">
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Rlzl"
+                        label="燃料种类"
+                        name="Veh_Rlzl"
+                        textLimit="30"
+                        tooltips="多种燃料之间用“/”分隔"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Databits"
-                        label="串口数据位"
-                        name="Veh_Databits"
-                        textLimit="5"
-                        tooltips="默认值为8"
+                        editable="false"
+                        id="Veh_Pfbz"
+                        label="排放标准"
+                        name="Veh_Pfbz"
+                        textLimit="60"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="3">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Pl"
+                           label="排量"
+                           name="Veh_Pl"
+                           textLimit="5"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Gl"
+                           label="功率"
+                           name="Veh_Gl"
+                           textLimit="7"
+                           tooltips="多种功率之间用“/”分隔"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Yh"
+                           label="油耗"
+                           name="Veh_Yh"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Zxxs"
+                        label="转向形式"
+                        name="Veh_Zxxs"
+                        textLimit="6"
+                        tooltips="如：方向盘"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Cddbj"
+                           label="纯电动标记"
+                           name="Veh_Cddbj"
+                           textLimit="1"
+                           tooltips="取值为1（是）、2（否），默认为2。纯电动车辆使用。"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zgcs"
+                           label="最高车速"
+                           name="Veh_Zgcs"
+                           textLimit="5"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+            </pagecolumn>
+         </basicpage>
+         <basicpage
+               description="车辆详细参数"
+               id="2"
+               title="车辆详细参数">
+            <pagecolumn>
+               <section
+                     label="规格、尺寸等参数">
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Qlj"
+                        label="轮距 前/后"
+                        name="Veh_Qlj"
+                        presentation="com.sg.vim.print.presentation.Veh_LjPresentation"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Gbthps"
+                           label="钢板弹簧片数"
+                           name="Veh_Gbthps"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Lts"
+                           label="轮胎数"
+                           name="Veh_Lts"
+                           textLimit="2"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Ltgg"
+                        label="轮胎规格"
+                        name="Veh_Ltgg"
+                        textLimit="20"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zj"
+                           label="轴距"
+                           name="Veh_Zj"
+                           textLimit="60"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zh"
+                           label="轴荷"
+                           name="Veh_Zh"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zs"
+                           label="轴数"
+                           name="Veh_Zs"
+                           textLimit="1"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zxzs"
+                           label="转向轴个数"
+                           name="Veh_Zxzs"
+                           textLimit="1"
+                           tooltips="取值为1、2、3，默认为1。供多转向轴的车辆填写。"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Wkc"
+                        label="外廓 长/宽/高"
+                        name="Veh_Wkc"
+                        presentation="com.sg.vim.print.presentation.Veh_WkcPresentation"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Stopbits"
-                        label="串口停止位"
-                        name="Veh_Stopbits"
-                        textLimit="5"
-                        tooltips="默认值为1"
+                        editable="false"
+                        id="Veh_Hxnbc"
+                        label="货厢内部 长/宽/高"
+                        name="Veh_Hxnbc"
+                        presentation="com.sg.vim.print.presentation.Veh_HxnbcPresentation"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     expand="false"
+                     label="质量参数">
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zzl"
+                           label="总质量"
+                           name="Veh_Zzl"
+                           textLimit="8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Edzzl"
+                           label="额定载质量"
+                           name="Veh_Edzzl"
+                           textLimit="8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zbzl"
+                           label="整备质量"
+                           name="Veh_Zbzl"
+                           textLimit="8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zzllyxs"
+                           label="载质量利用系数"
+                           name="Veh_Zzllyxs"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Zqyzzl"
+                        label="准牵引总质量"
+                        name="Veh_Zqyzzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Bgcazzdyxzzl"
+                        label="半挂车鞍座最大允许总质量"
+                        name="Veh_Bgcazzdyxzzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Edzk"
+                           label="额定载客"
+                           name="Veh_Edzk"
+                           textLimit="3"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Jsszcrs"
+                           label="驾驶室准乘人数"
+                           name="Veh_Jsszcrs"
+                           textLimit="3"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+               <section
+                     expand="false"
+                     label="备注">
+                  <field
+                        editPart="Text(Multi Line)"
+                        editable="false"
+                        id="Veh_Bz"
+                        label="备注"
+                        labelVisible="false"
+                        name="Veh_Bz"
+                        textLimit="300"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     expand="false"
+                     label="企业其它信息">
+                  <field
+                        editPart="Text(Multi Line)"
+                        editable="false"
+                        id="Veh_Qyqtxx"
+                        label="企业其它信息"
+                        name="Veh_Qyqtxx"
+                        textLimit="400"
+                        tooltips="该项目内容需要回车换行的地方使用“%%”表示。"
                         type="String">
                   </field>
                </section>
             </pagecolumn>
+            <pagecolumn>
+               <section
+                     label="操作记录">
+                  <field
+                        computeField="false"
+                        ctableId="com.sg.vim.print.table.pntrec"
+                        editPart="Table"
+                        editable="false"
+                        heightHint="240"
+                        id="action_rec"
+                        label="记录"
+                        labelVisible="false"
+                        name="action_rec"
+                        persistable="true"
+                        required="false"
+                        type="DBList">
+                  </field>
+               </section>
+               <section
+                     expand="false"
+                     label="打印设置">
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_PrinterName"
+                           label="打印机"
+                           name="Veh_PrinterName"
+                           textLimit="30"
+                           tooltips="缺省为默认打印机"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Connect"
+                           label="连接串口"
+                           name="Veh_Connect"
+                           textLimit="5"
+                           tooltips="默认值为COM1"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_PrintPosLeft"
+                           label="左边距"
+                           name="Veh_PrintPosLeft"
+                           textLimit="5"
+                           tooltips="默认值为15  单位：mm"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_PrintPosTop"
+                           label="上边距"
+                           name="Veh_PrintPosTop"
+                           textLimit="5"
+                           tooltips="默认值为15  单位：mm"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Baud"
+                           label="波特率"
+                           name="Veh_Baud"
+                           textLimit="10"
+                           tooltips="默认值为9600"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Parity"
+                           label="奇偶校验"
+                           name="Veh_Parity"
+                           textLimit="5"
+                           tooltips="默认值为N"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Databits"
+                           label="数据位"
+                           name="Veh_Databits"
+                           textLimit="5"
+                           tooltips="默认值为8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Stopbits"
+                           label="停止位"
+                           name="Veh_Stopbits"
+                           textLimit="5"
+                           tooltips="默认值为1"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+            </pagecolumn>
          </basicpage>
       </editor>
+      <pageExtendsions
+            id="com.sg.vim.print.editor.certificate"
+            location="after=2"
+            targetId="systempage">
+      </pageExtendsions>
       <editor
-            collectionName="certificateinfo"
+            collectionName="certificate"
             dbName="appportal"
             id="com.sg.vim.print.editor.certificate2"
+            labelFieldName="Veh_Clxh"
             name="底盘合格证">
          <basicpage
+               description="车辆基本信息"
                id="1"
-               title="合格证数据">
+               title="车辆基本信息">
             <pagecolumn>
                <section
                      label="基本信息">
@@ -3713,6 +3516,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Zchgzbh"
                         label="整车合格证编号"
                         name="Veh_Zchgzbh"
@@ -3722,6 +3526,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Dphgzbh"
                         label="底盘合格证编号"
                         name="Veh_Dphgzbh"
@@ -3731,6 +3536,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Fzrq"
                         label="发证日期"
                         name="Veh_Fzrq"
@@ -3740,6 +3546,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clzzqymc"
                         label="车辆制造企业名称"
                         name="Veh_Clzzqymc"
@@ -3748,6 +3555,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Qyid"
                         label="企业ID"
                         name="Veh_Qyid"
@@ -3757,6 +3565,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Cpggh"
                         label="产品公告号"
                         name="Veh_Cpggh"
@@ -3766,6 +3575,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggpc"
                         label="公告批次"
                         name="Veh_Ggpc"
@@ -3775,6 +3585,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggsxrq"
                         label="公告生效日期"
                         name="Veh_Ggsxrq"
@@ -3784,23 +3595,22 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Zzbh"
-                        inputValidator="com.sg.vim.print.validator.Veh_Zzbh_Validator"
                         label="纸张编号"
                         name="Veh_Zzbh"
-                        presentation="com.sg.vim.print.presentation.Veh_Zzbh_Presentation"
-                        required="true"
+                        required="false"
                         textLimit="7"
                         tooltips="必须是长度7位的数字"
                         type="String">
                   </field>
                </section>
-            </pagecolumn>
-            <pagecolumn>
                <section
+                     expand="false"
                      label="车辆型号信息">
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clfl"
                         label="车辆分类"
                         name="Veh_Clfl"
@@ -3810,6 +3620,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clmc"
                         label="车辆名称"
                         name="Veh_Clmc"
@@ -3819,6 +3630,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clpp"
                         label="车辆品牌"
                         name="Veh_Clpp"
@@ -3827,6 +3639,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clxh"
                         label="车辆型号"
                         name="Veh_Clxh"
@@ -3835,6 +3648,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Csys"
                         label="车身颜色"
                         name="Veh_Csys"
@@ -3844,6 +3658,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clzzrq"
                         label="车辆制造日期"
                         name="Veh_Clzzrq"
@@ -3852,355 +3667,12 @@
                         type="String">
                   </field>
                </section>
-            </pagecolumn>
-         </basicpage>
-         <basicpage
-               id="2"
-               title="合格证参数II">
-            <pagecolumn>
                <section
-                     label="车辆分类、底盘、发动机">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Dpxh"
-                        label="底盘型号"
-                        name="Veh_Dpxh"
-                        textLimit="30"
-                        tooltips="对于QX方式时使用"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Dpid"
-                        label="底盘ID"
-                        name="Veh_Dpid"
-                        textLimit="7"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Clsbdh"
-                        label="车辆识别代号"
-                        name="Veh_Clsbdh"
-                        textLimit="17"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Cjh"
-                        label="车架号"
-                        name="Veh_Cjh"
-                        textLimit="25"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Fdjh"
-                        label="发动机号"
-                        name="Veh_Fdjh"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Fdjxh"
-                        label="发动机型号"
-                        name="Veh_Fdjxh"
-                        textLimit="20"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-            <pagecolumn>
-               <section
-                     label="燃料、排放、功率等">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Rlzl"
-                        label="燃料种类"
-                        name="Veh_Rlzl"
-                        textLimit="30"
-                        tooltips="多种燃料之间用“/”分隔"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Pfbz"
-                        label="排放标准"
-                        name="Veh_Pfbz"
-                        textLimit="60"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Pl"
-                        label="排量"
-                        name="Veh_Pl"
-                        textLimit="5"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Gl"
-                        label="功率"
-                        name="Veh_Gl"
-                        textLimit="7"
-                        tooltips="多种功率之间用“/”分隔"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zxxs"
-                        label="转向形式"
-                        name="Veh_Zxxs"
-                        textLimit="6"
-                        tooltips="如：方向盘"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Yh"
-                        label="油耗"
-                        name="Veh_Yh"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Cddbj"
-                        label="纯电动标记"
-                        name="Veh_Cddbj"
-                        textLimit="1"
-                        tooltips="取值为1（是）、2（否），默认为2。纯电动车辆使用。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zgcs"
-                        label="最高车速"
-                        name="Veh_Zgcs"
-                        textLimit="5"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-         </basicpage>
-         <basicpage
-               id="3"
-               title="合格证参数III">
-            <pagecolumn>
-               <section
-                     label="规格、尺寸等参数">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Qlj"
-                        label="前轮距"
-                        name="Veh_Qlj"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hlj"
-                        label="后轮距"
-                        name="Veh_Hlj"
-                        textLimit="54"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Lts"
-                        label="轮胎数"
-                        name="Veh_Lts"
-                        textLimit="2"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Ltgg"
-                        label="轮胎规格"
-                        name="Veh_Ltgg"
-                        textLimit="20"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Gbthps"
-                        label="钢板弹簧片数"
-                        name="Veh_Gbthps"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zj"
-                        label="轴距"
-                        name="Veh_Zj"
-                        textLimit="60"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zh"
-                        label="轴荷"
-                        name="Veh_Zh"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zs"
-                        label="轴数"
-                        name="Veh_Zs"
-                        textLimit="1"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zxzs"
-                        label="转向轴个数"
-                        name="Veh_Zxzs"
-                        textLimit="1"
-                        tooltips="取值为1、2、3，默认为1。供多转向轴的车辆填写。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Wkc"
-                        label="外廓长"
-                        name="Veh_Wkc"
-                        textLimit="5"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Wkk"
-                        label="外廓宽"
-                        name="Veh_Wkk"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Wkg"
-                        label="外廓高"
-                        name="Veh_Wkg"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hxnbc"
-                        label="货厢内部长"
-                        name="Veh_Hxnbc"
-                        textLimit="5"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hxnbk"
-                        label="货厢内部宽"
-                        name="Veh_Hxnbk"
-                        textLimit="4"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Hxnbg"
-                        label="货厢内部高"
-                        name="Veh_Hxnbg"
-                        textLimit="4"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-            <pagecolumn>
-               <section
-                     label="质量参数">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zzl"
-                        label="总质量"
-                        name="Veh_Zzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Edzzl"
-                        label="额定载质量"
-                        name="Veh_Edzzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zbzl"
-                        label="整备质量"
-                        name="Veh_Zbzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zzllyxs"
-                        label="载质量利用系数"
-                        name="Veh_Zzllyxs"
-                        textLimit="30"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Zqyzzl"
-                        label="准牵引总质量"
-                        name="Veh_Zqyzzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Edzk"
-                        label="额定载客"
-                        name="Veh_Edzk"
-                        textLimit="3"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Bgcazzdyxzzl"
-                        label="半挂车鞍座最大允许总质量"
-                        name="Veh_Bgcazzdyxzzl"
-                        textLimit="8"
-                        type="String">
-                  </field>
+                     expand="false"
+                     label="公告信息">
                   <field
                         editPart="Text(Single Line)"
                         editable="false"
-                        id="Veh_Jsszcrs"
-                        label="驾驶室准乘人数"
-                        name="Veh_Jsszcrs"
-                        textLimit="3"
-                        type="String">
-                  </field>
-               </section>
-            </pagecolumn>
-         </basicpage>
-         <basicpage
-               id="4"
-               title="合格证参数IV">
-            <pagecolumn>
-               <section
-                     label="其他信息">
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Bz"
-                        label="备注"
-                        name="Veh_Bz"
-                        textLimit="300"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
                         id="Veh_Qybz"
                         label="企业标准"
                         name="Veh_Qybz"
@@ -4210,6 +3682,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Clscdwmc"
                         label="车辆生产单位名称"
                         name="Veh_Clscdwmc"
@@ -4218,6 +3691,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Cpscdz"
                         label="车辆生产单位地址"
                         name="Veh_Cpscdz"
@@ -4226,15 +3700,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Qyqtxx"
-                        label="企业其它信息"
-                        name="Veh_Qyqtxx"
-                        textLimit="400"
-                        tooltips="该项目内容需要回车换行的地方使用“%%”表示。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Cpggh"
                         label="产品公告号"
                         name="Veh_Cpggh"
@@ -4244,15 +3710,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Zzbh"
-                        label="纸张编号"
-                        name="Veh_Zzbh"
-                        textLimit="50"
-                        tooltips="可空"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggpc"
                         label="公告批次"
                         name="Veh_Ggpc"
@@ -4262,6 +3720,7 @@
                   </field>
                   <field
                         editPart="Text(Single Line)"
+                        editable="false"
                         id="Veh_Ggsxrq"
                         label="公告生效日期"
                         name="Veh_Ggsxrq"
@@ -4273,110 +3732,479 @@
             </pagecolumn>
             <pagecolumn>
                <section
-                     label="国家合格证系统信息">
+                     label="车辆分类、底盘、发动机">
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Tmxx"
-                        label="合格证条码信息"
-                        name="Veh_Tmxx"
-                        textLimit="1000"
-                        tooltips="调用ViewBarcodeInfo并读取合格证条码后，通过该属性可获得条码信息，具体项目格式见附件一。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_Jyw"
-                        label="校验信息"
-                        name="Veh_Jyw"
-                        textLimit="255+"
-                        tooltips="调用PrtParaTbl成功后，通过该属性可获得校验信息，供合格证上传用。其长度随合格证信息量发生变化,建议采用备注型等大容量数据类型存储。"
-                        type="String">
-                  </field>
-                  <field
-                        editPart="Text(Single Line)"
-                        id="Veh_PrinterName"
-                        label="目标打印机的名称"
-                        name="Veh_PrinterName"
+                        editable="false"
+                        id="Veh_Dpxh"
+                        label="底盘型号"
+                        name="Veh_Dpxh"
                         textLimit="30"
-                        tooltips="缺省为默认打印机"
+                        tooltips="对于QX方式时使用"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_PrintPosLeft"
-                        label="合格证打印的左边距"
-                        name="Veh_PrintPosLeft"
-                        textLimit="5"
-                        tooltips="默认值为15  单位：mm"
+                        editable="false"
+                        id="Veh_Dpid"
+                        label="底盘ID"
+                        name="Veh_Dpid"
+                        textLimit="7"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_PrintPosTop"
-                        label="合格证打印的上边距"
-                        name="Veh_PrintPosTop"
-                        textLimit="5"
-                        tooltips="默认值为15  单位：mm"
+                        editable="false"
+                        id="Veh_Clsbdh"
+                        label="车辆识别代号"
+                        name="Veh_Clsbdh"
+                        textLimit="17"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Connect"
-                        label="连接串口"
-                        name="Veh_Connect"
-                        textLimit="5"
-                        tooltips="默认值为COM1"
+                        editable="false"
+                        id="Veh_Cjh"
+                        label="车架号"
+                        name="Veh_Cjh"
+                        textLimit="25"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Baud"
-                        label="串口波特率"
-                        name="Veh_Baud"
-                        textLimit="10"
-                        tooltips="默认值为9600"
+                        editable="false"
+                        id="Veh_Fdjh"
+                        label="发动机号"
+                        name="Veh_Fdjh"
+                        textLimit="30"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Parity"
-                        label="串口奇偶校验"
-                        name="Veh_Parity"
-                        textLimit="5"
-                        tooltips="默认值为N"
+                        editable="false"
+                        id="Veh_Fdjxh"
+                        label="发动机型号"
+                        name="Veh_Fdjxh"
+                        textLimit="20"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="燃料、排放、功率等">
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Rlzl"
+                        label="燃料种类"
+                        name="Veh_Rlzl"
+                        textLimit="30"
+                        tooltips="多种燃料之间用“/”分隔"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Databits"
-                        label="串口数据位"
-                        name="Veh_Databits"
-                        textLimit="5"
-                        tooltips="默认值为8"
+                        editable="false"
+                        id="Veh_Pfbz"
+                        label="排放标准"
+                        name="Veh_Pfbz"
+                        textLimit="60"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="3">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Pl"
+                           label="排量"
+                           name="Veh_Pl"
+                           textLimit="5"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Gl"
+                           label="功率"
+                           name="Veh_Gl"
+                           textLimit="7"
+                           tooltips="多种功率之间用“/”分隔"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Yh"
+                           label="油耗"
+                           name="Veh_Yh"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Zxxs"
+                        label="转向形式"
+                        name="Veh_Zxxs"
+                        textLimit="6"
+                        tooltips="如：方向盘"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Cddbj"
+                           label="纯电动标记"
+                           name="Veh_Cddbj"
+                           textLimit="1"
+                           tooltips="取值为1（是）、2（否），默认为2。纯电动车辆使用。"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zgcs"
+                           label="最高车速"
+                           name="Veh_Zgcs"
+                           textLimit="5"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+            </pagecolumn>
+         </basicpage>
+         <basicpage
+               description="车辆详细参数"
+               id="2"
+               title="车辆详细参数">
+            <pagecolumn>
+               <section
+                     label="规格、尺寸等参数">
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Qlj"
+                        label="轮距 前/后"
+                        name="Veh_Qlj"
+                        presentation="com.sg.vim.print.presentation.Veh_LjPresentation"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Gbthps"
+                           label="钢板弹簧片数"
+                           name="Veh_Gbthps"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Lts"
+                           label="轮胎数"
+                           name="Veh_Lts"
+                           textLimit="2"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Ltgg"
+                        label="轮胎规格"
+                        name="Veh_Ltgg"
+                        textLimit="20"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zj"
+                           label="轴距"
+                           name="Veh_Zj"
+                           textLimit="60"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zh"
+                           label="轴荷"
+                           name="Veh_Zh"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zs"
+                           label="轴数"
+                           name="Veh_Zs"
+                           textLimit="1"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zxzs"
+                           label="转向轴个数"
+                           name="Veh_Zxzs"
+                           textLimit="1"
+                           tooltips="取值为1、2、3，默认为1。供多转向轴的车辆填写。"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Wkc"
+                        label="外廓 长/宽/高"
+                        name="Veh_Wkc"
+                        presentation="com.sg.vim.print.presentation.Veh_WkcPresentation"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Stopbits"
-                        label="串口停止位"
-                        name="Veh_Stopbits"
-                        textLimit="5"
-                        tooltips="默认值为1"
+                        editable="false"
+                        id="Veh_Hxnbc"
+                        label="货厢内部 长/宽/高"
+                        name="Veh_Hxnbc"
+                        presentation="com.sg.vim.print.presentation.Veh_HxnbcPresentation"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     expand="false"
+                     label="质量参数">
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zzl"
+                           label="总质量"
+                           name="Veh_Zzl"
+                           textLimit="8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Edzzl"
+                           label="额定载质量"
+                           name="Veh_Edzzl"
+                           textLimit="8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zbzl"
+                           label="整备质量"
+                           name="Veh_Zbzl"
+                           textLimit="8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Zzllyxs"
+                           label="载质量利用系数"
+                           name="Veh_Zzllyxs"
+                           textLimit="30"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="Veh_Zqyzzl"
+                        label="准牵引总质量"
+                        name="Veh_Zqyzzl"
+                        textLimit="8"
                         type="String">
                   </field>
                   <field
                         editPart="Text(Single Line)"
-                        id="Veh_Dywym"
-                        label="打印唯一码"
-                        name="Veh_Dywym"
-                        textLimit="50"
-                        tooltips="调用PrtParaTbl成功后，通过该属性可获得合格证打印唯一码，供合格证上传用。"
+                        editable="false"
+                        id="Veh_Bgcazzdyxzzl"
+                        label="半挂车鞍座最大允许总质量"
+                        name="Veh_Bgcazzdyxzzl"
+                        textLimit="8"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Edzk"
+                           label="额定载客"
+                           name="Veh_Edzk"
+                           textLimit="3"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Jsszcrs"
+                           label="驾驶室准乘人数"
+                           name="Veh_Jsszcrs"
+                           textLimit="3"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+               <section
+                     expand="false"
+                     label="备注">
+                  <field
+                        editPart="Text(Multi Line)"
+                        editable="false"
+                        id="Veh_Bz"
+                        label="备注"
+                        labelVisible="false"
+                        name="Veh_Bz"
+                        textLimit="300"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     expand="false"
+                     label="企业其它信息">
+                  <field
+                        editPart="Text(Multi Line)"
+                        editable="false"
+                        id="Veh_Qyqtxx"
+                        label="企业其它信息"
+                        name="Veh_Qyqtxx"
+                        textLimit="400"
+                        tooltips="该项目内容需要回车换行的地方使用“%%”表示。"
                         type="String">
                   </field>
                </section>
             </pagecolumn>
+            <pagecolumn>
+               <section
+                     label="操作记录">
+                  <field
+                        computeField="false"
+                        ctableId="com.sg.vim.print.table.pntrec"
+                        editPart="Table"
+                        editable="false"
+                        heightHint="240"
+                        id="action_rec"
+                        label="记录"
+                        labelVisible="false"
+                        name="action_rec"
+                        persistable="true"
+                        required="false"
+                        type="DBList">
+                  </field>
+               </section>
+               <section
+                     expand="false"
+                     label="打印设置">
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_PrinterName"
+                           label="打印机"
+                           name="Veh_PrinterName"
+                           textLimit="30"
+                           tooltips="缺省为默认打印机"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Connect"
+                           label="连接串口"
+                           name="Veh_Connect"
+                           textLimit="5"
+                           tooltips="默认值为COM1"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_PrintPosLeft"
+                           label="左边距"
+                           name="Veh_PrintPosLeft"
+                           textLimit="5"
+                           tooltips="默认值为15  单位：mm"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_PrintPosTop"
+                           label="上边距"
+                           name="Veh_PrintPosTop"
+                           textLimit="5"
+                           tooltips="默认值为15  单位：mm"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Baud"
+                           label="波特率"
+                           name="Veh_Baud"
+                           textLimit="10"
+                           tooltips="默认值为9600"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Parity"
+                           label="奇偶校验"
+                           name="Veh_Parity"
+                           textLimit="5"
+                           tooltips="默认值为N"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Databits"
+                           label="数据位"
+                           name="Veh_Databits"
+                           textLimit="5"
+                           tooltips="默认值为8"
+                           type="String">
+                     </field>
+                     <field
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="Veh_Stopbits"
+                           label="停止位"
+                           name="Veh_Stopbits"
+                           textLimit="5"
+                           tooltips="默认值为1"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+            </pagecolumn>
          </basicpage>
       </editor>
+      <pageExtendsions
+            id="com.sg.vim.print.editor.certificate2"
+            location="after=2"
+            targetId="systempage">
+      </pageExtendsions>
    </extension>
    <extension
          point="com.mobnut.admin.adminFunction">
@@ -4397,6 +4225,469 @@
             id="com.sg.vim.print.editor.printersetting"
             name="打印设置">
       </editor>
+   </extension>
+   <extension
+         point="com.sg.ui.table">
+      <table
+            canCreate="false"
+            canDelete="false"
+            collectionName="certificate"
+            dbName="appportal"
+            editorId="com.sg.vim.print.editor.certificate"
+            fix="5"
+            fullSelection="true"
+            headerVisiable="true"
+            id="com.sg.vim.table.certificate"
+            idfield="_id"
+            inputProvider="com.sg.vim.datamodel.CertificateInput"
+            limit="100"
+            multiSelection="true"
+            queryMode="false"
+            useHashlookup="false"
+            virtual="false">
+<column column="lifecycle" name="状态" type="String"></column>
+<column
+      column="Veh_Clmc"
+      name="车辆名称"
+      type="String">
+</column>
+<column
+      column="Veh_Clxh"
+      name="车辆型号"
+      type="String">
+</column>
+<column
+      column="Veh_Clsbdh"
+      name="车辆识别代号"
+      type="String">
+</column>
+<column
+      column="Veh_Zzbh"
+      name="纸张编号"
+      type="String">
+</column>n
+<columnGroup
+      defaultGroup="true"
+      id="g00"
+      name="基本信息">
+   <column
+         column="Veh_Clztxx"
+         name="车辆状态信息"
+         type="String">
+   </column>
+   <column
+         column="Veh_Wzghzbh"
+         name="完整合格证编号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Pzxlh"
+         name="配置序列号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Fzrq"
+         name="发证日期"
+         type="String">
+   </column>>
+</columnGroup>
+<columnGroup
+      defaultGroup="true"
+      id="g01"
+      name="车辆信息">
+   <column
+         column="Veh_Zchgzbh"
+         name="整车合格证编号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Dphgzbh"
+         name="底盘合格证编号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Clfl"
+         name="车辆分类"
+         type="String">
+   </column>
+   <column
+         column="Veh_Clpp"
+         name="车辆品牌"
+         type="String">
+   </column>
+   <column
+         column="Veh_Csys"
+         name="车身颜色"
+         type="String">
+   </column>
+   <column
+         column="Veh_Dpxh"
+         name="底盘型号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Dpid"
+         name="底盘ID"
+         type="String">
+   </column>
+   <column
+         column="Veh_Cjh"
+         name="车架号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Fdjh"
+         name="发动机号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Fdjxh"
+         name="发动机型号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Cddbj"
+         name="纯电动标志"
+         type="String">
+   </column>
+   <column
+         column="Veh_Cpggh"
+         name="公告号"
+         type="String">
+   </column>
+   <column
+         column="Veh_Ggpc"
+         name="公告批次"
+         type="String">
+   </column>
+   <column
+         column="Veh_Ggsxrq"
+         name="公告生效日期"
+         type="String">
+   </column>
+</columnGroup>
+<columnGroup
+      defaultGroup="false"
+      id="g02"
+      name="企业">
+   <column
+         column="Veh_Qyid"
+         name="公告企业ID"
+         type="String">
+   </column>
+   <column
+         column="Veh_Clzzqymc"
+         name="车辆制造企业名称"
+         type="String">
+   </column>
+   <column
+         column="Veh_Clscdwmc"
+         name="车辆生产单位名称"
+         type="String">
+   </column>
+   <column
+         column="Veh_Cpscdz"
+         name="车辆生产单位地址"
+         type="String">
+   </column>
+   <column
+         column="Veh_Qybz"
+         name="企业标准"
+         type="String">
+   </column>
+</columnGroup>
+<columnGroup
+      defaultGroup="false"
+      id="g03"
+      name="技术参数">
+   <column
+         column="Veh_Rlzl"
+         name="燃料种类"
+         type="String">
+   </column>
+   <column
+         column="Veh_Pfbz"
+         name="排放标准"
+         type="String">
+   </column>
+   <column
+         column="Veh_Pl"
+         name="排量"
+         type="String">
+   </column>
+   <column
+         column="Veh_Gl"
+         name="功率"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zxxs"
+         name="转向形式"
+         type="String">
+   </column>
+   <column
+         column="Veh_Qlj"
+         name="前轮距"
+         type="String">
+   </column>
+   <column
+         column="Veh_Hlj"
+         name="后轮距"
+         type="String">
+   </column>
+   <column
+         column="Veh_Lts"
+         name="轮胎数"
+         type="String">
+   </column>
+   <column
+         column="Veh_Ltgg"
+         name="轮胎规格"
+         type="String">
+   </column>
+   <column
+         column="Veh_Gbthps"
+         name="钢板弹簧片数"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zj"
+         name="轴距"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zh"
+         name="轴荷"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zs"
+         name="轴数"
+         type="String">
+   </column>
+   <column
+         column="Veh_Wkc"
+         name="外廓长"
+         type="String">
+   </column>
+   <column
+         column="Veh_Wkk"
+         name="外廓宽"
+         type="String">
+   </column>
+   <column
+         column="Veh_Wkg"
+         name="外廓高"
+         type="String">
+   </column>
+   <column
+         column="Veh_Hxnbc"
+         name="货厢内部长"
+         type="String">
+   </column>
+   <column
+         column="Veh_Hxnbk"
+         name="货厢内部宽"
+         type="String">
+   </column>
+   <column
+         column="Veh_Hxnbg"
+         name="货厢内部高"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zzl"
+         name="总质量"
+         type="String">
+   </column>
+   <column
+         column="Veh_Edzzl"
+         name="额定载质量"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zbzl"
+         name="整备质量"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zzllyxs"
+         name="载质量利用系数"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zqyzzl"
+         name="准牵引总质量"
+         type="String">
+   </column>
+   <column
+         column="Veh_Edzk"
+         name="额定载客"
+         type="String">
+   </column>
+   <column
+         column="Veh_Bgcazzdyxzzl"
+         name="半挂车鞍座最大允许总质量"
+         type="String">
+   </column>
+   <column
+         column="Veh_Jsszcrs"
+         name="驾驶室准乘人数"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zgcs"
+         name="最高车速"
+         type="String">
+   </column>
+   <column
+         column="Veh_Clzzrq"
+         name="车辆制造日期"
+         type="String">
+   </column>
+   <column
+         column="Veh_Bz"
+         name="备注"
+         type="String">
+   </column>
+   <column
+         column="Veh_Qyqtxx"
+         name="企业其它信息"
+         type="String">
+   </column>
+   <column
+         column="Veh_Zxzs"
+         name="转向轴个数"
+         type="String">
+   </column>
+   <column
+         column="Veh_Yh"
+         name="油耗"
+         type="String">
+   </column>
+   <column
+         column="Veh_Hzdfs"
+         name="后制动方式"
+         type="String">
+   </column>
+   <column
+         column="Veh_Hzdczfs"
+         name="后制动操作方式"
+         type="String">
+   </column>
+   <column
+         column="Veh_Qzdfs"
+         name="前制动方式"
+         type="String">
+   </column>
+   <column
+         column="Veh_Qzdczfs"
+         name="前制动操作方式"
+         type="String">
+   </column>
+</columnGroup>
+
+<columnGroup
+      defaultGroup="false"
+      id="g04"
+      name="操作">
+<column column="pnt_date" name="打印日期" type="DateTime"></column>
+<column column="pnt_account" name="打印者" type="String"></column>
+</columnGroup>
+<columnGroup
+      defaultGroup="false"
+      id="g05"
+      name="打印设置">
+   <column
+         column="Veh_Stopbits"
+         name="止码"
+         type="String">
+   </column>
+   <column
+         column="Veh_Databits"
+         name="数据位"
+         type="String">
+   </column>
+   <column
+         column="Veh_Parity"
+         name="奇偶检验"
+         type="String">
+   </column>
+   <column
+         column="Veh_Baud"
+         name="波特率"
+         type="String">
+   </column>
+   <column
+         column="Veh_Connect"
+         name="端口"
+         type="String">
+   </column>
+   <column
+         column="Veh_PrintPosTop"
+         name="顶端边距"
+         type="String">
+   </column>
+   <column
+         column="Veh_PrintPosLeft"
+         name="左端边距"
+         type="String">
+   </column>
+   <column
+         column="Veh_PrinterName"
+         name="打印机名称"
+         type="String">
+   </column>
+</columnGroup>
+<columnGroup
+      defaultGroup="false"
+      id="g06"
+      name="系统">
+<column column="Veh_Tmxx" name="合格证条码信息" type="String"></column>
+<column column="Veh_Jyw" name="校验信息" type="String"></column>
+<column column="Veh_Dywym" name="打印唯一码" type="String"></column>
+</columnGroup>
+
+
+      </table>
+      <table
+            canCreate="false"
+            canDelete="false"
+            canEdit="false"
+            fullSelection="true"
+            hasBorder="true"
+            headerVisiable="true"
+            id="com.sg.vim.print.table.pntrec"
+            lineVisiable="true"
+            multiSelection="false"
+            useHashlookup="false"
+            virtual="false">
+         <column
+               column="act_date"
+               name="日期"
+               type="DateTime"
+               width="80">
+         </column>
+         <column
+               column="act_type"
+               name="操作"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="act_account"
+               labelProvider="com.sg.ui.viewer.table.AccountLabelProvider"
+               name="操作人"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="act_memo"
+               name="备注"
+               type="String"
+               width="80">
+         </column>
+      </table>
    </extension>
 
 </plugin>
