@@ -43,6 +43,7 @@ public abstract class PrintModule {
 
     protected Integer paperNumber;
     private boolean hasPrint = false;
+    protected String lifecycle;
 
     public void setCallbackProperties(String key, Object value) {
         if (callbackProperties == null) {
@@ -89,6 +90,11 @@ public abstract class PrintModule {
 
     public boolean canPrintData() {
         return getInput() != null;
+    }
+    
+
+    public void setLifecycle(String lifecycle) {
+        this.lifecycle = lifecycle;
     }
 
     public abstract void fireEvent(String eventCode, String[] args, PrintContent printContent);
@@ -201,5 +207,13 @@ public abstract class PrintModule {
 
     public void doPrint(PrintContent pc) {
         
+    }
+
+    public DBObject getData() {
+        return getInput().getData().getData();
+    }
+
+    public void setValue(String key, Object value) {
+        getInput().getData().setValue(key, value)   ;     
     }
 }

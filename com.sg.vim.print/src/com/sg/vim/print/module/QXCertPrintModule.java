@@ -131,5 +131,9 @@ public class QXCertPrintModule extends PrintModule {
             return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><br/><ins>No.</ins>: "+getInputPaperNumber()+"</span>";
         }
     }
+    
+    public boolean canPrintData() {//只有无状态才能打印
+        return (!isHasPrint())&&(getInput() != null)&&(lifecycle==null);
+    }
 
 }

@@ -34,11 +34,9 @@ import com.mongodb.DBObject;
 import com.sg.ui.ImageResource;
 import com.sg.ui.UI;
 import com.sg.ui.UIUtils;
-import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.datamodel.IVIMFields;
 
 public class PrinterSettingEditor extends EditorPart {
-
-    public static final String[] functionsNameList = new String[] { "打印合格证", "打印车辆一致性证书", "打印燃油标识" };
 
     public class ComboEditingSpport extends StringEditingSpport {
 
@@ -50,7 +48,7 @@ public class PrinterSettingEditor extends EditorPart {
         @Override
         protected CellEditor getEditor() {
             ComboBoxCellEditor editor = new ComboBoxCellEditor(viewer.getTable(),
-                    functionsNameList, SWT.READ_ONLY);
+                    IVIMFields.PRINTER_FUNCTIONS, SWT.READ_ONLY);
             return editor;
         }
 
@@ -58,8 +56,8 @@ public class PrinterSettingEditor extends EditorPart {
         protected Object getValue(Object element) {
             PrinterItem printerItem = (PrinterItem) element;
             String text = (String) printerItem.getValue(properties);
-            for (int i = 0; i < functionsNameList.length; i++) {
-                if (functionsNameList[i].equals(text)) {
+            for (int i = 0; i < IVIMFields.PRINTER_FUNCTIONS.length; i++) {
+                if (IVIMFields.PRINTER_FUNCTIONS[i].equals(text)) {
                     return i;
                 }
             }
@@ -69,7 +67,7 @@ public class PrinterSettingEditor extends EditorPart {
         @Override
         protected void setValue(Object element, Object value) {
             int i = ((Integer) value).intValue();
-            super.setValue(element, functionsNameList[i]);
+            super.setValue(element, IVIMFields.PRINTER_FUNCTIONS[i]);
         }
     }
 
@@ -165,7 +163,7 @@ public class PrinterSettingEditor extends EditorPart {
         }
 
         public String getText(String parameter) {
-            if (VimUtils.mVeh_PrinterName.equals(parameter)) {
+            if (IVIMFields.mVeh_PrinterName.equals(parameter)) {
                 String image = "<img src='"+FileUtil.getImageURL(ImageResource.ADD_16, UI.PLUGIN_ID)+"'  width='16' height='16'/>";
 
                 return "<small>"+image+"<a href=\"create\" target=\"_rwt\">注册新打印机</a></small>";
@@ -208,7 +206,7 @@ public class PrinterSettingEditor extends EditorPart {
         public String getText(String parameter) {
             int index = input.indexOf(this);
             String text = (String) getValue(parameter);
-            if (parameter.equals(VimUtils.mVeh_PrinterName)) {
+            if (parameter.equals(IVIMFields.mVeh_PrinterName)) {
                 if (!Utils.isNullOrEmpty(text)) {
                     String image = "<img src='"+FileUtil.getImageURL(ImageResource.DELETE_16, UI.PLUGIN_ID)+"'  width='16' height='16'/>";
                     text = "     <span  style='float:right;padding:0px'><small>"+ image+"<a href=\"remove@"
@@ -279,13 +277,13 @@ public class PrinterSettingEditor extends EditorPart {
                 if (e.detail == RWT.HYPERLINK) {
                     if (e.text.equals("create")) {
                         DBObject data = new BasicDBObject();
-                        data.put(VimUtils.mVeh_PrintPosLeft, "15");
-                        data.put(VimUtils.mVeh_PrintPosTop, "15");
-                        data.put(VimUtils.mVeh_Connect, "COM1");
-                        data.put(VimUtils.mVeh_Baud, "9600");
-                        data.put(VimUtils.mVeh_Parity, "N");
-                        data.put(VimUtils.mVeh_Databits, "8");
-                        data.put(VimUtils.mVeh_Stopbits, "1");
+                        data.put(IVIMFields.mVeh_PrintPosLeft, "15");
+                        data.put(IVIMFields.mVeh_PrintPosTop, "15");
+                        data.put(IVIMFields.mVeh_Connect, "COM1");
+                        data.put(IVIMFields.mVeh_Baud, "9600");
+                        data.put(IVIMFields.mVeh_Parity, "N");
+                        data.put(IVIMFields.mVeh_Databits, "8");
+                        data.put(IVIMFields.mVeh_Stopbits, "1");
                         input.add(input.size() - 1, new PrinterItem(data));
                         viewer.refresh();
                         isDirty = true;
@@ -303,35 +301,35 @@ public class PrinterSettingEditor extends EditorPart {
 
         UIUtils.enableTableViewerEditing(viewer);
 
-        TableViewerColumn col = createEditableColumn("打印机名", VimUtils.mVeh_PrinterName, 180);
-        col.setEditingSupport(new StringEditingSpport(VimUtils.mVeh_PrinterName, true));
+        TableViewerColumn col = createEditableColumn("打印机名", IVIMFields.mVeh_PrinterName, 180);
+        col.setEditingSupport(new StringEditingSpport(IVIMFields.mVeh_PrinterName, true));
 
-        col = createEditableColumn("功能", VimUtils.mVeh_A_PrinterFunction, 180);
-        col.setEditingSupport(new ComboEditingSpport(VimUtils.mVeh_A_PrinterFunction));
+        col = createEditableColumn("功能", IVIMFields.mVeh_A_PrinterFunction, 180);
+        col.setEditingSupport(new ComboEditingSpport(IVIMFields.mVeh_A_PrinterFunction));
 
-        col = createEditableColumn("说明", VimUtils.mVeh_A_PrinterDesc, 180);
-        col.setEditingSupport(new StringEditingSpport(VimUtils.mVeh_A_PrinterDesc, false));
+        col = createEditableColumn("说明", IVIMFields.mVeh_A_PrinterDesc, 180);
+        col.setEditingSupport(new StringEditingSpport(IVIMFields.mVeh_A_PrinterDesc, false));
 
-        col = createEditableColumn("合格证\n左边距", VimUtils.mVeh_PrintPosLeft, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_PrintPosLeft, true));
+        col = createEditableColumn("合格证\n左边距", IVIMFields.mVeh_PrintPosLeft, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_PrintPosLeft, true));
 
-        col = createEditableColumn("合格证\n上边距", VimUtils.mVeh_PrintPosTop, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_PrintPosTop, true));
+        col = createEditableColumn("合格证\n上边距", IVIMFields.mVeh_PrintPosTop, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_PrintPosTop, true));
 
-        col = createEditableColumn("连接", VimUtils.mVeh_Connect, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_Connect, true));
+        col = createEditableColumn("连接", IVIMFields.mVeh_Connect, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_Connect, true));
 
-        col = createEditableColumn("波特率", VimUtils.mVeh_Baud, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_Baud, true));
+        col = createEditableColumn("波特率", IVIMFields.mVeh_Baud, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_Baud, true));
 
-        col = createEditableColumn("奇偶\n校验", VimUtils.mVeh_Parity, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_Parity, true));
+        col = createEditableColumn("奇偶\n校验", IVIMFields.mVeh_Parity, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_Parity, true));
 
-        col = createEditableColumn("数据位", VimUtils.mVeh_Databits, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_Databits, true));
+        col = createEditableColumn("数据位", IVIMFields.mVeh_Databits, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_Databits, true));
 
-        col = createEditableColumn("停止位", VimUtils.mVeh_Stopbits, 60);
-        col.setEditingSupport(new StringIntegerEditingSupport(VimUtils.mVeh_Stopbits, true));
+        col = createEditableColumn("停止位", IVIMFields.mVeh_Stopbits, 60);
+        col.setEditingSupport(new StringIntegerEditingSupport(IVIMFields.mVeh_Stopbits, true));
 
         viewer.setContentProvider(ArrayContentProvider.getInstance());
 

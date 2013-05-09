@@ -1,7 +1,9 @@
 package com.sg.vim.print.control;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -37,15 +39,16 @@ import org.eclipse.ui.forms.widgets.Form;
 import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
 import com.mobnut.db.utils.DBUtil;
+import com.mobnut.portal.user.UserSessionContext;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.ui.ImageResource;
 import com.sg.ui.UI;
 import com.sg.ui.UIUtils;
-import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.MultipageEditablePanel;
+import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.DataAssembly;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.module.COCPrintModule;
@@ -472,7 +475,14 @@ public class PrintContent extends Composite {
         PrintModule qxmodule = getModulebyName(modules, QXCertPrintModule.NAME);
         if (dpmodule.getInput() != null) {
             setHGZPaperNumber(dpmodule);
-            DBObject data = dpmodule.getInput().getData().getData();
+            try {
+                setPrinter(dpmodule,IVIMFields.PRINTER_FUNCTIONS[0]);
+            } catch (Exception e) {
+                UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n" + e.getMessage(),
+                        SWT.ICON_ERROR);
+                return;
+            }
+            DBObject data = dpmodule.getData();
             VimUtils.setValues(certBrowser, data);
             VimUtils.print(certBrowser);
             if (dpmodule.getError() != null) {
@@ -482,7 +492,14 @@ public class PrintContent extends Composite {
             }
         }
         setHGZPaperNumber(qxmodule);
-        DBObject data = qxmodule.getInput().getData().getData();
+        try {
+            setPrinter(qxmodule,IVIMFields.PRINTER_FUNCTIONS[0]);
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + e.getMessage(),
+                    SWT.ICON_ERROR);
+            return;
+        }
+        DBObject data = qxmodule.getData();
         VimUtils.setValues(certBrowser, data);
         VimUtils.print(certBrowser);
         if (qxmodule.getError() != null) {
@@ -497,6 +514,20 @@ public class PrintContent extends Composite {
         navigator.update(certPrintModule, null);
     }
 
+    private void setPrinter(PrintModule module,String printfunctionName) throws Exception {
+        HashMap<String, String> printerPara = VimUtils
+                .getPrinterParameters(printfunctionName);
+        if(printerPara==null){
+            throw new Exception("没有对"+printfunctionName+"设置打印机");
+        }
+        Iterator<String> iter = printerPara.keySet().iterator();
+        while(iter.hasNext()){
+            String key = iter.next();
+            Object value = printerPara.get(key);
+            module.setValue(key, value);
+        }
+    }
+
     private void setHGZPaperNumber(PrintModule module) {
         Integer inputPageNumber = module.getPaperNumber();
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
@@ -506,7 +537,7 @@ public class PrintContent extends Composite {
         } else {
             pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
         }
-        module.getInput().getData().setValue(VimUtils.mVeh_Zzbh, pnum);
+        module.setValue(IVIMFields.mVeh_Zzbh, pnum);
     }
 
     private void doBarResultCallback(Object[] arguments) {
@@ -524,8 +555,7 @@ public class PrintContent extends Composite {
                 currentModule = qxCertPrintModule;
             }
             if (currentModule != null) {
-                DataObject data = currentModule.getInput().getData();
-                data.setValue(VimUtils.mVeh_Tmxx, mVeh_Tmxx);
+                currentModule.setValue(IVIMFields.mVeh_Tmxx, mVeh_Tmxx);
             }
 
         }
@@ -556,14 +586,12 @@ public class PrintContent extends Composite {
                 currentModule.setError(mVeh_ErrorInfo.toString());
             } else {
                 if (currentModule != null) {
-                    DataObject data = currentModule.getInput().getData();
-                    data.setValue(VimUtils.mVeh__Wzghzbh, mVeh__Wzghzbh);
-                    data.setValue(VimUtils.mVeh_Jyw, mVeh_Jyw);
-                    data.setValue(VimUtils.mVeh_Dywym, mVeh_Veh_Dywym);
+                    currentModule.setValue(IVIMFields.mVeh__Wzghzbh, mVeh__Wzghzbh);
+                    currentModule.setValue(IVIMFields.mVeh_Jyw, mVeh_Jyw);
+                    currentModule.setValue(IVIMFields.mVeh_Dywym, mVeh_Veh_Dywym);
                 }
                 if (currentModule == dpCertPrintModule) {
-                    qxCertPrintModule.getInput().getData()
-                            .setValue(VimUtils.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
+                    qxCertPrintModule.setValue(IVIMFields.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
                 }
                 savePrintData(currentModule);
             }
@@ -572,6 +600,11 @@ public class PrintContent extends Composite {
     }
 
     private void savePrintData(PrintModule module) {
+        // 设置打印日期，打印人，以及当前的状态
+        DBObject moduleData = module.getData();
+        moduleData.put(IVIMFields.PRINTDATE, new Date());
+        moduleData.put(IVIMFields.PRINTACCOUNT, UserSessionContext.getAccountInfo());
+        moduleData.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
         module.save();
     }
 

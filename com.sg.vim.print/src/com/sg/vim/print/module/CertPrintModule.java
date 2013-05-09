@@ -7,6 +7,7 @@ import com.mobnut.db.DBActivator;
 import com.mobnut.db.utils.DBUtil;
 import com.mongodb.DBCollection;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
@@ -64,17 +65,12 @@ public class CertPrintModule extends PrintModule {
             builder.append("<a href=\"" + _UPLOAD + "@" + getName()
                     + "\" target=\"_rwt\">上传</a>   ");
         }
+        if(lifecycle!=null){
+            builder.append("<b>状态: "+lifecycle+"</b>");
+        }
         builder.append("</small>");
 
         return builder.toString();
-    }
-
-    public boolean canUploadData() {
-        return canUploadData;
-    }
-
-    public void setCanUploadData(boolean b) {
-        canUploadData = b;
     }
 
     @Override
@@ -84,6 +80,8 @@ public class CertPrintModule extends PrintModule {
             dpinput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
                     null, vin, true);
             dpCertPrintModule.setInput(para);
+            String lifecycle = VimUtils.getLifecycle(vin,VimUtils.COL_CERF);
+            dpCertPrintModule.setLifecycle(lifecycle);
         } else {
             dpinput = null;
         }
@@ -92,8 +90,11 @@ public class CertPrintModule extends PrintModule {
         input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
                 false);
         qxCertPrintModule.setInput(para);
+        String lifecycle = VimUtils.getLifecycle(vin,VimUtils.COL_CERF);
+        qxCertPrintModule.setLifecycle(lifecycle);
         qxCertPrintModule.setInputData(input);
         canUploadData = false;
+        setLifecycle(lifecycle);
     }
 
     @Override
@@ -182,11 +183,6 @@ public class CertPrintModule extends PrintModule {
     }
 
     @Override
-    public boolean canInputPaperNumber() {
-        return canPrintData();
-    }
-
-    @Override
     public String getInputPaperNumber() {
         if (paperNumber != null) {
             return String.format("%" + 0 + 7 + "d", paperNumber);
@@ -195,8 +191,21 @@ public class CertPrintModule extends PrintModule {
         }
     }
 
-    public boolean canPrintData() {
-        return !isHasPrint()&&getInput() != null;
+    public void setCanUploadData(boolean b) {
+        canUploadData = b;
+    }
+
+    @Override
+    public boolean canInputPaperNumber() {
+        return canPrintData();
+    }
+
+    public boolean canUploadData() {//只有已经打印的状态才能上传
+        return canUploadData&&IVIMFields.LC_PRINTED.equals(lifecycle);
+    }
+
+    public boolean canPrintData() {//只有无状态才能打印
+        return (!isHasPrint())&&(getInput() != null)&&(lifecycle==null);
     }
 
  
