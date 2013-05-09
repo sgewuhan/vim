@@ -88,5 +88,4 @@ public class COCPrintModule extends PrintModule {
         return NAME;
     }
 
-
 }

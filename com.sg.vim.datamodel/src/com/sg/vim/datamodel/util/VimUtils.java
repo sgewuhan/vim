@@ -223,11 +223,19 @@ public class VimUtils {
     }
 
     public static void print(Browser browser) {
-        browser.execute("printCert()");
+        if(!debug){
+            browser.execute("printCert()");
+        }else{
+            browser.execute("printCertDummy()");
+        }
     }
 
-    public static void test(Browser browser) {
-        browser.execute("showBar()");
+    public static void showBar(Browser browser) {
+        if(!debug){
+            browser.execute("showBar()");
+        }else{
+            browser.execute("showBarDummy()");
+        }
     }
 
     /**
@@ -609,11 +617,11 @@ public class VimUtils {
         OperateResult r = vidService.uploadInsertEnt(cis);
         int rCode = r.getResultCode();
         if (rCode == 1) {
-            throw new Exception(GetResultMessage(r));
+            throw new Exception(getResultMessage(r));
         }
     }
 
-    static String GetResultMessage(OperateResult oResult) {
+    static String getResultMessage(OperateResult oResult) {
         StringBuffer sb = new StringBuffer();
 
         sb.append(String.format("²Ù×÷½á¹û:%s\r\n", oResult.getResultCode()));
@@ -636,7 +644,7 @@ public class VimUtils {
         OperateResult r = vidService.uploadOverTimeEnt(cis, memo);
         int rCode = r.getResultCode();
         if (rCode == 1) {
-            throw new Exception(GetResultMessage(r));
+            throw new Exception(getResultMessage(r));
         }
     }
 
@@ -652,7 +660,7 @@ public class VimUtils {
         OperateResult r = vidService.uploadUpdateEnt(cis, memo);
         int rCode = r.getResultCode();
         if (rCode == 1) {
-            throw new Exception(GetResultMessage(r));
+            throw new Exception(getResultMessage(r));
         }
     }
 
@@ -666,7 +674,7 @@ public class VimUtils {
         OperateResult r = vidService.uploadDeleteEnt(wzhgzbhs, memo);
         int rCode = r.getResultCode();
         if (rCode == 1) {
-            throw new Exception(GetResultMessage(r));
+            throw new Exception(getResultMessage(r));
         }
     }
 

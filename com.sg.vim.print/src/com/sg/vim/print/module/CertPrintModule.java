@@ -117,10 +117,15 @@ public class CertPrintModule extends PrintModule {
     @Override
     public void fireEvent(String eventCode, String[] arg, PrintContent pc) {
         if (eventCode.equals(_PRINT)) {
-            pc.doPrint(this);
+            doPrint(pc);
         } else if (eventCode.contains(_UPLOAD)) {
             pc.doUpload(this);
         }
+    }
+
+    @Override
+    public void doPrint(PrintContent pc) {
+        pc.doPrint(this);
     }
 
     /**
@@ -193,6 +198,8 @@ public class CertPrintModule extends PrintModule {
     public boolean canPrintData() {
         return !isHasPrint()&&getInput() != null;
     }
+
+ 
 
 
 }

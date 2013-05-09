@@ -8,6 +8,7 @@ import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
 
 public class DataModelActivator implements BundleActivator {
 
+    public static final String PLUGIN_ID = "com.sg.vim.datamodel.DataModelActivator";
     private static BundleContext context;
 
     static BundleContext getContext() {
