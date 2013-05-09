@@ -638,7 +638,7 @@ public class PrintContent extends Composite {
 
     public void doPrint(CertPrintModule certPrintModule) {
 
-        if (!VimUtils.debug) {
+//        if (!VimUtils.debug) {
 
             // 如果有底盘合格证数据先打印底盘合格证
             PrintModule dpmodule = getModulebyName(modules, DPCertPrintModule.NAME);
@@ -664,7 +664,7 @@ public class PrintContent extends Composite {
                 return;
             }
 
-        }
+//        }
         // 设置模块为可上传
         ((CertPrintModule) modules[0]).setHasPrint(true);
         ((CertPrintModule) modules[0]).setCanUploadData(true);
@@ -685,7 +685,7 @@ public class PrintContent extends Composite {
     }
 
     public void doUpload(CertPrintModule certPrintModule) {
-        if (!VimUtils.debug) {
+//        if (!VimUtils.debug) {
             List<DBObject> list = new ArrayList<DBObject>();
             PrintModule[] sb = certPrintModule.getSubModules();
             for (int i = 0; i < sb.length; i++) {
@@ -704,7 +704,7 @@ public class PrintContent extends Composite {
                         SWT.ICON_ERROR);
                 return;
             }
-        }
+//        }
 
         ((CertPrintModule) modules[0]).setCanUploadData(false);
         navigator.update(certPrintModule, null);
