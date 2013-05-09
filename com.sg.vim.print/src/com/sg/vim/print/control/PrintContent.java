@@ -557,7 +557,6 @@ public class PrintContent extends Composite {
             if (currentModule != null) {
                 currentModule.setValue(IVIMFields.mVeh_Tmxx, mVeh_Tmxx);
             }
-
         }
     }
 
