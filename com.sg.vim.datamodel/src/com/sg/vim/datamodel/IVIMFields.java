@@ -447,7 +447,8 @@ public class IVIMFields {
     public static final String LIFECYCLE = "lifecycle";
     public static final String LC_PRINTED = "已打印";
     public static final String LC_UPLOADED = "已上传";
-    
+    public static final String LC_CANCELED = "已撤销";
+    public static final String LC_REMOVED = "已作废";
     
     public static final String[] PRINTER_FUNCTIONS = new String[] { "打印合格证", "打印车辆一致性证书", "打印燃油标识" };
     public static final String ACTION_REC = "action_rec";
