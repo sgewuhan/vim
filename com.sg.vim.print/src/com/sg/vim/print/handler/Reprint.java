@@ -1,5 +1,8 @@
 package com.sg.vim.print.handler;
 
+import java.util.HashMap;
+import java.util.Iterator;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -21,7 +24,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.mobnut.commons.util.Utils;
+import com.mobnut.db.DBActivator;
+import com.mobnut.db.utils.DBUtil;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
 import com.sg.vim.datamodel.IVIMFields;
@@ -30,6 +36,7 @@ import com.sg.vim.datamodel.util.VimUtils;
 public class Reprint extends AbstractHandler {
 
     private Shell reprintShell;
+    private Text zzbnInput;
 
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -63,7 +70,7 @@ public class Reprint extends AbstractHandler {
         fd.top = new FormAttachment(0, 10);
         fd.left = new FormAttachment(0, 10);
         // 创建一个文本输入框
-        Text zzbnInput = new Text(reprintShell, SWT.BORDER);
+        zzbnInput = new Text(reprintShell, SWT.BORDER);
         fd = new FormData();
         zzbnInput.setLayoutData(fd);
         fd.top = new FormAttachment(label, 10);
@@ -105,8 +112,18 @@ public class Reprint extends AbstractHandler {
         printButton.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                VimUtils.setValues(certBrowser, data);
-                VimUtils.rePrint(certBrowser);
+                // 设置纸张编号
+                try {
+                    setHGZPaperNumber(data);
+                    // 设置打印机数据
+                    setPrinter(data);
+
+                    VimUtils.setValues(certBrowser, data);
+                    VimUtils.rePrint(certBrowser);
+                } catch (Exception e1) {
+                    UIUtils.showMessage(reprintShell, "合格证补打",
+                            "您选中的合格证补打发生错误：\n" + e1.getMessage(), SWT.ICON_ERROR | SWT.OK);
+                }
             }
         });
 
@@ -139,6 +156,37 @@ public class Reprint extends AbstractHandler {
         printCertResultFunction.dispose();
     }
 
+    protected void setPrinter(DBObject data) throws Exception {
+        HashMap<String, String> printerPara = VimUtils
+                .getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[0]);
+        if (printerPara == null) {
+            throw new Exception("没有对" + IVIMFields.PRINTER_FUNCTIONS[0] + "设置打印机");
+        }
+        Iterator<String> iter = printerPara.keySet().iterator();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            Object value = printerPara.get(key);
+            data.put(key, value);
+        }
+    }
+
+    protected void setHGZPaperNumber(DBObject data) throws Exception {
+        String text = zzbnInput.getText();
+        if (!Utils.isNumbers(text)) {
+            throw new Exception("需要输入合法的数字");
+        }
+        Integer inputPageNumber = Integer.parseInt(text);
+
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        String pnum;
+        if (inputPageNumber != null) {
+            pnum = String.format("%07d", inputPageNumber.intValue());
+        } else {
+            pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
+        }
+        data.put(IVIMFields.mVeh_Zzbh, pnum);
+    }
+
     protected void doPrintCertResultCallback(Shell shell, DBObject data, Object[] arguments) {
         if (arguments != null) {
             // jsreturn,Veh_ErrorInfo,Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw,
@@ -153,19 +201,20 @@ public class Reprint extends AbstractHandler {
             if (!Utils.isNullOrEmptyString(mVeh_ErrorInfo)) {
                 UIUtils.showMessage(shell, "合格证补打", "您选中的合格证补打发生错误：\n" + mVeh_ErrorInfo,
                         SWT.ICON_ERROR | SWT.OK);
-                return;
-            }
-            String lc = (String) data.get(IVIMFields.LIFECYCLE);
-            BasicDBObject info = new BasicDBObject();
-            info.put(IVIMFields.mVeh__Wzghzbh, mVeh__Wzghzbh);
-            info.put(IVIMFields.mVeh_Jyw, mVeh_Jyw);
-            info.put(IVIMFields.mVeh_Dywym, mVeh_Veh_Dywym);
-            // 尚未上传
-            if (IVIMFields.LC_PRINTED.equals(lc)) {
-                VimUtils.saveRePrintData(data, info);
             } else {
-                VimUtils.saveRePrintData(data, null);
+                String lc = (String) data.get(IVIMFields.LIFECYCLE);
+                BasicDBObject info = new BasicDBObject();
+                info.put(IVIMFields.mVeh__Wzghzbh, mVeh__Wzghzbh);
+                info.put(IVIMFields.mVeh_Jyw, mVeh_Jyw);
+                info.put(IVIMFields.mVeh_Dywym, mVeh_Veh_Dywym);
+                // 尚未上传
+                if (IVIMFields.LC_PRINTED.equals(lc)) {
+                    VimUtils.saveRePrintData(data, info);
+                } else {
+                    VimUtils.saveRePrintData(data, null);
+                }
             }
+            reprintShell.dispose();
         }
 
     }
