@@ -1353,6 +1353,12 @@ public class VimUtils {
         int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
         return id;
     }
+    
+    public static int getMaxPaperOfCert(){
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        int id = DBUtil.getIncreasedID(ids, "Veh_Zzbh");
+        return id;
+    }
 
     public static void saveRePrintData(DBObject data, DBObject info) {
         Date date = new Date();
