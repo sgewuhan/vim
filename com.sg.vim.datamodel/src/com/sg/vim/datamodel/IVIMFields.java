@@ -443,12 +443,13 @@ public class IVIMFields {
     public static final String PRINTACCOUNT = "pnt_account";
     public static final String UPLOADDATE = "upl_date";
     public static final String UPLOADACCOUNT = "upl_account";
+    public static final String CANCELDATE = "cel_date";
+    public static final String CANCELACCOUNT = "cel_account";
 
     public static final String LIFECYCLE = "lifecycle";
     public static final String LC_PRINTED = "已打印";
     public static final String LC_UPLOADED = "已上传";
-    public static final String LC_CANCELED = "已撤销";
-    public static final String LC_REMOVED = "已作废";
+    public static final String LC_CANCELED = "已作废";
     
     public static final String[] PRINTER_FUNCTIONS = new String[] { "打印合格证", "打印车辆一致性证书", "打印燃油标识" };
     public static final String ACTION_REC = "action_rec";
@@ -459,6 +460,9 @@ public class IVIMFields {
     public static final String ACTION_REC_TYPE_VALUE_PRINT = "打印";
     public static final Object ACTION_REC_TYPE_VALUE_UPLOAD = "上传";
     public static final Object ACTION_REC_TYPE_VALUE_REPRINT = "补打";
+    public static final Object ACTION_REC_TYPE_VALUE_UPLOAD2 = "补传";
+    public static final Object ACTION_REC_TYPE_VALUE_CANCEL = "撤消";
+    public static String mVeh_A_update_memo = "updatememo";
 
 
 }

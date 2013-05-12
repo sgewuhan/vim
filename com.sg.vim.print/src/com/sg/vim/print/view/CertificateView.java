@@ -1,29 +1,29 @@
 package com.sg.vim.print.view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
+import org.bson.types.ObjectId;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.IInputValidator;
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 import com.mobnut.commons.util.Utils;
-import com.mobnut.db.DBActivator;
-import com.mobnut.db.utils.DBUtil;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
+import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.ui.part.editor.IEditorSaveHandler;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
@@ -31,10 +31,9 @@ import com.sg.vim.datamodel.util.VimUtils;
 public class CertificateView extends TableNavigator {
 
     private BrowserFunction printCertResultFunction;
-    private DBObject data;
-    private Shell reprintShell;
-    private Text zzbnInput;
-    private Browser certBrowser;
+    private DBObject currentPrintData;
+    private Browser browser;
+    private int startNumber;
 
     @Override
     public void createPartControl(Composite parent) {
@@ -44,9 +43,9 @@ public class CertificateView extends TableNavigator {
     }
 
     private void createBrowser(final Composite parent) {
-        certBrowser = new Browser(parent, SWT.NONE);
-        certBrowser.setUrl("/vert2");
-        printCertResultFunction = new BrowserFunction(certBrowser, "printCertResult") {
+        browser = new Browser(parent, SWT.NONE);
+        browser.setUrl("/vert2");
+        printCertResultFunction = new BrowserFunction(browser, "printCertResult") {
             public Object function(Object[] arguments) {
                 doPrintCertResultCallback(arguments);
                 return null;
@@ -54,7 +53,7 @@ public class CertificateView extends TableNavigator {
         };
 
         FormData fd = new FormData();
-        certBrowser.setLayoutData(fd);
+        browser.setLayoutData(fd);
         fd.top = new FormAttachment(0, 0);
         fd.left = new FormAttachment(0, 0);
         fd.width = 1;
@@ -82,140 +81,247 @@ public class CertificateView extends TableNavigator {
                 UIUtils.showMessage(getSite().getShell(), "合格证补打", "您选中的合格证补打发生错误：\n"
                         + mVeh_ErrorInfo, SWT.ICON_ERROR | SWT.OK);
             } else {
-                String lc = (String) data.get(IVIMFields.LIFECYCLE);
+                String lc = (String) currentPrintData.get(IVIMFields.LIFECYCLE);
                 BasicDBObject info = new BasicDBObject();
                 info.put(IVIMFields.mVeh__Wzghzbh, mVeh__Wzghzbh);
                 info.put(IVIMFields.mVeh_Jyw, mVeh_Jyw);
                 info.put(IVIMFields.mVeh_Dywym, mVeh_Veh_Dywym);
                 // 尚未上传
                 if (IVIMFields.LC_PRINTED.equals(lc)) {
-                    VimUtils.saveRePrintData(data, info);
+                    VimUtils.saveRePrintData(currentPrintData, info);
                 } else {
-                    VimUtils.saveRePrintData(data, null);
+                    VimUtils.saveRePrintData(currentPrintData, null);
                 }
+
+                getNavigator().getViewer().update(currentPrintData, null);
             }
-        }
-        if(reprintShell!=null&&!reprintShell.isDisposed()){
-            reprintShell.dispose();
         }
 
     }
 
-    public void doRePrint(DBObject data) {
-        this.data = data;
+    private void doRePrint(DBObject data) {
+        this.currentPrintData = data;
 
-        String lc = (String) data.get(IVIMFields.LIFECYCLE);
-        Shell shell = getSite().getShell();
+        String lc = (String) currentPrintData.get(IVIMFields.LIFECYCLE);
         if (!IVIMFields.LC_PRINTED.equals(lc) && !IVIMFields.LC_UPLOADED.equals(lc)) {
-            UIUtils.showMessage(shell, "合格证补打", "您选中的合格证不满足补打的条件", SWT.ICON_ERROR | SWT.OK);
+            // UIUtils.showMessage(shell, "合格证补打", "您选中的合格证不满足补打的条件", SWT.ICON_ERROR | SWT.OK);
+            return;
         }
 
-        // 显示补打对话框
-        reprintShell = new Shell(shell, SWT.APPLICATION_MODAL | SWT.BORDER);
-        reprintShell.setLayout(new FormLayout());
-
-        Label label = new Label(reprintShell, SWT.NONE);
-        label.setText("请输入新的合格证纸张编号:");
-        FormData fd = new FormData();
-        label.setLayoutData(fd);
-        fd.top = new FormAttachment(0, 10);
-        fd.left = new FormAttachment(0, 10);
-        // 创建一个文本输入框
-        zzbnInput = new Text(reprintShell, SWT.BORDER);
-        fd = new FormData();
-        zzbnInput.setLayoutData(fd);
-        fd.top = new FormAttachment(label, 10);
-        fd.left = new FormAttachment(0, 10);
-        fd.width = 240;
-        fd.right = new FormAttachment(100, -10);
-
-        // 取出当前的纸张编号值
-        int num = VimUtils.getMaxPaperOfCert();
-        String s = String.format("%" + 0 + 7 + "d", num);
-        zzbnInput.setText(s);
-
-        // 创建补打按钮
-        Button printButton = new Button(reprintShell, SWT.PUSH);
-        printButton.setText("确定");
-        fd = new FormData();
-        printButton.setLayoutData(fd);
-        fd.top = new FormAttachment(zzbnInput, 10);
-        fd.left = new FormAttachment(0, 10);
-        fd.bottom = new FormAttachment(100, -10);
-        printButton.addSelectionListener(new SelectionAdapter() {
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                // 设置纸张编号
-                try {
-                    setHGZPaperNumber();
-                    // 设置打印机数据
-                    setPrinter();
-
-                    VimUtils.setValues(certBrowser, CertificateView.this.data);
-                    VimUtils.rePrint(certBrowser);
-                } catch (Exception e1) {
-                    UIUtils.showMessage(reprintShell, "合格证补打",
-                            "您选中的合格证补打发生错误：\n" + e1.getMessage(), SWT.ICON_ERROR | SWT.OK);
-                }
-            }
-        });
-
-        Button closeButton = new Button(reprintShell, SWT.PUSH);
-        closeButton.setText("取消");
-        fd = new FormData();
-        closeButton.setLayoutData(fd);
-        fd.top = new FormAttachment(zzbnInput, 10);
-        fd.left = new FormAttachment(printButton, 10);
-        fd.bottom = new FormAttachment(100, -10);
-        closeButton.addSelectionListener(new SelectionAdapter() {
-
-            @Override
-            public void widgetSelected(SelectionEvent e) {
-                reprintShell.dispose();
-            }
-
-        });
-
-        reprintShell.setLocation(200, 200);
-        reprintShell.pack();
-        reprintShell.open();
-
-    }
-
-    void setPrinter() throws Exception {
         HashMap<String, String> printerPara = VimUtils
                 .getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[0]);
         if (printerPara == null) {
-            throw new Exception("没有对" + IVIMFields.PRINTER_FUNCTIONS[0] + "设置打印机");
+            return;
         }
+
+        // 设置纸张编号
+        VimUtils.setCurrentPaperCert(startNumber);
+        String pnum = String.format("%07d", startNumber);
+        currentPrintData.put(IVIMFields.mVeh_Zzbh, pnum);
+
+        // 设置打印机
         Iterator<String> iter = printerPara.keySet().iterator();
         while (iter.hasNext()) {
             String key = iter.next();
             Object value = printerPara.get(key);
-            data.put(key, value);
+            currentPrintData.put(key, value);
+        }
+
+        VimUtils.print(browser);
+
+    }
+
+    public void doReUpload() {
+
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        IInputValidator validator = new IInputValidator() {
+
+            @Override
+            public String isValid(String newText) {
+                if (Utils.isNullOrEmpty(newText)) {
+                    return "您必须为补传合格证输入原因";
+                }
+                return null;
+            }
+        };
+        InputDialog d = new InputDialog(getSite().getShell(), "合格证补传", "请输入补传的原因", "", validator);
+        if (InputDialog.OK != d.open()) {
+            return;
+        }
+        String memo = d.getValue();
+        if (Utils.isNullOrEmpty(memo)) {
+            return;
+        }
+
+        try {
+
+            List<ObjectId> idList = new ArrayList<ObjectId>();
+            List<DBObject> dataList = new ArrayList<DBObject>();
+            Iterator<?> iter = selection.iterator();
+            while (iter.hasNext()) {
+                DBObject dataItem = (DBObject) iter.next();
+                idList.add((ObjectId) dataItem.get("_id"));
+                dataList.add(dataItem);
+            }
+            VimUtils.uploadCert2(dataList, memo);
+            DBObject setting = VimUtils.saveUpload2Data(idList, memo);
+            for (int i = 0; i < dataList.size(); i++) {
+                DBObject item = dataList.get(i);
+                item.putAll(setting);
+            }
+
+            getNavigator().getViewer().update(dataList.toArray(), null);
+        } catch (Exception e) {
+            UIUtils.showMessage(getSite().getShell(), "合格证补传", e.getMessage(), SWT.ICON_ERROR
+                    | SWT.OK);
         }
     }
 
-    void setHGZPaperNumber() throws Exception {
-        String text = zzbnInput.getText();
-        if (!Utils.isNumbers(text)) {
-            throw new Exception("需要输入合法的数字");
+    public void doRePrint() {
+        NumberInput numberShell = new NumberInput(getSite().getShell());
+        numberShell.setLocation(200, 200);
+        numberShell.pack();
+        numberShell.open();
+        startNumber = numberShell.getNumber();
+        int maxNumber = VimUtils.getCurrentMaxPaperOfCert();
+        if (maxNumber > startNumber) {
+            UIUtils.showMessage(getSite().getShell(), "合格证补打", "输入的纸张编号已被占用\n请重新补打并设置正确的纸张编号。",
+                    SWT.ICON_ERROR | SWT.OK);
         }
-        Integer inputPageNumber = Integer.parseInt(text);
 
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
-        String pnum;
-        if (inputPageNumber != null) {
-            int intValue = inputPageNumber.intValue();
-            int curId = DBUtil.getCurrentID(ids, "Veh_Zzbh");
-            if (curId > intValue) {
-                throw new Exception("输入的纸张编号已被占用");
-            }
-            pnum = String.format("%07d", intValue);
-        } else {
-            pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        Iterator<?> iter = selection.iterator();
+        while (iter.hasNext()) {
+            DBObject data = (DBObject) iter.next();
+            doRePrint(data);
         }
-        data.put(IVIMFields.mVeh_Zzbh, pnum);
+    }
+
+    public void doUpload() {
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+
+        List<ObjectId> idList = new ArrayList<ObjectId>();
+        List<DBObject> dataList = new ArrayList<DBObject>();
+        Iterator<?> iter = selection.iterator();
+        while (iter.hasNext()) {
+            DBObject dataItem = (DBObject) iter.next();
+            idList.add((ObjectId) dataItem.get("_id"));
+            dataList.add(dataItem);
+        }
+        try {
+            VimUtils.uploadCert(dataList);
+            DBObject setting = VimUtils.saveUploadData(idList, "");
+
+            for (int i = 0; i < dataList.size(); i++) {
+                DBObject item = dataList.get(i);
+                item.putAll(setting);
+            }
+        } catch (Exception e) {
+            UIUtils.showMessage(getSite().getShell(), "合格证上传", e.getMessage(), SWT.ICON_ERROR
+                    | SWT.OK);
+        }
+
+    }
+
+    public void doCancel() {
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+
+        IInputValidator validator = new IInputValidator() {
+
+            @Override
+            public String isValid(String newText) {
+                if (Utils.isNullOrEmpty(newText)) {
+                    return "您必须为撤消合格证输入原因";
+                }
+                return null;
+            }
+        };
+        InputDialog d = new InputDialog(getSite().getShell(), "合格证补传", "请输入撤消的原因", "", validator);
+        if (InputDialog.OK != d.open()) {
+            return;
+        }
+        String memo = d.getValue();
+        if (Utils.isNullOrEmpty(memo)) {
+            return;
+        }
+
+        List<String> certNumberList = new ArrayList<String>();
+        List<ObjectId> idList = new ArrayList<ObjectId>();
+        List<DBObject> dataList = new ArrayList<DBObject>();
+        Iterator<?> iter = selection.iterator();
+        while (iter.hasNext()) {
+            DBObject dataItem = (DBObject) iter.next();
+            certNumberList.add((String) dataItem.get(IVIMFields.mVeh__Wzghzbh));
+            idList.add((ObjectId) dataItem.get("_id"));
+            dataList.add(dataItem);
+        }
+        try {
+            VimUtils.deleteCert(certNumberList, memo);
+            DBObject setting = VimUtils.saveDeleteData(idList, memo);
+
+            for (int i = 0; i < dataList.size(); i++) {
+                DBObject item = dataList.get(i);
+                item.putAll(setting);
+            }
+        } catch (Exception e) {
+            UIUtils.showMessage(getSite().getShell(), "合格证撤消", e.getMessage(), SWT.ICON_ERROR
+                    | SWT.OK);
+        }
+    }
+
+    public void doEdit() {
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        
+        final DBObject data = (DBObject) selection.getFirstElement();
+        
+        IEditorSaveHandler saveHandler = new IEditorSaveHandler() {
+            
+            @Override
+            public boolean doSaveBefore(DataObjectEditorInput input, IProgressMonitor monitor,
+                    String operation) throws Exception {
+                String memo = input.getData().getText(IVIMFields.mVeh_A_update_memo);
+                List<DBObject> certList = new ArrayList<DBObject>();
+                certList.add(input.getData().getData());
+                VimUtils.updateCert(certList, memo);
+                
+                return true;
+            }
+            
+            @Override
+            public boolean doSaveAfter(DataObjectEditorInput input, IProgressMonitor monitor,
+                    String operation) throws Exception {
+                
+                //data与input同步
+                Iterator<String> iter = data.keySet().iterator();
+                while(iter.hasNext()){
+                    String key = iter.next();
+                    if(key.startsWith("Veh_")){
+                        data.put(key, input.getData().getValue(key));
+                    }
+                }
+                getNavigator().getViewer().update(data, null);
+                return true;
+            }
+        };
+        try {
+            UIUtils.openDialog((ObjectId) data.get("_id"), "com.sg.vim.print.editor.certificate_edit", true, false, saveHandler);
+        } catch (Exception e) {
+            UIUtils.showMessage(getSite().getShell(), "合格证修改", e.getMessage(), SWT.ICON_ERROR
+                    | SWT.OK);
+        }
+        
     }
 
 }

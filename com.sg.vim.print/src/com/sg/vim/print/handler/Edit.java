@@ -9,12 +9,10 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.sg.vim.print.view.CertificateView;
 
-public class Reupload extends AbstractHandler {
+public class Edit extends AbstractHandler {
 
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
-        // 对于打印后2天内未及时上传的数据为补传，对于正常数据，点击补传，弹出提示框，
-        // 对于补传数据，要求填写补传原因
         IStructuredSelection sel = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
         if (sel == null || sel.isEmpty()) {
             return null;
@@ -22,7 +20,7 @@ public class Reupload extends AbstractHandler {
         
         IWorkbenchPart part = HandlerUtil.getActivePart(event);
         if(part instanceof CertificateView){
-            ((CertificateView)part).doReUpload();
+            ((CertificateView)part).doEdit();
         }
         return null;
     }

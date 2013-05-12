@@ -592,6 +592,10 @@ public class VimUtils {
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
+        return getCertificateInfo(data,false);
+    }
+    
+    private static CertificateInfo getCertificateInfo(DBObject data,boolean isUpdate) throws Exception {
         CertificateInfo info = new CertificateInfo();
 
         // ÐòºÅ
@@ -1322,27 +1326,6 @@ public class VimUtils {
         return null;
     }
 
-    public static void saveUploadData(List<ObjectId> idList, String memo) {
-        Date date = new Date();
-        DBObject accountInfo = UserSessionContext.getAccountInfo();
-        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
-                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
-                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
-                .append(IVIMFields.ACTION_REC_MEMO, memo);
-
-        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
-        DBObject query = new BasicDBObject().append("_id",
-                new BasicDBObject().append("$in", idList));
-        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
-                .append(IVIMFields.UPLOADDATE, date)
-                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
-        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
-                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-
-        col.update(query, update, false, true);
-
-    }
-
     public static int getCurrentMaxPaperOfCert() {
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
         int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
@@ -1353,6 +1336,56 @@ public class VimUtils {
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
         int id = DBUtil.getIncreasedID(ids, "Veh_Zzbh");
         return id;
+    }
+    
+
+    public static void setCurrentPaperCert(int startNumber) {
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        DBUtil.setCurrentID(ids, "Veh_Zzbh",startNumber);        
+    }
+
+    public static DBObject saveUploadData(List<ObjectId> idList, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+    
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
+                .append(IVIMFields.UPLOADDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+    
+        col.update(query, update, false, true);
+        
+        return setting;
+    
+    }
+    
+    public static DBObject saveUpload2Data(List<ObjectId> idList, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD2)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+    
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
+                .append(IVIMFields.UPLOADDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+    
+        col.update(query, update, false, true);
+        return setting;
     }
 
     public static void saveRePrintData(DBObject data, DBObject info) {
@@ -1373,5 +1406,27 @@ public class VimUtils {
 
         col.update(query, update, false, true);
     }
+
+    public static DBObject saveDeleteData(List<ObjectId> idList, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_CANCEL)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+    
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.CANCELACCOUNT, accountInfo)
+                .append(IVIMFields.CANCELDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_CANCELED);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+    
+        col.update(query, update, false, true);
+        return setting;
+    }
+
 
 }

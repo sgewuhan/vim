@@ -7,7 +7,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.mongodb.DBObject;
 import com.sg.vim.print.view.CertificateView;
 
 public class Reprint extends AbstractHandler {
@@ -23,9 +22,8 @@ public class Reprint extends AbstractHandler {
         }
         
         IWorkbenchPart part = HandlerUtil.getActivePart(event);
-        DBObject data = (DBObject) sel.getFirstElement();
         if(part instanceof CertificateView){
-            ((CertificateView)part).doRePrint(data);
+            ((CertificateView)part).doRePrint();
         }
         return null;
     }
