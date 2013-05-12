@@ -79,7 +79,7 @@ public class Reprint extends AbstractHandler {
         fd.right = new FormAttachment(100, -10);
 
         // 取出当前的纸张编号值
-        int num = VimUtils.getCurrentMaxPaperOfCert();
+        int num = VimUtils.getMaxPaperOfCert();
         String s = String.format("%" + 0 + 7 + "d", num);
         zzbnInput.setText(s);
 
@@ -90,7 +90,7 @@ public class Reprint extends AbstractHandler {
                 "printCertResult") {
             public Object function(Object[] arguments) {
                 doPrintCertResultCallback(reprintShell, data, arguments);
-                return super.function(arguments);
+                return null;
             }
         };
 
@@ -153,7 +153,6 @@ public class Reprint extends AbstractHandler {
                 printCertResultFunction.dispose();
             }
         });
-        printCertResultFunction.dispose();
     }
 
     protected void setPrinter(DBObject data) throws Exception {
@@ -214,7 +213,6 @@ public class Reprint extends AbstractHandler {
                     VimUtils.saveRePrintData(data, null);
                 }
             }
-            reprintShell.dispose();
         }
 
     }
