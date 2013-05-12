@@ -142,6 +142,11 @@ public class VimUtils {
             browser.execute("printCertDummy()");
         }
     }
+    
+
+    public static void rePrint(Browser certBrowser) {
+        
+    }
 
     public static void showBar(Browser browser) {
         if (!debug) {
@@ -1367,4 +1372,5 @@ public class VimUtils {
 
         col.update(query, update, false, true);
     }
+
 }
