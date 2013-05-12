@@ -2774,6 +2774,10 @@
             alias="/vert"
             base-name="/html/vert.html">
       </resource>
+      <resource
+            alias="/vert2"
+            base-name="/html/vert2.html">
+      </resource>
    </extension>
    <extension
          point="com.sg.ui.dataEditor">
@@ -4592,7 +4596,11 @@
       id="g04"
       name="操作">
 <column column="pnt_date" name="打印日期" type="DateTime"></column>
-<column column="pnt_account" name="打印者" type="String"></column>
+<column
+      column="pnt_account"
+      labelProvider="com.sg.ui.viewer.table.AccountLabelProvider"
+      name="打印者"
+      type="String"></column>
 </columnGroup>
 <columnGroup
       defaultGroup="false"

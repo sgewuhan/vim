@@ -458,6 +458,7 @@ public class IVIMFields {
     public static final String ACTION_REC_MEMO = "act_memo";
     public static final String ACTION_REC_TYPE_VALUE_PRINT = "打印";
     public static final Object ACTION_REC_TYPE_VALUE_UPLOAD = "上传";
+    public static final Object ACTION_REC_TYPE_VALUE_REPRINT = "补打";
 
 
 }

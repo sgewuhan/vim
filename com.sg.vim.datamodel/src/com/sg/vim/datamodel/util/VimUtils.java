@@ -1322,23 +1322,49 @@ public class VimUtils {
         return null;
     }
 
-    public static void saveUploadData(List<ObjectId> idList) {
+    public static void saveUploadData(List<ObjectId> idList, String memo) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
-                .append(IVIMFields.ACTION_REC_MEMO, "");
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
 
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
         DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
-                .append(IVIMFields.UPLOADDATE, date).append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
+                .append(IVIMFields.UPLOADDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
 
         col.update(query, update, false, true);
 
+    }
+
+    public static int getCurrentMaxPaperOfCert() {
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
+        return id;
+    }
+
+    public static void saveRePrintData(DBObject data, DBObject info) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_REPRINT)
+                .append(IVIMFields.ACTION_REC_MEMO, "No.:" + data.get(IVIMFields.mVeh_Zzbh));
+
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id", data.get("_id"));
+        BasicDBObject update = new BasicDBObject().append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+        if (info != null) {
+            update.append("$set", info);
+        }
+
+        col.update(query, update, false, true);
     }
 }

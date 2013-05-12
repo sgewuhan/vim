@@ -155,8 +155,7 @@ public class CertPrintModule extends PrintModule {
     public String getDisplayedPaperNumber() {
         if (paperNumber == null) {
             if(canPrintData()){
-                DBCollection ids = DBActivator.getCollection("appportal", "ids");
-                int currentId = DBUtil.getCurrentID(ids, "Veh_Zzbh");
+                int currentId = VimUtils.getCurrentMaxPaperOfCert();
                 String s = String.format("%" + 0 + 7 + "d", currentId);
                 return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><small>" + "使用自动纸张编号, 当前值:"+s
                         + "<br/>或者<ins>双击</ins>设置起始纸张编号</small></span>";

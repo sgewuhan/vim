@@ -608,7 +608,7 @@ public class PrintContent extends Composite {
         actionList.add(new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
-                .append(IVIMFields.ACTION_REC_MEMO, ""));
+                .append(IVIMFields.ACTION_REC_MEMO, "No.:"+moduleData.get(IVIMFields.mVeh_Zzbh)));
         moduleData.put(IVIMFields.ACTION_REC, actionList);
         module.save();
     }
@@ -646,7 +646,7 @@ public class PrintContent extends Composite {
             idList.add((ObjectId) sb[i].getData().get("_id"));
         }
         
-        VimUtils.saveUploadData(idList);
+        VimUtils.saveUploadData(idList,"");
     }
 
 }

@@ -9,10 +9,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
 
 import com.mobnut.commons.util.Utils;
-import com.mobnut.db.DBActivator;
-import com.mobnut.db.utils.DBUtil;
-import com.mongodb.DBCollection;
 import com.sg.ui.UIUtils;
+import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.module.PrintModule;
 
 public class CertPrintModuleSeqEditingSupport extends EditingSupport {
@@ -36,8 +34,7 @@ public class CertPrintModuleSeqEditingSupport extends EditingSupport {
             throw new Exception("请输入数字");
         }
 
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
-        int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
+        int id = VimUtils.getCurrentMaxPaperOfCert();
         if (id > i) {
             throw new Exception("您设置的起始顺序号不能小于当前的顺序号。");
         }

@@ -16,12 +16,12 @@
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="com.sg.vim.perspective.printdata"
-            name="打印数据">
+            name="数据管理">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="com.sg.vim.perspective.print"
-            name="打印和上传">
+            name="打印">
       </perspective>
       <perspective
             class="com.mobnut.admin.AdminPerspectiveFactory"

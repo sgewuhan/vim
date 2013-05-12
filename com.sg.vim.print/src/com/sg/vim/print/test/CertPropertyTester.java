@@ -61,12 +61,16 @@ public class CertPropertyTester extends PropertyTester {
     }
 
     private boolean canUpload(DBObject data) {
+
         return IVIMFields.LC_PRINTED.equals(getLifecycle(data));
     }
 
     private boolean canReprint(DBObject data) {
-        return IVIMFields.LC_UPLOADED.equals(getLifecycle(data))
-                || IVIMFields.LC_PRINTED.equals(getLifecycle(data));
+        // 对于已打印，未上传的合格证，再继续打印的话，可以更改纸质编号，记录打印日期，并保留历史数据
+        // 即状态为已打印。
+        // 2、对于已上传如果不修改任何内容只改纸质编号的话可以补打
+        return IVIMFields.LC_PRINTED.equals(getLifecycle(data))
+                || IVIMFields.LC_UPLOADED.equals(getLifecycle(data));
     }
 
 }
