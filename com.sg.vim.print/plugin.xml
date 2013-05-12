@@ -87,7 +87,7 @@
             restorable="true">
       </view>
       <view
-            class="com.sg.ui.part.view.TableNavigator"
+            class="com.sg.vim.print.view.CertificateView"
             id="com.sg.vim.view.certificate"
             name="合格证管理"
             restorable="true">
