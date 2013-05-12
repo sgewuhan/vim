@@ -136,12 +136,11 @@ public class VimUtils {
     }
 
     public static void print(Browser browser) {
-            browser.execute("printCert()");
+        browser.execute("printCert()");
     }
-    
 
     public static void rePrint(Browser browser) {
-            browser.execute("printCert()");
+        browser.execute("printCert()");
     }
 
     public static void showBar(Browser browser) {
@@ -1349,8 +1348,8 @@ public class VimUtils {
         int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
         return id;
     }
-    
-    public static int getMaxPaperOfCert(){
+
+    public static int getMaxPaperOfCert() {
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
         int id = DBUtil.getIncreasedID(ids, "Veh_Zzbh");
         return id;
