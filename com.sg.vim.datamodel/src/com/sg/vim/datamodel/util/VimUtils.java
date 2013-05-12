@@ -136,16 +136,12 @@ public class VimUtils {
     }
 
     public static void print(Browser browser) {
-        if (!debug) {
             browser.execute("printCert()");
-        } else {
-            browser.execute("printCertDummy()");
-        }
     }
     
 
-    public static void rePrint(Browser certBrowser) {
-        
+    public static void rePrint(Browser browser) {
+            browser.execute("printCert()");
     }
 
     public static void showBar(Browser browser) {
