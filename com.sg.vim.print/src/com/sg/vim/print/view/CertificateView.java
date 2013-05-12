@@ -95,6 +95,9 @@ public class CertificateView extends TableNavigator {
                 }
             }
         }
+        if(reprintShell!=null&&!reprintShell.isDisposed()){
+            reprintShell.dispose();
+        }
 
     }
 
@@ -179,7 +182,7 @@ public class CertificateView extends TableNavigator {
 
     }
 
-    protected void setPrinter() throws Exception {
+    void setPrinter() throws Exception {
         HashMap<String, String> printerPara = VimUtils
                 .getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[0]);
         if (printerPara == null) {
@@ -193,7 +196,7 @@ public class CertificateView extends TableNavigator {
         }
     }
 
-    protected void setHGZPaperNumber() throws Exception {
+    void setHGZPaperNumber() throws Exception {
         String text = zzbnInput.getText();
         if (!Utils.isNumbers(text)) {
             throw new Exception("需要输入合法的数字");
