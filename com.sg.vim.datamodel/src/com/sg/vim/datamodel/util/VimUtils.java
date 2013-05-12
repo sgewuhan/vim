@@ -1428,5 +1428,24 @@ public class VimUtils {
         return setting;
     }
 
+    public static DBObject saveUpdateData(ObjectId id, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPDATE)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+    
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id",id);
+        DBObject setting = new BasicDBObject().append(IVIMFields.UPDATEACCOUNT, accountInfo)
+                .append(IVIMFields.UPDATEDATE, date);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+    
+        col.update(query, update, false, true);
+        return setting;
+    }
+
 
 }

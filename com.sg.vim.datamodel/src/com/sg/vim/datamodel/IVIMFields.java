@@ -445,6 +445,8 @@ public class IVIMFields {
     public static final String UPLOADACCOUNT = "upl_account";
     public static final String CANCELDATE = "cel_date";
     public static final String CANCELACCOUNT = "cel_account";
+    public static final String UPDATEDATE = "upd_date";
+    public static final String UPDATEACCOUNT = "upd_account";
 
     public static final String LIFECYCLE = "lifecycle";
     public static final String LC_PRINTED = "已打印";
@@ -462,6 +464,7 @@ public class IVIMFields {
     public static final Object ACTION_REC_TYPE_VALUE_REPRINT = "补打";
     public static final Object ACTION_REC_TYPE_VALUE_UPLOAD2 = "补传";
     public static final Object ACTION_REC_TYPE_VALUE_CANCEL = "撤消";
+    public static final Object ACTION_REC_TYPE_VALUE_UPDATE = "修改";
     public static String mVeh_A_update_memo = "updatememo";
 
 

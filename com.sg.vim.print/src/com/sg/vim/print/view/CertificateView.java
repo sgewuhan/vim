@@ -23,6 +23,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.ui.part.editor.DataObjectEditor;
 import com.sg.ui.part.editor.IEditorSaveHandler;
 import com.sg.ui.part.view.TableNavigator;
 import com.sg.vim.datamodel.IVIMFields;
@@ -34,6 +35,7 @@ public class CertificateView extends TableNavigator {
     private DBObject currentPrintData;
     private Browser browser;
     private int startNumber;
+    private DataObjectEditor editor;
 
     @Override
     public void createPartControl(Composite parent) {
@@ -283,45 +285,59 @@ public class CertificateView extends TableNavigator {
         if (selection == null || selection.isEmpty()) {
             return;
         }
-        
+
         final DBObject data = (DBObject) selection.getFirstElement();
-        
+
         IEditorSaveHandler saveHandler = new IEditorSaveHandler() {
-            
+
+            private String memo;
+
             @Override
             public boolean doSaveBefore(DataObjectEditorInput input, IProgressMonitor monitor,
                     String operation) throws Exception {
-                String memo = input.getData().getText(IVIMFields.mVeh_A_update_memo);
+
+                int yes = UIUtils.showMessage(getSite().getShell(), "更新合格证数据",
+                        "您希望使用当前的数据更新至国家合格证服务器吗？\n保存后，系统将更新国家合格证服务器的数据。", SWT.OK | SWT.CANCEL
+                                | SWT.ICON_QUESTION);
+                if (yes != SWT.OK) {
+                    return false;
+                }
+
+                memo = input.getData().getText(IVIMFields.mVeh_A_update_memo);
+                input.getData().getData().removeField(IVIMFields.mVeh_A_update_memo);
                 List<DBObject> certList = new ArrayList<DBObject>();
                 certList.add(input.getData().getData());
                 VimUtils.updateCert(certList, memo);
-                
                 return true;
             }
-            
+
             @Override
             public boolean doSaveAfter(DataObjectEditorInput input, IProgressMonitor monitor,
                     String operation) throws Exception {
-                
-                //data与input同步
+                VimUtils.saveUpdateData((ObjectId) data.get("_id"), memo);
+                // data与input同步
                 Iterator<String> iter = data.keySet().iterator();
-                while(iter.hasNext()){
+                while (iter.hasNext()) {
                     String key = iter.next();
-                    if(key.startsWith("Veh_")){
+                    if (key.startsWith("Veh_")) {
                         data.put(key, input.getData().getValue(key));
                     }
                 }
                 getNavigator().getViewer().update(data, null);
+                UIUtils.showMessage(getSite().getShell(), "更新合格证数据", "已提交更新国家合格证服务器的数据。\n编辑器即将关闭。",
+                        SWT.OK | SWT.ICON_INFORMATION);
+                editor.close(false);
                 return true;
             }
         };
         try {
-            UIUtils.openDialog((ObjectId) data.get("_id"), "com.sg.vim.print.editor.certificate_edit", true, false, saveHandler);
+            editor = UIUtils.open((ObjectId) data.get("_id"),
+                    "com.sg.vim.print.editor.certificate_edit", true, false, saveHandler);
         } catch (Exception e) {
             UIUtils.showMessage(getSite().getShell(), "合格证修改", e.getMessage(), SWT.ICON_ERROR
                     | SWT.OK);
         }
-        
+
     }
 
 }

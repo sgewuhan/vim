@@ -2785,6 +2785,7 @@
             collectionName="certificate"
             dbName="appportal"
             id="com.sg.vim.print.editor.certificate"
+            isSaveAsAllowed="false"
             labelFieldName="Veh_Clxh"
             name="整车合格证">
          <basicpage
@@ -3499,6 +3500,7 @@
             collectionName="certificate"
             dbName="appportal"
             id="com.sg.vim.print.editor.certificate2"
+            isSaveAsAllowed="false"
             labelFieldName="Veh_Clxh"
             name="底盘合格证">
          <basicpage
@@ -4213,6 +4215,8 @@
             collectionName="certificate"
             dbName="appportal"
             id="com.sg.vim.print.editor.certificate_edit"
+            isDefault="false"
+            isSaveAsAllowed="false"
             name="修改合格证">
          <basicpage
                description="车辆基本信息"
@@ -4328,7 +4332,7 @@
                   </field>
                </section>
                <section
-                     expand="false"
+                     expand="true"
                      label="车辆型号信息">
                   <field
                         editPart="Text(Single Line)"
@@ -4390,7 +4394,7 @@
                   </field>
                </section>
                <section
-                     expand="false"
+                     expand="true"
                      label="公告信息">
                   <field
                         editPart="Text(Single Line)"
@@ -4605,7 +4609,8 @@
             <pagecolumn>
                <section
                      label="规格、尺寸等参数">
-                  <fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
                      <field
                            editPart="Text(Single Line)"
                            editable="true"
@@ -4749,7 +4754,7 @@
                   </fieldgroup>
                </section>
                <section
-                     expand="false"
+                     expand="true"
                      label="质量参数">
                   <fieldgroup
                         columnCount="2">
@@ -4833,7 +4838,7 @@
             </pagecolumn>
             <pagecolumn>
                <section
-                     expand="false"
+                     expand="true"
                      label="备注">
                   <field
                         editPart="Text(Multi Line)"
@@ -4847,7 +4852,7 @@
                   </field>
                </section>
                <section
-                     expand="false"
+                     expand="true"
                      label="企业其它信息">
                   <field
                         editPart="Text(Multi Line)"
