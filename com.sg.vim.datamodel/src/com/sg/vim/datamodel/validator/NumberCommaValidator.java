@@ -20,7 +20,7 @@ public class NumberCommaValidator implements IFieldInputValidator {
   @Override
   public boolean validate(DataObject data, FieldConfigurator fieldConfigurator,
       Object valueForUpdate, IMessageManager messageManager, Control control) {
-    if (valueForUpdate instanceof String) {
+    if (!Utils.isNullOrEmptyString(valueForUpdate)) {
       boolean matched = Utils.isPatternMatched(valueForUpdate,"(\\d+)(,\\d+)*");
       if (!matched) {
         messageManager.addMessage(fieldConfigurator.getId(), "必须是逗号分割的数字", null,
