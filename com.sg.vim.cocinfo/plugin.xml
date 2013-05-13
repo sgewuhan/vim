@@ -94,8 +94,8 @@
 			-->
 			<column column="f_21a" name="发动机编号" type="String"></column>
 			<column column="f_21b" name="发动机编号在发动机上的打刻位置" type="String"></column>
-			<column column="ccc_04" name="发动机型号" type="String"></column>
-			<column column="ccc_05" name="发动机类别" type="String"></column>
+			<column column="ccc_04" name="底盘型号" type="String"></column>
+			<column column="ccc_05" name="底盘类别" type="String"></column>
 			<!--
 			<column column="ccc_06" name="底盘制造商" type="String"></column>
 			<column column="ccc_07" name="底盘CCC证书编号(版本号)" type="String"></column>
@@ -251,12 +251,12 @@
             </column>
             <column
                   column="ccc_04"
-                  name="发动机型号"
+                  name="底盘型号"
                   type="String">
             </column>
             <column
                   column="ccc_05"
-                  name="发动机类别"
+                  name="底盘类别"
                   type="String">
             </column>
             <column
@@ -842,12 +842,12 @@
             </column>
             <column
                   column="ccc_04"
-                  name="发动机型号"
+                  name="底盘型号"
                   type="String">
             </column>
             <column
                   column="ccc_05"
-                  name="发动机类别"
+                  name="底盘类别"
                   type="String">
             </column>
             <column
@@ -1289,12 +1289,12 @@
             </column>
             <column
                   column="ccc_04"
-                  name="发动机型号"
+                  name="底盘型号"
                   type="String">
             </column>
             <column
                   column="ccc_05"
-                  name="发动机类别"
+                  name="底盘类别"
                   type="String">
             </column>
             <column
@@ -1739,8 +1739,8 @@
 				<column column="f_c0_7" name="车辆注\n册类型" type="String"></column>
 				<column column="f_21a" name="发动机编号" type="String"></column>
 				<column column="f_21b" name="发动机编号\n打刻位置" type="String"></column>
-				<column column="ccc_04" name="发动机\n型号" type="String"></column>
-				<column column="ccc_05" name="发动机\n类别" type="String"></column>
+				<column column="ccc_04" name="底盘\n型号" type="String"></column>
+				<column column="ccc_05" name="底盘\n类别" type="String"></column>
 				<column column="ccc_06" name="底盘制造商" type="String"></column>
 				<column column="ccc_07" name="底盘CCC\n编号" type="String"></column>
 				<column column="ccc_08" name="底盘CCC\n签发日期" type="String"></column>
@@ -2031,12 +2031,12 @@
             </column>
             <column
                   column="ccc_04"
-                  name="发动机\n型号"
+                  name="底盘\n型号"
                   type="String">
             </column>
             <column
                   column="ccc_05"
-                  name="发动机\n类别"
+                  name="底盘\n类别"
                   type="String">
             </column>
             <column
@@ -3343,7 +3343,7 @@
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
-                        editable="false"
+                        editable="true"
                         id="f_c4"
                         label="C4 发动机型号"
                         labelVisible="true"
