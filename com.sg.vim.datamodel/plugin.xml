@@ -88,6 +88,9 @@
             id="com.sg.vim.enum.type4"
             label="燃料种类">
          <enumerate
+               id="" value ="" label="">
+         </enumerate>
+         <enumerate
                id="汽油">
          </enumerate>
          <enumerate

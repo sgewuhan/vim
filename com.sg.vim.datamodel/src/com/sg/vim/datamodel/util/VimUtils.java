@@ -292,16 +292,16 @@ public class VimUtils {
     public static DataObjectEditorInput getCOCInput(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
             String vin) {
-        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
-                .getConfigurator(COCPAPER_EDITOR);
-        DBCollection c = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
-        DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
-        DataObject data = new DataObject(c, dbObject);
-        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-        if (debug) {
-            editorInput.setEditable(true);
-        }
-        return editorInput;
+//        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
+//                .getConfigurator(COCPAPER_EDITOR);
+//        DBCollection c = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
+//        DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
+//        DataObject data = new DataObject(c, dbObject);
+//        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
+//        if (debug) {
+//            editorInput.setEditable(true);
+//        }
+        return null;
     }
 
     private static DBObject transferCOCData(DBObject cocData, DBObject confData,
@@ -350,7 +350,7 @@ public class VimUtils {
         }
 
         // Veh_FDjh F_21a 发动机号 映射
-        String code = (String) mesRawData.getValue("safety_components_vin");
+        String code = (String) mesRawData.getValue("SAFETY_COMPONENTS_VIN");
         
         result.put(IVIMFields.mVeh_Fdjh,code.substring(code.length()-9) );
         // Veh_Rlzl F_25 燃料种类 映射
