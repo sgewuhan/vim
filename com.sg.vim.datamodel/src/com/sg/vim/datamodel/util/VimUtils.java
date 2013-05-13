@@ -54,6 +54,7 @@ public class VimUtils {
     private static final String COL_COCINFO = "cocinfo";
 
     public static final String COL_CERF = "certificate";
+    public static final String COL_COCPAPER = "cocpaper";
 
     private static final String COL_PRODUCTCODEINFO = "productcodeinfo";
 
@@ -66,6 +67,8 @@ public class VimUtils {
     private final static String DPCERT_EDITOR = "com.sg.vim.print.editor.certificate2";
 
     private final static String QXCERT_EDITOR = "com.sg.vim.print.editor.certificate";
+
+    private final static String COCPAPER_EDITOR = "com.sg.vim.print.editor.cocpaper";
 
     /**
      * 成品码
@@ -277,7 +280,7 @@ public class VimUtils {
         DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
                 .getConfigurator(isDP ? DPCERT_EDITOR : QXCERT_EDITOR);
         DBCollection c = DBActivator.getCollection(DB_NAME, COL_CERF);
-        DBObject dbObject = transferData(cocData, confData, productCodeData, mesRawData, vin, isDP);
+        DBObject dbObject = transferCerfData(cocData, confData, productCodeData, mesRawData, vin, isDP);
         DataObject data = new DataObject(c, dbObject);
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
         if (debug) {
@@ -286,7 +289,35 @@ public class VimUtils {
         return editorInput;
     }
 
-    public static DBObject transferData(DBObject cocData, DBObject confData,
+    public static DataObjectEditorInput getCOCInput(DBObject cocData, DBObject confData,
+            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
+            String vin) {
+        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
+                .getConfigurator(COCPAPER_EDITOR);
+        DBCollection c = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
+        DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
+        DataObject data = new DataObject(c, dbObject);
+        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
+        if (debug) {
+            editorInput.setEditable(true);
+        }
+        return editorInput;
+    }
+
+    private static DBObject transferCOCData(DBObject cocData, DBObject confData,
+            DBObject productCodeData, SQLRow mesRawData, String vin) {
+        BasicDBObject result = new BasicDBObject();
+        //处理轮距合并
+        Object qlj = cocData.get(IVIMFields.F_5A);
+        Object hlj = cocData.get(IVIMFields.F_5B);
+        result.put(IVIMFields.F_5A_O,""+qlj+"/"+hlj );
+        
+        
+        return result;
+    }
+    
+
+    public static DBObject transferCerfData(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, String vin, boolean isDP) throws Exception {
         BasicDBObject result = new BasicDBObject();
         // Veh_ClzzqymC F_0_1 车辆制造企业名称 映射
@@ -319,7 +350,9 @@ public class VimUtils {
         }
 
         // Veh_FDjh F_21a 发动机号 映射
-        result.put(IVIMFields.mVeh_Fdjh, cocData.get(IVIMFields.F_21a));
+        String code = (String) mesRawData.getValue("safety_components_vin");
+        
+        result.put(IVIMFields.mVeh_Fdjh,code.substring(code.length()-9) );
         // Veh_Rlzl F_25 燃料种类 映射
         result.put(IVIMFields.mVeh_Rlzl, cocData.get(IVIMFields.F_25));
         // Veh_Gl C_01 功率 映射

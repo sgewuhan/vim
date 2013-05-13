@@ -295,6 +295,9 @@ public class IVIMFields {
     public static final String F_5A = "f_5a";
     /** 后轮距 **/
     public static final String F_5B = "f_5b";
+    
+    public static final String F_5A_O = "f_5a_o";
+
     /** 6.1 长度(mm) **/
     public static final String F_6_1 = "f_6_1";
     /** 6.3 车辆前端与牵引装置中心之间的距离(mm) **/

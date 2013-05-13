@@ -1,7 +1,10 @@
 package com.sg.vim.print.module;
 
+import java.util.Map;
+
 import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
 import com.sg.vim.print.module.action.COCPrintAction;
@@ -87,5 +90,20 @@ public class COCPrintModule extends PrintModule {
     public String getName() {
         return NAME;
     }
+
+    @Override
+    public boolean canPrintData() {
+        return super.canPrintData();
+    }
+
+    @Override
+    public void setInput(Map<String, Object> para) throws Exception {
+        super.setInput(para);
+        
+        VimUtils.getCOCInput(dpcocData, dpconfData, productCodeData, mesRawData,
+                null, vin);
+    }
+    
+    
 
 }

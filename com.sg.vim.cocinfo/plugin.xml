@@ -2721,6 +2721,18 @@
                         required="false"
                         type="String">
                   </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_c0_7"
+                        label="C0.7 车辆注册类型"
+                        labelVisible="true"
+                        name="f_c0_7"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <!--
                   <field
                         computeField="false"
