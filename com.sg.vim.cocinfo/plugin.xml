@@ -1859,7 +1859,7 @@
       </table>
       <table
             canCreate="false"
-            canDelete="false"
+            canDelete="true"
             collectionName="productcodeinfo"
             customItemHeight="72"
             dbName="appportal"
