@@ -6,6 +6,7 @@ import com.mobnut.commons.util.file.FileUtil;
 import com.mobnut.db.DBActivator;
 import com.mobnut.db.utils.DBUtil;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
@@ -58,15 +59,21 @@ public class CertPrintModule extends PrintModule {
         builder.append("<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><b>合格证</b></span><br/><small>");
         if (canPrintData()) {
             builder.append(getIcon("print_16.png", 16, 16));
-            builder.append("<a href=\"" + _PRINT + "@" + getName() + "\" target=\"_rwt\">打印</a>   ");
+            if (IVIMFields.LC_ABANDON.equals(lifecycle)) {
+                builder.append("<a href=\"" + _PRINT + "@" + getName()
+                        + "\" target=\"_rwt\">已作废，重新打印</a>   ");
+            } else {
+                builder.append("<a href=\"" + _PRINT + "@" + getName()
+                        + "\" target=\"_rwt\">打印</a>   ");
+            }
         }
         if (canUploadData()) {
             builder.append(getIcon("upload_16.png", 16, 16));
             builder.append("<a href=\"" + _UPLOAD + "@" + getName()
                     + "\" target=\"_rwt\">上传</a>   ");
         }
-        if(lifecycle!=null){
-            builder.append("<b>状态: "+lifecycle+"</b>");
+        if (lifecycle != null) {
+            builder.append("<b>状态: " + lifecycle + "</b>");
         }
         builder.append("</small>");
 
@@ -80,8 +87,16 @@ public class CertPrintModule extends PrintModule {
             dpinput = VimUtils.getCerfInput(dpcocData, dpconfData, productCodeData, mesRawData,
                     null, vin, true);
             dpCertPrintModule.setInput(para);
-            String lifecycle = VimUtils.getLifecycle(vin,VimUtils.COL_CERF);
-            dpCertPrintModule.setLifecycle(lifecycle);
+            // 处理生命周期状态
+            DBObject certData = VimUtils.getCertDataByVin(vin, "DP");
+            if (certData != null) {
+                String lifecycle = (String) certData.get(IVIMFields.LIFECYCLE);
+                dpCertPrintModule.setLifecycle(lifecycle);
+                if (IVIMFields.LC_ABANDON.equals(lifecycle)) {// 如果是已作废，需要把已作废的合格证编号复制过来
+                    Object custCertNum = certData.get(IVIMFields.mVeh_Zchgzbh);
+                    dpCertPrintModule.setValue(IVIMFields.mVeh_Zchgzbh, custCertNum);
+                }
+            }
         } else {
             dpinput = null;
         }
@@ -90,8 +105,18 @@ public class CertPrintModule extends PrintModule {
         input = VimUtils.getCerfInput(cocData, confData, productCodeData, mesRawData, null, vin,
                 false);
         qxCertPrintModule.setInput(para);
-        String lifecycle = VimUtils.getLifecycle(vin,VimUtils.COL_CERF);
-        qxCertPrintModule.setLifecycle(lifecycle);
+
+        // 处理生命周期状态
+        DBObject certData = VimUtils.getCertDataByVin(vin, "QX");
+        if (certData != null) {
+            String lifecycle = (String) certData.get(IVIMFields.LIFECYCLE);
+            qxCertPrintModule.setLifecycle(lifecycle);
+            if (IVIMFields.LC_ABANDON.equals(lifecycle)) {// 如果是已作废，需要把已作废的合格证编号复制过来
+                Object custCertNum = certData.get(IVIMFields.mVeh_Zchgzbh);
+                qxCertPrintModule.setValue(IVIMFields.mVeh_Zchgzbh, custCertNum);
+            }
+        }
+        
         qxCertPrintModule.setInputData(input);
         canUploadData = false;
         setLifecycle(lifecycle);
@@ -154,12 +179,12 @@ public class CertPrintModule extends PrintModule {
     @Override
     public String getDisplayedPaperNumber() {
         if (paperNumber == null) {
-            if(canPrintData()){
+            if (canPrintData()) {
                 int currentId = VimUtils.getCurrentMaxPaperOfCert();
                 String s = String.format("%" + 0 + 7 + "d", currentId);
-                return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><small>" + "使用自动纸张编号, 当前值:"+s
-                        + "<br/>或者<ins>双击</ins>设置起始纸张编号</small></span>";
-            }else{
+                return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><small>" + "使用自动纸张编号, 当前值:"
+                        + s + "<br/>或者<ins>双击</ins>设置起始纸张编号</small></span>";
+            } else {
                 return "";
             }
         } else {
@@ -199,15 +224,13 @@ public class CertPrintModule extends PrintModule {
         return canPrintData();
     }
 
-    public boolean canUploadData() {//只有已经打印的状态才能上传
-        return canUploadData&&IVIMFields.LC_PRINTED.equals(lifecycle);
+    public boolean canUploadData() {// 只有已经打印的状态才能上传
+        return canUploadData && IVIMFields.LC_PRINTED.equals(lifecycle);
     }
 
-    public boolean canPrintData() {//只有无状态才能打印
-        return (!isHasPrint())&&(getInput() != null)&&(lifecycle==null);
+    public boolean canPrintData() {// 只有无状态或者已作废才能打印
+        return (!isHasPrint()) && (getInput() != null)
+                && ((lifecycle == null) || (lifecycle.equals(IVIMFields.LC_ABANDON)));
     }
-
- 
-
 
 }

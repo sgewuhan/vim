@@ -468,9 +468,13 @@ public class PrintContent extends Composite {
 
     public void doPrint(CertPrintModule certPrintModule) {
         // 如果有底盘合格证数据先打印底盘合格证
+
         PrintModule dpmodule = getModulebyName(modules, DPCertPrintModule.NAME);
         PrintModule qxmodule = getModulebyName(modules, QXCertPrintModule.NAME);
         if (dpmodule.getInput() != null) {
+
+
+            // 设置纸张编号
             setHGZPaperNumber(dpmodule);
             try {
                 setPrinter(dpmodule, IVIMFields.PRINTER_FUNCTIONS[0]);
@@ -608,7 +612,7 @@ public class PrintContent extends Composite {
         actionList.add(new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
-                .append(IVIMFields.ACTION_REC_MEMO, "No.:"+moduleData.get(IVIMFields.mVeh_Zzbh)));
+                .append(IVIMFields.ACTION_REC_MEMO, "No.:" + moduleData.get(IVIMFields.mVeh_Zzbh)));
         moduleData.put(IVIMFields.ACTION_REC, actionList);
         module.save();
     }
@@ -626,7 +630,7 @@ public class PrintContent extends Composite {
             }
         }
         try {
-            if(!VimUtils.debug){
+            if (!VimUtils.debug) {
                 VimUtils.uploadCert(list);
             }
             saveUploadData(sb);
@@ -645,8 +649,8 @@ public class PrintContent extends Composite {
         for (int i = 0; i < sb.length; i++) {
             idList.add((ObjectId) sb[i].getData().get("_id"));
         }
-        
-        VimUtils.saveUploadData(idList,"");
+
+        VimUtils.saveUploadData(idList, "");
     }
 
 }

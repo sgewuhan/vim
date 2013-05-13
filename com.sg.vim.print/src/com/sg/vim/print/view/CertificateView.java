@@ -68,6 +68,25 @@ public class CertificateView extends TableNavigator {
         super.dispose();
     }
 
+    private String getMemo(String title) {
+        IInputValidator validator = new IInputValidator() {
+    
+            @Override
+            public String isValid(String newText) {
+                if (Utils.isNullOrEmpty(newText)) {
+                    return "您必须输入原因";
+                }
+                return null;
+            }
+        };
+        InputDialog d = new InputDialog(getSite().getShell(), title, "请输入原因", "", validator);
+        if (InputDialog.OK != d.open()) {
+            return null;
+        }
+        String memo = d.getValue();
+        return memo;
+    }
+
     private void doPrintCertResultCallback(Object[] arguments) {
         if (arguments != null) {
             // jsreturn,Veh_ErrorInfo,Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw,
@@ -139,21 +158,7 @@ public class CertificateView extends TableNavigator {
         if (selection == null || selection.isEmpty()) {
             return;
         }
-        IInputValidator validator = new IInputValidator() {
-
-            @Override
-            public String isValid(String newText) {
-                if (Utils.isNullOrEmpty(newText)) {
-                    return "您必须为补传合格证输入原因";
-                }
-                return null;
-            }
-        };
-        InputDialog d = new InputDialog(getSite().getShell(), "合格证补传", "请输入补传的原因", "", validator);
-        if (InputDialog.OK != d.open()) {
-            return;
-        }
-        String memo = d.getValue();
+        String memo = getMemo("合格证补传");
         if (Utils.isNullOrEmpty(memo)) {
             return;
         }
@@ -237,21 +242,7 @@ public class CertificateView extends TableNavigator {
             return;
         }
 
-        IInputValidator validator = new IInputValidator() {
-
-            @Override
-            public String isValid(String newText) {
-                if (Utils.isNullOrEmpty(newText)) {
-                    return "您必须为撤消合格证输入原因";
-                }
-                return null;
-            }
-        };
-        InputDialog d = new InputDialog(getSite().getShell(), "合格证补传", "请输入撤消的原因", "", validator);
-        if (InputDialog.OK != d.open()) {
-            return;
-        }
-        String memo = d.getValue();
+        String memo = getMemo("合格证撤消");
         if (Utils.isNullOrEmpty(memo)) {
             return;
         }
@@ -268,7 +259,7 @@ public class CertificateView extends TableNavigator {
         }
         try {
             VimUtils.deleteCert(certNumberList, memo);
-            DBObject setting = VimUtils.saveDeleteData(idList, memo);
+            DBObject setting = VimUtils.saveCancelData(idList, memo);
 
             for (int i = 0; i < dataList.size(); i++) {
                 DBObject item = dataList.get(i);
@@ -337,6 +328,34 @@ public class CertificateView extends TableNavigator {
             UIUtils.showMessage(getSite().getShell(), "合格证修改", e.getMessage(), SWT.ICON_ERROR
                     | SWT.OK);
         }
+
+    }
+
+    public void doRemove() {
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        
+        String memo = getMemo("合格证作废");
+        if (Utils.isNullOrEmpty(memo)) {
+            return;
+        }
+
+        List<ObjectId> idList = new ArrayList<ObjectId>();
+        List<DBObject> dataList = new ArrayList<DBObject>();
+        Iterator<?> iter = selection.iterator();
+        while (iter.hasNext()) {
+            DBObject dataItem = (DBObject) iter.next();
+            idList.add((ObjectId) dataItem.get("_id"));
+            dataList.add(dataItem);
+        }
+        
+        DBObject set = VimUtils.saveRemoveData(idList, memo);
+        for (int i = 0; i < dataList.size(); i++) {
+            dataList.get(i).putAll(set);
+        }
+        getNavigator().getViewer().update(dataList, null);
 
     }
 

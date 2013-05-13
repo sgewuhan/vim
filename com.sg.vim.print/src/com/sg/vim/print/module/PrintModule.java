@@ -43,7 +43,7 @@ public abstract class PrintModule {
 
     protected Integer paperNumber;
     private boolean hasPrint = false;
-    protected String lifecycle;
+    public String lifecycle;
 
     public void setCallbackProperties(String key, Object value) {
         if (callbackProperties == null) {

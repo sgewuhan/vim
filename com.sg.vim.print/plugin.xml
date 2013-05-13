@@ -5655,7 +5655,7 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="com.sg.vim.print.test.CertPropertyTester"
+            class="com.sg.vim.print.handler.CertPropertyTester"
             id="com.sg.vim.print.test.action"
             namespace="com.sg.vim.print.test"
             properties="cando"

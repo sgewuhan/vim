@@ -1,4 +1,4 @@
-package com.sg.vim.print.test;
+package com.sg.vim.print.handler;
 
 import java.util.Date;
 
@@ -62,7 +62,7 @@ public class CertPropertyTester extends PropertyTester {
         //根据打印时间而定，只能打印新的，需要填写作废原因。
         //保留作废历史记录（不能修改的字段有：合格证编号，vin）
 
-        return IVIMFields.LC_CANCELED.equals(getLifecycle(data));
+        return IVIMFields.LC_PRINTED.equals(getLifecycle(data));
     }
 
     private boolean canCancel(DBObject data) {

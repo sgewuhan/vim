@@ -40,16 +40,9 @@
       <seq
             collectionname="ids"
             dbname="appportal"
-            id="com.sg.vim.seq.qxhgz"
-            name="整车合格证顺序号"
-            seqname="Veh_ZChgzbh">
-      </seq>
-      <seq
-            collectionname="ids"
-            dbname="appportal"
-            id="com.sg.vim.seq.dphgz"
-            name="底盘合格证顺序号"
-            seqname="Veh_DPhgzbh">
+            id="com.sg.vim.seq.hgz"
+            name="合格证顺序号"
+            seqname="hgzbh">
       </seq>
       <seq
             collectionname="ids"

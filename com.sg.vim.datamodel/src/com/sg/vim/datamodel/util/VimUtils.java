@@ -451,8 +451,7 @@ public class VimUtils {
 
         // 编辑时处理
         DBCollection ids = DBActivator.getCollection(DB_NAME, "ids");
-        String seq = isDP ? DBUtil.getIncreasedID(ids, "Veh_DPhgzbh", "0", 10) : DBUtil
-                .getIncreasedID(ids, "Veh_ZChgzbh", "0", 10);
+        String seq = DBUtil.getIncreasedID(ids, IVIMFields.SEQ_GZBH, "0", 10);
         string = companyId + seq;
         if (!debug && string.length() != 14) {
             throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
@@ -1305,6 +1304,11 @@ public class VimUtils {
         }
         return null;
     }
+    
+    public static DBObject getCertDataByVin(String vin, String clztxx) {
+        DBCollection col = DBActivator.getCollection("appportal", COL_CERF);
+        return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(IVIMFields.mVeh_Clztxx, clztxx));
+    }
 
     public static HashMap<String, String> getPrinterParameters(String printfunctionName) {
         DBCollection col = DBActivator.getCollection("appportal", "printers");
@@ -1407,7 +1411,7 @@ public class VimUtils {
         col.update(query, update, false, true);
     }
 
-    public static DBObject saveDeleteData(List<ObjectId> idList, String memo) {
+    public static DBObject saveCancelData(List<ObjectId> idList, String memo) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
@@ -1440,6 +1444,27 @@ public class VimUtils {
         DBObject query = new BasicDBObject().append("_id",id);
         DBObject setting = new BasicDBObject().append(IVIMFields.UPDATEACCOUNT, accountInfo)
                 .append(IVIMFields.UPDATEDATE, date);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+    
+        col.update(query, update, false, true);
+        return setting;
+    }
+
+    public static DBObject saveRemoveData(List<ObjectId> idList, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_ABANDON)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+    
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.ABANDONACCOUNT, accountInfo)
+                .append(IVIMFields.ABANDONDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_ABANDON);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
     
