@@ -2,9 +2,11 @@ package com.sg.vim.datamodel.util;
 
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.datatype.DatatypeFactory;
@@ -12,12 +14,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.bson.types.ObjectId;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.rap.rwt.RWT;
+import org.eclipse.rap.rwt.client.service.UrlLauncher;
 import org.eclipse.swt.browser.Browser;
 
 import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
 import com.mobnut.db.utils.DBUtil;
 import com.mobnut.portal.user.UserSessionContext;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
@@ -280,7 +285,8 @@ public class VimUtils {
         DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
                 .getConfigurator(isDP ? DPCERT_EDITOR : QXCERT_EDITOR);
         DBCollection c = DBActivator.getCollection(DB_NAME, COL_CERF);
-        DBObject dbObject = transferCerfData(cocData, confData, productCodeData, mesRawData, vin, isDP);
+        DBObject dbObject = transferCerfData(cocData, confData, productCodeData, mesRawData, vin,
+                isDP);
         DataObject data = new DataObject(c, dbObject);
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
         if (debug) {
@@ -290,32 +296,83 @@ public class VimUtils {
     }
 
     public static DataObjectEditorInput getCOCInput(DBObject cocData, DBObject confData,
-            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
-            String vin) {
-//        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
-//                .getConfigurator(COCPAPER_EDITOR);
-//        DBCollection c = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
-//        DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
-//        DataObject data = new DataObject(c, dbObject);
-//        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-//        if (debug) {
-//            editorInput.setEditable(true);
-//        }
-        return null;
+            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler, String vin) {
+        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
+                .getConfigurator(COCPAPER_EDITOR);
+        DBCollection c = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
+        DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
+        DataObject data = new DataObject(c, dbObject);
+        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
+        if (debug) {
+            editorInput.setEditable(true);
+        }
+        return editorInput;
     }
 
     private static DBObject transferCOCData(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, String vin) {
         BasicDBObject result = new BasicDBObject();
-        //处理轮距合并
+
+        // 复制cocData的值
+        Iterator<String> iter1 = cocData.keySet().iterator();
+        while (iter1.hasNext()) {
+            String key = iter1.next();
+            if (key.startsWith("_")) {
+                continue;
+            } else if (key.equals("photo")) {
+                continue;
+            } else if (key.equals("basicinfo_id")) {
+                continue;
+            }
+            result.put(key, cocData.get(key));
+        }
+
+        // 处理轮距合并
         Object qlj = cocData.get(IVIMFields.F_5A);
         Object hlj = cocData.get(IVIMFields.F_5B);
-        result.put(IVIMFields.F_5A_O,""+qlj+"/"+hlj );
+        result.put(IVIMFields.F_5A_O, "" + qlj + "/" + hlj);
+        // 处理发动机编号
+
+        // Veh_FDjh F_21a 发动机号 映射
+        String code = (String) mesRawData.getValue("SAFETY_COMPONENTS_VIN");
+        result.put(IVIMFields.F_21a, code.substring(code.length() - 9));
+
+        // 处理排放
+        Object f46_3 = cocData.get(IVIMFields.F_46_3);
+        // 市区，Co2, 油耗
+        // f_46_3_o11,f_46_3_o12
+        // 市郊，Co2,油耗
+        // f_46_3_o21,f_46_3_o22
+        // 综合,Co2,油耗
+        // f_46_3_o31,f_46_3_o32
+        if (f46_3 instanceof BasicDBList) {
+            Iterator<Object> iter = ((BasicDBList) f46_3).iterator();
+            while (iter.hasNext()) {
+                DBObject dbo = (DBObject) iter.next();
+                if ("市区".equals(dbo.get("location"))) {
+                    result.put(IVIMFields.F_46_3_o11, dbo.get("co2"));
+                    result.put(IVIMFields.F_46_3_o12, dbo.get("fuelqty"));
+                } else if ("市郊".equals(dbo.get("location"))) {
+                    result.put(IVIMFields.F_46_3_o21, dbo.get("co2"));
+                    result.put(IVIMFields.F_46_3_o22, dbo.get("fuelqty"));
+                } else if ("综合".equals(dbo.get("location"))) {
+                    result.put(IVIMFields.F_46_3_o31, dbo.get("co2"));
+                    result.put(IVIMFields.F_46_3_o32, dbo.get("fuelqty"));
+                }
+            }
+        }
+
+        // 处理VIN
+        result.put(IVIMFields.F_0_6b, vin);
         
-        
+        //处理签发日期
+        Object ccc03 = cocData.get(IVIMFields.CCC_03);
+        if(ccc03 instanceof Date){
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+            result.put(IVIMFields.CCC_03, sdf.format((Date)ccc03));
+        }
         return result;
     }
-    
 
     public static DBObject transferCerfData(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, String vin, boolean isDP) throws Exception {
@@ -351,8 +408,8 @@ public class VimUtils {
 
         // Veh_FDjh F_21a 发动机号 映射
         String code = (String) mesRawData.getValue("SAFETY_COMPONENTS_VIN");
-        
-        result.put(IVIMFields.mVeh_Fdjh,code.substring(code.length()-9) );
+
+        result.put(IVIMFields.mVeh_Fdjh, code.substring(code.length() - 9));
         // Veh_Rlzl F_25 燃料种类 映射
         result.put(IVIMFields.mVeh_Rlzl, cocData.get(IVIMFields.F_25));
         // Veh_Gl C_01 功率 映射
@@ -624,10 +681,11 @@ public class VimUtils {
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
-        return getCertificateInfo(data,false);
+        return getCertificateInfo(data, false);
     }
-    
-    private static CertificateInfo getCertificateInfo(DBObject data,boolean isUpdate) throws Exception {
+
+    private static CertificateInfo getCertificateInfo(DBObject data, boolean isUpdate)
+            throws Exception {
         CertificateInfo info = new CertificateInfo();
 
         // 序号
@@ -1337,10 +1395,11 @@ public class VimUtils {
         }
         return null;
     }
-    
+
     public static DBObject getCertDataByVin(String vin, String clztxx) {
         DBCollection col = DBActivator.getCollection("appportal", COL_CERF);
-        return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(IVIMFields.mVeh_Clztxx, clztxx));
+        return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
+                IVIMFields.mVeh_Clztxx, clztxx));
     }
 
     public static HashMap<String, String> getPrinterParameters(String printfunctionName) {
@@ -1374,11 +1433,10 @@ public class VimUtils {
         int id = DBUtil.getIncreasedID(ids, "Veh_Zzbh");
         return id;
     }
-    
 
     public static void setCurrentPaperCert(int startNumber) {
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
-        DBUtil.setCurrentID(ids, "Veh_Zzbh",startNumber);        
+        DBUtil.setCurrentID(ids, "Veh_Zzbh", startNumber);
     }
 
     public static DBObject saveUploadData(List<ObjectId> idList, String memo) {
@@ -1388,7 +1446,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
-    
+
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
@@ -1397,13 +1455,13 @@ public class VimUtils {
                 .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-    
+
         col.update(query, update, false, true);
-        
+
         return setting;
-    
+
     }
-    
+
     public static DBObject saveUpload2Data(List<ObjectId> idList, String memo) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
@@ -1411,7 +1469,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD2)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
-    
+
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
@@ -1420,7 +1478,7 @@ public class VimUtils {
                 .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-    
+
         col.update(query, update, false, true);
         return setting;
     }
@@ -1451,7 +1509,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_CANCEL)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
-    
+
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
@@ -1460,7 +1518,7 @@ public class VimUtils {
                 .append(IVIMFields.LIFECYCLE, IVIMFields.LC_CANCELED);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-    
+
         col.update(query, update, false, true);
         return setting;
     }
@@ -1472,14 +1530,14 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPDATE)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
-    
+
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
-        DBObject query = new BasicDBObject().append("_id",id);
+        DBObject query = new BasicDBObject().append("_id", id);
         DBObject setting = new BasicDBObject().append(IVIMFields.UPDATEACCOUNT, accountInfo)
                 .append(IVIMFields.UPDATEDATE, date);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-    
+
         col.update(query, update, false, true);
         return setting;
     }
@@ -1491,7 +1549,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_ABANDON)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
-    
+
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_CERF);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
@@ -1500,10 +1558,86 @@ public class VimUtils {
                 .append(IVIMFields.LIFECYCLE, IVIMFields.LC_ABANDON);
         BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-    
+
         col.update(query, update, false, true);
         return setting;
     }
 
+    public static void printCOC(Browser browser, DBObject dbObject) throws Exception {
+        HashMap<String, String> printerdata = getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[1]);
+        if (printerdata == null) {
+            throw new Exception("没有设置打印COC证书的打印机");
+        }
+        String printerName = printerdata.get(IVIMFields.mVeh_PrinterName);
+
+        String template = null;
+        if (dbObject.get(IVIMFields.F_0_4).equals("M1")) {
+            template = "cocm1.pdf";
+        } else if (dbObject.get(IVIMFields.F_0_4).equals("N1")) {
+            template = "cocn1.pdf";
+        }
+        if (template == null) {
+            throw new Exception("没有对应的打印模板");
+        }
+
+        saveCOCPrintData(dbObject);
+
+        StringBuilder url = new StringBuilder();
+        url.append("/form/printdata");
+        url.append("?form=" + template);
+        url.append("&printer=" + printerName);
+        url.append("&db=appportal");
+        url.append("&col=" + COL_COCPAPER);
+        url.append("&id=" + dbObject.get("_id"));
+
+        String encodedURL = RWT.getResponse().encodeURL(url.toString());
+        if (browser != null) {
+            browser.setUrl(encodedURL);
+        } else {
+            UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
+            System.out.println(encodedURL);
+            launcher.openURL(encodedURL);
+        }
+
+    }
+
+    public static void saveCOCPrintData(DBObject data) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
+                .append(IVIMFields.ACTION_REC_MEMO, "");
+
+        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
+        data.put(IVIMFields.PRINTDATE, date);
+        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
+
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
+        DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
+
+        DBObject coc = col.findOne(query, new BasicDBObject().append("_id", 1));
+        ObjectId oid;
+        if (coc == null) {// 没有此VIM的COC证书
+            oid = new ObjectId();
+            data.put("_id", oid);
+            List<DBObject> reclist = new ArrayList<DBObject>();
+            reclist.add(rec);
+            data.put(IVIMFields.ACTION_REC, reclist);
+
+            col.insert(data);
+        } else {
+            oid = (ObjectId) coc.get("_id");
+            data.removeField("_id");
+
+            BasicDBObject update = new BasicDBObject().append("$push",
+                    new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+            update.append("$set", data);
+
+            col.update(query, update, false, true);
+            data.put("_id", oid);
+        }
+
+    }
 
 }

@@ -4873,6 +4873,1585 @@
             </fieldname>
          </versionControl>
       </editor>
+      <editor
+            collectionName="cocinfo"
+            dbName="appportal"
+            id="com.sg.vim.print.editor.cocpaper"
+            isDefault="false"
+            isSaveAsAllowed="false"
+            name="车辆一致性证书"
+            saveHandler="com.sg.vim.datamodel.savehandler.COCSave"
+            titleToolTips="车辆一致性信息">
+         <basicpage
+               description="第一部分 车辆总体信息"
+               id="com.sg.vim.cocinfopage.basic"
+               image="image/contact_32.png"
+               title="车辆总体信息">
+            <pagecolumn
+                  id="1">
+               <section
+                     label="基本信息">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="ccc_12"
+                        label="车辆一致性证书编号"
+                        labelVisible="true"
+                        name="ccc_12"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_0_1"
+                        label="0.1 车辆制造企业名称"
+                        labelVisible="true"
+                        name="f_0_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        defaultValue="中国"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_c0_1"
+                        label="C0.1车辆制造国"
+                        labelVisible="true"
+                        name="f_c0_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_2a"
+                        label="0.2 车型系列代号/名称"
+                        labelVisible="true"
+                        name="f_0_2a"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_2b"
+                        label="单元代号/名称"
+                        labelVisible="true"
+                        name="f_0_2b"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_2c"
+                        label="车型代号/名称"
+                        labelVisible="true"
+                        name="f_0_2c"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_0_2_1"
+                        label="车型名称"
+                        labelVisible="true"
+                        name="f_0_2_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_c0_2"
+                           label="C 0.2 中文品牌"
+                           labelVisible="true"
+                           name="f_c0_2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_c0_3"
+                           label="C0.3 英文品牌"
+                           labelVisible="true"
+                           name="f_c0_3"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Combo(Read Only)"
+                        editable="true"
+                        id="f_0_4"
+                        label="0.4 车辆类别"
+                        labelVisible="true"
+                        name="f_0_4"
+                        option="com.sg.vim.enum.type1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="0.5 基本车辆制造商">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_5c"
+                        label="名称"
+                        labelVisible="true"
+                        name="f_0_5c"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        heightHint="40"
+                        id="f_0_5d"
+                        label="地址"
+                        labelVisible="true"
+                        name="f_0_5d"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="最终制造阶段制造商">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_5a"
+                        label="名称"
+                        labelVisible="true"
+                        name="f_0_5a"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        heightHint="40"
+                        id="f_0_5b"
+                        label="地址"
+                        labelVisible="true"
+                        name="f_0_5b"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+            <pagecolumn
+                  id="2">
+               <section
+                     label="铭牌，车辆识别号，发动机号及位置">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_6a"
+                        label="0.6 法定铭牌的位置"
+                        labelVisible="true"
+                        name="f_0_6a"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_0_6b"
+                        label="车辆识别代号"
+                        labelVisible="true"
+                        name="f_0_6b"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        id="f_0_6c"
+                        label="车辆识别代号的打刻位置"
+                        labelVisible="true"
+                        name="f_0_6c"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_c0_7"
+                        label="C0.7 车辆注册类型"
+                        labelVisible="true"
+                        name="f_c0_7"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_21a"
+                        label="21 发动机编号"
+                        labelVisible="true"
+                        name="f_21a"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        id="f_21b"
+                        label="发动机编号在发动机上的打刻位置"
+                        labelVisible="true"
+                        name="f_21b"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="CCC证书">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="ccc_01"
+                        label="CCC认证过程中车辆的制造阶段"
+                        labelVisible="true"
+                        name="ccc_01"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="ccc_02"
+                        label="CCC证书编号(版本号)"
+                        labelVisible="true"
+                        name="ccc_02"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="DateDrop"
+                        editable="true"
+                        id="ccc_03"
+                        label="签发日期"
+                        labelVisible="true"
+                        name="ccc_03"
+                        persistable="true"
+                        required="false"
+                        type="Date">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="ccc_20"
+                        label="职务"
+                        labelVisible="true"
+                        name="ccc_20"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+         <basicpage
+               description="第二部分 车辆一致性证书参数"
+               id="com.sg.vim.cocinfopage.advance"
+               image="image/contact_32.png"
+               title="车辆一致性证书参数">
+            <pagecolumn
+                  id="1">
+               <section
+                     label="基本参数">
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_1"
+                           label="1 车轴数量"
+                           labelVisible="true"
+                           name="f_1"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_1_1a"
+                           label="车轮数量"
+                           labelVisible="true"
+                           name="f_1_1a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_2"
+                           label="2 驱动轴位置"
+                           labelVisible="true"
+                           name="f_2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_3"
+                           label="3 轴距(mm)"
+                           labelVisible="true"
+                           name="f_3"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="1">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_4_1_1"
+                           label="4.1.1 牵引座前置距最大值(mm)"
+                           labelVisible="true"
+                           name="f_4_1_1"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_4_1_2"
+                           label="4.1.2 牵引座前置距最小值(mm)"
+                           labelVisible="true"
+                           name="f_4_1_2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_5a"
+                           label="5 轮距(mm)"
+                           labelVisible="true"
+                           name="f_5a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_5b"
+                           label="/"
+                           labelVisible="true"
+                           name="f_5b"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="3">
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_6_1"
+                           label="6.1 长度(mm)"
+                           labelVisible="true"
+                           name="f_6_1"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_7_1"
+                           label="7.1 宽度(mm)"
+                           labelVisible="true"
+                           name="f_7_1"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_8"
+                           label="8 高度(mm)"
+                           labelVisible="true"
+                           name="f_8"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="1">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_6_3"
+                           label="6.3 车辆前端与牵引装置中心之间的距离(mm)"
+                           labelVisible="true"
+                           name="f_6_3"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_6_5"
+                           label="6.5 装载区长度(mm)"
+                           labelVisible="true"
+                           name="f_6_5"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_c1"
+                           label="C1 前悬(mm)"
+                           labelVisible="true"
+                           name="f_c1"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_11"
+                           label="l1 后悬(mm)"
+                           labelVisible="true"
+                           name="f_11"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_c2"
+                           label="C2 接近角(°)"
+                           labelVisible="true"
+                           name="f_c2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_c3"
+                           label="C3 离去角(°)"
+                           labelVisible="true"
+                           name="f_c3"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+               <section
+                     label="质量和负荷">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_12_1"
+                        label="12.1 行驶状态下带车身的车辆质量(kg)"
+                        labelVisible="true"
+                        name="f_12_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_14_1"
+                        label="14.1 额定总质量(kg)"
+                        labelVisible="true"
+                        name="f_14_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_c5"
+                        label="C5 载质量利用系数(kg)"
+                        labelVisible="true"
+                        name="f_c5"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_14_2"
+                        label="14.2 该质量的轴荷分配(kg)"
+                        labelVisible="true"
+                        name="f_14_2"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_14_3"
+                        label="14.3 各车轴或车轴组技术上允许的最大质量(kg)"
+                        labelVisible="true"
+                        name="f_14_3"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_15"
+                        label="15 可伸缩轴或可装载轴的位置"
+                        labelVisible="true"
+                        name="f_15"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_16"
+                        label="16 车顶最大允许载荷(kg)"
+                        labelVisible="true"
+                        name="f_16"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_17_1"
+                        label="17.1 牵引杆式挂车最大牵引质量(kg)"
+                        labelVisible="true"
+                        name="f_17_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_17_2"
+                        label="17.2 半挂车最大牵引质量(kg)"
+                        labelVisible="true"
+                        name="f_17_2"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_17_3"
+                        label="17.3 中心轴式挂车最大牵引质量(kg)"
+                        labelVisible="true"
+                        name="f_17_3"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_17"
+                           label="17.4 挂车的最大质量(制动下)(kg)"
+                           labelVisible="true"
+                           name="f_17"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_17_4"
+                           label="非制动下"
+                           labelVisible="true"
+                           name="f_17_4"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_18"
+                        label="18 牵引车与挂车的最大组合质量(kg)"
+                        labelVisible="true"
+                        name="f_18"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_19_1"
+                        label="19.1 牵引车与挂车连接点处最大垂直负荷(kg)"
+                        labelVisible="true"
+                        name="f_19_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="发动机">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_20"
+                        label="20 制造商名称"
+                        labelVisible="true"
+                        name="f_20"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_c4"
+                        label="C4 发动机型号"
+                        labelVisible="true"
+                        name="f_c4"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_22"
+                           label="22 工作原理"
+                           labelVisible="true"
+                           name="f_22"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_22_1"
+                           label="22.1 直接喷射"
+                           labelVisible="true"
+                           name="f_22_1"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_23"
+                           label="23 汽缸数量"
+                           labelVisible="true"
+                           name="f_23"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_23a"
+                           label="汽缸排列形式"
+                           labelVisible="true"
+                           name="f_23a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_24"
+                           label="24 排量(ml)"
+                           labelVisible="true"
+                           name="f_24"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="false"
+                           id="f_25"
+                           label="25 燃料种类"
+                           labelVisible="true"
+                           name="f_25"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_26"
+                           label="26 最大净功率(kw)"
+                           labelVisible="true"
+                           name="f_26"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_26a"
+                           label="对应的发动机转速(min-1)"
+                           labelVisible="true"
+                           name="f_26a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+               <section
+                     label="离合器，变速器，轮胎，转向和制动">
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_27"
+                           label="27 离合器形式"
+                           labelVisible="true"
+                           name="f_27"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_28"
+                           label="28 变速器形式"
+                           labelVisible="true"
+                           name="f_28"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_29"
+                           label="29 速比"
+                           labelVisible="true"
+                           name="f_29"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_30"
+                           label="30 主传动比"
+                           labelVisible="true"
+                           name="f_30"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_1_1"
+                        label="轮胎数"
+                        labelVisible="true"
+                        name="f_1_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_32"
+                        label="32 轮胎规格"
+                        labelVisible="true"
+                        name="f_32"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Combo(Read Only)"
+                        editable="true"
+                        id="f_32a"
+                        label="轮胎规格(合格证)"
+                        labelVisible="true"
+                        name="f_32a"
+                        optionProvider="com.sg.vim.datamodel.option.F32_Option"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_33_1"
+                        label="33.1 驱动轴是否装空气悬挂或等效装置"
+                        labelVisible="true"
+                        name="f_33_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_c6"
+                        label="C6 钢板弹簧片数"
+                        labelVisible="true"
+                        name="f_c6"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_34"
+                        label="34 转向助力形式"
+                        labelVisible="true"
+                        name="f_34"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        id="f_35"
+                        label="35 制动装置简要说明"
+                        labelVisible="true"
+                        name="f_35"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_36"
+                        label="36 挂车制动系统供气管内压力(bar)"
+                        labelVisible="true"
+                        name="f_36"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+            <pagecolumn
+                  id="2">
+               <section
+                     label="车身，车门，座位">
+                  <fieldgroup
+                        columnCount="3">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_37"
+                           label="37 车身型式"
+                           labelVisible="true"
+                           name="f_37"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_38"
+                           label="38 车辆颜色"
+                           labelVisible="true"
+                           name="f_38"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_39"
+                           label="39 罐式车罐容量(m3)"
+                           labelVisible="true"
+                           name="f_39"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_40"
+                        label="40 起重机的最大力矩能力(kNm)"
+                        labelVisible="true"
+                        name="f_40"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_41"
+                           label="41 车门数量"
+                           labelVisible="true"
+                           name="f_41"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_41a"
+                           label="车门结构"
+                           labelVisible="true"
+                           name="f_41a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="3">
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_c7_1"
+                           label="C7 货厢内部尺寸(mm) 长"
+                           labelVisible="true"
+                           name="f_c7_1"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_c7_2"
+                           label="宽"
+                           labelVisible="true"
+                           name="f_c7_2"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_c7_3"
+                           label="高"
+                           labelVisible="true"
+                           name="f_c7_3"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_42_1"
+                           label="42.1 座位数(包括驾驶员座)"
+                           labelVisible="true"
+                           name="f_42_1"
+                           optionProvider="com.sg.vim.datamodel.option.F421_Option"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_42_1a"
+                           label="布置方式"
+                           labelVisible="true"
+                           name="f_42_1a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+               <section
+                     label="牵引装置">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_43_1"
+                        label="43.1 如装有牵引装置CCC证书编号"
+                        labelVisible="true"
+                        name="f_43_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_43_1a"
+                        label="或试验报告编号"
+                        labelVisible="true"
+                        name="f_43_1a"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_44"
+                        label="44 最高车速(km/h)"
+                        labelVisible="true"
+                        name="f_44"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="45 声级">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_45_o1"
+                        label="CCC认证引用的标准号及对应实施阶段"
+                        labelVisible="true"
+                        name="f_45_o1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_45_o2"
+                           label="1.定置噪声(dB(A))"
+                           labelVisible="true"
+                           name="f_45_o2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_45_o3"
+                           label="对应发动机转速(min-1)"
+                           labelVisible="true"
+                           name="f_45_o3"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_45_o4"
+                        label="加速行驶车外噪声(dB(A))"
+                        labelVisible="true"
+                        name="f_45_o4"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="46.1 烟气排放物">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="120"
+                        id="f_46_1_o1"
+                        label="CCC认证引用的标准号及对应实施阶段"
+                        labelVisible="true"
+                        name="f_46_1_o1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="120"
+                        id="f_46_1_o2"
+                        label="1.试验用液体燃料"
+                        labelVisible="true"
+                        name="f_46_1_o2"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="4">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o4"
+                           label="CO"
+                           labelVisible="true"
+                           name="f_46_1_o4"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o5"
+                           label="HC"
+                           labelVisible="true"
+                           name="f_46_1_o5"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o6"
+                           label="NOx"
+                           labelVisible="true"
+                           name="f_46_1_o6"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o7"
+                           label="HC+NOx"
+                           labelVisible="true"
+                           name="f_46_1_o7"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o8"
+                           label="烟度(吸收系数m-1的校正值)"
+                           labelVisible="true"
+                           name="f_46_1_o8"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o9"
+                           label="微粒物"
+                           labelVisible="true"
+                           name="f_46_1_o9"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="120"
+                        id="f_46_1_o3"
+                        label="2.试验用气体燃料"
+                        labelVisible="true"
+                        name="f_46_1_o3"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <fieldgroup
+                        columnCount="4">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o10"
+                           label="CO"
+                           labelVisible="true"
+                           name="f_46_1_o10"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o11"
+                           label="NOx"
+                           labelVisible="true"
+                           name="f_46_1_o11"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o13"
+                           label="NMHC"
+                           labelVisible="true"
+                           name="f_46_1_o13"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o12"
+                           label="THC"
+                           labelVisible="true"
+                           name="f_46_1_o12"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <fieldgroup
+                        columnCount="2">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o15"
+                           label="CH4"
+                           labelVisible="true"
+                           name="f_46_1_o15"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_46_1_o14"
+                           label="微粒物"
+                           labelVisible="true"
+                           name="f_46_1_o14"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+               </section>
+               <section
+                     label="46.2 CO2排放量/燃油消耗量">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="120"
+                        id="f_46_2"
+                        label="CCC认证引用的标准号"
+                        labelVisible="true"
+                        name="f_46_2"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        ctableId="com.sg.vim.cocinfo.table.co2"
+                        defaultValueProvider="com.sg.vim.datemodel.defaultvalue.CO2Default"
+                        editPart="Table"
+                        editable="true"
+                        id="f_46_3"
+                        label="CO2 排放量"
+                        labelVisible="false"
+                        name="f_46_3"
+                        persistable="true"
+                        required="false"
+                        type="DBList">
+                  </field>
+               </section>
+               <section
+                     label="试验报告以及备注">
+                  <fieldgroup
+                        columnCount="1">
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_48_1"
+                           label="48.1 按照运输危险货物的结构要求的试验报告编号"
+                           labelVisible="true"
+                           name="f_48_1"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_48_1a"
+                           label="级别"
+                           labelVisible="true"
+                           name="f_48_1a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           heightHint="120"
+                           id="f_48_2"
+                           label="48.2 按照运输某些动物的结构要求的试验报告编号"
+                           labelVisible="true"
+                           name="f_48_2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_48_2a"
+                           label="级别"
+                           labelVisible="true"
+                           name="f_48_2a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                  </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        heightHint="120"
+                        id="f_50"
+                        label="50 备注"
+                        labelVisible="true"
+                        name="f_50"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+      </editor>
    </extension>
    <extension
          point="com.mobnut.admin.adminFunction">

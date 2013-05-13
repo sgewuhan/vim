@@ -68,9 +68,9 @@ public class IVIMFields {
     public static final String CCC_08 = "ccc_08";
     /** 制造商 **/
     public static final String CCC_09 = "ccc_09";
-    /**职务**/
+    /** 职务 **/
     public static final String CCC_20 = "ccc_20";
-    
+
     /** 签发日期 **/
     public static final String CCC_1 = "ccc_1";
     /** CCC证书编号(版本号) **/
@@ -284,6 +284,19 @@ public class IVIMFields {
     public static final String F_46_2 = "f_46_2";
     /** 46.3 CO2排放量/燃油消耗量 **/
     public static final String F_46_3 = "f_46_3";
+    
+    // 市区，Co2, 油耗
+    // f_46_3_o11,f_46_3_o12
+    // 市郊，Co2,油耗
+    // f_46_3_o21,f_46_3_o22
+    // 综合,Co2,油耗
+    // f_46_3_o31,f_46_3_o32
+    public static final String F_46_3_o11 = "f_46_3_o11";
+    public static final String F_46_3_o12 = "f_46_3_o12";
+    public static final String F_46_3_o21 = "f_46_3_o21";
+    public static final String F_46_3_o22 = "f_46_3_o22";
+    public static final String F_46_3_o31 = "f_46_3_o31";
+    public static final String F_46_3_o32 = "f_46_3_o32";
 
     /** 48.1 按照运输危险货物的结构要求的试验报告编号 **/
     public static final String F_48_1 = "f_48_1";
@@ -295,7 +308,7 @@ public class IVIMFields {
     public static final String F_5A = "f_5a";
     /** 后轮距 **/
     public static final String F_5B = "f_5b";
-    
+
     public static final String F_5A_O = "f_5a_o";
 
     /** 6.1 长度(mm) **/

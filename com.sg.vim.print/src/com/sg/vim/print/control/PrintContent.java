@@ -83,6 +83,7 @@ public class PrintContent extends Composite {
     private MultipageEditablePanel folder;
     private Form form;
     private CertPrintModuleSeqEditingSupport editingSupport;
+    private Browser cocBrowser;
 
     public PrintContent(ManagedForm mform, Form form, int style) {
         super(form.getBody(), style);
@@ -117,17 +118,29 @@ public class PrintContent extends Composite {
         fd.right = new FormAttachment(100, -margin);
         fd.bottom = new FormAttachment(100, -margin);
 
-        certBrowser = createBrowser(this);
+        certBrowser = createCertBrowser(this);
         fd = new FormData();
         certBrowser.setLayoutData(fd);
         fd.top = new FormAttachment(banner);
         fd.left = new FormAttachment();
-        fd.width = margin;
-        fd.height = margin;
+        fd.width = 1;
+        fd.height = 1;
+        
+        cocBrowser = createCOCBrowser(this);
+        fd = new FormData();
+        cocBrowser.setLayoutData(fd);
+        fd.top = new FormAttachment(banner);
+        fd.left = new FormAttachment();
+        fd.width = 1;
+        fd.height = 1;
 
     }
 
-    private Browser createBrowser(PrintContent printContent) {
+    private Browser createCOCBrowser(PrintContent printContent) {
+        return  new Browser(this, SWT.NONE);
+    }
+
+    private Browser createCertBrowser(PrintContent printContent) {
         Browser certBrowser = new Browser(this, SWT.NONE);
         certBrowser.setUrl("/vert");
         printCertResultFunction = new BrowserFunction(certBrowser, "printCertResult") {
@@ -465,6 +478,16 @@ public class PrintContent extends Composite {
         editorArea.layout();
         contentPanel.setWeights(new int[] { 1, 3 });
     }
+    
+
+    public void doPrint(COCPrintModule cocPrintModule) {
+        try {
+            VimUtils.printCOC(cocBrowser,cocPrintModule.getInput().getData().getData());
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(),
+                    SWT.ICON_ERROR);
+        }
+    }
 
     public void doPrint(CertPrintModule certPrintModule) {
         // 如果有底盘合格证数据先打印底盘合格证
@@ -652,5 +675,6 @@ public class PrintContent extends Composite {
 
         VimUtils.saveUploadData(idList, "");
     }
+
 
 }

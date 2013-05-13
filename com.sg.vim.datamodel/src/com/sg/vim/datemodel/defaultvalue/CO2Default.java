@@ -1,4 +1,4 @@
-package com.sg.vim.cocinfo.defaultvalue;
+package com.sg.vim.datemodel.defaultvalue;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;

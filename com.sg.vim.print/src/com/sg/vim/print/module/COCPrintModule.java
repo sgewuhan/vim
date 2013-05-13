@@ -50,21 +50,12 @@ public class COCPrintModule extends PrintModule {
         return builder.toString();
     }
 
-    private boolean enable;
+    private DataObjectEditorInput input;
 
-    @Override
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
 
     @Override
     public DataObjectEditorInput getInput() {
-        // TODO Auto-generated method stub
-        return null;
+        return input;
     }
 
     @Override
@@ -83,7 +74,9 @@ public class COCPrintModule extends PrintModule {
     public void fireEvent(String eventCode, String[] arg, PrintContent pc) {
         if (_OPENEDITOR.equals(eventCode)) {
             pc.showData(this);
-        } 
+        } else if(_PRINT.equals(eventCode)){
+            pc.doPrint(this);
+        }
     }
 
     @Override
@@ -100,7 +93,7 @@ public class COCPrintModule extends PrintModule {
     public void setInput(Map<String, Object> para) throws Exception {
         super.setInput(para);
         
-        VimUtils.getCOCInput(dpcocData, dpconfData, productCodeData, mesRawData,
+        input = VimUtils.getCOCInput(cocData, confData, productCodeData, mesRawData,
                 null, vin);
     }
     
