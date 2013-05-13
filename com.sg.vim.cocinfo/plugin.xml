@@ -2902,6 +2902,18 @@
                         required="false"
                         type="Date">
                   </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="ccc_20"
+                        label="职务"
+                        labelVisible="true"
+                        name="ccc_20"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                </section>
             </pagecolumn>
          </basicpage>
@@ -3023,36 +3035,39 @@
                         columnCount="3">
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_6_1"
                            label="6.1 长度(mm)"
                            labelVisible="true"
                            name="f_6_1"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_7_1"
                            label="7.1 宽度(mm)"
                            labelVisible="true"
                            name="f_7_1"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_8"
                            label="8 高度(mm)"
                            labelVisible="true"
                            name="f_8"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -3678,36 +3693,39 @@
                         columnCount="3">
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_c7_1"
                            label="C7 货厢内部尺寸(mm) 长"
                            labelVisible="true"
                            name="f_c7_1"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_c7_2"
                            label="宽"
                            labelVisible="true"
                            name="f_c7_2"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
                            id="f_c7_3"
                            label="高"
                            labelVisible="true"
                            name="f_c7_3"
+                           optionProvider="com.sg.vim.datamodel.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -3861,11 +3879,35 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
+                           id="f_48_1a"
+                           label="级别"
+                           labelVisible="true"
+                           name="f_48_1a"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
                            heightHint="120"
                            id="f_48_2"
                            label="48.2 按照运输某些动物的结构要求的试验报告编号"
                            labelVisible="true"
                            name="f_48_2"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="f_48_2a"
+                           label="级别"
+                           labelVisible="true"
+                           name="f_48_2a"
                            persistable="true"
                            required="false"
                            type="String">

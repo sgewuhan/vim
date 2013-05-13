@@ -67,7 +67,10 @@ public class IVIMFields {
     /** 签发日期 **/
     public static final String CCC_08 = "ccc_08";
     /** 制造商 **/
-    public static final String CCC09 = "ccc_09";
+    public static final String CCC_09 = "ccc_09";
+    /**职务**/
+    public static final String CCC_20 = "ccc_20";
+    
     /** 签发日期 **/
     public static final String CCC_1 = "ccc_1";
     /** CCC证书编号(版本号) **/
@@ -210,6 +213,10 @@ public class IVIMFields {
     public static final String F_24 = "f_24";
     /** 25 燃料种类 **/
     public static final String F_25 = "f_25";
+    public static final String F_25_1 = "f_25_1";
+    public static final String F_25_2 = "f_25_2";
+    public static final String F_25_3 = "f_25_3";
+
     /** 26 最大净功率(kw) **/
     public static final String F_26 = "f_26";
     /** 对应转速(min-1) **/
@@ -271,9 +278,13 @@ public class IVIMFields {
     /** 45 声级 **/
     public static final String F_45 = "f_45";
     /** 46.1 排气排放物 **/
+    @Deprecated
     public static final String F_46_1 = "f_46_1";
-    /** 46.2 CO2排放量/燃油消耗量 **/
+    /** 46.2 CO2排放标准号 **/
     public static final String F_46_2 = "f_46_2";
+    /** 46.3 CO2排放量/燃油消耗量 **/
+    public static final String F_46_3 = "f_46_3";
+
     /** 48.1 按照运输危险货物的结构要求的试验报告编号 **/
     public static final String F_48_1 = "f_48_1";
     /** 48.2 按照运输某些动物的结构要求的试验报告编号 **/
