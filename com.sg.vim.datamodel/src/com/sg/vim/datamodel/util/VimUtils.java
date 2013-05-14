@@ -371,6 +371,27 @@ public class VimUtils {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
             result.put(IVIMFields.CCC_03, sdf.format((Date)ccc03));
         }
+        
+        //处理合格证日期
+        //1.根据查找合格证
+        DBObject cert = getCertDataByVin(vin, "QX");
+        if(cert!=null){
+            Object fzrq = cert.get(IVIMFields.mVeh_Fzrq);
+            result.put(IVIMFields.CCC_21, fzrq==null?"":fzrq.toString());
+
+        }
+        
+        //处理颜色
+        String sn = mesRawData.getText(FIELD_PRODUCT_CODE);
+        String colorCode = sn.substring(14, 15);
+        String colorName = (String) cocData.get(IVIMFields.F_38);
+        for (int i = 0; i < COLOR_CODE.length; i++) {
+            if (COLOR_CODE[i].equalsIgnoreCase(colorCode)) {
+                colorName = COLOR_NAME[i];
+                break;
+            }
+        }
+        result.put(IVIMFields.F_38, colorName);
         return result;
     }
 

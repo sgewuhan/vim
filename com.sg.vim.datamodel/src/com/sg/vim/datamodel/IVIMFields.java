@@ -494,5 +494,6 @@ public class IVIMFields {
     public static final String mVeh_A_update_memo = "updatememo";
 
     public static final String SEQ_GZBH = "hgzbh";
+    public static final String CCC_21 = "ccc_21";
 
 }
