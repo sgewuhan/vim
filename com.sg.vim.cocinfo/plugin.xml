@@ -2503,6 +2503,7 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="ccc_12"
+                        inputValidator="com.sg.ui.part.editor.field.value.UniqueValidator"
                         label="车辆一致性证书编号"
                         labelVisible="true"
                         name="ccc_12"
