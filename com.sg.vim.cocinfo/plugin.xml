@@ -3816,51 +3816,12 @@
                      label="45 声级">
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
+                        editPart="Text(Multi Line)"
                         editable="true"
-                        id="f_45_o1"
-                        label="CCC认证引用的标准号及对应实施阶段"
-                        labelVisible="true"
-                        name="f_45_o1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <fieldgroup
-                        columnCount="2">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_45_o2"
-                           label="1.定置噪声(dB(A))"
-                           labelVisible="true"
-                           name="f_45_o2"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_45_o3"
-                           label="对应发动机转速(min-1)"
-                           labelVisible="true"
-                           name="f_45_o3"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                  </fieldgroup>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="f_45_o4"
-                        label="加速行驶车外噪声(dB(A))"
-                        labelVisible="true"
-                        name="f_45_o4"
+                        id="f_45"
+                        label="sj"
+                        labelVisible="false"
+                        name="f_45"
                         persistable="true"
                         required="false"
                         type="String">
@@ -3870,211 +3831,17 @@
                      label="46.1 烟气排放物">
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
+                        editPart="Text(Multi Line)"
                         editable="true"
                         heightHint="120"
-                        id="f_46_1_o1"
-                        label="CCC认证引用的标准号及对应实施阶段"
-                        labelVisible="true"
-                        name="f_46_1_o1"
+                        id="f_46_1"
+                        label="yq"
+                        labelVisible="false"
+                        name="f_46_1"
                         persistable="true"
                         required="false"
                         type="String">
                   </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        heightHint="120"
-                        id="f_46_1_o2"
-                        label="1.试验用液体燃料"
-                        labelVisible="true"
-                        name="f_46_1_o2"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <fieldgroup
-                        columnCount="4">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o4"
-                           label="CO"
-                           labelVisible="true"
-                           name="f_46_1_o4"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o5"
-                           label="HC"
-                           labelVisible="true"
-                           name="f_46_1_o5"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o6"
-                           label="NOx"
-                           labelVisible="true"
-                           name="f_46_1_o6"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o7"
-                           label="HC+NOx"
-                           labelVisible="true"
-                           name="f_46_1_o7"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                  </fieldgroup>
-                  <fieldgroup
-                        columnCount="2">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o8"
-                           label="烟度(吸收系数m-1的校正值)"
-                           labelVisible="true"
-                           name="f_46_1_o8"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o9"
-                           label="微粒物"
-                           labelVisible="true"
-                           name="f_46_1_o9"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                  </fieldgroup>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        heightHint="120"
-                        id="f_46_1_o3"
-                        label="2.试验用气体燃料"
-                        labelVisible="true"
-                        name="f_46_1_o3"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <fieldgroup
-                        columnCount="4">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o10"
-                           label="CO"
-                           labelVisible="true"
-                           name="f_46_1_o10"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o11"
-                           label="NOx"
-                           labelVisible="true"
-                           name="f_46_1_o11"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o13"
-                           label="NMHC"
-                           labelVisible="true"
-                           name="f_46_1_o13"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o12"
-                           label="THC"
-                           labelVisible="true"
-                           name="f_46_1_o12"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                  </fieldgroup>
-                  <fieldgroup
-                        columnCount="2">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o15"
-                           label="CH4"
-                           labelVisible="true"
-                           name="f_46_1_o15"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           heightHint="120"
-                           id="f_46_1_o14"
-                           label="微粒物"
-                           labelVisible="true"
-                           name="f_46_1_o14"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                  </fieldgroup>
                </section>
                <section
                      label="46.2 CO2排放量/燃油消耗量">
