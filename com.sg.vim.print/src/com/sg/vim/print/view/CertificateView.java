@@ -354,8 +354,8 @@ public class CertificateView extends TableNavigator {
         DBObject set = VimUtils.saveRemoveData(idList, memo);
         for (int i = 0; i < dataList.size(); i++) {
             dataList.get(i).putAll(set);
+            getNavigator().getViewer().update(dataList.get(i), null);
         }
-        getNavigator().getViewer().update(dataList, null);
 
     }
 

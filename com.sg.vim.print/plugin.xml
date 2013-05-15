@@ -152,6 +152,100 @@
                   type="String">
             </column>
          </filterAction>
+         <queryAction>
+            <column
+                  column="lifecycle"
+                  name="状态"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2a"
+                  name="车型系列代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2b"
+                  name="单元代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2c"
+                  name="车型代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_21a"
+                  name="发动机编号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_04"
+                  name="底盘型号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_05"
+                  name="底盘类别"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_07"
+                  name="底盘CCC编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_c4"
+                  name="发动机型号"
+                  type="String">
+            </column>
+         </queryAction>
+         <searchAction>
+            <column
+                  column="lifecycle"
+                  name="状态"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2a"
+                  name="车型系列代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2b"
+                  name="单元代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_2c"
+                  name="车型代号/名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_21a"
+                  name="发动机编号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_04"
+                  name="底盘型号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_05"
+                  name="底盘类别"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_07"
+                  name="底盘CCC编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_c4"
+                  name="发动机型号"
+                  type="String">
+            </column>
+         </searchAction>
       </navigator>
       <navigator
             id="com.sg.vim.view.certificate"
@@ -4297,6 +4391,23 @@
                         type="String">
                   </field>
                </section>
+               <section
+                     label="操作记录">
+                  <field
+                        computeField="false"
+                        ctableId="com.sg.vim.print.table.pntrec"
+                        editPart="Table"
+                        editable="false"
+                        heightHint="240"
+                        id="action_rec"
+                        label="记录"
+                        labelVisible="false"
+                        name="action_rec"
+                        persistable="true"
+                        required="false"
+                        type="DBList">
+                  </field>
+               </section>
             </pagecolumn>
          </basicpage>
       </editor>
@@ -5493,7 +5604,7 @@
                   <with
                         variable="activePartId">
                      <equals
-                           value="com.sg.vim.view.certificate">
+                           value="com.sg.vim.view.cocpaper">
                      </equals>
                   </with>
                   <with

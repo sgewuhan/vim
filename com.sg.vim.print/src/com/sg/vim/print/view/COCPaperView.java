@@ -77,8 +77,8 @@ public class COCPaperView extends TableNavigator {
         DBObject set = VimUtils.saveRemoveCOCData(idList, memo);
         for (int i = 0; i < dataList.size(); i++) {
             dataList.get(i).putAll(set);
+            getNavigator().getViewer().update(dataList.get(i), null);
         }
-        getNavigator().getViewer().update(dataList, null);
     }
 
     private String getMemo(String title) {
