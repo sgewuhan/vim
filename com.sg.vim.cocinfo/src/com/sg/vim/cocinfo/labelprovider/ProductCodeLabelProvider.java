@@ -2,6 +2,7 @@ package com.sg.vim.cocinfo.labelprovider;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 
+import com.mobnut.commons.util.Utils;
 import com.mobnut.commons.util.file.FileUtil;
 import com.mongodb.DBObject;
 import com.sg.vim.cocinfo.COCInfoActivator;
@@ -29,6 +30,9 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
         Object cfginfo_id = data.get(IVIMFields.CFG_ID);
         String tag1 = cocinfo_id == null ? "Î´Ö¸¶¨    " : "´ò¿ª    ";
         String tag2 = cfginfo_id == null ? "Î´Ö¸¶¨    " : "´ò¿ª    ";
+        
+        //¸ÖÆ¬µ¯»É
+        Object f_c6 = data.get(IVIMFields.F_C6);
 
         StringBuilder builder = new StringBuilder();
 
@@ -69,6 +73,14 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
             builder.append(" ÅäÖÃÐòºÅ: ");
             builder.append("<a href=\"com.sg.vim.editor.configcode@" + cfginfo_id
                     + "\" target=\"_rwt\">" + tag2 + "</a>");
+        }
+        
+        if(!Utils.isNullOrEmptyString(f_c6)){
+            builder.append(" ¸ÖÆ¬µ¯»É: ");
+            builder.append(f_c6);
+        }else{
+            builder.append(" ¸ÖÆ¬µ¯»É: ");
+            builder.append("Î´Éè¶¨");
         }
         builder.append("</small></span>");
 

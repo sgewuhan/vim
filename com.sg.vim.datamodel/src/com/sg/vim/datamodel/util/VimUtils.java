@@ -31,6 +31,7 @@ import com.sg.sqldb.utility.SQLResult;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.sqldb.utility.SQLUtil;
 import com.sg.ui.UI;
+import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.editor.IEditorSaveHandler;
@@ -331,6 +332,15 @@ public class VimUtils {
         Object qlj = cocData.get(IVIMFields.F_5A);
         Object hlj = cocData.get(IVIMFields.F_5B);
         result.put(IVIMFields.F_5A_O, "" + qlj + "/" + hlj);
+        
+        // 处理4.1 
+        Object qzj = cocData.get(IVIMFields.F_4_1_1);
+        Object hzj = cocData.get(IVIMFields.F_4_1_2);
+        if(Utils.isNullOrEmptyString(qzj)&&Utils.isNullOrEmptyString(hzj)){
+            result.put(IVIMFields.F_4_1_1_O, "" + qzj + "/" + hzj);
+        }
+
+        
         // 处理发动机编号
 
         // Veh_FDjh F_21a 发动机号 映射
@@ -392,6 +402,11 @@ public class VimUtils {
             }
         }
         result.put(IVIMFields.F_38, colorName);
+        
+        //处理钢板簧，在成品码中取
+        Object fc6 = productCodeData.get(IVIMFields.F_C6);
+        result.put(IVIMFields.F_C6, fc6);
+
         return result;
     }
 
@@ -1645,11 +1660,16 @@ public class VimUtils {
             List<DBObject> reclist = new ArrayList<DBObject>();
             reclist.add(rec);
             data.put(IVIMFields.ACTION_REC, reclist);
-
+            
+            //处理系统字段
+            UIUtils.addInsertInfo(data);
+            
             col.insert(data);
         } else {
             oid = (ObjectId) coc.get("_id");
             data.removeField("_id");
+            UIUtils.addmodifyInfo(data);
+
 
             BasicDBObject update = new BasicDBObject().append("$push",
                     new BasicDBObject().append(IVIMFields.ACTION_REC, rec));

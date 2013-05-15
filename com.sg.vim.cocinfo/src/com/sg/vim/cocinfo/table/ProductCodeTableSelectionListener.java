@@ -9,25 +9,25 @@ import com.sg.ui.UIUtils;
 
 public class ProductCodeTableSelectionListener implements SelectionListener {
 
-  public ProductCodeTableSelectionListener() {
-  }
-
-  @Override
-  public void widgetSelected(SelectionEvent e) {
-    if (e.detail == RWT.HYPERLINK) {
-      String[] ids = e.text.split("@");
-      try {
-        ObjectId cocinfoId = new ObjectId(ids[1]);
-        UIUtils.openDialog(cocinfoId, ids[0], false, false, null);
-      } catch (Exception e1) {
-        e1.printStackTrace();
-      }
+    public ProductCodeTableSelectionListener() {
     }
-  }
 
-  @Override
-  public void widgetDefaultSelected(SelectionEvent e) {
+    @Override
+    public void widgetSelected(SelectionEvent e) {
+        if (e.detail == RWT.HYPERLINK) {
+            String[] ids = e.text.split("@");
+            try {
+                ObjectId cocinfoId = new ObjectId(ids[1]);
+                UIUtils.openDialog(cocinfoId, ids[0], false, false, null);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 
-  }
+    @Override
+    public void widgetDefaultSelected(SelectionEvent e) {
+
+    }
 
 }

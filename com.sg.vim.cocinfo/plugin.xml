@@ -1860,9 +1860,12 @@
       <table
             canCreate="false"
             canDelete="true"
+            canEdit="true"
             collectionName="productcodeinfo"
             customItemHeight="72"
             dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
+            editorId="com.sg.vim.editor.productcode"
             fullSelection="true"
             headerVisiable="false"
             id="com.sg.vim.table.productcode"
@@ -2725,7 +2728,7 @@
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
-                        editable="false"
+                        editable="true"
                         id="f_c0_7"
                         label="C0.7 车辆注册类型"
                         labelVisible="true"
@@ -3596,6 +3599,18 @@
                   </field>
                   <field
                         computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_34"
+                        label="C34 转向形式"
+                        labelVisible="true"
+                        name="f_c34"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
                         editPart="Text(Multi Line)"
                         editable="true"
                         id="f_35"
@@ -4031,6 +4046,99 @@
             location="after=com.sg.vim.configcode.basicpage1"
             targetId="systempage">
       </pageExtendsions>
+      <editor
+            collectionName="productcodeinfo"
+            dbName="appportal"
+            id="com.sg.vim.editor.productcode"
+            isDefault="true"
+            isSaveAsAllowed="false"
+            labelFieldName="e_02"
+            name="成品数据编辑">
+         <basicpage
+               description="成品数据维护"
+               id="com.sg.vim.productcodeinfo.basicpage1"
+               image="image/contact_32.png"
+               title="成品数据维护">
+            <pagecolumn>
+               <section
+                     expand="true"
+                     label="成品数据维护">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="e_02"
+                        label="成品码"
+                        labelVisible="true"
+                        name="e_02"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="e_03"
+                        label="产品名称"
+                        labelVisible="true"
+                        name="e_03"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_0_2c1"
+                        label="公告车型"
+                        labelVisible="true"
+                        name="f_0_2c1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_c6"
+                        label="钢板弹簧片数"
+                        labelVisible="true"
+                        name="f_c6"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="cocinfo_name"
+                        label="车型一致性信息"
+                        labelVisible="true"
+                        name="cocinfo_name"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="configcodeinfo_name"
+                        label="配置序列号"
+                        labelVisible="true"
+                        name="configcodeinfo_name"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.menus">

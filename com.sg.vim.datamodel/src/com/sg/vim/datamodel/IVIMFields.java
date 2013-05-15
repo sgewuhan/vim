@@ -255,6 +255,10 @@ public class IVIMFields {
     public static final String F_4_1_1 = "f_4_1_1";
     /** 4.1.2牵引座前置距最小值(mm) **/
     public static final String F_4_1_2 = "f_4_1_2";
+    
+    public static final String F_4_1_1_O = "f_4_1_1_o";
+
+    
     /** 40 起重机的最大力矩能力(kNm) **/
     public static final String F_40 = "f_40";
     /** 41 车门数量 **/
