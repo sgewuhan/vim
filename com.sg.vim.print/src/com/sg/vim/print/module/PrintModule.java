@@ -31,13 +31,13 @@ public abstract class PrintModule {
     protected static final String _PRINT = "_PRINT";
     protected static final String _UPLOAD = "_UPLOAD";
 
-    protected String vin;
-    protected SQLRow mesRawData;
-    protected DBObject productCodeData;
-    protected DBObject dpconfData;
-    protected DBObject dpcocData;
-    protected DBObject confData;
-    protected DBObject cocData;
+    public String vin;
+    public SQLRow mesRawData;
+    public DBObject productCodeData;
+    public DBObject dpconfData;
+    public DBObject dpcocData;
+    public DBObject confData;
+    public DBObject cocData;
     private HashMap<String, Object> callbackProperties;
     private String error;
 

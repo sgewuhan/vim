@@ -5483,9 +5483,9 @@
             allPopups="false"
             locationURI="toolbar:main?after=com.sg.ui.separator3">
          <command
-               commandId="com.sg.vim.print.reprint.coc"
-               icon="image/print_24.png"
-               label="补打"
+               commandId="com.sg.vim.print.remove.coc"
+               icon="image/remove_24.png"
+               label="作废"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -5493,7 +5493,7 @@
                   <with
                         variable="activePartId">
                      <equals
-                           value="com.sg.vim.view.cocpaper">
+                           value="com.sg.vim.view.certificate">
                      </equals>
                   </with>
                   <with
@@ -5537,8 +5537,8 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="com.sg.vim.print.reprint.coc"
-            name="补打">
+            id="com.sg.vim.print.remove.coc"
+            name="作废">
       </command>
    </extension>
    <extension
@@ -5663,8 +5663,8 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.sg.vim.print.handler.ReprintCOC"
-            commandId="com.sg.vim.print.reprint.coc">
+            class="com.sg.vim.print.handler.RemoveCOC"
+            commandId="com.sg.vim.print.remove.coc">
          <enabledWhen>
             <with
                   variable="selection">
@@ -5672,7 +5672,7 @@
                      ifEmpty="false"
                      operator="and">
                   <test
-                        args="reprint"
+                        args="remove"
                         property="com.sg.vim.print.test.cando"
                         value="true">
                   </test>

@@ -125,7 +125,7 @@ public class PrintContent extends Composite {
         fd.left = new FormAttachment();
         fd.width = 1;
         fd.height = 1;
-        
+
         cocBrowser = createCOCBrowser(this);
         fd = new FormData();
         cocBrowser.setLayoutData(fd);
@@ -137,7 +137,7 @@ public class PrintContent extends Composite {
     }
 
     private Browser createCOCBrowser(PrintContent printContent) {
-        return  new Browser(this, SWT.NONE);
+        return new Browser(this, SWT.NONE);
     }
 
     private Browser createCertBrowser(PrintContent printContent) {
@@ -478,14 +478,29 @@ public class PrintContent extends Composite {
         editorArea.layout();
         contentPanel.setWeights(new int[] { 1, 3 });
     }
-    
 
     public void doPrint(COCPrintModule cocPrintModule) {
         try {
-            VimUtils.printCOC(cocBrowser,cocPrintModule.getInput().getData().getData());
+            // 检查有无对应的已打印或已上传的合格证
+            DBObject certData = VimUtils.getCertDataByVin(vin, "QX");
+            if (certData == null) {
+                throw new Exception("无法获取VIN对应的合格证，无法打印COC证书");
+            }
+            if (!IVIMFields.LC_PRINTED.equals(certData.get(IVIMFields.LIFECYCLE))
+                    && !IVIMFields.LC_UPLOADED.equals(certData.get(IVIMFields.LIFECYCLE))) {
+                throw new Exception("VIN对应的合格证已经失效，无法打印COC证书");
+            }
+            // 检查钢板弹簧是否有数据
+            if (cocPrintModule.productCodeData == null
+                    || Utils.isNullOrEmptyString(cocPrintModule.productCodeData
+                            .get(IVIMFields.F_C6))) {
+                throw new Exception("VIN对应的成品码缺少钢板弹簧的数据，无法打印COC证书");
+
+            }
+
+            VimUtils.printCOC(cocBrowser, cocPrintModule.getInput().getData().getData());
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(),
-                    SWT.ICON_ERROR);
+            UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
         }
     }
 
@@ -495,7 +510,6 @@ public class PrintContent extends Composite {
         PrintModule dpmodule = getModulebyName(modules, DPCertPrintModule.NAME);
         PrintModule qxmodule = getModulebyName(modules, QXCertPrintModule.NAME);
         if (dpmodule.getInput() != null) {
-
 
             // 设置纸张编号
             setHGZPaperNumber(dpmodule);
@@ -675,6 +689,5 @@ public class PrintContent extends Composite {
 
         VimUtils.saveUploadData(idList, "");
     }
-
 
 }

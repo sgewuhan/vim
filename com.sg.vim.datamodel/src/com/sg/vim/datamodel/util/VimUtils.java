@@ -1599,6 +1599,72 @@ public class VimUtils {
         return setting;
     }
 
+    public static DBObject saveRemoveCOCData(List<ObjectId> idList, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_ABANDON)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.ABANDONACCOUNT, accountInfo)
+                .append(IVIMFields.ABANDONDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_ABANDON);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+
+        col.update(query, update, false, true);
+        return setting;
+    }
+
+    public static void saveCOCPrintData(DBObject data) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
+                .append(IVIMFields.ACTION_REC_MEMO, "");
+    
+        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
+        data.put(IVIMFields.PRINTDATE, date);
+        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
+    
+        DBCollection col = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
+        DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
+    
+        DBObject coc = col.findOne(query, new BasicDBObject().append("_id", 1));
+
+        ObjectId oid;
+        if (coc == null) {// 没有此VIM的COC证书
+            oid = new ObjectId();
+            data.put("_id", oid);
+            List<DBObject> reclist = new ArrayList<DBObject>();
+            reclist.add(rec);
+            data.put(IVIMFields.ACTION_REC, reclist);
+            
+            //处理系统字段
+            UIUtils.addInsertInfo(data);
+            
+            col.insert(data);
+        } else {
+            oid = (ObjectId) coc.get("_id");
+            data.removeField("_id");
+            UIUtils.addmodifyInfo(data);
+    
+    
+            BasicDBObject update = new BasicDBObject().append("$push",
+                    new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+            update.append("$set", data);
+    
+            col.update(query, update, false, true);
+            data.put("_id", oid);
+        }
+    
+    }
+
     public static void printCOC(Browser browser, DBObject dbObject) throws Exception {
         HashMap<String, String> printerdata = getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[1]);
         if (printerdata == null) {
@@ -1633,50 +1699,6 @@ public class VimUtils {
             UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
             System.out.println(encodedURL);
             launcher.openURL(encodedURL);
-        }
-
-    }
-
-    public static void saveCOCPrintData(DBObject data) {
-        Date date = new Date();
-        DBObject accountInfo = UserSessionContext.getAccountInfo();
-        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
-                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
-                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
-                .append(IVIMFields.ACTION_REC_MEMO, "");
-
-        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
-        data.put(IVIMFields.PRINTDATE, date);
-        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
-
-        DBCollection col = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
-        DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
-
-        DBObject coc = col.findOne(query, new BasicDBObject().append("_id", 1));
-        ObjectId oid;
-        if (coc == null) {// 没有此VIM的COC证书
-            oid = new ObjectId();
-            data.put("_id", oid);
-            List<DBObject> reclist = new ArrayList<DBObject>();
-            reclist.add(rec);
-            data.put(IVIMFields.ACTION_REC, reclist);
-            
-            //处理系统字段
-            UIUtils.addInsertInfo(data);
-            
-            col.insert(data);
-        } else {
-            oid = (ObjectId) coc.get("_id");
-            data.removeField("_id");
-            UIUtils.addmodifyInfo(data);
-
-
-            BasicDBObject update = new BasicDBObject().append("$push",
-                    new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-            update.append("$set", data);
-
-            col.update(query, update, false, true);
-            data.put("_id", oid);
         }
 
     }
