@@ -53,6 +53,10 @@ public class VimUtils {
 
     public static String HD_USER;
 
+    public static boolean COC_REPRINT;
+
+    public static boolean FL_REPRINT;
+
     private static final String COL_CONFIGCODEINFO = "configcodeinfo";
 
     private static final String MES_DB = "mes";
@@ -332,15 +336,14 @@ public class VimUtils {
         Object qlj = cocData.get(IVIMFields.F_5A);
         Object hlj = cocData.get(IVIMFields.F_5B);
         result.put(IVIMFields.F_5A_O, "" + qlj + "/" + hlj);
-        
-        // 处理4.1 
+
+        // 处理4.1
         Object qzj = cocData.get(IVIMFields.F_4_1_1);
         Object hzj = cocData.get(IVIMFields.F_4_1_2);
-        if(Utils.isNullOrEmptyString(qzj)&&Utils.isNullOrEmptyString(hzj)){
+        if (Utils.isNullOrEmptyString(qzj) && Utils.isNullOrEmptyString(hzj)) {
             result.put(IVIMFields.F_4_1_1_O, "" + qzj + "/" + hzj);
         }
 
-        
         // 处理发动机编号
 
         // Veh_FDjh F_21a 发动机号 映射
@@ -374,24 +377,24 @@ public class VimUtils {
 
         // 处理VIN
         result.put(IVIMFields.F_0_6b, vin);
-        
-        //处理签发日期
+
+        // 处理签发日期
         Object ccc03 = cocData.get(IVIMFields.CCC_03);
-        if(ccc03 instanceof Date){
+        if (ccc03 instanceof Date) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-            result.put(IVIMFields.CCC_03, sdf.format((Date)ccc03));
+            result.put(IVIMFields.CCC_03, sdf.format((Date) ccc03));
         }
-        
-        //处理合格证日期
-        //1.根据查找合格证
+
+        // 处理合格证日期
+        // 1.根据查找合格证
         DBObject cert = getCertDataByVin(vin, "QX");
-        if(cert!=null){
+        if (cert != null) {
             Object fzrq = cert.get(IVIMFields.mVeh_Fzrq);
-            result.put(IVIMFields.CCC_21, fzrq==null?"":fzrq.toString());
+            result.put(IVIMFields.CCC_21, fzrq == null ? "" : fzrq.toString());
 
         }
-        
-        //处理颜色
+
+        // 处理颜色
         String sn = mesRawData.getText(FIELD_PRODUCT_CODE);
         String colorCode = sn.substring(14, 15);
         String colorName = (String) cocData.get(IVIMFields.F_38);
@@ -402,8 +405,8 @@ public class VimUtils {
             }
         }
         result.put(IVIMFields.F_38, colorName);
-        
-        //处理钢板簧，在成品码中取
+
+        // 处理钢板簧，在成品码中取
         Object fc6 = productCodeData.get(IVIMFields.F_C6);
         result.put(IVIMFields.F_C6, fc6);
 
@@ -1620,49 +1623,53 @@ public class VimUtils {
         return setting;
     }
 
-    public static void saveCOCPrintData(DBObject data) {
+    public static void saveCOCPrintData(DBObject data) throws Exception {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
                 .append(IVIMFields.ACTION_REC_MEMO, "");
-    
+
         data.put(IVIMFields.PRINTACCOUNT, accountInfo);
         data.put(IVIMFields.PRINTDATE, date);
         data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
-    
+
         DBCollection col = DBActivator.getCollection(DB_NAME, COL_COCPAPER);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
-    
+
         DBObject coc = col.findOne(query, new BasicDBObject().append("_id", 1));
 
+        if (!COC_REPRINT && coc != null) {
+            if (!IVIMFields.LC_ABANDON.equals(coc.get(IVIMFields.LIFECYCLE))) {
+                throw new Exception("该COC证书已经打印，不可重复打印");
+            }
+        }
         ObjectId oid;
-        if (coc == null) {// 没有此VIM的COC证书
+        if (coc == null || IVIMFields.LC_ABANDON.equals(coc.get(IVIMFields.LIFECYCLE))) {// 没有此VIM的COC证书或者COC证书已经作废
             oid = new ObjectId();
             data.put("_id", oid);
             List<DBObject> reclist = new ArrayList<DBObject>();
             reclist.add(rec);
             data.put(IVIMFields.ACTION_REC, reclist);
-            
-            //处理系统字段
+
+            // 处理系统字段
             UIUtils.addInsertInfo(data);
-            
+
             col.insert(data);
         } else {
             oid = (ObjectId) coc.get("_id");
             data.removeField("_id");
             UIUtils.addmodifyInfo(data);
-    
-    
+
             BasicDBObject update = new BasicDBObject().append("$push",
                     new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
             update.append("$set", data);
-    
+
             col.update(query, update, false, true);
             data.put("_id", oid);
         }
-    
+
     }
 
     public static void printCOC(Browser browser, DBObject dbObject) throws Exception {
