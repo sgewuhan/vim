@@ -361,6 +361,9 @@ public class IVIMFields {
     public static final String H_03 = "h_03";
     /** 配置 **/
     public static final String H_04 = "h_04";
+    
+    /**最大设计总质量**/
+    public static final String G_31 = "g_31";
 
     public static final String mVeh_Clztxx = "Veh_Clztxx";// 车辆状态信息 字符 2 取值为QX和DP
     public static final String mVeh_Zchgzbh = "Veh_Zchgzbh";// 整车合格证编号 字符 14
@@ -499,5 +502,19 @@ public class IVIMFields {
 
     public static final String SEQ_GZBH = "hgzbh";
     public static final String CCC_21 = "ccc_21";
+    public static final String G_32 = "g_32";
+    public static final String G_33 = "g_33";
+    public static final String G_34 = "g_33";
+    public static final String G_35 = "g_35";
+    
+    
+    public static final String COL_CONFIGCODEINFO = "configcodeinfo";
+    public static final String COL_COCINFO = "cocinfo";
+    public static final String COL_CERF = "certificate";
+    public static final String COL_COCPAPER = "cocpaper";
+    public static final String COL_FUELABEL = "fuellabel";
+    public static final String COL_PRODUCTCODEINFO = "productcodeinfo";
+
+    public static final String DB_NAME = "appportal";
 
 }

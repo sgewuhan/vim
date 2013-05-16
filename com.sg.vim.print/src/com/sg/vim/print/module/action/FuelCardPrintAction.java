@@ -1,6 +1,6 @@
 package com.sg.vim.print.module.action;
 
-public class FualCardPrintAction extends PrintAction {
+public class FuelCardPrintAction extends PrintAction {
 
 
     @Override

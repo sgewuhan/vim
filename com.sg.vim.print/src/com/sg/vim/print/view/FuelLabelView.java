@@ -9,39 +9,38 @@ import com.mongodb.DBObject;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
 
-public class COCPaperView extends GenericPrintabelView {
+public class FuelLabelView extends GenericPrintabelView {
 
 
     @Override
     protected String getMessageReprintTitle() {
-        return "车型一致性证书补打";
+        return "燃油标识补打";
     }
 
     @Override
     protected String getMessageRemoveTitle() {
-        return "车型一致性证书作废";
+        return "燃油标识作废";
     }
 
     @Override
     protected String getMessagePrintTitle() {
-        return "车型一致性证书打印";
+        return "燃油标识打印";
     }
 
     @Override
     protected DBObject remove(List<ObjectId> idList, String memo) {
-        return VimUtils.saveRemoveData(idList, memo,IVIMFields.COL_COCPAPER);
+        return VimUtils.saveRemoveData(idList, memo,IVIMFields.COL_FUELABEL);
     }
 
     @Override
     protected void print(Browser browser, DBObject dbObject) throws Exception {
-        VimUtils.printCOC(browser, dbObject);
+        VimUtils.printFuelLabel(browser, dbObject);
     }
     
 
     @Override
     protected void reprint(Browser browser, DBObject dbObject) throws Exception {
-        VimUtils.printCOC(browser, dbObject);
+        VimUtils.printFuelLabel(browser, dbObject);
     }
-
 
 }

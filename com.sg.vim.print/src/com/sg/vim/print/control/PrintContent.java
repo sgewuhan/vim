@@ -555,6 +555,24 @@ public class PrintContent extends Composite {
         navigator.update(certPrintModule, null);
     }
 
+    public void doPrint(FuelCardPrintModule fuelCardPrintModule) {
+        try {
+            // 检查有无对应的已打印或已上传的合格证
+            DBObject certData = VimUtils.getCertDataByVin(vin, "QX");
+            if (certData == null) {
+                throw new Exception("无法获取VIN对应的合格证，无法打印COC证书");
+            }
+            if (!IVIMFields.LC_PRINTED.equals(certData.get(IVIMFields.LIFECYCLE))
+                    && !IVIMFields.LC_UPLOADED.equals(certData.get(IVIMFields.LIFECYCLE))) {
+                throw new Exception("VIN对应的合格证已经失效，无法打印COC证书");
+            }
+
+            VimUtils.printFuelLabel(cocBrowser, fuelCardPrintModule.getData());
+        } catch (Exception e) {
+            UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
+        }        
+    }
+
     private void setZCHGZNumber(PrintModule dpmodule) throws Exception {
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
         String seq = DBUtil.getIncreasedID(ids, IVIMFields.SEQ_GZBH, "0", 10);

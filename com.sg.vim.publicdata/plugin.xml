@@ -1664,7 +1664,7 @@
                <section
                      label="质量">
                   <fieldgroup
-                        columnCount="3">
+                        columnCount="2">
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
@@ -1697,6 +1697,18 @@
                            label="整备质量(kg)"
                            labelVisible="true"
                            name="c_08"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Text(Single Line)"
+                           editable="true"
+                           id="g_31"
+                           label="最大设计总质量(kg)"
+                           labelVisible="true"
+                           name="g_31"
                            persistable="true"
                            required="false"
                            type="String">
@@ -2311,6 +2323,33 @@
                         label="合格证备注"
                         labelVisible="false"
                         name="c_11"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
+                     label="燃油标识信息">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="g_32"
+                        label="燃油标识其他信息"
+                        labelVisible="true"
+                        name="g_32"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="g_33"
+                        label="对应限值"
+                        labelVisible="true"
+                        name="g_33"
                         persistable="true"
                         required="false"
                         type="String">
