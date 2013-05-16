@@ -92,7 +92,7 @@ public class FuelCardPrintModule extends PrintModule {
     @Override
     public boolean canPrintData() {
         return (!isHasPrint()) && (getInput() != null)
-                && ((lifecycle == null) || (lifecycle.equals(IVIMFields.LC_ABANDON)));
+                && ((lifecycle == null) || (lifecycle.equals(IVIMFields.LC_ABANDON)&&VimUtils.FL_REPRINT));
     }
 
     @Override
@@ -102,7 +102,7 @@ public class FuelCardPrintModule extends PrintModule {
         input = VimUtils.getFLInput(cocData, confData, productCodeData, mesRawData,
                 null, vin);
         
-        DBObject dataItem = VimUtils.getCOCPaperDataByVin(vin);
+        DBObject dataItem = VimUtils.getFuelLabelByVin(vin);
         lifecycle =null;
         if (dataItem != null) {
             lifecycle = (String) dataItem.get(IVIMFields.LIFECYCLE);

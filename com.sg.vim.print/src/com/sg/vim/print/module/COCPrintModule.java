@@ -93,7 +93,7 @@ public class COCPrintModule extends PrintModule {
     @Override
     public boolean canPrintData() {
         return (!isHasPrint()) && (getInput() != null)
-                && ((lifecycle == null) || (lifecycle.equals(IVIMFields.LC_ABANDON)));
+                && ((lifecycle == null) || (lifecycle.equals(IVIMFields.LC_ABANDON)&&VimUtils.FL_REPRINT));
     }
 
     @Override
