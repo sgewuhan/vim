@@ -42,8 +42,8 @@ public class Vim implements BundleActivator {
             debug = "true".equalsIgnoreCase(appProps.getProperty("debug","false"));
             VimUtils.HARDWAREID  = appProps.getProperty("vidc.hardware");
             VimUtils.HD_USER=appProps.getProperty("vidc.user");
-            VimUtils.COC_REPRINT="true".equalsIgnoreCase("reprint.coc");
-            VimUtils.FL_REPRINT="true".equalsIgnoreCase("reprint.fuallabel");
+            VimUtils.COC_REPRINT="true".equalsIgnoreCase(appProps.getProperty("reprint.coc"));
+            VimUtils.FL_REPRINT="true".equalsIgnoreCase(appProps.getProperty("reprint.fuallabel"));
             
             VimUtils.debug = debug;
         } catch (Exception e) {
