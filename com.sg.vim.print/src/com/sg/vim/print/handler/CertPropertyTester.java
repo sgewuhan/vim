@@ -6,6 +6,7 @@ import org.eclipse.core.expressions.PropertyTester;
 
 import com.mongodb.DBObject;
 import com.sg.vim.datamodel.IVIMFields;
+import com.sg.vim.datamodel.util.VimUtils;
 
 public class CertPropertyTester extends PropertyTester {
 
@@ -18,9 +19,10 @@ public class CertPropertyTester extends PropertyTester {
     public static final String ACT_CANCEL = "cancel";
 
     public static final String ACT_REMOVE = "remove";
-    
+
     public static final String ACT_EDIT = "edit";
 
+    public static final String ACT_PRINT = "print";
 
     public CertPropertyTester() {
     }
@@ -46,21 +48,40 @@ public class CertPropertyTester extends PropertyTester {
             } else if (ACT_EDIT.equals(args[0])) {
                 return canEdit((DBObject) receiver);
 
+            } else if (ACT_PRINT.equals(args[0])) {
+                return canPrint((DBObject) receiver,expectedValue);
+
             }
         }
         return false;
     }
 
+    private boolean canPrint(DBObject data, Object type) {
+        boolean b = IVIMFields.LC_ABANDON.equals(getLifecycle(data));
+        if(!b){
+            return false;
+        }
+        
+        //当设置了可以重复打印时，如果该项为作废时，可以再次打印
+        if("cocRePrintable".equals(type)){
+            return VimUtils.COC_REPRINT;
+        }else if("flRePrintable".equals(type)){
+            return VimUtils.FL_REPRINT;
+        }
+        
+        return false;
+        
+    }
 
     private String getLifecycle(DBObject data) {
         return (String) data.get(IVIMFields.LIFECYCLE);
     }
 
     private boolean canRemove(DBObject data) {
-        //针对已打印，未上传的数据，作废历史数据
-        //根据VIN生成作废的合格证编号，正常上传，也可能补传
-        //根据打印时间而定，只能打印新的，需要填写作废原因。
-        //保留作废历史记录（不能修改的字段有：合格证编号，vin）
+        // 针对已打印，未上传的数据，作废历史数据
+        // 根据VIN生成作废的合格证编号，正常上传，也可能补传
+        // 根据打印时间而定，只能打印新的，需要填写作废原因。
+        // 保留作废历史记录（不能修改的字段有：合格证编号，vin）
 
         return IVIMFields.LC_PRINTED.equals(getLifecycle(data));
     }
@@ -104,7 +125,6 @@ public class CertPropertyTester extends PropertyTester {
         return IVIMFields.LC_PRINTED.equals(getLifecycle(data))
                 || IVIMFields.LC_UPLOADED.equals(getLifecycle(data));
     }
-    
 
     private boolean canEdit(DBObject data) {
         return IVIMFields.LC_UPLOADED.equals(getLifecycle(data));

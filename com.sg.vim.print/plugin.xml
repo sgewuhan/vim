@@ -5616,6 +5616,29 @@
                </and>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.sg.vim.print.print.coc"
+               icon="image/print_24.png"
+               label="打印"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.cocpaper">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -5650,6 +5673,10 @@
       <command
             id="com.sg.vim.print.remove.coc"
             name="作废">
+      </command>
+      <command
+            id="com.sg.vim.print.print.coc"
+            name="打印">
       </command>
    </extension>
    <extension
@@ -5786,6 +5813,24 @@
                         args="remove"
                         property="com.sg.vim.print.test.cando"
                         value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.PrintCOC"
+            commandId="com.sg.vim.print.print.coc">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="print"
+                        property="com.sg.vim.print.test.cando"
+                        value="cocRePrintable">
                   </test>
                </iterate>
             </with>
