@@ -578,14 +578,15 @@ public class VimUtils {
 
         // Veh_ZChgzbh 整车合格证编号 返回 返回值4位企业代码+10位顺序号成功调用打印方法后可以通过该属性获得15位的整车合格证编号
 
-        // 编辑时处理
-        DBCollection ids = DBActivator.getCollection(DB_NAME, "ids");
-        String seq = DBUtil.getIncreasedID(ids, IVIMFields.SEQ_GZBH, "0", 10);
-        string = companyId + seq;
-        if (!debug && string.length() != 14) {
-            throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
-        }
-        result.put(IVIMFields.mVeh_Zchgzbh, string);
+        // 打印前时处理
+        
+//        DBCollection ids = DBActivator.getCollection(DB_NAME, "ids");
+//        String seq = DBUtil.getIncreasedID(ids, IVIMFields.SEQ_GZBH, "0", 10);
+//        string = companyId + seq;
+//        if (!debug && string.length() != 14) {
+//            throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
+//        }
+//        result.put(IVIMFields.mVeh_Zchgzbh, string);
 
         // Veh_Dphgzbh 全项方式15位；底盘方式不填 级联
         // result.put(IVIMFields.mVeh_Dphgzbh, cocData.get(IVIMFields.F_0_1));

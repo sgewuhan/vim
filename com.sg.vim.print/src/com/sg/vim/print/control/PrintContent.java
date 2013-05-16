@@ -514,6 +514,7 @@ public class PrintContent extends Composite {
             // 设置纸张编号
             setHGZPaperNumber(dpmodule);
             try {
+                setZCHGZNumber(dpmodule);
                 setPrinter(dpmodule, IVIMFields.PRINTER_FUNCTIONS[0]);
             } catch (Exception e) {
                 UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n" + e.getMessage(),
@@ -531,6 +532,7 @@ public class PrintContent extends Composite {
         }
         setHGZPaperNumber(qxmodule);
         try {
+            setZCHGZNumber(qxmodule);
             setPrinter(qxmodule, IVIMFields.PRINTER_FUNCTIONS[0]);
         } catch (Exception e) {
             UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + e.getMessage(),
@@ -553,6 +555,32 @@ public class PrintContent extends Composite {
         navigator.update(certPrintModule, null);
     }
 
+    private void setZCHGZNumber(PrintModule dpmodule) throws Exception {
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        String seq = DBUtil.getIncreasedID(ids, IVIMFields.SEQ_GZBH, "0", 10);
+        String companyId = (String) dpmodule.getData().get(IVIMFields.C_14);
+
+        String string = companyId + seq;
+        if (!VimUtils.debug && string.length() != 14) {
+            throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
+        }
+        dpmodule.getData().put(IVIMFields.mVeh_Zchgzbh, string);
+        
+    }
+    
+
+    private void setHGZPaperNumber(PrintModule module) {
+        Integer inputPageNumber = module.getPaperNumber();
+        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        String pnum;
+        if (inputPageNumber != null) {
+            pnum = String.format("%07d", inputPageNumber.intValue());
+        } else {
+            pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
+        }
+        module.setValue(IVIMFields.mVeh_Zzbh, pnum);
+    }
+
     private void setPrinter(PrintModule module, String printfunctionName) throws Exception {
         HashMap<String, String> printerPara = VimUtils.getPrinterParameters(printfunctionName);
         if (printerPara == null) {
@@ -566,17 +594,6 @@ public class PrintContent extends Composite {
         }
     }
 
-    private void setHGZPaperNumber(PrintModule module) {
-        Integer inputPageNumber = module.getPaperNumber();
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
-        String pnum;
-        if (inputPageNumber != null) {
-            pnum = String.format("%07d", inputPageNumber.intValue());
-        } else {
-            pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
-        }
-        module.setValue(IVIMFields.mVeh_Zzbh, pnum);
-    }
 
     private void doBarResultCallback(Object[] arguments) {
         if (arguments != null) {
