@@ -99,4 +99,17 @@ public class COCPaperView extends TableNavigator {
         String memo = d.getValue();
         return memo;
     }
+
+    public void doPrint(Object[] dboArray) {
+        for (int i = 0; i < dboArray.length; i++) {
+            try {
+                VimUtils.printCOC(browser, (DBObject) dboArray[i]);
+                getNavigator().getViewer().update((DBObject) dboArray[i], null);
+
+            } catch (Exception e) {
+                UIUtils.showMessage(getSite().getShell(), "´òÓ¡COCÖ¤Êé", e.getMessage(), SWT.ICON_ERROR
+                        | SWT.OK);
+            }        
+        }
+    }
 }
