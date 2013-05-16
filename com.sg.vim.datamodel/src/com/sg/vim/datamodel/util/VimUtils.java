@@ -353,7 +353,7 @@ public class VimUtils {
         // d_16
         result.put(IVIMFields.D_16, cocData.get(IVIMFields.D_16));
         // g_33
-        result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
+      result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
         // g_34 //取制造日期
         try {
             String mftDate = (String) mesRawData.getValue(FIELD_MFT_DATE);
@@ -366,7 +366,7 @@ public class VimUtils {
         } catch (ParseException e) {
         }
         // f_0_6b //取vin
-        result.put(IVIMFields.G_31, vin);
+        result.put(IVIMFields.F_0_6b, vin);
 
         return result;
     }

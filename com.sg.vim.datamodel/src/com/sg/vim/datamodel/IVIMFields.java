@@ -504,7 +504,7 @@ public class IVIMFields {
     public static final String CCC_21 = "ccc_21";
     public static final String G_32 = "g_32";
     public static final String G_33 = "g_33";
-    public static final String G_34 = "g_33";
+    public static final String G_34 = "g_34";
     public static final String G_35 = "g_35";
     
     

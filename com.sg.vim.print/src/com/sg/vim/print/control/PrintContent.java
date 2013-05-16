@@ -502,6 +502,9 @@ public class PrintContent extends Composite {
         } catch (Exception e) {
             UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
         }
+        // 设置模printed
+        modules[2].setLifecycle(IVIMFields.LC_PRINTED);
+        navigator.update(cocPrintModule, null);
     }
 
     public void doPrint(CertPrintModule certPrintModule) {
@@ -560,17 +563,20 @@ public class PrintContent extends Composite {
             // 检查有无对应的已打印或已上传的合格证
             DBObject certData = VimUtils.getCertDataByVin(vin, "QX");
             if (certData == null) {
-                throw new Exception("无法获取VIN对应的合格证，无法打印COC证书");
+                throw new Exception("无法获取VIN对应的合格证，无法打印燃油标识");
             }
             if (!IVIMFields.LC_PRINTED.equals(certData.get(IVIMFields.LIFECYCLE))
                     && !IVIMFields.LC_UPLOADED.equals(certData.get(IVIMFields.LIFECYCLE))) {
-                throw new Exception("VIN对应的合格证已经失效，无法打印COC证书");
+                throw new Exception("VIN对应的合格证已经失效，无法打印燃油标识");
             }
 
             VimUtils.printFuelLabel(cocBrowser, fuelCardPrintModule.getData());
         } catch (Exception e) {
-            UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
-        }        
+            UIUtils.showMessage(getShell(), "打印", "打印燃油标识发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
+        }  
+        // 设置模printed
+        modules[2].setLifecycle(IVIMFields.LC_PRINTED);
+        navigator.update(fuelCardPrintModule, null);
     }
 
     private void setZCHGZNumber(PrintModule dpmodule) throws Exception {
