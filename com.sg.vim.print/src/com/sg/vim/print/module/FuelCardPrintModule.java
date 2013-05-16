@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.model.DataObjectEditorInput;
+import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.print.PrintActivator;
 import com.sg.vim.print.control.PrintContent;
@@ -45,6 +46,9 @@ public class FuelCardPrintModule extends PrintModule {
             builder.append("<a href=\"" + _PRINT + "@" + getName() + "\" target=\"_rwt\">´òÓ¡</a>   ");
         }
 
+        if (lifecycle != null) {
+            builder.append("<b>×´Ì¬: " + lifecycle + "</b>");
+        }
         builder.append("</small>");
 
         return builder.toString();
@@ -86,7 +90,8 @@ public class FuelCardPrintModule extends PrintModule {
 
     @Override
     public boolean canPrintData() {
-        return super.canPrintData();
+        return (!isHasPrint()) && (getInput() != null)
+                && ((lifecycle == null) || (lifecycle.equals(IVIMFields.LC_ABANDON)));
     }
 
     @Override
