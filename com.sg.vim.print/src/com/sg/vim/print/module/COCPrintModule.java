@@ -3,6 +3,7 @@ package com.sg.vim.print.module;
 import java.util.Map;
 
 import com.mobnut.commons.util.file.FileUtil;
+import com.mongodb.DBObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
@@ -101,6 +102,13 @@ public class COCPrintModule extends PrintModule {
         
         input = VimUtils.getCOCInput(cocData, confData, productCodeData, mesRawData,
                 null, vin);
+        
+        DBObject dataItem = VimUtils.getCOCPaperDataByVin(vin);
+        lifecycle =null;
+        if (dataItem != null) {
+            lifecycle = (String) dataItem.get(IVIMFields.LIFECYCLE);
+            setLifecycle(lifecycle);
+        }
     }
     
     

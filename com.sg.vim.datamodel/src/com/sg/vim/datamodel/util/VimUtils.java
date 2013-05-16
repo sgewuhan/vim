@@ -1498,6 +1498,17 @@ public class VimUtils {
         return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
                 IVIMFields.mVeh_Clztxx, clztxx));
     }
+    
+
+    public static DBObject getCOCPaperDataByVin(String vin) {
+        DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_COCPAPER);
+        return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
+    }
+    
+    public static DBObject getFuelLabelByVin(String vin) {
+        DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_FUELABEL);
+        return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
+    }
 
     public static HashMap<String, String> getPrinterParameters(String printfunctionName) {
         DBCollection col = DBActivator.getCollection("appportal", "printers");
@@ -1834,6 +1845,7 @@ public class VimUtils {
         }
 
     }
+
 
 
 }
