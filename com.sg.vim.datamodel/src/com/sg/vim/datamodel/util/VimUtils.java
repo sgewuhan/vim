@@ -1668,22 +1668,28 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
                 .append(IVIMFields.ACTION_REC_MEMO, "");
 
-        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
-        data.put(IVIMFields.PRINTDATE, date);
-        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
+
 
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
-        DBObject coc = col.findOne(query, new BasicDBObject().append("_id", 1));
+        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1));
 
-        if (!COC_REPRINT && coc != null) {
-            if (!IVIMFields.LC_ABANDON.equals(coc.get(IVIMFields.LIFECYCLE))) {
+        
+        if(dataItem!=null){
+            if(!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))){
                 throw new Exception("该COC证书已经打印，不可重复打印");
+            }else{
+                if(!COC_REPRINT){
+                    throw new Exception("设置不允许直接重复打印作废的COC证书，不可重复打印");
+                }
             }
-        }
+         } 
+        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
+        data.put(IVIMFields.PRINTDATE, date);
+        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
         ObjectId oid;
-        if (coc == null || IVIMFields.LC_ABANDON.equals(coc.get(IVIMFields.LIFECYCLE))) {// 没有此VIM的COC证书或者COC证书已经作废
+        if (dataItem == null || IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {// 没有此VIM的COC证书或者COC证书已经作废
             oid = new ObjectId();
             data.put("_id", oid);
             List<DBObject> reclist = new ArrayList<DBObject>();
@@ -1695,7 +1701,7 @@ public class VimUtils {
 
             col.insert(data);
         } else {
-            oid = (ObjectId) coc.get("_id");
+            oid = (ObjectId) dataItem.get("_id");
             data.removeField("_id");
             UIUtils.addmodifyInfo(data);
 
@@ -1718,22 +1724,28 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
                 .append(IVIMFields.ACTION_REC_MEMO, "");
 
-        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
-        data.put(IVIMFields.PRINTDATE, date);
-        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
 
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
-        DBObject coc = col.findOne(query, new BasicDBObject().append("_id", 1));
+        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1));
 
-        if (!FL_REPRINT && coc != null) {
-            if (!IVIMFields.LC_ABANDON.equals(coc.get(IVIMFields.LIFECYCLE))) {
-                throw new Exception("该燃油标识已经打印，不可重复打印");
-            }
-        }
+        
+        if(dataItem!=null){
+           if(!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))){
+               throw new Exception("该燃油标识已经打印，不可重复打印");
+           }else{
+               if(!FL_REPRINT){
+                   throw new Exception("设置不允许直接重复打印作废的燃油标识，不可重复打印");
+               }
+           }
+        }        
+        
+        data.put(IVIMFields.PRINTACCOUNT, accountInfo);
+        data.put(IVIMFields.PRINTDATE, date);
+        data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
         ObjectId oid;
-        if (coc == null || IVIMFields.LC_ABANDON.equals(coc.get(IVIMFields.LIFECYCLE))) {// 没有此VIM的COC证书或者COC证书已经作废
+        if (dataItem == null || IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {// 没有此VIM的COC证书或者COC证书已经作废
             oid = new ObjectId();
             data.put("_id", oid);
             List<DBObject> reclist = new ArrayList<DBObject>();
@@ -1745,7 +1757,7 @@ public class VimUtils {
 
             col.insert(data);
         } else {
-            oid = (ObjectId) coc.get("_id");
+            oid = (ObjectId) dataItem.get("_id");
             data.removeField("_id");
             UIUtils.addmodifyInfo(data);
 
