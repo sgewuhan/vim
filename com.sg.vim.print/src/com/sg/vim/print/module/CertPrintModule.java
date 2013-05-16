@@ -225,8 +225,9 @@ public class CertPrintModule extends PrintModule {
         return canPrintData();
     }
 
-    public boolean canUploadData() {// 只有已经打印的状态才能上传
-        return canUploadData && IVIMFields.LC_PRINTED.equals(lifecycle);
+    public boolean canUploadData() {// 只有已经打印的状态才能上传,屏蔽此功能
+        return false;
+//        return canUploadData && IVIMFields.LC_PRINTED.equals(lifecycle);
     }
 
     public boolean canPrintData() {// 只有无状态或者已作废才能打印
