@@ -36,9 +36,9 @@ public class FuelCardPrintModule extends PrintModule {
         StringBuilder builder = new StringBuilder();
         builder.append("<img src=\"");
         if (isEnable()) {
-            builder.append(FileUtil.getImageURL("coc_48.png", PrintActivator.PLUGIN_ID, "image"));
+            builder.append(FileUtil.getImageURL("fualcard_48.png", PrintActivator.PLUGIN_ID, "image"));
         } else {
-            builder.append(FileUtil.getImageURL("coc_d_48.png", PrintActivator.PLUGIN_ID, "image"));
+            builder.append(FileUtil.getImageURL("fualcard_d_48.png", PrintActivator.PLUGIN_ID, "image"));
         }
         builder.append("\"  width='48' height='48' style='float:left;padding:5px'/>");
         builder.append("<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><b>汽车燃油量消耗标识</b></span><br/><small>");
