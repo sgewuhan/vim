@@ -108,8 +108,9 @@ public class CertPrintModule extends PrintModule {
 
         // 处理生命周期状态
         DBObject certData = VimUtils.getCertDataByVin(vin, "QX");
+        lifecycle =null;
         if (certData != null) {
-            String lifecycle = (String) certData.get(IVIMFields.LIFECYCLE);
+            lifecycle = (String) certData.get(IVIMFields.LIFECYCLE);
             qxCertPrintModule.setLifecycle(lifecycle);
             if (IVIMFields.LC_ABANDON.equals(lifecycle)) {// 如果是已作废，需要把已作废的合格证编号复制过来
                 Object custCertNum = certData.get(IVIMFields.mVeh_Zchgzbh);
