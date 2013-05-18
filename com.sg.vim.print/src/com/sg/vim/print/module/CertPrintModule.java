@@ -24,7 +24,6 @@ public class CertPrintModule extends PrintModule {
     private DataObjectEditorInput dpinput;
     private DataObjectEditorInput input;
     private boolean canUploadData;
-
     public CertPrintModule() {
         super();
         qxCertPrintModule = new QXCertPrintModule();
