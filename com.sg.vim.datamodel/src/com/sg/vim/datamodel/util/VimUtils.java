@@ -9,7 +9,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -1796,7 +1795,7 @@ public class VimUtils {
         url.append("/form/printdata");
         url.append("?form=" + template);
         url.append("&printer=" + printerName);
-        url.append("&font=" + "simhei.ttc");
+        url.append("&font=" + "simhei.ttf");
         url.append("&db=appportal");
         url.append("&col=" + IVIMFields.COL_FUELABEL);
         url.append("&id=" + dbObject.get("_id"));
