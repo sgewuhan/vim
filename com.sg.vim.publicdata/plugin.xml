@@ -1664,7 +1664,7 @@
                <section
                      label="质量">
                   <fieldgroup
-                        columnCount="2">
+                        columnCount="3">
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
@@ -1697,18 +1697,6 @@
                            label="整备质量(kg)"
                            labelVisible="true"
                            name="c_08"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="g_31"
-                           label="最大设计总质量(kg)"
-                           labelVisible="true"
-                           name="g_31"
                            persistable="true"
                            required="false"
                            type="String">

@@ -342,8 +342,7 @@ public class VimUtils {
         result.put(IVIMFields.D_22, cocData.get(IVIMFields.D_22));
         // c_08
         result.put(IVIMFields.C_08, cocData.get(IVIMFields.C_08));
-      // g_31
-        result.put(IVIMFields.G_31, cocData.get(IVIMFields.G_31));
+        result.put(IVIMFields.F_14_1, cocData.get(IVIMFields.F_14_1));
         // g_32
         result.put(IVIMFields.G_32, cocData.get(IVIMFields.G_32));
         // d_14

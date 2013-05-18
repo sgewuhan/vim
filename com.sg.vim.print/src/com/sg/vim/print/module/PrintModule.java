@@ -218,6 +218,8 @@ public abstract class PrintModule {
     }
 
     public void setValue(String key, Object value) {
-        getInput().getData().setValue(key, value);
+    	if(getInput()!=null){
+    		getInput().getData().setValue(key, value);
+    	}
     }
 }

@@ -4544,10 +4544,10 @@
                         computeField="false"
                         editPart="Text(Single Line)"
                         editable="true"
-                        id="g_31"
+                        id="f_14_1"
                         label="最大设计总质量"
                         labelVisible="true"
-                        name="g_31"
+                        name="f_14_1"
                         persistable="true"
                         required="false"
                         type="String">

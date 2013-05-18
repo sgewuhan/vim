@@ -362,9 +362,6 @@ public class IVIMFields {
     /** 配置 **/
     public static final String H_04 = "h_04";
     
-    /**最大设计总质量**/
-    public static final String G_31 = "g_31";
-
     public static final String mVeh_Clztxx = "Veh_Clztxx";// 车辆状态信息 字符 2 取值为QX和DP
     public static final String mVeh_Zchgzbh = "Veh_Zchgzbh";// 整车合格证编号 字符 14
                                                             // 4位企业代码+10位顺序号成功调用打印方法后可以通过该属性获得15位的整车合格证编号
