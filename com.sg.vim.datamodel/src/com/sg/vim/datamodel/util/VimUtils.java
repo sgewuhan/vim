@@ -1793,6 +1793,7 @@ public class VimUtils {
         url.append("/form/printdata");
         url.append("?form=" + template);
         url.append("&printer=" + printerName);
+        url.append("&font=" + "simhei.ttc");
         url.append("&db=appportal");
         url.append("&col=" + IVIMFields.COL_FUELABEL);
         url.append("&id=" + dbObject.get("_id"));
