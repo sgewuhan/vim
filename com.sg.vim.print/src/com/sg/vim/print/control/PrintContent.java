@@ -582,9 +582,9 @@ public class PrintContent extends Composite {
     private void setZCHGZNumber(PrintModule dpmodule) throws Exception {
         DBCollection ids = DBActivator.getCollection("appportal", "ids");
         String seq = DBUtil.getIncreasedID(ids, IVIMFields.SEQ_GZBH, "0", 10);
-        String companyId = (String) dpmodule.getData().get(IVIMFields.C_14);
+//        String companyId = (String) dpmodule.getData().get(IVIMFields.C_14);
 
-        String string = companyId + seq;
+        String string = "WAK1" + seq;
         if (!VimUtils.debug && string.length() != 14) {
             throw new Exception("无法取得正确的整车合格证编号。\n4位企业代码+10位顺序号");
         }
