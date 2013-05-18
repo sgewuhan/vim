@@ -1218,7 +1218,8 @@
             id="com.sg.vim.editor.basicinfo"
             labelFieldName="d_23"
             name="公告车型信息"
-            recreateable="true">
+            recreateable="true"
+            saveHandler="com.sg.vim.publicdata.savehandler.BasicInfoSaveHandler">
          <basicpage
                description="车辆和企业基本信息"
                id="com.sg.vim.basicpage1"
@@ -2356,4 +2357,56 @@
             targetId="systempage">
       </pageExtendsions>
    </extension>
+                  <extension
+                        point="org.eclipse.ui.menus">
+                     <menuContribution
+                           allPopups="false"
+                           locationURI="toolbar:main?after=com.sg.ui.separator3">
+                        <command
+                              commandId="com.sg.vim.publicdata.transfertococinfo"
+                              icon="image/trasfer_24.png"
+                              label="复制公告数据"
+                              style="push">
+                           <visibleWhen
+                                 checkEnabled="false">
+                              <and>
+                                 <with
+                                       variable="activeWorkbenchWindow.activePerspective">
+                                    <equals
+                                          value="perspective.home">
+                                    </equals>
+                                 </with>
+                                 <with
+                                       variable="activePartId">
+                                    <equals
+                                          value="com.sg.vim.cocinfo.mnt">
+                                    </equals>
+                                 </with>
+                              </and>
+                           </visibleWhen>
+                        </command>
+                     </menuContribution>
+                  </extension>
+                  <extension
+                        point="org.eclipse.ui.commands">
+                     <command
+                           id="com.sg.vim.publicdata.transfertococinfo"
+                           name="复制公告数据">
+                     </command>
+                  </extension>
+                  <extension
+                        point="org.eclipse.ui.handlers">
+                     <handler
+                           class="com.sg.vim.publicdata.handler.TransferToCOC"
+                           commandId="com.sg.vim.publicdata.transfertococinfo">
+                        <enabledWhen>
+                           <with
+                                 variable="selection">
+                              <count
+                                    value="+">
+                              </count>
+                           </with>
+                        </enabledWhen>
+                     </handler>
+                  </extension>
 </plugin>

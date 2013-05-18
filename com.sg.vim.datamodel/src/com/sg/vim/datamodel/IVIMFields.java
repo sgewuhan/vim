@@ -513,5 +513,6 @@ public class IVIMFields {
     public static final String COL_PRODUCTCODEINFO = "productcodeinfo";
 
     public static final String DB_NAME = "appportal";
+    public static final String BASICINFO_ID = "basicinfo_id";
 
 }

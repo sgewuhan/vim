@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -37,6 +38,8 @@ import com.sg.ui.model.DataObject;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.ui.part.editor.IEditorSaveHandler;
 import com.sg.ui.registry.config.DataEditorConfigurator;
+import com.sg.vim.datamodel.BasicInfo;
+import com.sg.vim.datamodel.COCInfo;
 import com.sg.vim.datamodel.DataModelActivator;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
@@ -57,7 +60,6 @@ public class VimUtils {
     public static boolean COC_REPRINT;
 
     public static boolean FL_REPRINT;
-
 
     private static final String MES_DB = "mes";
 
@@ -214,7 +216,8 @@ public class VimUtils {
     }
 
     public static DBObject getProductCodeInfo(String productCode) throws Exception {
-        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_PRODUCTCODEINFO);
+        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME,
+                IVIMFields.COL_PRODUCTCODEINFO);
         DBObject query = new BasicDBObject().append(IVIMFields.E_02, productCode);
         DBObject data = c.findOne(query);
         if (data == null) {
@@ -247,7 +250,8 @@ public class VimUtils {
     }
 
     public static DBObject getConfInfo(DBObject productCodeData) throws Exception {
-        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CONFIGCODEINFO);
+        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME,
+                IVIMFields.COL_CONFIGCODEINFO);
         ObjectId id = (ObjectId) productCodeData.get(IVIMFields.CFG_ID);
         DBObject query = new BasicDBObject().append("_id", id);
         DBObject data = c.findOne(query);
@@ -268,7 +272,8 @@ public class VimUtils {
     }
 
     public static DBObject getConfInfoById(String productId) throws Exception {
-        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CONFIGCODEINFO);
+        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME,
+                IVIMFields.COL_CONFIGCODEINFO);
         DBObject o = new BasicDBObject().append(IVIMFields.D_02, productId);
         DBObject data = c.findOne(o);
         if (data == null) {
@@ -323,7 +328,7 @@ public class VimUtils {
     }
 
     private static DBObject transferFuelLabelData(DBObject cocData, DBObject confData,
-            DBObject productCodeData, SQLRow mesRawData, String vin)  {
+            DBObject productCodeData, SQLRow mesRawData, String vin) {
         BasicDBObject result = new BasicDBObject();
 
         // f_0_2c1
@@ -352,7 +357,7 @@ public class VimUtils {
         // d_16
         result.put(IVIMFields.D_16, cocData.get(IVIMFields.D_16));
         // g_33
-      result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
+        result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
         // g_34 //取制造日期
         try {
             String mftDate = (String) mesRawData.getValue(FIELD_MFT_DATE);
@@ -1497,13 +1502,12 @@ public class VimUtils {
         return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
                 IVIMFields.mVeh_Clztxx, clztxx));
     }
-    
 
     public static DBObject getCOCPaperDataByVin(String vin) {
         DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_COCPAPER);
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
     }
-    
+
     public static DBObject getFuelLabelByVin(String vin) {
         DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_FUELABEL);
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
@@ -1678,23 +1682,20 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
                 .append(IVIMFields.ACTION_REC_MEMO, "");
 
-
-
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
         DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1));
 
-        
-        if(dataItem!=null){
-            if(!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))){
+        if (dataItem != null) {
+            if (!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {
                 throw new Exception("该COC证书已经打印，不可重复打印");
-            }else{
-                if(!COC_REPRINT){
+            } else {
+                if (!COC_REPRINT) {
                     throw new Exception("设置不允许直接重复打印作废的COC证书，不可重复打印");
                 }
             }
-         } 
+        }
         data.put(IVIMFields.PRINTACCOUNT, accountInfo);
         data.put(IVIMFields.PRINTDATE, date);
         data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
@@ -1724,7 +1725,6 @@ public class VimUtils {
         }
 
     }
-    
 
     private static void saveFuelLabelPrintData(DBObject data) throws Exception {
         Date date = new Date();
@@ -1734,23 +1734,21 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_PRINT)
                 .append(IVIMFields.ACTION_REC_MEMO, "");
 
-
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
         DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1));
 
-        
-        if(dataItem!=null){
-           if(!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))){
-               throw new Exception("该燃油标识已经打印，不可重复打印");
-           }else{
-               if(!FL_REPRINT){
-                   throw new Exception("设置不允许直接重复打印作废的燃油标识，不可重复打印");
-               }
-           }
-        }        
-        
+        if (dataItem != null) {
+            if (!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {
+                throw new Exception("该燃油标识已经打印，不可重复打印");
+            } else {
+                if (!FL_REPRINT) {
+                    throw new Exception("设置不允许直接重复打印作废的燃油标识，不可重复打印");
+                }
+            }
+        }
+
         data.put(IVIMFields.PRINTACCOUNT, accountInfo);
         data.put(IVIMFields.PRINTDATE, date);
         data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);
@@ -1777,7 +1775,7 @@ public class VimUtils {
 
             col.update(query, update, false, true);
             data.put("_id", oid);
-        }        
+        }
     }
 
     public static void printFuelLabel(Browser browser, DBObject dbObject) throws Exception {
@@ -1805,7 +1803,7 @@ public class VimUtils {
         } else {
             UrlLauncher launcher = RWT.getClient().getService(UrlLauncher.class);
             launcher.openURL(encodedURL);
-        }        
+        }
     }
 
     public static void printCOC(Browser browser, DBObject dbObject) throws Exception {
@@ -1845,6 +1843,30 @@ public class VimUtils {
 
     }
 
-
+    /**
+     * 将公告数据同步到COC信息中
+     * 
+     * @param cocInfo
+     * @throws Exception
+     */
+    public static void syncPublicDataToCOC(DBObject cocInfo) throws Exception {
+        ObjectId bcid = (ObjectId) cocInfo.get(IVIMFields.BASICINFO_ID);
+        BasicInfo bService = new BasicInfo();
+        DBObject basicInfo = bService.get(bcid);
+        Iterator<String> iter = basicInfo.keySet().iterator();
+        
+        BasicDBObject update = new BasicDBObject();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            if(key.startsWith("_")){
+                continue;
+            }
+            cocInfo.put(key, basicInfo.get(key));
+            update.put(key, basicInfo.get(key));
+        }
+        
+        COCInfo cService = new COCInfo();
+        cService.update((ObjectId) cocInfo.get("_id"), update);
+    }
 
 }
