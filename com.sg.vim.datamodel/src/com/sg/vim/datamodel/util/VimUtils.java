@@ -624,6 +624,9 @@ public class VimUtils {
             throw new Exception("无法取得正确的产品公告号。\n值转换  由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位");
         }
         result.put(IVIMFields.mVeh_Cpggh, string);
+        result.put(IVIMFields.D_23, productPublicId);
+        result.put(IVIMFields.H_01, confid);
+        
         // Veh_GgpC D_18 公告批次 映射
         result.put(IVIMFields.mVeh_Ggpc, cocData.get(IVIMFields.D_18));
         // Veh_Ggsxrq D_01 公告生效日期 映射
@@ -1068,7 +1071,7 @@ public class VimUtils {
         // 产品号
         // s:string
         //
-        value = (String) data.get(IVIMFields.mVeh_Cpggh);
+        value = (String) data.get(IVIMFields.D_23);
         // Assert.isNotNull(value, "产品号不可为空");
         info.setCPH(value);
         //
@@ -1685,7 +1688,7 @@ public class VimUtils {
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
-        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1));
+        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1).append(IVIMFields.LIFECYCLE, 1));
 
         if (dataItem != null) {
             if (!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {
@@ -1737,7 +1740,7 @@ public class VimUtils {
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
-        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1));
+        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1).append(IVIMFields.LIFECYCLE, 1));
 
         if (dataItem != null) {
             if (!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {
@@ -1793,6 +1796,7 @@ public class VimUtils {
         url.append("/form/printdata");
         url.append("?form=" + template);
         url.append("&printer=" + printerName);
+        url.append("&font=" + "simhei.ttc");
         url.append("&db=appportal");
         url.append("&col=" + IVIMFields.COL_FUELABEL);
         url.append("&id=" + dbObject.get("_id"));

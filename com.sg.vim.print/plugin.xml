@@ -6038,7 +6038,7 @@
             </visibleWhen>
          </command>
          <command
-               commandId="com.sg.vim.print.print.coc"
+               commandId="com.sg.vim.print.print.fuellabel"
                icon="image/print_24.png"
                label="打印"
                style="push">
