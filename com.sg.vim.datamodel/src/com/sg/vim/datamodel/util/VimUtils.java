@@ -443,7 +443,7 @@ public class VimUtils {
         // 处理签发日期
         Object ccc03 = cocData.get(IVIMFields.CCC_03);
         if (ccc03 instanceof Date) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             result.put(IVIMFields.CCC_03, sdf.format((Date) ccc03));
         }
 
