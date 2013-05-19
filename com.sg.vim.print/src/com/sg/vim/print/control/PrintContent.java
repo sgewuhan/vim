@@ -348,8 +348,8 @@ public class PrintContent extends Composite {
 			protected void asyncAssemblyDone(IStatus result, SQLRow mesRawData,
 					DBObject productCodeData, DBObject cocData,
 					DBObject confData, DBObject dpcocData, DBObject dpconfData) {
-					if (result.isOK()) {
-						try {
+				if (result.isOK()) {
+					try {
 						Map<String, Object> para = new HashMap<String, Object>();
 						para.put(PrintModule.PARA_COC_DATA, cocData);
 						para.put(PrintModule.PARA_CONF_DATA, confData);
@@ -368,13 +368,13 @@ public class PrintContent extends Composite {
 						UIUtils.showMessage(getShell(), "组合机动车完整数据",
 								"错误:" + e.getMessage(), SWT.ERROR);
 					}
-					} else {
-						Throwable e = result.getException();
-						if (e != null) {
-							UIUtils.showMessage(getShell(), "组合机动车完整数据",
-									"错误:" + e.getMessage(), SWT.ERROR);
-						}
+				} else {
+					Throwable e = result.getException();
+					if (e != null) {
+						UIUtils.showMessage(getShell(), "组合机动车完整数据",
+								"错误:" + e.getMessage(), SWT.ERROR);
 					}
+				}
 				setOperationEnable(true);
 			}
 
@@ -668,7 +668,7 @@ public class PrintContent extends Composite {
 			// jsreturn,Veh_ErrorInfo,Veh_Clztxx,VehCert.Veh_Zchgzbh,VehCert.Veh_Jyw,
 			// VehCert.Veh_Dywym
 
-			// Object jsReturn = arguments[0];
+			Object jsReturn = arguments[0];
 			Object mVeh_ErrorInfo = arguments[1];
 			Object mVeh_Clztxx = arguments[2];
 			Object mVeh__Wzghzbh = arguments[3];
@@ -686,9 +686,11 @@ public class PrintContent extends Composite {
 					&& "qx".equalsIgnoreCase(mVeh_Clztxx.toString())) {
 				currentModule = qxCertPrintModule;
 			}
-			if (!Utils.isNullOrEmptyString(mVeh_ErrorInfo)) {
+			if ("-1".equals(jsReturn.toString())
+					&& !Utils.isNullOrEmptyString(mVeh_ErrorInfo)) {
 				currentModule.setError(mVeh_ErrorInfo.toString());
 			} else {
+				currentModule.setError(null);
 				if (currentModule != null) {
 					currentModule.setValue(IVIMFields.mVeh__Wzghzbh,
 							mVeh__Wzghzbh);
