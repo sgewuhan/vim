@@ -4101,13 +4101,13 @@
                   </field>
                   <field
                         computeField="false"
-                        defaultValueProvider="com.sg.vim.datamodel.defualtvalue.FC6Defaul"
-                        editPart="Text(Single Line)"
+                        editPart="Combo(Read Only)"
                         editable="true"
                         id="f_c6"
                         label="钢板弹簧片数"
                         labelVisible="true"
                         name="f_c6"
+                        optionProvider="com.sg.vim.datamodel.option.FC6_Option"
                         persistable="true"
                         required="false"
                         type="String">

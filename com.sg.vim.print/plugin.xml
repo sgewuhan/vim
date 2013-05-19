@@ -4330,7 +4330,7 @@
                   <field
                         computeField="false"
                         ctableId="com.sg.vim.cocinfo.table.co2"
-                        defaultValueProvider="com.sg.vim.datemodel.defaultvalue.CO2Default"
+                        defaultValueProvider="com.sg.vim.datamodel.defualtvalue.CO2Default"
                         editPart="Table"
                         editable="true"
                         id="f_46_3"

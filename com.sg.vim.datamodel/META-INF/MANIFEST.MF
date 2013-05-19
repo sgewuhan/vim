@@ -18,6 +18,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.sg.vim.datamodel,
+ com.sg.vim.datamodel.defualtvalue,
  com.sg.vim.datamodel.labelprovider,
  com.sg.vim.datamodel.option,
  com.sg.vim.datamodel.savehandler,
