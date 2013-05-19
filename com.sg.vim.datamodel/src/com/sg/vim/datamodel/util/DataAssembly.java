@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.swt.widgets.Display;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
 import com.sg.vim.datamodel.DataModelActivator;
@@ -77,10 +78,14 @@ public abstract class DataAssembly extends Job {
             // 找到对应的底盘信息
             try {
                 dpcocData = VimUtils.getCOCInfoById((String) dpId);
-                dpconfData = VimUtils.getConfInfoById((String) dpId);
             } catch (Exception e) {
                 return new Status(Status.ERROR, DataModelActivator.PLUGIN_ID, message, e);
             }
+            try {
+				dpconfData = VimUtils.getConfInfoById((String) dpId);
+			} catch (Exception e) {
+				dpconfData = new BasicDBObject();
+			}
 
         }
 
