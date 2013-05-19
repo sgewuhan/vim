@@ -1945,6 +1945,32 @@
             markupEnabled="false"
             multiSelection="true">
          <column
+               column="f_0_2c1"
+               name="车型代号"
+               type="String">
+         </column>
+         <column
+               column="ccc_12"
+               name="车辆一致性\n证书编号"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="f_c4"
+               name="发动机型号"
+               type="String">
+         </column>
+         <column
+               column="f_32"
+               name="轮胎规格"
+               type="String">
+         </column>
+         <column
+               column="f_42_1"
+               name="座位数"
+               type="String">
+         </column>
+         <column
                column="f_0_2a"
                name="车型系列\n代号/名称"
                type="String">
@@ -2235,11 +2261,6 @@
             <column
                   column="f_20"
                   name="制造商名称"
-                  type="String">
-            </column>
-            <column
-                  column="f_c4"
-                  name="发动机型号"
                   type="String">
             </column>
             <column
@@ -3876,7 +3897,7 @@
                   <field
                         computeField="false"
                         ctableId="com.sg.vim.cocinfo.table.co2"
-                        defaultValueProvider="com.sg.vim.datemodel.defaultvalue.CO2Default"
+                        defaultValueProvider="com.sg.vim.datamodel.defualtvalue.CO2Default"
                         editPart="Table"
                         editable="true"
                         id="f_46_3"

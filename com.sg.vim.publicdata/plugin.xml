@@ -173,7 +173,7 @@
                   type="Integer">
             </column>
             <column
-                  column="f_42_1"
+                  column="f_42_1b"
                   name="额定载客"
                   type="Integer">
             </column>
@@ -550,7 +550,7 @@
                   type="Integer">
             </column>
             <column
-                  column="f_42_1"
+                  column="f_42_1b"
                   name="额定载客"
                   type="Integer">
             </column>
@@ -832,6 +832,22 @@
                type="String"
                width="89">
          </column>
+         <column
+               column="c_22"
+               name="车辆类型"
+               type="String">
+         </column>
+         <column
+               column="c_23"
+               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
+               name="车辆状态信息"
+               type="String">
+         </column>
+         <column
+               column="f_c4"
+               name="发动机型号"
+               type="String">
+         </column>
          <columnGroup
                defaultGroup="true"
                name="车辆基本信息">
@@ -868,17 +884,6 @@
             <column
                   column="c_21"
                   name="纯电动标记"
-                  type="String">
-            </column>
-            <column
-                  column="c_22"
-                  name="车辆类型"
-                  type="String">
-            </column>
-            <column
-                  column="c_23"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
-                  name="车辆状态信息"
                   type="String">
             </column>
          </columnGroup>
@@ -947,7 +952,7 @@
                   type="String">
             </column>
             <column
-                  column="f_42_1"
+                  column="f_42_1b"
                   name="额定载客"
                   type="String">
             </column>
@@ -1128,11 +1133,6 @@
             <column
                   column="ccc_06"
                   name="底盘生产企业"
-                  type="String">
-            </column>
-            <column
-                  column="f_c4"
-                  name="发动机型号"
                   type="String">
             </column>
             <column
@@ -1627,11 +1627,11 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_42_1"
+                           id="f_42_1b"
                            inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
                            label="额定载客(含驾驶员)(人)"
                            labelVisible="true"
-                           name="f_42_1"
+                           name="f_42_1b"
                            persistable="true"
                            required="false"
                            type="String">
