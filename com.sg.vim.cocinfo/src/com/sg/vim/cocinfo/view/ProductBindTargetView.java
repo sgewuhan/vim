@@ -31,7 +31,6 @@ public class ProductBindTargetView extends TableNavigator implements
     @Override
     public void createPartControl(Composite parent) {
         getViewSite().getPage().addPostSelectionListener("com.sg.vim.productcode", this);
-
         super.createPartControl(parent);
     }
 
@@ -80,5 +79,6 @@ public class ProductBindTargetView extends TableNavigator implements
     public boolean canBind() {
         return canTransfer;
     }
+
 
 }

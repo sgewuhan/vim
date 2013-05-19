@@ -4031,7 +4031,7 @@
                         labelVisible="true"
                         name="h_02"
                         persistable="true"
-                        required="false"
+                        required="true"
                         type="String">
                   </field>
                   <field

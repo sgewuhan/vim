@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.util.Util;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
@@ -39,6 +40,8 @@ public class BindingConfigCodeToProductcode extends AbstractHandler {
         }
 
         DBObject configcode = (DBObject) selection.getFirstElement();
+        Object f_0_2C1_cc = configcode.get(IVIMFields.F_0_2C1);
+
         ObjectId configcodeId = (ObjectId) configcode.get(ConfigCodeInfo.FIELD_SYSID);
         String configcodeName = (String) configcode.get(IVIMFields.H_03);
 
@@ -61,6 +64,13 @@ public class BindingConfigCodeToProductcode extends AbstractHandler {
         Iterator iter = prodCodeSelection.iterator();
         while (iter.hasNext()) {
             DBObject productCodeData = (DBObject) iter.next();
+            Object f_0_2C1_pc = productCodeData.get(IVIMFields.F_0_2C1);
+            if(!Util.equals(f_0_2C1_cc, f_0_2C1_pc)){
+                UIUtils.showMessage(activeShell, "绑定车型一致性信息到成品码", "选定的公告车型和成品码公告车型不一致，不能执行绑定",
+                        SWT.ICON_ERROR);
+                return null;
+            }
+            
             idList.add(productCodeData.get(ProductCodeInfo.FIELD_SYSID));
         }
 

@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.util.Util;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
@@ -37,6 +38,9 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
         }
 
         DBObject cocinfo = (DBObject) selection.getFirstElement();
+        Object f_0_2C1_coc = cocinfo.get(IVIMFields.F_0_2C1);
+        
+        
         ObjectId cocinfoId = (ObjectId) cocinfo.get(ProductCodeInfo.FIELD_SYSID);
         String cocinfoName = (String) cocinfo.get(IVIMFields.F_0_2_1) + " "
                 + cocinfo.get(IVIMFields.F_0_2C1) + " " + cocinfo.get(IVIMFields.F_0_2a);
@@ -58,6 +62,12 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
         Iterator iter = prodCodeSelection.iterator();
         while (iter.hasNext()) {
             DBObject productCodeData = (DBObject) iter.next();
+            Object f_0_2C1_pc = productCodeData.get(IVIMFields.F_0_2C1);
+            if(!Util.equals(f_0_2C1_coc, f_0_2C1_pc)){
+                UIUtils.showMessage(activeShell, "绑定车型一致性信息到成品码", "选定的公告车型和成品码公告车型不一致，不能执行绑定",
+                        SWT.ICON_ERROR);
+                return null;
+            }
             idList.add(productCodeData.get(ProductCodeInfo.FIELD_SYSID));
         }
 
