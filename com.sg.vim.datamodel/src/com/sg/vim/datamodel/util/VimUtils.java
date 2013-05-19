@@ -60,6 +60,8 @@ public class VimUtils {
 
     public static boolean FL_REPRINT;
 
+	public static String LOCAL_SERVER;
+
     private static final String MES_DB = "mes";
 
     private static final String SQL_GET_PRODUCINFOR = "select erp_product_code,safety_components_vin,manufacture_date "
@@ -443,7 +445,7 @@ public class VimUtils {
         // 处理签发日期
         Object ccc03 = cocData.get(IVIMFields.CCC_03);
         if (ccc03 instanceof Date) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             result.put(IVIMFields.CCC_03, sdf.format((Date) ccc03));
         }
 
