@@ -1421,6 +1421,19 @@
                         required="false"
                         type="String">
                   </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="60"
+                        id="c_24"
+                        label="8位企业ID"
+                        labelVisible="true"
+                        name="c_24"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <fieldgroup
                         columnCount="2">
                      <field

@@ -33,7 +33,7 @@ public class F421_Option implements IFieldOptionProvider {
 		if ((srcValue1 instanceof String)
 				&& (Utils.isPatternMatched(srcValue1, "(\\d+)(,\\d+)*"))) {
 			String[] values = ((String) srcValue1).split(",");
-			for (int i = 0; i < children.size(); i++) {
+			for (int i = 0; i < values.length; i++) {
 				children.add(new Enumerate(values[i], values[i]));
 			}
 		}

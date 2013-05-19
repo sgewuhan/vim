@@ -46,6 +46,9 @@ public class IVIMFields {
     public static final String C_22 = "c_22";
     /** 车辆状态信息 **/
     public static final String C_23 = "c_23";
+    /**8位企业id**/
+    public static final String C_24 = "c_24";
+
     /** 车辆一致性证书编号 **/
     public static final String CCC_00 = "ccc_00";
     /** CCC认证过程中车辆的制造阶段 **/

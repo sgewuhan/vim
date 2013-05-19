@@ -611,8 +611,8 @@ public class VimUtils {
         // Veh_CpsCDz D_04 车辆生产单位地址 映射
         result.put(IVIMFields.mVeh_Cpscdz, cocData.get(IVIMFields.D_04));
         // Veh_QyiD C_14 企业ID 映射
-        String companyId = (String) cocData.get(IVIMFields.C_14);
-        result.put(IVIMFields.mVeh_Qyid, companyId + "0000");
+        String companyId = (String) cocData.get(IVIMFields.C_24);
+        result.put(IVIMFields.mVeh_Qyid, companyId);
         // Veh_Qybz C_17 企业标准 映射
         result.put(IVIMFields.mVeh_Qybz, cocData.get(IVIMFields.C_17));
         // Veh_Cpggh D_23 产品公告号 值转换 由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位
@@ -673,26 +673,26 @@ public class VimUtils {
         // Veh_Qyqtxx 公告中的其他
         result.put(IVIMFields.mVeh_Qyqtxx, cocData.get(IVIMFields.C_18));
 
-        // // Veh_Tmxx 条码 不填
-        // result.put(IVIMFields.mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
-        // Veh_Jyw 待测 校验不填
-        // result.put(IVIMFields.mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
-        // Veh_PrinterName 待测
-        result.put(IVIMFields.mVeh_PrinterName, "");
-        // Veh_PrintPosLeFt 待测
-        result.put(IVIMFields.mVeh_PrintPosLeft, "15");
-        // Veh_PrintPosTop 待测
-        result.put(IVIMFields.mVeh_PrintPosTop, "15");
-        // Veh_ConneCt 待测
-        result.put(IVIMFields.mVeh_Connect, "com1");
-        // Veh_BauD 待测
-        result.put(IVIMFields.mVeh_Baud, "9600");
-        // Veh_Parity 待测
-        result.put(IVIMFields.mVeh_Parity, "N");
-        // Veh_Databits 待测
-        result.put(IVIMFields.mVeh_Databits, "8");
-        // Veh_Stopbits 待测
-        result.put(IVIMFields.mVeh_Stopbits, "1");
+//        // // Veh_Tmxx 条码 不填
+//        // result.put(IVIMFields.mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
+//        // Veh_Jyw 待测 校验不填
+//        // result.put(IVIMFields.mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
+//        // Veh_PrinterName 待测
+//        result.put(IVIMFields.mVeh_PrinterName, "");
+//        // Veh_PrintPosLeFt 待测
+//        result.put(IVIMFields.mVeh_PrintPosLeft, "15");
+//        // Veh_PrintPosTop 待测
+//        result.put(IVIMFields.mVeh_PrintPosTop, "15");
+//        // Veh_ConneCt 待测
+//        result.put(IVIMFields.mVeh_Connect, "com1");
+//        // Veh_BauD 待测
+//        result.put(IVIMFields.mVeh_Baud, "9600");
+//        // Veh_Parity 待测
+//        result.put(IVIMFields.mVeh_Parity, "N");
+//        // Veh_Databits 待测
+//        result.put(IVIMFields.mVeh_Databits, "8");
+//        // Veh_Stopbits 待测
+//        result.put(IVIMFields.mVeh_Stopbits, "1");
 
         // Veh_Zzbh 纸张编号
         // *****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
