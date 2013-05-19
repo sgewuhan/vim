@@ -60,6 +60,8 @@ public class VimUtils {
 
     public static boolean FL_REPRINT;
 
+	public static String LOCAL_SERVER;
+
     private static final String MES_DB = "mes";
 
     private static final String SQL_GET_PRODUCINFOR = "select erp_product_code,safety_components_vin,manufacture_date "

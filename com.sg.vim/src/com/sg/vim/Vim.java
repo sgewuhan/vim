@@ -44,6 +44,7 @@ public class Vim implements BundleActivator {
             VimUtils.HD_USER=appProps.getProperty("vidc.user");
             VimUtils.COC_REPRINT="true".equalsIgnoreCase(appProps.getProperty("reprint.coc"));
             VimUtils.FL_REPRINT="true".equalsIgnoreCase(appProps.getProperty("reprint.fuallabel"));
+            VimUtils.LOCAL_SERVER=appProps.getProperty("vidc.localaddress");
             
             VimUtils.debug = debug;
         } catch (Exception e) {
