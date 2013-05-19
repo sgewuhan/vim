@@ -119,6 +119,8 @@ public class VimUtils {
             IVIMFields.mVeh_Parity, IVIMFields.mVeh_Databits, IVIMFields.mVeh_Stopbits,
             IVIMFields.mVeh_Zzbh, IVIMFields.mVeh_Cddbj };
 
+    public static String LOCAL_CERT_ARRESS = null;
+
     public static void setValues(Browser browser, DBObject dbo) {
         StringBuilder sb = new StringBuilder();
         sb.append("setValues(");
