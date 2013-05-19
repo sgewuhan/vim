@@ -185,18 +185,28 @@ public class VimUtils {
 	 * @throws Exception
 	 */
 	public static SQLRow getProductCode(String vin) throws Exception {
+		// **********************************************测试使用
+		if (debug || vin.equals("LMBC4EAE5DU012961")) {
 
+			SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE,
+					FIELD_MFT_DATE, FIELD_ENGINEE_NUM, "VIN" });
+			row.setValue(FIELD_ENGINEE_NUM, "BJ413AC09D00042");
+			row.setValue(FIELD_MFT_DATE, "2012-12-21");
+			row.setValue(FIELD_PRODUCT_CODE, "88T151ACBA4-U3A1");
+			row.setValue("VIN", vin);
+			return row;
+		}
 		if (debug) {
 			Connection conn = DDB.getDefault().getConnection("MES_DB");
 			if (conn == null) {
-				String[] arr1 = new String[] { "LNBMDLAA0CU000319",
+				String[] arr1 = new String[] { "LMBC4EAE5DU012961",
 						"LNBMDLAA4CU000484", "LNBMDLAA6CU000485",
 						"LNBMDLAA1CU000572", "LNBMDLAA3CU000573" };
 				String[] arr2 = new String[] { "LNBMDLAA7CU000480" };
 				if (Utils.inArray(vin, arr1)) {
 					SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE,
 							FIELD_MFT_DATE, FIELD_ENGINEE_NUM, "VIN" });
-					row.setValue(FIELD_ENGINEE_NUM, "BJ410A1C10D00129");
+					row.setValue(FIELD_ENGINEE_NUM, "BJ413AC09D00042");
 					row.setValue(FIELD_MFT_DATE, "2012-12-21");
 					row.setValue(FIELD_PRODUCT_CODE, "88T151ACBA4-U3A1");
 					row.setValue("VIN", vin);
@@ -213,13 +223,30 @@ public class VimUtils {
 				}
 			}
 		}
+		// **********************************************************
 
 		SQLResult res = SQLUtil.SQL_QUERY(MES_DB, SQL_GET_PRODUCINFOR + vin
 				+ "'");
+
 		if (res.size() == 0) {
 			throw new Exception("MES数据库中没有VIN对应的成品记录。\nVIN:" + vin);
+		}else{
+			SQLRow row = res.getData().get(0);
+			String mftDate = row.getText(FIELD_MFT_DATE);
+			try{
+				Date date = new SimpleDateFormat(Utils.SDF_DATE).parse(mftDate);
+				long intv = (System.currentTimeMillis()-date.getTime())/24*60*24*1000;
+				if(intv>30){
+					throw new Exception("MES数据库中VIN对应的成品记录,制造日期不得早于当前日期30天。\nVIN:" + vin);
+				}
+			}catch(Exception e){
+				throw new Exception("MES数据库中VIN对应的成品记录,制造日期不合规。\nVIN:" + vin);
+			}
+			
+			return row;
+			
 		}
-		return res.getData().get(0);
+
 	}
 
 	public static DBObject getProductCodeInfo(String productCode)
@@ -502,9 +529,11 @@ public class VimUtils {
 	}
 
 	private static String getColorNameByCode(String colorCode) {
-		DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, "colors");
-		DBObject d = c.findOne(new BasicDBObject().append(IVIMFields.color_code, colorCode));
-		if(d!=null){
+		DBCollection c = DBActivator
+				.getCollection(IVIMFields.DB_NAME, "colors");
+		DBObject d = c.findOne(new BasicDBObject().append(
+				IVIMFields.color_code, colorCode));
+		if (d != null) {
 			return (String) d.get(IVIMFields.color_name);
 		}
 		return null;
@@ -531,8 +560,8 @@ public class VimUtils {
 		String sn = mesRawData.getText(FIELD_PRODUCT_CODE);
 		String colorCode = sn.substring(14, 15);
 		String colorName = getColorNameByCode(colorCode);
-		if(Utils.isNullOrEmpty(colorName)){
-			throw new Exception("无法在颜色对照表中找到成品码对应的颜色\n颜色id为:"+colorCode);
+		if (Utils.isNullOrEmpty(colorName)) {
+			throw new Exception("无法在颜色对照表中找到成品码对应的颜色\n颜色id为:" + colorCode);
 		}
 		result.put(IVIMFields.mVeh_Csys, colorName);
 		// } else {
@@ -568,7 +597,9 @@ public class VimUtils {
 			result.put(IVIMFields.mVeh_Hxnbg, cocData.get(IVIMFields.F_C7_3));
 		}
 		// Veh_Gbthps F_C6 钢板弹簧片数 映射
-		result.put(IVIMFields.mVeh_Gbthps, cocData.get(IVIMFields.F_C6));
+		// 处理钢板簧，在成品码中取
+		Object fc6 = productCodeData.get(IVIMFields.F_C6);
+		result.put(IVIMFields.mVeh_Gbthps, fc6);
 		// Veh_FDjxh F_C4 发动机型号 映射
 		result.put(IVIMFields.mVeh_Fdjxh, cocData.get(IVIMFields.F_C4));
 		// Veh_Lts F_1_1 轮胎数 映射
@@ -600,20 +631,34 @@ public class VimUtils {
 		// Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
 		result.put(IVIMFields.mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
 		// Veh_JsszCrs C_02 驾驶室准乘人数 映射 全项不填，底盘必填
+		Object cllb = cocData.get(IVIMFields.F_0_4);
 		if (isDP) {
 			Object c_02 = cocData.get(IVIMFields.C_02);
 			if (!debug && Utils.isNullOrEmptyString(c_02)) {
 				throw new Exception("驾驶室准乘人数在底盘合格证数据中不可为空");
 			}
 			result.put(IVIMFields.mVeh_Jsszcrs, c_02);
+		}else{
+			if ("N1".equals(cllb)) {
+				Object c_02 = cocData.get(IVIMFields.C_02);
+				if (!debug && Utils.isNullOrEmptyString(c_02)) {
+					throw new Exception("驾驶室准乘人数在N1类全项合格证数据中不可为空");
+				}
+				result.put(IVIMFields.mVeh_Jsszcrs, c_02);
+			}
 		}
 		// Veh_EDzk F_42_1 额定载客 映射
 		if (!isDP) {
-			Object f_42_1 = cocData.get(IVIMFields.F_42_1);
-			if (!debug && Utils.isNullOrEmptyString(f_42_1)) {
-				throw new Exception("额定载客数在全项合格证数据中不可为空");
+			// 如果是M1类，取额定载客
+			// 如果是N1类，取驾驶室准乘人数
+			if ("M1".equals(cllb)) {
+				Object f_42_1 = cocData.get(IVIMFields.F_42_1);
+				if (!debug && Utils.isNullOrEmptyString(f_42_1)) {
+					throw new Exception("额定载客数在M1类全项合格证数据中不可为空");
+				}
+				result.put(IVIMFields.mVeh_Edzk, f_42_1);
 			}
-			result.put(IVIMFields.mVeh_Edzk, f_42_1);
+
 		}
 		// Veh_ZgCs F_44 最高车速 映射
 		result.put(IVIMFields.mVeh_Zgcs, cocData.get(IVIMFields.F_44));
@@ -654,14 +699,15 @@ public class VimUtils {
 		if (Utils.isNullOrEmpty(confid)) {
 			confid = (String) confData.get(IVIMFields.H_02);
 		}
-		if (!isDP) {
-			String string = productPublicId + confid;
-			if (!debug && string.length() != 25) {
-				throw new Exception(
-						"无法取得正确的产品公告号。\n值转换  由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位");
-			}
-			result.put(IVIMFields.mVeh_Cpggh, string);
+		if (Utils.isNullOrEmpty(confid)) {
+			confid = "";
 		}
+		String string = productPublicId + confid;
+//		if (!debug && string.length() != 25) {
+//			throw new Exception(
+//					"无法取得正确的产品公告号。\n值转换  由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位");
+//		}
+		result.put(IVIMFields.mVeh_Cpggh, string);
 		result.put(IVIMFields.D_23, productPublicId);
 		result.put(IVIMFields.H_01, confid);
 
@@ -697,7 +743,7 @@ public class VimUtils {
 
 		// Veh_Fzrq 发证日期 字符 14 YYYY年MM月DD日
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-		String string = sdf.format(new Date());
+		string = sdf.format(new Date());
 		result.put(IVIMFields.mVeh_Fzrq, string);
 		// Veh_Cjh vin vin
 		result.put(IVIMFields.mVeh_Cjh, "");
@@ -1315,7 +1361,7 @@ public class VimUtils {
 		// 驾驶室准乘人数
 		// s:string
 		//
-		value = (String) data.get(IVIMFields.mVeh_Clxh);
+		value = (String) data.get(IVIMFields.mVeh_Jsszcrs);
 		// Assert.isNotNull(value, "驾驶室准乘人数不可为空");
 		info.setJSSZCRS(value);
 		//
@@ -1991,6 +2037,21 @@ public class VimUtils {
 			update.put(key, basicInfo.get(key));
 		}
 
+		//处理燃料种类
+        StringBuffer sb = new StringBuffer();
+        Object f251 = basicInfo.get(IVIMFields.F_25_1);
+        sb.append(f251);
+        Object f252 = basicInfo.get(IVIMFields.F_25_2);
+        if(!Utils.isNullOrEmptyString(f252)){
+            sb.append("/");//使用/分割
+            sb.append(f252);
+        }
+        Object f253 = basicInfo.get(IVIMFields.F_25_3);
+        if(!Utils.isNullOrEmptyString(f253)){
+            sb.append("/");//使用/分割
+            sb.append(f253);
+        }
+        update.put(IVIMFields.F_25, sb.toString());
 		COCInfo cService = new COCInfo();
 		cService.update((ObjectId) cocInfo.get("_id"), update);
 	}

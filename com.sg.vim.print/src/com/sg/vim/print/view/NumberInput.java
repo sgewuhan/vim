@@ -20,8 +20,8 @@ public class NumberInput extends Shell {
 
     protected int number;
 
-    public NumberInput(Shell shell) {
-        super(shell, SWT.APPLICATION_MODAL | SWT.BORDER);
+    public NumberInput(Shell shell,int style) {
+        super(shell, style);
         createContent(this);
     }
 

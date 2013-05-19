@@ -25,7 +25,7 @@ public abstract class DataAssembly extends Job {
     private DBObject dpconfData;
 
     public DataAssembly(String vin) {
-        super("组装合格证数据VIN" + vin);
+        super("组装车辆数据，VIN=" + vin);
         this.vin = vin;
     }
 
