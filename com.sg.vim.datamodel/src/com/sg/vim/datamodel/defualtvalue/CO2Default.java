@@ -1,4 +1,4 @@
-package com.sg.vim.datemodel.defaultvalue;
+package com.sg.vim.datamodel.defualtvalue;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;

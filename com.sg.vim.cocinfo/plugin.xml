@@ -4101,6 +4101,7 @@
                   </field>
                   <field
                         computeField="false"
+                        defaultValueProvider="com.sg.vim.datamodel.defualtvalue.FC6Defaul"
                         editPart="Text(Single Line)"
                         editable="true"
                         id="f_c6"

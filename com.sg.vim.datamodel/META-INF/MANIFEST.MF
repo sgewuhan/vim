@@ -22,7 +22,6 @@ Export-Package: com.sg.vim.datamodel,
  com.sg.vim.datamodel.option,
  com.sg.vim.datamodel.savehandler,
  com.sg.vim.datamodel.util,
- com.sg.vim.datamodel.validator,
- com.sg.vim.datemodel.defaultvalue
+ com.sg.vim.datamodel.validator
 Import-Package: javax.servlet;version="2.6.0",
  javax.servlet.http;version="2.6.0"
