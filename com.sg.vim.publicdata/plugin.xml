@@ -869,6 +869,11 @@
                   name="英文品牌"
                   type="String">
             </column>
+            <column
+                  column="c_02"
+                  name="整备质量"
+                  type="String">
+            </column>
          </filterAction>
          <searchAction>
             <column
@@ -919,6 +924,11 @@
             <column
                   column="m_1"
                   name="英文品牌"
+                  type="String">
+            </column>
+            <column
+                  column="c_02"
+                  name="整备质量"
                   type="String">
             </column>
          </searchAction>
@@ -1401,6 +1411,11 @@
          <column
                column="m_1"
                name="英文品牌"
+               type="String">
+         </column>
+         <column
+               column="c_02"
+               name="整备质量"
                type="String">
          </column>
       </table>
@@ -2688,6 +2703,18 @@
                         editable="false"
                         id="c_02"
                         label="驾驶室准乘人数"
+                        labelVisible="true"
+                        name="c_02"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="c_02"
+                        label="整备质量"
                         labelVisible="true"
                         name="c_02"
                         persistable="true"
