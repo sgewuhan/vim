@@ -518,5 +518,8 @@ public class IVIMFields {
 
     public static final String DB_NAME = "appportal";
     public static final String BASICINFO_ID = "basicinfo_id";
+    
+    public static final String color_name = "color_name";
+    public static final String color_code = "color_code";
 
 }

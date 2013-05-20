@@ -4656,6 +4656,13 @@
             run="com.sg.vim.print.function.PrinterSetting"
             tooltip="设置系统的打印机">
       </adminFunction>
+      <adminFunction
+            id="com.sg.vim.print.function.ColorSetting"
+            image="image/color_48.png"
+            label="颜色设置"
+            run="com.sg.vim.print.function.ColorSetting"
+            tooltip="设置系统的打印机">
+      </adminFunction>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -4665,6 +4672,13 @@
             icon="image/print_16.png"
             id="com.sg.vim.print.editor.printersetting"
             name="打印设置">
+      </editor>
+      <editor
+            class="com.sg.vim.print.function.ColorSettingEditor"
+            default="false"
+            icon="image/color_16.png"
+            id="com.sg.vim.print.editor.colorsetting"
+            name="颜色设置">
       </editor>
    </extension>
    <extension
