@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import com.mobnut.db.DBActivator;
 import com.sg.vim.cocinfo.SyncProductCodeData;
 import com.sg.vim.datamodel.util.VimUtils;
 
@@ -31,6 +32,7 @@ public class Vim implements BundleActivator {
      */
     public void start(BundleContext bundleContext) throws Exception {
         Vim.context = bundleContext;
+        DBActivator.SKIP_AUTH = true;
         InputStream is = null;
         FileInputStream fis = null;
         try {

@@ -52,6 +52,57 @@
             seqname="Veh_Zzbh">
       </seq>
    </extension>
+   <extension
+         point="com.mobnut.portal.scenario">
+      <scenario
+            id="com.sg.vim.scenario.mnt"
+            name="数据维护">
+         <perspective
+               default="true"
+               id="perspective.home">
+         </perspective>
+         <perspective
+               id="com.sg.vim.perspective.cocinfo">
+         </perspective>
+         <perspective
+               id="com.sg.vim.perspective.printdata">
+         </perspective>
+      </scenario>
+      <scenario
+            id="com.sg.vim.scenario.print"
+            name="打印">
+         <perspective
+               default="true"
+               id="com.sg.vim.perspective.print"></perspective>
+      </scenario>
+      <scenario
+            id="com.sg.vim.scenario.sys"
+            name="系统管理">
+         <perspective
+               default="true"
+               id="com.mobnut.admin.perspective">
+         </perspective>
+      </scenario>
+   </extension>
+   <extension
+         point="com.mobnut.admin.adminFunction">
+      <adminFunction
+            id="com.sg.vim.function.scenariosetting"
+            image="image/scenarios_48.png"
+            label="场景"
+            run="com.sg.vim.function.ScenarioSetting"
+            tooltip="设置系统的使用场景">
+      </adminFunction>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.sg.vim.function.ScenarioSettingEditor"
+            default="false"
+            id="com.sg.vim.editor.scenariosetting"
+            name="用户使用场景设置">
+      </editor>
+   </extension>
    <!--extension
          point="com.sg.ui.dataEditor">
       <basicpage
