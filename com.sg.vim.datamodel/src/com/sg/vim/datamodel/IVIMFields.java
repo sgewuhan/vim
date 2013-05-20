@@ -506,7 +506,9 @@ public class IVIMFields {
     public static final String mVeh_A_update_memo = "updatememo";
 
     public static final String SEQ_GZBH = "hgzbh";
+    /**在COC证书上的合格证日期**/
     public static final String CCC_21 = "ccc_21";
+    
     public static final String G_32 = "g_32";
     public static final String G_33 = "g_33";
     public static final String G_34 = "g_34";
