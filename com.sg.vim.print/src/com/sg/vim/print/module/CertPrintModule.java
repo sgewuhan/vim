@@ -23,6 +23,7 @@ public class CertPrintModule extends PrintModule {
     private DPCertPrintModule dpCertPrintModule;
     private DataObjectEditorInput dpinput;
     private DataObjectEditorInput input;
+    @SuppressWarnings("unused")
     private boolean canUploadData;
     public CertPrintModule() {
         super();

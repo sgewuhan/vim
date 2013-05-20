@@ -30,7 +30,6 @@ import org.eclipse.ui.part.EditorPart;
 import com.mobnut.admin.functions.UserLabelProvider;
 import com.mobnut.portal.Portal;
 import com.mobnut.portal.db.Account;
-import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -150,6 +149,7 @@ public class ScenarioSettingEditor extends EditorPart implements ISelectionChang
 
         Object s = userData.get(Account.FIELD_SCENARIO);
         if (s instanceof List) {
+            @SuppressWarnings({ "unchecked", "rawtypes" })
             Iterator<Object> iter = ((List) s).iterator();
             while (iter.hasNext()) {
                 String pid = (String) iter.next();

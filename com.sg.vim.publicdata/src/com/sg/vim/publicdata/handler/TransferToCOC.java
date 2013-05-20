@@ -18,6 +18,7 @@ public class TransferToCOC extends AbstractHandler {
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
         IStructuredSelection sel = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
+        @SuppressWarnings("rawtypes")
         Iterator iter = sel.iterator();
         IWorkbenchPart part = HandlerUtil.getActivePart(event);
         while(iter.hasNext()){
