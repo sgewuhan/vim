@@ -24,16 +24,20 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
         Object productCode = data.get(IVIMFields.E_02);
         Object productName = data.get(IVIMFields.E_03);
         Object modelCode = data.get(IVIMFields.F_0_2C1);
-//        Object cocinfo_name = data.get(IVIMFields.COC_NAME);
+        // Object cocinfo_name = data.get(IVIMFields.COC_NAME);
         Object cocinfo_id = data.get(IVIMFields.COC_ID);
         Object cocinfo_id2 = data.get(IVIMFields.COC_ID2);
-//        Object cfginfo_name = data.get(IVIMFields.CFG_NAME);
+        Object c_12 = data.get(IVIMFields.C_12);
+        // Object cfginfo_name = data.get(IVIMFields.CFG_NAME);
         Object cfginfo_id = data.get(IVIMFields.CFG_ID);
         String tag1 = cocinfo_id == null ? "Î´Ö¸¶¨    " : "´ò¿ª    ";
         String tag1_1 = cocinfo_id2 == null ? "Î´Ö¸¶¨    " : "´ò¿ª    ";
         String tag2 = cfginfo_id == null ? "Î´Ö¸¶¨    " : "´ò¿ª    ";
+        boolean needDP = !Utils.isNullOrEmptyString(c_12);
         
-        //¸ÖÆ¬µ¯»É
+        
+        
+        // ¸ÖÆ¬µ¯»É
         Object f_c6 = data.get(IVIMFields.F_C6);
 
         StringBuilder builder = new StringBuilder();
@@ -44,57 +48,73 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
         builder.append(" [");
         builder.append(modelCode);
         builder.append(" ]");
+        
+        if(isFinished(data)){
+            builder.append("<img src=\"");
+            builder.append(FileUtil.getImageURL("checked_16.png", COCInfoActivator.PLUGIN_ID,
+                    "image"));
+            builder.append("\"  width='16' height='16' style='padding-right:4px;padding-top:4px;'/>");
+        }
+        
         builder.append("</b><br/>");
         builder.append(productName);
         builder.append("<br/><small>");
         if (cocinfo_id == null) {
             builder.append("<img src=\"");
-            builder.append(FileUtil.getImageURL("unlink1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
+            builder.append(FileUtil.getImageURL("unlink1_1216.png", COCInfoActivator.PLUGIN_ID,
+                    "image"));
             builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" Õû³µ COC: ");
+            builder.append(" Õû³µ: ");
             builder.append(tag1);
         } else {
             builder.append("<img src=\"");
-            builder.append(FileUtil.getImageURL("link1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
+            builder.append(FileUtil.getImageURL("link1_1216.png", COCInfoActivator.PLUGIN_ID,
+                    "image"));
             builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" COC: ");
+            builder.append(" Õû³µ: ");
             builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id
                     + "\" target=\"_rwt\">" + tag1 + "</a>");
         }
-        if (cocinfo_id2 == null) {
-            builder.append("<img src=\"");
-            builder.append(FileUtil.getImageURL("unlink1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
-            builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" µ×ÅÌ COC: ");
-            builder.append(tag1);
-        } else {
-            builder.append("<img src=\"");
-            builder.append(FileUtil.getImageURL("link1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
-            builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" COC: ");
-            builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id2
-                    + "\" target=\"_rwt\">" + tag1_1 + "</a>");
+        if (needDP) {
+            if (cocinfo_id2 == null) {
+                builder.append("<img src=\"");
+                builder.append(FileUtil.getImageURL("unlink1_1216.png", COCInfoActivator.PLUGIN_ID,
+                        "image"));
+                builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
+                builder.append(" µ×ÅÌ: ");
+                builder.append(tag1_1);
+            } else {
+                builder.append("<img src=\"");
+                builder.append(FileUtil.getImageURL("link1_1216.png", COCInfoActivator.PLUGIN_ID,
+                        "image"));
+                builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
+                builder.append(" µ×ÅÌ: ");
+                builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id2
+                        + "\" target=\"_rwt\">" + tag1_1 + "</a>");
+            }
         }
 
         if (cfginfo_id == null) {
             builder.append("<img src=\"");
-            builder.append(FileUtil.getImageURL("unlink2_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
+            builder.append(FileUtil.getImageURL("unlink2_1216.png", COCInfoActivator.PLUGIN_ID,
+                    "image"));
             builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" ÅäÖÃÐòºÅ: ");
+            builder.append(" ÅäÖÃ: ");
             builder.append(tag2);
         } else {
             builder.append("<img src=\"");
-            builder.append(FileUtil.getImageURL("link2_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
+            builder.append(FileUtil.getImageURL("link2_1216.png", COCInfoActivator.PLUGIN_ID,
+                    "image"));
             builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" ÅäÖÃÐòºÅ: ");
+            builder.append(" ÅäÖÃ: ");
             builder.append("<a href=\"com.sg.vim.editor.configcode@" + cfginfo_id
                     + "\" target=\"_rwt\">" + tag2 + "</a>");
         }
-        
-        if(!Utils.isNullOrEmptyString(f_c6)){
+
+        if (!Utils.isNullOrEmptyString(f_c6)) {
             builder.append(" ¸ÖÆ¬µ¯»É: ");
             builder.append(f_c6);
-        }else{
+        } else {
             builder.append(" ¸ÖÆ¬µ¯»É: ");
             builder.append("Î´Éè¶¨");
         }
@@ -102,6 +122,23 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
 
         return builder.toString();
 
+    }
+
+    private boolean isFinished(DBObject data) {
+        Object cocinfo_id = data.get(IVIMFields.COC_ID);
+        Object cocinfo_id2 = data.get(IVIMFields.COC_ID2);
+        Object c_12 = data.get(IVIMFields.C_12);
+        Object cfginfo_id = data.get(IVIMFields.CFG_ID);
+        Object f_c6 = data.get(IVIMFields.F_C6);
+
+        if(cocinfo_id==null||cfginfo_id==null||Utils.isNullOrEmptyString(f_c6)){
+            return false;
+        }else{
+            if(c_12!=null&&cocinfo_id2==null){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

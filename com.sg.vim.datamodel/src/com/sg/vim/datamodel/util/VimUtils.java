@@ -300,6 +300,15 @@ public class VimUtils {
 		}
 		return data;
 	}
+	
+	   public static DBObject getCOCInfo2(DBObject productCodeData) {
+	        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME,
+	                IVIMFields.COL_COCINFO);
+	        ObjectId id = (ObjectId) productCodeData.get(IVIMFields.COC_ID2);
+	        DBObject query = new BasicDBObject().append("_id", id);
+	        DBObject data = c.findOne(query);
+	        return data;
+	    }
 
 	public static DBObject getConfInfo(DBObject productCodeData)
 			throws Exception {

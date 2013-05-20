@@ -33,7 +33,7 @@
                id="com.sg.vim.configcode"
                minimized="false"
                relationship="stack"
-               relative="com.sg.vim.cocinfo">
+               relative="com.sg.vim.cocinfo2">
          </view>
       </perspectiveExtension>
    </extension>
