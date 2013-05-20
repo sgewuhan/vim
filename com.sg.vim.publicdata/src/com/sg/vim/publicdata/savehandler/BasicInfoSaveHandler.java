@@ -39,7 +39,7 @@ public class BasicInfoSaveHandler implements IEditorSaveHandler {
 
             ObjectId id = input.getData().getSystemId();
             DBCursor cur = cocService.find(new BasicDBObject().append(IVIMFields.BASICINFO_ID, id),
-                    new BasicDBObject().append("_id", 1));
+                    null);
             if (!cur.hasNext()) {
                 return true;
             }
@@ -47,7 +47,7 @@ public class BasicInfoSaveHandler implements IEditorSaveHandler {
             int ok = UIUtils.showMessage(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
                     "保存", "您有一个或多个车型一致性信息是由本条公告车型信息所创建\n。您需要同步更改关联的车型一致性信息码？", SWT.ICON_QUESTION
                             | SWT.YES | SWT.NO);
-            if(SWT.NO!=ok){
+            if(SWT.YES!=ok){
                 return true;
             }
             while(cur.hasNext()){

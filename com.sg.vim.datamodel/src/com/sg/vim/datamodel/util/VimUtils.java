@@ -60,7 +60,7 @@ public class VimUtils {
 
     public static boolean FL_REPRINT;
 
-	public static String LOCAL_SERVER;
+    public static String LOCAL_SERVER;
 
     private static final String MES_DB = "mes";
 
@@ -493,25 +493,24 @@ public class VimUtils {
         }
 
         // Veh_Csys F_38 车身颜色 从成品字典取
-        if (!isDP) {
-            String sn = mesRawData.getText(FIELD_PRODUCT_CODE);
-            String colorCode = sn.substring(14, 15);
-            String colorName = (String) cocData.get(IVIMFields.F_38);
-            for (int i = 0; i < COLOR_CODE.length; i++) {
-                if (COLOR_CODE[i].equalsIgnoreCase(colorCode)) {
-                    colorName = COLOR_NAME[i];
-                    break;
-                }
+        // if (!isDP) {
+        String sn = mesRawData.getText(FIELD_PRODUCT_CODE);
+        String colorCode = sn.substring(14, 15);
+        String colorName = (String) cocData.get(IVIMFields.F_38);
+        for (int i = 0; i < COLOR_CODE.length; i++) {
+            if (COLOR_CODE[i].equalsIgnoreCase(colorCode)) {
+                colorName = COLOR_NAME[i];
+                break;
             }
-            result.put(IVIMFields.mVeh_Csys, colorName);
-        } else {
-            String colorName = (String) cocData.get(IVIMFields.F_38);
-            result.put(IVIMFields.mVeh_Csys, colorName);
         }
+        result.put(IVIMFields.mVeh_Csys, colorName);
+        // } else {
+        // String colorName = (String) cocData.get(IVIMFields.F_38);
+        // result.put(IVIMFields.mVeh_Csys, colorName);
+        // }
 
         // Veh_FDjh F_21a 发动机号 映射
         String code = (String) mesRawData.getValue("SAFETY_COMPONENTS_VIN");
-
         result.put(IVIMFields.mVeh_Fdjh, code.substring(code.length() - 9));
         // Veh_Rlzl F_25 燃料种类 映射
         result.put(IVIMFields.mVeh_Rlzl, cocData.get(IVIMFields.F_25));
@@ -529,12 +528,14 @@ public class VimUtils {
         result.put(IVIMFields.mVeh_Wkk, cocData.get(IVIMFields.F_7_1));
         // Veh_Wkg F_8 外廓高 映射
         result.put(IVIMFields.mVeh_Wkg, cocData.get(IVIMFields.F_8));
-        // Veh_HxnbC F_C7_1 货厢内部长 映射
-        result.put(IVIMFields.mVeh_Hxnbc, cocData.get(IVIMFields.F_C7_1));
-        // Veh_Hxnbk F_C7_2 货厢内部宽 映射
-        result.put(IVIMFields.mVeh_Hxnbk, cocData.get(IVIMFields.F_C7_2));
-        // Veh_Hxnbg F_C7_3 货厢内部高 映射
-        result.put(IVIMFields.mVeh_Hxnbg, cocData.get(IVIMFields.F_C7_3));
+        if (!isDP) {
+            // Veh_HxnbC F_C7_1 货厢内部长 映射
+            result.put(IVIMFields.mVeh_Hxnbc, cocData.get(IVIMFields.F_C7_1));
+            // Veh_Hxnbk F_C7_2 货厢内部宽 映射
+            result.put(IVIMFields.mVeh_Hxnbk, cocData.get(IVIMFields.F_C7_2));
+            // Veh_Hxnbg F_C7_3 货厢内部高 映射
+            result.put(IVIMFields.mVeh_Hxnbg, cocData.get(IVIMFields.F_C7_3));
+        }
         // Veh_Gbthps F_C6 钢板弹簧片数 映射
         result.put(IVIMFields.mVeh_Gbthps, cocData.get(IVIMFields.F_C6));
         // Veh_FDjxh F_C4 发动机型号 映射
@@ -568,16 +569,16 @@ public class VimUtils {
         // Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
         result.put(IVIMFields.mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
         // Veh_JsszCrs C_02 驾驶室准乘人数 映射 全项不填，底盘必填
-        Object c_02 = cocData.get(IVIMFields.C_02);
         if (isDP) {
+            Object c_02 = cocData.get(IVIMFields.C_02);
             if (!debug && Utils.isNullOrEmptyString(c_02)) {
                 throw new Exception("驾驶室准乘人数在底盘合格证数据中不可为空");
             }
             result.put(IVIMFields.mVeh_Jsszcrs, c_02);
         }
         // Veh_EDzk F_42_1 额定载客 映射
-        Object f_42_1 = cocData.get(IVIMFields.F_42_1);
         if (!isDP) {
+            Object f_42_1 = cocData.get(IVIMFields.F_42_1);
             if (!debug && Utils.isNullOrEmptyString(f_42_1)) {
                 throw new Exception("额定载客数在全项合格证数据中不可为空");
             }
@@ -629,7 +630,7 @@ public class VimUtils {
         result.put(IVIMFields.mVeh_Cpggh, string);
         result.put(IVIMFields.D_23, productPublicId);
         result.put(IVIMFields.H_01, confid);
-        
+
         // Veh_GgpC D_18 公告批次 映射
         result.put(IVIMFields.mVeh_Ggpc, cocData.get(IVIMFields.D_18));
         // Veh_Ggsxrq D_01 公告生效日期 映射
@@ -673,26 +674,26 @@ public class VimUtils {
         // Veh_Qyqtxx 公告中的其他
         result.put(IVIMFields.mVeh_Qyqtxx, cocData.get(IVIMFields.C_18));
 
-//        // // Veh_Tmxx 条码 不填
-//        // result.put(IVIMFields.mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
-//        // Veh_Jyw 待测 校验不填
-//        // result.put(IVIMFields.mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
-//        // Veh_PrinterName 待测
-//        result.put(IVIMFields.mVeh_PrinterName, "");
-//        // Veh_PrintPosLeFt 待测
-//        result.put(IVIMFields.mVeh_PrintPosLeft, "15");
-//        // Veh_PrintPosTop 待测
-//        result.put(IVIMFields.mVeh_PrintPosTop, "15");
-//        // Veh_ConneCt 待测
-//        result.put(IVIMFields.mVeh_Connect, "com1");
-//        // Veh_BauD 待测
-//        result.put(IVIMFields.mVeh_Baud, "9600");
-//        // Veh_Parity 待测
-//        result.put(IVIMFields.mVeh_Parity, "N");
-//        // Veh_Databits 待测
-//        result.put(IVIMFields.mVeh_Databits, "8");
-//        // Veh_Stopbits 待测
-//        result.put(IVIMFields.mVeh_Stopbits, "1");
+        // // // Veh_Tmxx 条码 不填
+        // // result.put(IVIMFields.mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
+        // // Veh_Jyw 待测 校验不填
+        // // result.put(IVIMFields.mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
+        // // Veh_PrinterName 待测
+        // result.put(IVIMFields.mVeh_PrinterName, "");
+        // // Veh_PrintPosLeFt 待测
+        // result.put(IVIMFields.mVeh_PrintPosLeft, "15");
+        // // Veh_PrintPosTop 待测
+        // result.put(IVIMFields.mVeh_PrintPosTop, "15");
+        // // Veh_ConneCt 待测
+        // result.put(IVIMFields.mVeh_Connect, "com1");
+        // // Veh_BauD 待测
+        // result.put(IVIMFields.mVeh_Baud, "9600");
+        // // Veh_Parity 待测
+        // result.put(IVIMFields.mVeh_Parity, "N");
+        // // Veh_Databits 待测
+        // result.put(IVIMFields.mVeh_Databits, "8");
+        // // Veh_Stopbits 待测
+        // result.put(IVIMFields.mVeh_Stopbits, "1");
 
         // Veh_Zzbh 纸张编号
         // *****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
@@ -1691,7 +1692,8 @@ public class VimUtils {
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
-        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1).append(IVIMFields.LIFECYCLE, 1));
+        DBObject dataItem = col.findOne(query,
+                new BasicDBObject().append("_id", 1).append(IVIMFields.LIFECYCLE, 1));
 
         if (dataItem != null) {
             if (!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {
@@ -1743,7 +1745,8 @@ public class VimUtils {
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
         DBObject query = new BasicDBObject().append(IVIMFields.F_0_6b, data.get(IVIMFields.F_0_6b));
 
-        DBObject dataItem = col.findOne(query, new BasicDBObject().append("_id", 1).append(IVIMFields.LIFECYCLE, 1));
+        DBObject dataItem = col.findOne(query,
+                new BasicDBObject().append("_id", 1).append(IVIMFields.LIFECYCLE, 1));
 
         if (dataItem != null) {
             if (!IVIMFields.LC_ABANDON.equals(dataItem.get(IVIMFields.LIFECYCLE))) {
@@ -1861,17 +1864,17 @@ public class VimUtils {
         BasicInfo bService = new BasicInfo();
         DBObject basicInfo = bService.get(bcid);
         Iterator<String> iter = basicInfo.keySet().iterator();
-        
+
         BasicDBObject update = new BasicDBObject();
         while (iter.hasNext()) {
             String key = iter.next();
-            if(key.startsWith("_")){
+            if (key.startsWith("_")) {
                 continue;
             }
             cocInfo.put(key, basicInfo.get(key));
             update.put(key, basicInfo.get(key));
         }
-        
+
         COCInfo cService = new COCInfo();
         cService.update((ObjectId) cocInfo.get("_id"), update);
     }
