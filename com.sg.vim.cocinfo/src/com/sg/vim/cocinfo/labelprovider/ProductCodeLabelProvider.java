@@ -26,9 +26,11 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
         Object modelCode = data.get(IVIMFields.F_0_2C1);
 //        Object cocinfo_name = data.get(IVIMFields.COC_NAME);
         Object cocinfo_id = data.get(IVIMFields.COC_ID);
+        Object cocinfo_id2 = data.get(IVIMFields.COC_ID2);
 //        Object cfginfo_name = data.get(IVIMFields.CFG_NAME);
         Object cfginfo_id = data.get(IVIMFields.CFG_ID);
         String tag1 = cocinfo_id == null ? "未指定    " : "打开    ";
+        String tag1_1 = cocinfo_id2 == null ? "未指定    " : "打开    ";
         String tag2 = cfginfo_id == null ? "未指定    " : "打开    ";
         
         //钢片弹簧
@@ -49,7 +51,7 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
             builder.append("<img src=\"");
             builder.append(FileUtil.getImageURL("unlink1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
             builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
-            builder.append(" COC: ");
+            builder.append(" 整车 COC: ");
             builder.append(tag1);
         } else {
             builder.append("<img src=\"");
@@ -58,6 +60,20 @@ public class ProductCodeLabelProvider extends ColumnLabelProvider {
             builder.append(" COC: ");
             builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id
                     + "\" target=\"_rwt\">" + tag1 + "</a>");
+        }
+        if (cocinfo_id2 == null) {
+            builder.append("<img src=\"");
+            builder.append(FileUtil.getImageURL("unlink1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
+            builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
+            builder.append(" 底盘 COC: ");
+            builder.append(tag1);
+        } else {
+            builder.append("<img src=\"");
+            builder.append(FileUtil.getImageURL("link1_1216.png", COCInfoActivator.PLUGIN_ID, "image"));
+            builder.append("\"  width='16' height='12' style='padding-right:4px;padding-top:4px;'/>");
+            builder.append(" COC: ");
+            builder.append("<a href=\"com.sg.vim.editor.cocinfo@" + cocinfo_id2
+                    + "\" target=\"_rwt\">" + tag1_1 + "</a>");
         }
 
         if (cfginfo_id == null) {

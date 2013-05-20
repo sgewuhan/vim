@@ -84,8 +84,12 @@ public class IVIMFields {
     public static final String CFG_NAME = "configcodeinfo_name";
     /** COC ID **/
     public static final String COC_ID = "cocinfo_id";
+    /**DP COC ID**/
+    public static final String COC_ID2 = "cocinfo_id2";
     /** COC name **/
     public static final String COC_NAME = "cocinfo_name";
+    /** DP COC name **/
+    public static final String COC_NAME2 = "cocinfo_name2";
     /** 生效日期 **/
     public static final String D_01 = "d_01";
     /** 产品ID zhonghua 424 **/
