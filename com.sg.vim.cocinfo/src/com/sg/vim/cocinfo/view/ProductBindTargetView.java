@@ -18,7 +18,7 @@ import com.sg.vim.datamodel.IVIMFields;
 public class ProductBindTargetView extends TableNavigator implements 
         ISelectionListener {
 
-    private boolean canTransfer;
+    protected boolean canTransfer;
 
     public ProductBindTargetView() {
     }
