@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.swt.widgets.Display;
 
+import com.mobnut.commons.util.Utils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.sg.sqldb.utility.SQLRow;
@@ -67,6 +68,13 @@ public abstract class DataAssembly extends Job {
             return new Status(Status.ERROR, DataModelActivator.PLUGIN_ID, message, e);
         }
         // 处理底盘有关数据
+        Object dpid = productCodeData.get(IVIMFields.C_12);
+        if(!Utils.isNullOrEmptyString(dpid)){
+            dpcocData = VimUtils.getCOCInfo2(productCodeData);
+            dpconfData = new BasicDBObject();
+        }
+        
+        
         // 判断有无底盘ID
         /**
          * 输入VIN时，有底盘型号和底盘ID不为空，而先打印底盘合格证。如果系统中有这台车的底盘合格证就不用打印底盘合格证， 就直接打印整车合格证，

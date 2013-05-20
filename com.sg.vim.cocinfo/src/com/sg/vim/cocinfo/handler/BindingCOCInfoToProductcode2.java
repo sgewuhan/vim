@@ -1,9 +1,6 @@
 package com.sg.vim.cocinfo.handler;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 import org.bson.types.ObjectId;
 import org.eclipse.core.commands.AbstractHandler;
@@ -19,7 +16,6 @@ import com.mobnut.db.DBActivator;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.sg.ui.UIUtils;
 import com.sg.ui.part.view.TableNavigator;
@@ -33,7 +29,6 @@ public class BindingCOCInfoToProductcode2 extends AbstractHandler {
     private static final String info2 = "请选择需要绑定到成品码的底盘车型一致性信息记录";
     private static final String info1 = "已经成功完成底盘车型一致性信息绑定处理";
     private static final String title = "绑定底盘车型一致性信息到成品码";
-    private static final String info4 = "选择的成品记录没有绑定整车一致性信息";
     private static final String info5 = "选择的成品记录绑定的整车一致性信息没有一致的底盘ID";
 
     @Override
@@ -62,20 +57,16 @@ public class BindingCOCInfoToProductcode2 extends AbstractHandler {
         if (prodCodeSelection == null || prodCodeSelection.isEmpty()) {
             UIUtils.showMessage(activeShell, title, info3, SWT.ICON_INFORMATION);
         }
-        Set<ObjectId> cocidset = getSelectedCOCInfo((IStructuredSelection) prodCodeSelection);
-        if (cocidset.isEmpty()) {
-            UIUtils.showMessage(activeShell, title, info4, SWT.ICON_INFORMATION);
-            return null;
-        }
         
         // 然后取出整车的底盘ID
-        String dpid = getDPIdFromCOC(cocidset);
+        String dpid = getDPIdFromSelection((IStructuredSelection) prodCodeSelection);
         if (dpid == null) {
             UIUtils.showMessage(activeShell, title, info5, SWT.ICON_INFORMATION);
             return null;
         }
         
         BasicDBList idList = new BasicDBList();
+        @SuppressWarnings("rawtypes")
         Iterator iter = prodCodeSelection.iterator();
         while(iter.hasNext()){
             DBObject d = (DBObject) iter.next();
@@ -101,40 +92,22 @@ public class BindingCOCInfoToProductcode2 extends AbstractHandler {
         return null;
     }
     
-    private Set<ObjectId> getSelectedCOCInfo(IStructuredSelection selection) {
-        Set<ObjectId> result = new HashSet<ObjectId>();
+    private String getDPIdFromSelection(IStructuredSelection selection) {
+        String dpid = null;
         @SuppressWarnings("rawtypes")
         Iterator iter = selection.iterator();
         while (iter.hasNext()) {
             DBObject data = (DBObject) iter.next();
-            Object itm = data.get(IVIMFields.COC_ID);
-            result.add((ObjectId) itm);
+            Object itm = data.get(IVIMFields.C_12);
+            if(dpid==null){
+                dpid = (String) itm;
+            }else{
+                if(!dpid.equals(itm)){
+                    return null;
+                }
+            }
         }
-        return result;
-    }
-    
-    private String getDPIdFromCOC(Set<ObjectId> cocidset) {
-        ArrayList<ObjectId> list = new ArrayList<ObjectId>();
-        list.addAll(cocidset);
-        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCINFO);
-        DBCursor cur = c.find(new BasicDBObject().append("_id", new BasicDBObject().append("$in", list)),
-                new BasicDBObject().append(IVIMFields.C_12, 1));
-        String dpId = null;
-        while(cur.hasNext()){
-          Object d = cur.next().get(IVIMFields.C_12);
-          if(dpId==null){
-              dpId = (String) d;
-          }else{
-              if(!dpId.equals(d)){
-                  return null;
-              }
-          }
-        }
-        
-//        if (d != null) {
-//            return (String) d.get(IVIMFields.C_12);
-//        }
-        return dpId;
+        return dpid;
     }
 
 }

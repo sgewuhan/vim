@@ -46,6 +46,8 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
         Object f_0_2C1_coc = cocinfo.get(IVIMFields.F_0_2C1);
 
         ObjectId cocinfoId = (ObjectId) cocinfo.get(ProductCodeInfo.FIELD_SYSID);
+        String dpId = (String) cocinfo.get(IVIMFields.C_12);
+
         String cocinfoName = (String) cocinfo.get(IVIMFields.F_0_2_1) + " "
                 + cocinfo.get(IVIMFields.F_0_2C1) + " " + cocinfo.get(IVIMFields.F_0_2a);
 
@@ -79,7 +81,8 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
         DBObject data = new BasicDBObject().append(
                 "$set",
                 new BasicDBObject().append(IVIMFields.COC_ID, cocinfoId).append(
-                        IVIMFields.COC_NAME, cocinfoName));
+                        IVIMFields.COC_NAME, cocinfoName).append(
+                                IVIMFields.C_12, dpId));
         c.update(query, data, false, true);
 
         iter = prodCodeSelection.iterator();
@@ -87,6 +90,7 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
             DBObject productCodeData = (DBObject) iter.next();
             productCodeData.put(IVIMFields.COC_ID, cocinfoId);
             productCodeData.put(IVIMFields.COC_NAME, cocinfoName);
+            productCodeData.put(IVIMFields.C_12, dpId);
             viewer.update(productCodeData, null);
         }
         UIUtils.showMessage(activeShell, title, info1, SWT.ICON_INFORMATION);
