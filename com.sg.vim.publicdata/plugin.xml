@@ -865,11 +865,6 @@
                   type="String">
             </column>
             <column
-                  column="m_1"
-                  name="英文品牌"
-                  type="String">
-            </column>
-            <column
                   column="c_02"
                   name="整备质量"
                   type="String">
@@ -919,11 +914,6 @@
             <column
                   column="f_c0_2"
                   name="品牌"
-                  type="String">
-            </column>
-            <column
-                  column="m_1"
-                  name="英文品牌"
                   type="String">
             </column>
             <column
@@ -1409,11 +1399,6 @@
                type="String">
          </column>
          <column
-               column="m_1"
-               name="英文品牌"
-               type="String">
-         </column>
-         <column
                column="c_02"
                name="整备质量"
                type="String">
@@ -1781,11 +1766,11 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_8s"
+                           id="f_7_1s"
                            inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
                            label="宽"
                            labelVisible="true"
-                           name="f_8s"
+                           name="f_7_1s"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1794,11 +1779,11 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_7_1s"
+                           id="f_8s"
                            inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
                            label="高"
                            labelVisible="true"
-                           name="f_7_1s"
+                           name="f_8s"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1820,11 +1805,11 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_c7_3s"
+                           id="f_c7_2s"
                            inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
                            label="宽"
                            labelVisible="true"
-                           name="f_c7_3s"
+                           name="f_c7_2s"
                            persistable="true"
                            required="false"
                            type="String">
@@ -1833,11 +1818,11 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="f_c7_2s"
+                           id="f_c7_3s"
                            inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
                            label="高"
                            labelVisible="true"
-                           name="f_c7_2s"
+                           name="f_c7_3s"
                            persistable="true"
                            required="false"
                            type="String">
@@ -2597,18 +2582,6 @@
                         label="品牌"
                         labelVisible="true"
                         name="f_c0_2"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="false"
-                        id="m_1"
-                        label="英文品牌"
-                        labelVisible="true"
-                        name="m_1"
                         persistable="true"
                         required="false"
                         type="String">

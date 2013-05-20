@@ -109,6 +109,11 @@ public class FuelCardPrintModule extends PrintModule {
             setLifecycle(lifecycle);
         }
     }
+
+	@Override
+	public void doPrint(PrintContent pc) {
+        pc.doPrint(this);
+	}
     
     
 

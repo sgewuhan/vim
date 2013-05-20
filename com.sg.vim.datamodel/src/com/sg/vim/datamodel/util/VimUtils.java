@@ -1872,6 +1872,14 @@ public class VimUtils {
 				}
 			}
 		}
+		String vin = (String) dataItem.get(IVIMFields.F_0_6b);
+		DBObject cert = getCertDataByVin(vin, "QX");
+		if (cert != null) {
+			Object fzrq = cert.get(IVIMFields.mVeh_Fzrq);
+			dataItem.put(IVIMFields.CCC_21, fzrq == null ? "" : fzrq.toString());
+
+		}
+		
 		data.put(IVIMFields.PRINTACCOUNT, accountInfo);
 		data.put(IVIMFields.PRINTDATE, date);
 		data.put(IVIMFields.LIFECYCLE, IVIMFields.LC_PRINTED);

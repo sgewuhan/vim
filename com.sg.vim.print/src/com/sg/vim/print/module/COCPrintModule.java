@@ -110,6 +110,11 @@ public class COCPrintModule extends PrintModule {
             setLifecycle(lifecycle);
         }
     }
+
+	@Override
+	public void doPrint(PrintContent pc) {
+        pc.doPrint(this);
+	}
     
     
 

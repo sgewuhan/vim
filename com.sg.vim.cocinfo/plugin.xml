@@ -4078,18 +4078,6 @@
                   </fieldgroup>
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        id="m_1"
-                        label="英文品牌(铭牌用)"
-                        labelVisible="true"
-                        name="m_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
                         editPart="Combo(Read Only)"
                         editable="true"
                         id="f_0_4"
@@ -5019,18 +5007,6 @@
                         label="33.1 驱动轴是否装空气悬挂或等效装置"
                         labelVisible="true"
                         name="f_33_1"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="false"
-                        id="f_c6"
-                        label="C6 钢板弹簧片数"
-                        labelVisible="true"
-                        name="f_c6"
                         persistable="true"
                         required="false"
                         type="String">
