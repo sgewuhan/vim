@@ -4078,6 +4078,18 @@
                   </fieldgroup>
                   <field
                         computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="m_1"
+                        label="英文品牌(铭牌用)"
+                        labelVisible="true"
+                        name="m_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
                         editPart="Combo(Read Only)"
                         editable="true"
                         id="f_0_4"
