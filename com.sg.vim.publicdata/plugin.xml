@@ -30,6 +30,13 @@
                               relationship="stack"
                               relative="com.sg.vim.view.basic">
                         </view>
+                        <view
+                              closeable="false"
+                              id="com.sg.vim.view.nameplate"
+                              minimized="false"
+                              relationship="stack"
+                              relative="com.sg.vim.view.basic">
+                        </view>
                      </perspectiveExtension>
                   </extension>
                   <extension
@@ -38,6 +45,12 @@
                            class="com.sg.ui.part.view.TableNavigator"
                            id="com.sg.vim.view.basic"
                            name="公告车型基本信息"
+                           restorable="true">
+                     </view>
+                     <view
+                           class="com.sg.ui.part.view.TableNavigator"
+                           id="com.sg.vim.view.nameplate"
+                           name="铭牌参数管理"
                            restorable="true">
                      </view>
                   </extension>   <extension
@@ -801,6 +814,115 @@
             </column>
          </searchAction>
       </navigator>
+      <navigator
+            id="com.sg.vim.view.nameplate"
+            provideSelection="true"
+            table="com.sg.vim.table.nameplate">
+         <filterAction>
+            <column
+                  column="f_0_2c1"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="f_c4"
+                  name="发动机型号"
+                  type="String">
+            </column>
+            <column
+                  column="f_24"
+                  name="发动机排量"
+                  type="String">
+            </column>
+            <column
+                  column="f_26"
+                  name="最大净功率"
+                  type="String">
+            </column>
+            <column
+                  column="c_01"
+                  name="额定功率"
+                  type="String">
+            </column>
+            <column
+                  column="c_04"
+                  name="最大允许总质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_42_1"
+                  name="额定载客数"
+                  type="String">
+            </column>
+            <column
+                  column="c_02"
+                  name="驾驶室准乘人数"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_2"
+                  name="品牌"
+                  type="String">
+            </column>
+            <column
+                  column="m_1"
+                  name="英文品牌"
+                  type="String">
+            </column>
+         </filterAction>
+         <searchAction>
+            <column
+                  column="f_0_2c1"
+                  name="车辆型号"
+                  type="String">
+            </column>
+            <column
+                  column="f_c4"
+                  name="发动机型号"
+                  type="String">
+            </column>
+            <column
+                  column="f_24"
+                  name="发动机排量"
+                  type="String">
+            </column>
+            <column
+                  column="f_26"
+                  name="最大净功率"
+                  type="String">
+            </column>
+            <column
+                  column="c_01"
+                  name="额定功率"
+                  type="String">
+            </column>
+            <column
+                  column="c_04"
+                  name="最大允许总质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_42_1"
+                  name="额定载客数"
+                  type="String">
+            </column>
+            <column
+                  column="c_02"
+                  name="驾驶室准乘人数"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_2"
+                  name="品牌"
+                  type="String">
+            </column>
+            <column
+                  column="m_1"
+                  name="英文品牌"
+                  type="String">
+            </column>
+         </searchAction>
+      </navigator>
    </extension>
    <extension
          point="com.sg.ui.table">
@@ -1209,6 +1331,78 @@
                   type="String">
             </column>
          </columnGroup>
+      </table>
+      <table
+            canCreate="false"
+            canDelete="true"
+            canEdit="true"
+            collectionName="cocinfo"
+            customItemHeight="72"
+            dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
+            editorId="com.sg.vim.print.editor.nameplate"
+            fix="2"
+            fullSelection="true"
+            hasBorder="false"
+            headerVisiable="true"
+            id="com.sg.vim.table.nameplate"
+            idfield="_id"
+            inputProvider="com.sg.vim.datamodel.COCInfoInputQX"
+            lineVisiable="true"
+            markupEnabled="false"
+            multiSelection="true"
+            useHashlookup="false"
+            virtual="true">
+         <column
+               column="f_0_2c1"
+               name="车辆型号"
+               type="String">
+         </column>
+         <column
+               column="f_c4"
+               name="发动机型号"
+               type="String">
+         </column>
+         <column
+               column="f_24"
+               name="发动机排量"
+               type="String">
+         </column>
+         <column
+               column="f_26"
+               name="最大净功率"
+               type="String">
+         </column>
+         <column
+               column="c_01"
+               name="额定功率"
+               type="String">
+         </column>
+         <column
+               column="c_04"
+               name="最大允许总质量"
+               type="String">
+         </column>
+         <column
+               column="f_42_1"
+               name="额定载客数"
+               type="String">
+         </column>
+         <column
+               column="c_02"
+               name="驾驶室准乘人数"
+               type="String">
+         </column>
+         <column
+               column="f_c0_2"
+               name="品牌"
+               type="String">
+         </column>
+         <column
+               column="m_1"
+               name="英文品牌"
+               type="String">
+         </column>
       </table>
    </extension>   <extension
          point="com.sg.ui.dataEditor">
@@ -2369,6 +2563,141 @@
             location="after=com.sg.vim.basicpage2"
             targetId="systempage">
       </pageExtendsions>
+      <editor
+            collectionName="cocinfo"
+            dbName="appportal"
+            id="com.sg.vim.print.editor.nameplate"
+            name="铭牌参数">
+         <basicpage
+               id="com.sg.vim.print.basicpage3"
+               title="com.sg.vim.print.basicpage3">
+            <pagecolumn>
+               <section
+                     label="铭牌数据">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_c0_2"
+                        label="品牌"
+                        labelVisible="true"
+                        name="f_c0_2"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="m_1"
+                        label="英文品牌"
+                        labelVisible="true"
+                        name="m_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_0_2c1"
+                        label="车辆型号"
+                        labelVisible="true"
+                        name="f_0_2c1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_c4"
+                        label="发动机型号"
+                        labelVisible="true"
+                        name="f_c4"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_24"
+                        label="发动机排量"
+                        labelVisible="true"
+                        name="f_24"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_26"
+                        label="最大净功率"
+                        labelVisible="true"
+                        name="f_26"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="c_01"
+                        label="额定功率"
+                        labelVisible="true"
+                        name="c_01"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="c_04"
+                        label="最大允许总质量"
+                        labelVisible="true"
+                        name="c_04"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="f_42_1"
+                        label="额定载客数"
+                        labelVisible="true"
+                        name="f_42_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="c_02"
+                        label="驾驶室准乘人数"
+                        labelVisible="true"
+                        name="c_02"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+      </editor>
    </extension>
                   <extension
                         point="org.eclipse.ui.menus">
