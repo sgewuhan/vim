@@ -4479,6 +4479,7 @@
             canCreate="false"
             canDelete="false"
             canEdit="false"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             fullSelection="true"
             hasBorder="true"
             headerVisiable="true"
@@ -4518,6 +4519,7 @@
             canDelete="false"
             collectionName="certificate"
             dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.print.editor.certificate"
             fix="5"
             fullSelection="true"
@@ -4527,6 +4529,7 @@
             inputProvider="com.sg.vim.datamodel.CertificateInput"
             limit="100"
             multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.certificate"
             queryMode="false"
             useHashlookup="false"
             virtual="false">
@@ -4945,6 +4948,7 @@
             canEdit="true"
             collectionName="cocpaper"
             dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.print.editor.cocpaper"
             fix="5"
             fullSelection="true"
@@ -4954,6 +4958,7 @@
             inputProvider="com.sg.vim.datamodel.COCPaperInput"
             limit="100"
             multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.cocpaper"
             queryMode="false"
             useHashlookup="false"
             virtual="false">
@@ -5492,6 +5497,7 @@
             canEdit="true"
             collectionName="fuellabel"
             dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.print.editor.fuellabel"
             fix="2"
             fullSelection="true"
@@ -5501,6 +5507,7 @@
             inputProvider="com.sg.vim.datamodel.FuelLabelInput"
             limit="100"
             multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.fuellabel"
             queryMode="false"
             useHashlookup="false"
             virtual="false">
@@ -5865,6 +5872,144 @@
                   </with>
                </and>
             </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.certificate">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.certificate.sep2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.reprint"
+               icon="image/print_24.png"
+               label="补打"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.upload"
+               icon="image/upload_24.png"
+               label="上传"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.reupload"
+               icon="image/upload2_24.png"
+               label="补传"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.cancel"
+               icon="image/cancel_24.png"
+               label="撤销"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.remove"
+               icon="image/remove_24.png"
+               label="作废"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.edit"
+               icon="image/edit3_24.png"
+               label="修改"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.cocpaper">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.cocpaper.sep2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.remove.coc"
+               icon="image/remove_24.png"
+               label="作废"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.print.coc"
+               icon="image/print_24.png"
+               label="打印"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.fuellabel">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.cocpaper.sep2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.remove.fuellabel"
+               icon="image/remove_24.png"
+               label="作废"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.print.fuellabel"
+               icon="image/print_24.png"
+               label="打印"
+               style="push">
          </command>
       </menuContribution>
    </extension>

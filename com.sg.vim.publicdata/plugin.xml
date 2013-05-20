@@ -944,6 +944,7 @@
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.basic"
             useHashlookup="false"
             virtual="true">
          <column
@@ -1334,12 +1335,11 @@
       </table>
       <table
             canCreate="false"
-            canDelete="true"
-            canEdit="true"
+            canDelete="false"
+            canEdit="false"
             collectionName="cocinfo"
             customItemHeight="72"
             dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
             editorId="com.sg.vim.print.editor.nameplate"
             fix="2"
             fullSelection="true"
@@ -2567,6 +2567,7 @@
             collectionName="cocinfo"
             dbName="appportal"
             id="com.sg.vim.print.editor.nameplate"
+            isDefault="false"
             name="铭牌参数">
          <basicpage
                id="com.sg.vim.print.basicpage3"
@@ -2726,6 +2727,50 @@
                                  </with>
                               </and>
                            </visibleWhen>
+                        </command>
+                     </menuContribution>
+                     <menuContribution
+                           allPopups="true"
+                           locationURI="popup:com.sg.vim.table.cocinfo.mnt">
+                        <command
+                              commandId="com.sg.ui.command.create"
+                              icon="image/create2_24.png"
+                              label="创建"
+                              style="pulldown">
+                        </command>
+                        <command
+                              commandId="com.sg.ui.command.edit"
+                              icon="image/edit_24.png"
+                              label="编辑"
+                              style="push">
+                        </command>
+                        <command
+                              commandId="com.sg.ui.command.refresh"
+                              icon="image/refresh_24.png"
+                              label="更新"
+                              style="push">
+                        </command>
+                        <command
+                              commandId="com.sg.ui.command.export"
+                              icon="image/export_24.png"
+                              label="导出"
+                              style="push">
+                        </command>
+                        <command
+                              commandId="com.sg.ui.command.delete"
+                              icon="image/trash_24.png"
+                              label="删除"
+                              style="push">
+                        </command>
+                        <separator
+                              name="com.sg.vim.table.cocinfo.mnt.sep1"
+                              visible="true">
+                        </separator>
+                        <command
+                              commandId="com.sg.vim.publicdata.transfertococinfo"
+                              icon="image/trasfer_24.png"
+                              label="复制公告数据"
+                              style="push">
                         </command>
                      </menuContribution>
                   </extension>
