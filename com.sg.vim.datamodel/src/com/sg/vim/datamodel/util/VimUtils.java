@@ -196,6 +196,18 @@ public class VimUtils {
 			row.setValue("VIN", vin);
 			return row;
 		}
+		// **********************************************≤‚ ‘ π”√
+		if (debug || vin.equals("LMBC4EAE5DU012961")) {
+
+			SQLRow row = new SQLRow(new String[] { FIELD_PRODUCT_CODE,
+					FIELD_MFT_DATE, FIELD_ENGINEE_NUM, "VIN" });
+			row.setValue(FIELD_ENGINEE_NUM, "BJ413AC09D00042");
+			row.setValue(FIELD_MFT_DATE, "2012-12-21");
+			row.setValue(FIELD_PRODUCT_CODE, "88T151ACBA4-U3A1");
+			row.setValue("VIN", vin);
+			return row;
+		}
+		// **********************************************************
 		if (debug) {
 			Connection conn = DDB.getDefault().getConnection("MES_DB");
 			if (conn == null) {
