@@ -446,10 +446,20 @@ public class VimUtils {
         // 处理4.1
         Object qzj = cocData.get(IVIMFields.F_4_1_1);
         Object hzj = cocData.get(IVIMFields.F_4_1_2);
-        if (Utils.isNullOrEmptyString(qzj) && Utils.isNullOrEmptyString(hzj)) {
+        if (!Utils.isNullOrEmptyString(qzj) && !Utils.isNullOrEmptyString(hzj)) {
             result.put(IVIMFields.F_4_1_1_O, "" + qzj + "/" + hzj);
         }
 
+        //处理座位数
+        Object zws = cocData.get(IVIMFields.F_42_1);
+        if(Utils.isNullOrEmptyString(zws)){
+        	zws = 
+        			cocData.get(IVIMFields.C_02);
+        }
+        
+        result.put(IVIMFields.F_42_1_O, zws);
+        
+        
         // 处理发动机编号
 
         // Veh_FDjh F_21a 发动机号 映射

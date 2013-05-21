@@ -516,12 +516,14 @@ public class PrintContent extends Composite {
             }
 
             VimUtils.printCOC(cocBrowser, cocPrintModule.getInput().getData().getData());
+            
+            // 设置模printed
+            modules[1].setLifecycle(IVIMFields.LC_PRINTED);
+            navigator.update(cocPrintModule, null);
         } catch (Exception e) {
             UIUtils.showMessage(getShell(), "打印", "打印COC发生错误\n" + e.getMessage(), SWT.ICON_ERROR);
         }
-        // 设置模printed
-        modules[2].setLifecycle(IVIMFields.LC_PRINTED);
-        navigator.update(cocPrintModule, null);
+
     }
 
     public void doPrint(CertPrintModule certPrintModule) {
