@@ -1872,11 +1872,11 @@ public class VimUtils {
 				}
 			}
 		}
-		String vin = (String) dataItem.get(IVIMFields.F_0_6b);
+		String vin = (String) data.get(IVIMFields.F_0_6b);
 		DBObject cert = getCertDataByVin(vin, "QX");
 		if (cert != null) {
 			Object fzrq = cert.get(IVIMFields.mVeh_Fzrq);
-			dataItem.put(IVIMFields.CCC_21, fzrq == null ? "" : fzrq.toString());
+			data.put(IVIMFields.CCC_21, fzrq == null ? "" : fzrq.toString());
 
 		}
 		
