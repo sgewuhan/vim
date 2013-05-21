@@ -2629,171 +2629,43 @@
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.cocinfo"
             useHashlookup="false">
-				<column column="f_0_2a" name="车型系列\n代号/名称" type="String"></column>
-    <column
-          column="f_0_2b"
-          name="单元代号/名称"
-          type="String">
-    </column>
-            
-    <column
-          column="f_0_2c"
-          name="车型代号/名称"
-          type="String">
-    </column>
-				
-				<columnGroup defaultGroup="true" name="车辆基本信息">
-				<column column="f_0_1" name="车辆制造企业名称" type="String"></column>
-				<column column="f_c0_1" name="车辆制造国" type="String"></column>
-				<column column="f_c0_2" name="中文品牌" type="String"></column>
-				<column column="f_c0_3" name="英文品牌" type="String"></column>
-				<column column="f_0_4" name="车辆类别" type="String"></column>
-				<column column="f_0_5c" name="基本制造商\n名称" type="String"></column>
-				<column column="f_0_5d" name="基本制造商\n地址" type="String"></column>
-				<column column="f_0_5a" name="最终制造商\n名称" type="String"></column>
-				<column column="f_0_5b" name="最终制造商\n地址" type="String"></column>
-				<column column="f_0_6a" name="法定铭牌位置" type="String"></column>
-				<column column="f_0_6c" name="车辆识别代号\n打刻位置" type="String"></column>
-				<column column="f_c0_7" name="车辆注\n册类型" type="String"></column>
-				<column column="f_21a" name="发动机编号" type="String"></column>
-				<column column="f_21b" name="发动机编号\n打刻位置" type="String"></column>
-				<column column="ccc_04" name="底盘\n型号" type="String"></column>
-				<column column="ccc_05" name="底盘\n类别" type="String"></column>
-				<column column="ccc_06" name="底盘制造商" type="String"></column>
-				<column column="ccc_07" name="底盘CCC\n编号" type="String"></column>
-				<column column="ccc_08" name="底盘CCC\n签发日期" type="String"></column>
-				<column column="ccc_09" name="阶段2\n制造商" type="String"></column>
-				<column column="ccc_10" name="阶段2\nCCC编号" type="String"></column>
-				<column column="ccc_11" name="阶段2\n签发日期" type="String"></column>
-				<column column="ccc_01" name="CCC认证过程中\n车辆制造阶段" type="String"></column>
-				<column column="ccc_02" name="CCC证书编号" type="String"></column>
-				<column column="ccc_03" name="签发日期" type="String"></column>
-				</columnGroup>
-				
-				<columnGroup defaultGroup="false" name="车辆技术参数">
-				<column column="f_1" name="车轴数量" type="String"></column>
-				<column column="f_1_1" name="车轮数量" type="String"></column>
-				<column column="f_2" name=" 驱动轴位置" type="String"></column>
-				<column column="f_3" name="轴距" type="String"></column>
-				<column column="f_4_1" name="支承转盘导程" type="String"></column>
-				<column column="f_5" name="轮距" type="String"></column>
-				<column
-          column="f_6_1"
-          labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
-          name="长宽高"
-          type="String"></column>
-				<column column="f_6_3" name="车辆前端与牵引装置\n中心之间的距离(mm)" type="String"></column>
-				<column column="f_6_5" name="装载区\n长度" type="String"></column>
-				<column column="f_10_1" name="车辆在地面上\n的投影面积" type="String"></column>
-				<column
-          column="f_c1"
-          labelProvider="com.sg.vim.datamodel.labelprovider.OverHangLabelProvider"
-          name="前悬\n后悬"
-          type="String"></column>
-				<column
-          column="f_c2"
-          labelProvider="com.sg.vim.datamodel.labelprovider.ApproachAndDepartureLabelProvider"
-          name="接近角\n离去角"
-          type="String"></column>
-				</columnGroup>
-				
-				<columnGroup defaultGroup="false" name="质量和负荷">
-				<column column="f_12_1" name="行驶状态下带\n车身的车辆质量" type="String"></column>
-				<column column="f_14_1" name="额定总质量" type="String"></column>
-				<column column="f_c5" name="载质量利用系数" type="String"></column>
-				<column column="f_14_2" name="该质量的轴荷分配" type="String"></column>
-				<column column="f_14_3" name="各车轴或车轴组技术\n上允许的最大质量" type="String"></column>
-				<column column="f_15" name="可伸缩轴或\n可装载轴的位置" type="String"></column>
-				<column column="f_16" name="车顶最大允许载荷" type="String"></column>
-				<column column="f_17_1" name="牵引杆式挂车\n最大牵引质量" type="String"></column>
-				<column column="f_17_2" name="半挂车\n最大牵引质量" type="String"></column>
-				<column column="f_17_3" name="中心轴式挂车\n最大牵引质量" type="String"></column>
-				<column column="f_17" name="挂车的\n最大质量(制动下)" type="String"></column>
-				<column column="f_17_4" name="挂车的\n最大质量(非制动下)" type="String"></column>
-				<column column="f_18" name="牵引车与挂车\n最大组合质量" type="String"></column>
-				<column column="f_19_1" name="牵引车与挂车连接点处\n最大垂直负荷" type="String"></column>
-				</columnGroup>
-				
-				
-				<columnGroup defaultGroup="false" name="发动机">
-				<column column="f_20" name="制造商名称" type="String"></column>
-				<column column="f_c4" name="发动机型号" type="String"></column>
-				<column column="f_22" name="工作原理" type="String"></column>
-				<column column="f_22_1" name="直接喷射" type="String"></column>
-				<column column="f_23" name="缸数量" type="String"></column>
-				<column column="f_23a" name="排列形式" type="String"></column>
-				<column column="f_24" name="排量" type="String"></column>
-				<column column="f_25" name="燃料种类" type="String"></column>
-				<column column="f_26" name="最大净功率" type="String"></column>
-				<column column="f_26a" name="对应转速" type="String"></column>
-				</columnGroup>
-				
-				<columnGroup defaultGroup="false" name="离合器，变速器，轮胎，转向和制动">
-				<column column="f_27" name="离合器形式" type="String"></column>
-				<column column="f_28" name="变速器形式" type="String"></column>
-				<column column="f_29" name="速比" type="String"></column>
-				<column column="f_30" name="主传动比" type="String"></column>
-				<column column="f_32" name="轮胎规格" type="String"></column>
-				<column column="f_33_1" name="空气悬挂" type="String"></column>
-				<column column="f_c6" name="钢板弹\n簧片数" type="String"></column>
-				<column column="f_34" name="转向助力\n形式" type="String"></column>
-				<column column="f_35" name="制动装置\n简要说明" type="String"></column>
-				<column column="f_36" name="挂车制动系统\n供气管内压力" type="String"></column>
-				</columnGroup>
-				
-				
-				<columnGroup defaultGroup="false" name="车身">
-				<column column="f_37" name="车身型式" type="String"></column>
-				<column column="f_38" name="车辆颜色" type="String"></column>
-				<column column="f_39" name="罐式车\n罐容量" type="String"></column>
-				<column column="f_40" name="起重机\n最大力矩" type="String"></column>
-				<column column="f_41" name="车门数量" type="String"></column>
-				<column column="f_41a" name="车门结构" type="String"></column>
-				<column
-          column="f_c7_1"
-          labelProvider="com.sg.vim.datamodel.labelprovider.CarriageSizeLabelProvider"
-          name="货厢长宽高"
-          type="String"></column>
-				<column column="f_42_1" name="座位数" type="String"></column>
-				<column column="f_42_1a" name="布置方式" type="String"></column>
-				</columnGroup>
-				
-				
-				<columnGroup defaultGroup="false" name="牵引装置">
-				<column column="f_43_1" name="牵引装置\nCCC编号" type="String"></column>
-				<column column="f_43_1a" name="牵引装置\n试验报告" type="String"></column>
-				</columnGroup>
-				
-				<columnGroup defaultGroup="false" name="其他">
-				<column column="f_44" name="最高车速" type="String"></column>
-				<column column="f_45" name="声级" type="String"></column>
-				<column column="f_46_1" name="烟气排放物" type="String"></column>
-				<column column="f_46_2" name="CO2排放量\n燃油消耗量" type="String"></column>
-				<column column="f_48_1" name="危险货物\n试验报告编号" type="String"></column>
-				<column column="f_48_2" name="运输动物\n试验报告编号" type="String"></column>
-				<column column="f_50" name="备注" type="String"></column>
-				</columnGroup>            
-            
-      </table>
-      <table
-            canCreate="false"
-            canDelete="false"
-            collectionName="cocinfo"
-            customItemHeight="72"
-            dbName="appportal"
-            editorId="com.sg.vim.editor.cocinfo"
-            fix="3"
-            fullSelection="true"
-            hasBorder="false"
-            headerVisiable="true"
-            id="com.sg.vim.table.cocinfo2"
-            idfield="_id"
-            inputProvider="com.sg.vim.datamodel.COCInfoInputDP"
-            lineVisiable="true"
-            markupEnabled="false"
-            multiSelection="true"
-            popupMenu="popup:com.sg.vim.table.cocinfo2"
-            useHashlookup="false">
+         <column
+               column="f_0_2c1"
+               name="车型代号"
+               type="String">
+         </column>
+         <column
+               column="ccc_12"
+               name="车辆一致性\n证书编号"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="c_22"
+               name="车辆类型"
+               type="String">
+         </column>
+         <column
+               column="c_23"
+               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
+               name="车辆状态信息"
+               type="String">
+         </column>
+         <column
+               column="f_c4"
+               name="发动机型号"
+               type="String">
+         </column>
+         <column
+               column="f_32"
+               name="轮胎规格"
+               type="String">
+         </column>
+         <column
+               column="f_42_1"
+               name="座位数"
+               type="String">
+         </column>
          <column
                column="f_0_2a"
                name="车型系列\n代号/名称"
@@ -3088,8 +2960,564 @@
                   type="String">
             </column>
             <column
-                  column="f_c4"
-                  name="发动机型号"
+                  column="f_22"
+                  name="工作原理"
+                  type="String">
+            </column>
+            <column
+                  column="f_22_1"
+                  name="直接喷射"
+                  type="String">
+            </column>
+            <column
+                  column="f_23"
+                  name="缸数量"
+                  type="String">
+            </column>
+            <column
+                  column="f_23a"
+                  name="排列形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_24"
+                  name="排量"
+                  type="String">
+            </column>
+            <column
+                  column="f_25"
+                  name="燃料种类"
+                  type="String">
+            </column>
+            <column
+                  column="f_26"
+                  name="最大净功率"
+                  type="String">
+            </column>
+            <column
+                  column="f_26a"
+                  name="对应转速"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="离合器，变速器，轮胎，转向和制动">
+            <column
+                  column="f_27"
+                  name="离合器形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_28"
+                  name="变速器形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_29"
+                  name="速比"
+                  type="String">
+            </column>
+            <column
+                  column="f_30"
+                  name="主传动比"
+                  type="String">
+            </column>
+            <column
+                  column="f_32"
+                  name="轮胎规格"
+                  type="String">
+            </column>
+            <column
+                  column="f_33_1"
+                  name="空气悬挂"
+                  type="String">
+            </column>
+            <column
+                  column="f_c6"
+                  name="钢板弹\n簧片数"
+                  type="String">
+            </column>
+            <column
+                  column="f_34"
+                  name="转向助力\n形式"
+                  type="String">
+            </column>
+            <column
+                  column="f_35"
+                  name="制动装置\n简要说明"
+                  type="String">
+            </column>
+            <column
+                  column="f_36"
+                  name="挂车制动系统\n供气管内压力"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="车身">
+            <column
+                  column="f_37"
+                  name="车身型式"
+                  type="String">
+            </column>
+            <column
+                  column="f_38"
+                  name="车辆颜色"
+                  type="String">
+            </column>
+            <column
+                  column="f_39"
+                  name="罐式车\n罐容量"
+                  type="String">
+            </column>
+            <column
+                  column="f_40"
+                  name="起重机\n最大力矩"
+                  type="String">
+            </column>
+            <column
+                  column="f_41"
+                  name="车门数量"
+                  type="String">
+            </column>
+            <column
+                  column="f_41a"
+                  name="车门结构"
+                  type="String">
+            </column>
+            <column
+                  column="f_c7_1"
+                  labelProvider="com.sg.vim.datamodel.labelprovider.CarriageSizeLabelProvider"
+                  name="货厢长宽高"
+                  type="String">
+            </column>
+            <column
+                  column="f_42_1"
+                  name="座位数"
+                  type="String">
+            </column>
+            <column
+                  column="f_42_1a"
+                  name="布置方式"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="牵引装置">
+            <column
+                  column="f_43_1"
+                  name="牵引装置\nCCC编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_43_1a"
+                  name="牵引装置\n试验报告"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="其他">
+            <column
+                  column="f_44"
+                  name="最高车速"
+                  type="String">
+            </column>
+            <column
+                  column="f_45"
+                  name="声级"
+                  type="String">
+            </column>
+            <column
+                  column="f_46_1"
+                  name="烟气排放物"
+                  type="String">
+            </column>
+            <column
+                  column="f_46_2"
+                  name="CO2排放量\n燃油消耗量"
+                  type="String">
+            </column>
+            <column
+                  column="f_48_1"
+                  name="危险货物\n试验报告编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_48_2"
+                  name="运输动物\n试验报告编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_50"
+                  name="备注"
+                  type="String">
+            </column>
+         </columnGroup>
+            
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+            
+      </table>
+      <table
+            canCreate="false"
+            canDelete="false"
+            collectionName="cocinfo"
+            customItemHeight="72"
+            dbName="appportal"
+            editorId="com.sg.vim.editor.cocinfo"
+            fix="3"
+            fullSelection="true"
+            hasBorder="false"
+            headerVisiable="true"
+            id="com.sg.vim.table.cocinfo2"
+            idfield="_id"
+            inputProvider="com.sg.vim.datamodel.COCInfoInputDP"
+            lineVisiable="true"
+            markupEnabled="false"
+            multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.cocinfo2"
+            useHashlookup="false">
+         <column
+               column="f_0_2c1"
+               name="车型代号"
+               type="String">
+         </column>
+         <column
+               column="ccc_12"
+               name="车辆一致性\n证书编号"
+               type="String"
+               width="80">
+         </column>
+         <column
+               column="c_22"
+               name="车辆类型"
+               type="String">
+         </column>
+         <column
+               column="c_23"
+               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
+               name="车辆状态信息"
+               type="String">
+         </column>
+         <column
+               column="f_c4"
+               name="发动机型号"
+               type="String">
+         </column>
+         <column
+               column="f_32"
+               name="轮胎规格"
+               type="String">
+         </column>
+         <column
+               column="f_42_1"
+               name="座位数"
+               type="String">
+         </column>
+         <column
+               column="f_0_2a"
+               name="车型系列\n代号/名称"
+               type="String">
+         </column>
+         <column
+               column="f_0_2b"
+               name="单元代号/名称"
+               type="String">
+         </column>
+         <column
+               column="f_0_2c"
+               name="车型代号/名称"
+               type="String">
+         </column>
+         <columnGroup
+               defaultGroup="true"
+               name="车辆基本信息">
+            <column
+                  column="f_0_1"
+                  name="车辆制造企业名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_1"
+                  name="车辆制造国"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_2"
+                  name="中文品牌"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_3"
+                  name="英文品牌"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_4"
+                  name="车辆类别"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_5c"
+                  name="基本制造商\n名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_5d"
+                  name="基本制造商\n地址"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_5a"
+                  name="最终制造商\n名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_5b"
+                  name="最终制造商\n地址"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_6a"
+                  name="法定铭牌位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_0_6c"
+                  name="车辆识别代号\n打刻位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_7"
+                  name="车辆注\n册类型"
+                  type="String">
+            </column>
+            <column
+                  column="f_21a"
+                  name="发动机编号"
+                  type="String">
+            </column>
+            <column
+                  column="f_21b"
+                  name="发动机编号\n打刻位置"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_04"
+                  name="底盘\n型号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_05"
+                  name="底盘\n类别"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_06"
+                  name="底盘制造商"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_07"
+                  name="底盘CCC\n编号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_08"
+                  name="底盘CCC\n签发日期"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_09"
+                  name="阶段2\n制造商"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_10"
+                  name="阶段2\nCCC编号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_11"
+                  name="阶段2\n签发日期"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_01"
+                  name="CCC认证过程中\n车辆制造阶段"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_02"
+                  name="CCC证书编号"
+                  type="String">
+            </column>
+            <column
+                  column="ccc_03"
+                  name="签发日期"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="车辆技术参数">
+            <column
+                  column="f_1"
+                  name="车轴数量"
+                  type="String">
+            </column>
+            <column
+                  column="f_1_1"
+                  name="车轮数量"
+                  type="String">
+            </column>
+            <column
+                  column="f_2"
+                  name=" 驱动轴位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_3"
+                  name="轴距"
+                  type="String">
+            </column>
+            <column
+                  column="f_4_1"
+                  name="支承转盘导程"
+                  type="String">
+            </column>
+            <column
+                  column="f_5"
+                  name="轮距"
+                  type="String">
+            </column>
+            <column
+                  column="f_6_1"
+                  labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+                  name="长宽高"
+                  type="String">
+            </column>
+            <column
+                  column="f_6_3"
+                  name="车辆前端与牵引装置\n中心之间的距离(mm)"
+                  type="String">
+            </column>
+            <column
+                  column="f_6_5"
+                  name="装载区\n长度"
+                  type="String">
+            </column>
+            <column
+                  column="f_10_1"
+                  name="车辆在地面上\n的投影面积"
+                  type="String">
+            </column>
+            <column
+                  column="f_c1"
+                  labelProvider="com.sg.vim.datamodel.labelprovider.OverHangLabelProvider"
+                  name="前悬\n后悬"
+                  type="String">
+            </column>
+            <column
+                  column="f_c2"
+                  labelProvider="com.sg.vim.datamodel.labelprovider.ApproachAndDepartureLabelProvider"
+                  name="接近角\n离去角"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="质量和负荷">
+            <column
+                  column="f_12_1"
+                  name="行驶状态下带\n车身的车辆质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_14_1"
+                  name="额定总质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_c5"
+                  name="载质量利用系数"
+                  type="String">
+            </column>
+            <column
+                  column="f_14_2"
+                  name="该质量的轴荷分配"
+                  type="String">
+            </column>
+            <column
+                  column="f_14_3"
+                  name="各车轴或车轴组技术\n上允许的最大质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_15"
+                  name="可伸缩轴或\n可装载轴的位置"
+                  type="String">
+            </column>
+            <column
+                  column="f_16"
+                  name="车顶最大允许载荷"
+                  type="String">
+            </column>
+            <column
+                  column="f_17_1"
+                  name="牵引杆式挂车\n最大牵引质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_17_2"
+                  name="半挂车\n最大牵引质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_17_3"
+                  name="中心轴式挂车\n最大牵引质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_17"
+                  name="挂车的\n最大质量(制动下)"
+                  type="String">
+            </column>
+            <column
+                  column="f_17_4"
+                  name="挂车的\n最大质量(非制动下)"
+                  type="String">
+            </column>
+            <column
+                  column="f_18"
+                  name="牵引车与挂车\n最大组合质量"
+                  type="String">
+            </column>
+            <column
+                  column="f_19_1"
+                  name="牵引车与挂车连接点处\n最大垂直负荷"
+                  type="String">
+            </column>
+         </columnGroup>
+         <columnGroup
+               defaultGroup="false"
+               name="发动机">
+            <column
+                  column="f_20"
+                  name="制造商名称"
                   type="String">
             </column>
             <column
