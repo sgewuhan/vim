@@ -2626,7 +2626,9 @@
             inputProvider="com.sg.vim.datamodel.COCInfoInputQX"
             lineVisiable="true"
             markupEnabled="false"
-            multiSelection="true">
+            multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.cocinfo"
+            useHashlookup="false">
 				<column column="f_0_2a" name="车型系列\n代号/名称" type="String"></column>
     <column
           column="f_0_2b"
@@ -2789,7 +2791,9 @@
             inputProvider="com.sg.vim.datamodel.COCInfoInputDP"
             lineVisiable="true"
             markupEnabled="false"
-            multiSelection="true">
+            multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.cocinfo2"
+            useHashlookup="false">
          <column
                column="f_0_2a"
                name="车型系列\n代号/名称"
@@ -3304,10 +3308,10 @@
             limit="100"
             markupEnabled="true"
             multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.productcode"
             queryMode="false"
             selectionListener="com.sg.vim.cocinfo.table.ProductCodeTableSelectionListener"
-            useHashlookup="false"
-            virtual="false">
+            useHashlookup="false">
          <column
                column="e_01"
                labelProvider="com.sg.vim.cocinfo.labelprovider.ProductCodeLabelProvider"
@@ -3322,9 +3326,12 @@
             collectionName="configcodeinfo"
             dbName="appportal"
             editorId="com.sg.vim.editor.configcode"
+            fullSelection="true"
             id="com.sg.vim.table.configcode"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput">
+            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput"
+            popupMenu="popup:com.sg.vim.table.configcode"
+            useHashlookup="false">
          <column
                column="f_0_2c1"
                name="公告车型"
@@ -3373,7 +3380,9 @@
             inputProvider="com.sg.vim.datamodel.COCInfoInput"
             lineVisiable="true"
             markupEnabled="false"
-            multiSelection="true">
+            multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.cocinfo.mnt"
+            useHashlookup="false">
          <column
                column="f_0_2c1"
                name="车型代号"
@@ -3912,7 +3921,9 @@
             editorId="com.sg.vim.editor.configcode"
             id="com.sg.vim.table.configcode.mnt"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput">
+            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput"
+            popupMenu="popup:com.sg.ui.ctableviewer"
+            useHashlookup="false">
          <column
                column="f_0_2c1"
                name="公告车型"
@@ -3952,7 +3963,6 @@
             dbName="appportal"
             id="com.sg.vim.editor.cocinfo"
             name="车辆一致性信息"
-            saveHandler="com.sg.vim.datamodel.savehandler.COCSave"
             titleToolTips="车辆一致性信息">
          <basicpage
                description="第一部分 车辆总体信息"
@@ -5674,6 +5684,254 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.basic">
+         <command
+               commandId="com.sg.ui.command.create"
+               icon="image/create2_24.png"
+               label="创建"
+               style="pulldown">
+         </command>
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.delete"
+               icon="image/trash_24.png"
+               label="删除"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.cocinfo.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.command.copycreate.cocinfo"
+               icon="image/trasfer_24.png"
+               label="创建一致性信息"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.command.copycreate.configcode"
+               icon="image/trasfer_24.png"
+               label="创建配置序列号"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.productcode">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.delete"
+               icon="image/trash_24.png"
+               label="删除"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.productcode.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.command.importproductdata"
+               icon="image/import_24.png"
+               label="导入成品数据"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.productcode.separator2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.command.productcode.openbasic"
+               icon="image/gdoc_24.png"
+               label="查看公告车型"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.command.productcode.opencoc1"
+               icon="image/link1_24.png"
+               label="查看整车一致性信息"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.command.productcode.opencoc2"
+               icon="image/link1_24.png"
+               label="查看底盘一致性信息"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.command.productcode.openconfcode"
+               icon="image/link2_24.png"
+               label="查看配置序号"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.cocinfo">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.cocinfo.sep1"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.cocinfo.transfertoproductcode"
+               icon="image/link1_24.png"
+               label="指定整车数据"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.cocinfo2">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.cocinfo.sep2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.cocinfo.transfertoproductcode2"
+               icon="image/link1_24.png"
+               label="指定底盘数据"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.configcode">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activePart">
+                  <instanceof
+                        value="com.sg.ui.part.IEditablePart">
+                  </instanceof>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activePart">
+                  <instanceof
+                        value="com.sg.ui.part.IRefreshable">
+                  </instanceof>
+               </with>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activePart">
+                  <instanceof
+                        value="com.sg.ui.part.IExportablePart">
+                  </instanceof>
+               </with>
+            </visibleWhen>
+         </command>
+         <separator
+               name="com.sg.vim.table.configcode.sep2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.configcode.transfertoproductcode"
+               icon="image/link2_24.png"
+               label="指定配置数据"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeWorkbenchWindow.activePerspective">
+                  <equals
+                        value="com.sg.vim.perspective.cocinfo">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -5700,6 +5958,22 @@
       <command
             id="com.sg.vim.command.importproductdata"
             name="导入成品数据">
+      </command>
+      <command
+            id="com.sg.vim.command.productcode.openconfcode"
+            name="查看配置序号">
+      </command>
+      <command
+            id="com.sg.vim.command.productcode.opencoc2"
+            name="查看底盘一致性信息">
+      </command>
+      <command
+            id="com.sg.vim.command.productcode.opencoc1"
+            name="查看整车一致性信息">
+      </command>
+      <command
+            id="com.sg.vim.command.productcode.openbasic"
+            name="查看公告车型">
       </command>
    </extension>
    <extension
@@ -5816,6 +6090,134 @@
             class="com.sg.vim.cocinfo.handler.ImportProductData"
             commandId="com.sg.vim.command.importproductdata">
       </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.OpenConfCode"
+            commandId="com.sg.vim.command.productcode.openconfcode">
+         <activeWhen>
+            <and>
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.productcode">
+                  </equals>
+               </with>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+            </and>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false">
+                  <test
+                        args="conf"
+                        property="com.sg.vim.test.productcode.open">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.OpenCOC2"
+            commandId="com.sg.vim.command.productcode.opencoc2">
+         <activeWhen>
+            <and>
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.productcode">
+                  </equals>
+               </with>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+            </and>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false">
+                  <test
+                        args="coc2"
+                        property="com.sg.vim.test.productcode.open">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.OpenCOC1"
+            commandId="com.sg.vim.command.productcode.opencoc1">
+         <activeWhen>
+            <and>
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.productcode">
+                  </equals>
+               </with>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+            </and>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false">
+                  <test
+                        args="coc1"
+                        property="com.sg.vim.test.productcode.open">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.OpenBasic"
+            commandId="com.sg.vim.command.productcode.openbasic">
+         <activeWhen>
+            <and>
+               <with
+                     variable="activePartId">
+                  <equals
+                        value="com.sg.vim.productcode">
+                  </equals>
+               </with>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+            </and>
+         </activeWhen>
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false">
+                  <test
+                        args="basic"
+                        property="com.sg.vim.test.productcode.open">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
    </extension>
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
@@ -5824,6 +6226,13 @@
             id="com.sg.vim.test.activePart"
             namespace="com.sg.vim.test"
             properties="activePart"
+            type="java.lang.Object">
+      </propertyTester>
+      <propertyTester
+            class="com.sg.vim.cocinfo.test.ProductOpenTester"
+            id="com.sg.vim.test.productcode.open"
+            namespace="com.sg.vim.test.productcode"
+            properties="open"
             type="java.lang.Object">
       </propertyTester>
    </extension>
