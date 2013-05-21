@@ -5212,19 +5212,19 @@
                            type="String">
                      </field>
                   </fieldgroup>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_42_1a"
+                        label="布置方式"
+                        labelVisible="true"
+                        name="f_42_1a"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                </section>
-               <field
-                     computeField="false"
-                     editPart="Text(Single Line)"
-                     editable="true"
-                     id="f_42_1a"
-                     label="布置方式"
-                     labelVisible="true"
-                     name="f_42_1a"
-                     persistable="true"
-                     required="false"
-                     type="String">
-               </field>
                <section
                      label="牵引装置">
                   <field
