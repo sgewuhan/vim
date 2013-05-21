@@ -238,7 +238,7 @@ public class VimUtils {
             String mftDate = row.getText(FIELD_MFT_DATE);
             try {
                 Date date = new SimpleDateFormat(Utils.SDF_DATE).parse(mftDate);
-                long intv = (System.currentTimeMillis() - date.getTime()) / 24 * 60 * 24 * 1000;
+                long intv = (new Date().getTime() - date.getTime()) / (24 * 60 * 60 * 1000);
                 if (intv > 30 || intv < 0) {
                     throw new Exception("MES数据库中VIN对应的成品记录,制造日期不得早于当前日期30天,且不能晚于当前日期。\nVIN:" + vin);
                 }
