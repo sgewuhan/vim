@@ -276,6 +276,7 @@ public class IVIMFields {
     public static final String F_42_1 = "f_42_1";
     /** 42.1 座位数(包括驾驶员座) **/
     public static final String F_42_1_ = "f_42_1_";
+    /** 42.1 座位数(包括驾驶员座) GONGGAO YONG**/
 	public static final String F_42_1b = "f_42_1b";
     /** 布置方式 **/
     public static final String F_42_1a = "f_42_1a";

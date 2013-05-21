@@ -22,8 +22,8 @@ public class F421_Option implements IFieldOptionProvider {
 			Object value) {
 		Object srcValue1 = ((DataObject) data).getValue(IVIMFields.F_42_1b);
 		List<Enumerate> children1 = getChildren(srcValue1);
-		Object srcValue2 = ((DataObject) data).getValue(IVIMFields.C_02);
-		children1.addAll(getChildren(srcValue2));
+//		Object srcValue2 = ((DataObject) data).getValue(IVIMFields.C_02);
+//		children1.addAll(getChildren(srcValue2));
 		Enumerate root = new Enumerate("root", "", "", children1.toArray(new Enumerate[]{}));
 		return root;
 	}

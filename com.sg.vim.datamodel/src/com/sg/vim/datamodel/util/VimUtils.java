@@ -632,7 +632,6 @@ public class VimUtils {
         // Veh_EDzk F_42_1 额定载客 映射
         if (!isDP) {
             // 如果是M1类，取额定载客
-            // 如果是N1类，取驾驶室准乘人数
             if ("M1".equals(cllb)) {
                 Object f_42_1 = cocData.get(IVIMFields.F_42_1);
                 if (!debug && Utils.isNullOrEmptyString(f_42_1)) {

@@ -1399,7 +1399,7 @@
                type="String">
          </column>
          <column
-               column="c_02"
+               column="c_08"
                name="整备质量"
                type="String">
          </column>
@@ -1847,7 +1847,7 @@
                            computeField="false"
                            editPart="Text(Single Line)"
                            editable="true"
-                           id="c_02"
+                           id="c_02s"
                            label="驾驶室准乘人数(人)"
                            labelVisible="true"
                            name="c_02"
