@@ -5200,7 +5200,7 @@
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
+                           editPart="Combo(Read Only)"
                            editable="true"
                            id="c_02"
                            label="驾驶室准乘人数(人)"
