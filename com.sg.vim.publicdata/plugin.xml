@@ -1410,35 +1410,6 @@
                type="String">
          </column>
       </table>
-      <table
-            canCreate="false"
-            canDelete="true"
-            canEdit="true"
-            collectionName="productcodeinfo"
-            customItemHeight="72"
-            dbName="appportal"
-            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
-            editorId="com.sg.vim.editor.productcode"
-            fullSelection="true"
-            headerVisiable="false"
-            id="com.sg.vim.table.productcode"
-            idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ProductCodeInfoInput"
-            limit="100"
-            markupEnabled="true"
-            multiSelection="true"
-            popupMenu="popup:com.sg.vim.table.productcode"
-            queryMode="false"
-            selectionListener="com.sg.vim.cocinfo.table.ProductCodeTableSelectionListener"
-            useHashlookup="false">
-         <column
-               column="e_01"
-               labelProvider="com.sg.vim.cocinfo.labelprovider.ProductCodeLabelProvider"
-               name="成品码"
-               type="String"
-               width="-1">
-         </column>
-      </table>
    </extension>   <extension
          point="com.sg.ui.dataEditor">
       <editor
