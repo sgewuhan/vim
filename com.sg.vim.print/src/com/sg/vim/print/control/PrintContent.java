@@ -84,6 +84,7 @@ public class PrintContent extends Composite {
     private Form form;
     private CertPrintModuleSeqEditingSupport editingSupport;
     private Browser cocBrowser;
+    private Browser fuelBrowser;
 
     public PrintContent(ManagedForm mform, Form form, int style) {
         super(form.getBody(), style);
@@ -133,7 +134,18 @@ public class PrintContent extends Composite {
         fd.left = new FormAttachment();
         fd.width = 1;
         fd.height = 1;
+        
+        fuelBrowser = createFuelBrowser(this);
+        fd = new FormData();
+        fuelBrowser.setLayoutData(fd);
+        fd.top = new FormAttachment(banner);
+        fd.left = new FormAttachment();
+        fd.width = 1;
+        fd.height = 1;
+    }
 
+    private Browser createFuelBrowser(PrintContent printContent) {
+        return new Browser(this, SWT.NONE);
     }
 
     private Browser createCOCBrowser(PrintContent printContent) {
@@ -587,7 +599,7 @@ public class PrintContent extends Composite {
                 throw new Exception("VIN对应的合格证已经失效，无法打印燃油标识");
             }
 
-            VimUtils.printFuelLabel(cocBrowser, fuelCardPrintModule.getData());
+            VimUtils.printFuelLabel(fuelBrowser, fuelCardPrintModule.getData());
             // 设置模printed
             modules[2].setLifecycle(IVIMFields.LC_PRINTED);
             navigator.update(fuelCardPrintModule, null);
