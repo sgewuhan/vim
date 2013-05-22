@@ -1,5 +1,7 @@
 package com.sg.sqldb.utility;
 
+import java.util.HashMap;
+
 import org.eclipse.core.runtime.Assert;
 
 public class SQLRow {
@@ -93,6 +95,15 @@ public class SQLRow {
 	public Object getCode() {
 		return code;
 	}
+
+    public HashMap<String, Object> toMap() {
+        HashMap<String, Object> item = new HashMap<String,Object> ();
+        for (int i = 0; i < columns.length; i++) {
+            item.put(columns[i], data[i]);
+        }
+        
+        return item;
+    }
 
 
 //	@Override

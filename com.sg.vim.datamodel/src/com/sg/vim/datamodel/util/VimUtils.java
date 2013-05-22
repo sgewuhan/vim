@@ -62,7 +62,7 @@ public class VimUtils {
 
     public static String LOCAL_SERVER;
 
-    private static final String MES_DB = "mes";
+    public static final String MES_DB = "mes";
 
     private static final String SQL_GET_PRODUCINFOR = "select erp_product_code,safety_components_vin,manufacture_date "
             + "from bqyx_mes.mes_mp_erp_code_lot_view "

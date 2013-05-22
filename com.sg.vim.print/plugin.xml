@@ -5773,6 +5773,29 @@
                </and>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.sg.vim.print.handler.syncmescert"
+               icon="image/import_24.png"
+               label="MES导入"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.certificate">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -6039,6 +6062,10 @@
             id="com.sg.vim.print.edit"
             name="修改">
       </command>
+      <command
+            id="com.sg.vim.print.handler.syncmescert"
+            name="同步MES合格证数据">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -6179,6 +6206,10 @@
                </with>
             </and>
          </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.SyncMESCert"
+            commandId="com.sg.vim.print.handler.syncmescert">
       </handler>
    </extension>
    <extension

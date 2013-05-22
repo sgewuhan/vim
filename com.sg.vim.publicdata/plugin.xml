@@ -2711,6 +2711,7 @@
                      <menuContribution
                            allPopups="false"
                            locationURI="toolbar:main?after=com.sg.ui.separator3">
+               
                         <command
                               commandId="com.sg.vim.publicdata.transfertococinfo"
                               icon="image/trasfer_24.png"
@@ -2734,6 +2735,7 @@
                               </and>
                            </visibleWhen>
                         </command>
+             
                      </menuContribution>
                      <menuContribution
                            allPopups="true"
