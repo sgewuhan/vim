@@ -1416,6 +1416,7 @@
             collectionName="basicinfo"
             dbName="appportal"
             id="com.sg.vim.editor.basicinfo"
+            image="image/car_32.png"
             labelFieldName="d_23"
             name="公告车型信息"
             recreateable="true"
@@ -2768,6 +2769,12 @@
                               commandId="com.sg.ui.command.delete"
                               icon="image/trash_24.png"
                               label="删除"
+                              style="push">
+                        </command>
+                        <command
+                              commandId="com.sg.ui.command.addtocompare"
+                              icon="image/compare_24.png"
+                              label="加入对比"
                               style="push">
                         </command>
                         <separator

@@ -4390,6 +4390,7 @@
             collectionName="cocinfo"
             dbName="appportal"
             id="com.sg.vim.editor.cocinfo"
+            image="image/contact_32.png"
             name="车辆一致性信息"
             titleToolTips="车辆一致性信息">
          <basicpage
@@ -5834,6 +5835,7 @@
             collectionName="configcodeinfo"
             dbName="appportal"
             id="com.sg.vim.editor.configcode"
+            labelFieldName="f_0_2c1"
             name="配置序列号">
          <basicpage
                description="配置基本信息"
@@ -6158,6 +6160,12 @@
                label="删除"
                style="push">
          </command>
+         <command
+               commandId="com.sg.ui.command.addtocompare"
+               icon="image/compare_24.png"
+               label="加入对比"
+               style="push">
+         </command>
          <separator
                name="com.sg.vim.cocinfo.separator1"
                visible="true">
@@ -6200,6 +6208,12 @@
                commandId="com.sg.ui.command.delete"
                icon="image/trash_24.png"
                label="删除"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.addtocompare"
+               icon="image/compare_24.png"
+               label="加入对比"
                style="push">
          </command>
          <separator
