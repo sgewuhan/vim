@@ -5074,7 +5074,7 @@
                   <field
                         computeField="false"
                         editPart="Text(Single Line)"
-                        editable="false"
+                        editable="true"
                         id="f_c5"
                         label="C5 载质量利用系数(kg)"
                         labelVisible="true"
