@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.mobnut.commons;bundle-version="1.0.0",
  com.sg.sqldb;bundle-version="1.0.0",
  org.apache.log4j;bundle-version="1.2.13",
- com.sg.vim.datamodel
+ com.sg.vim.datamodel,
+ org.eclipse.equinox.http.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.servlet;version="2.6.0",
