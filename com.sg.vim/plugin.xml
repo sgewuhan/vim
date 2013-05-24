@@ -111,7 +111,7 @@
    <extension
          point="org.eclipse.equinox.http.registry.servlets">
       <servlet
-            alias="/product"
+            alias="/vim/product/info"
             class="com.sg.vim.restful.ProductInformationService">
       </servlet>
    </extension>
