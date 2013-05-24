@@ -108,6 +108,13 @@
             name="用户使用场景设置">
       </editor>
    </extension>
+   <extension
+         point="org.eclipse.equinox.http.registry.servlets">
+      <servlet
+            alias="/product"
+            class="com.sg.vim.restful.ProductInformationService">
+      </servlet>
+   </extension>
    <!--extension
          point="com.sg.ui.dataEditor">
       <basicpage

@@ -5918,6 +5918,12 @@
                label="导出"
                style="push">
          </command>
+         <command
+               commandId="com.sg.ui.command.addtocompare"
+               icon="image/compare_24.png"
+               label="加入对比"
+               style="push">
+         </command>
          <separator
                name="com.sg.vim.table.certificate.sep2"
                visible="true">
@@ -5980,6 +5986,12 @@
                label="导出"
                style="push">
          </command>
+         <command
+               commandId="com.sg.ui.command.addtocompare"
+               icon="image/compare_24.png"
+               label="加入对比"
+               style="push">
+         </command>
          <separator
                name="com.sg.vim.table.cocpaper.sep2"
                visible="true">
@@ -6016,6 +6028,12 @@
                commandId="com.sg.ui.command.export"
                icon="image/export_24.png"
                label="导出"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.addtocompare"
+               icon="image/compare_24.png"
+               label="加入对比"
                style="push">
          </command>
          <separator
