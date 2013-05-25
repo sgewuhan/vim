@@ -23,6 +23,7 @@ import com.sg.ui.part.view.TableNavigator;
 import com.sg.ui.viewer.table.CTableViewer;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.ProductCodeInfo;
+import com.sg.vim.datamodel.util.VimUtils;
 
 public class BindingCOCInfoToProductcode extends AbstractHandler {
 
@@ -72,7 +73,13 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
                 UIUtils.showMessage(activeShell, title, info4, SWT.ICON_ERROR);
                 return null;
             }
-            idList.add(productCodeData.get(ProductCodeInfo.FIELD_SYSID));
+            //Í¬²½MES
+            try {
+                VimUtils.mntMesProductInfo(productCodeData);
+                idList.add(productCodeData.get(ProductCodeInfo.FIELD_SYSID));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         DBCollection c = DBActivator.getCollection("appportal", "productcodeinfo");

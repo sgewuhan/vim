@@ -10,19 +10,23 @@ import com.sg.sqldb.DDB;
 
 public class SQLUtil {
 
-    public static int SQL_COUNT(String dataSource, String sql) {
+    public static int SQL_COUNT(String dataSource, String sql) throws Exception {
         String uSql = sql.toUpperCase();
         int fieldStart = uSql.indexOf("SELECT") + 6;
         int fieldEnd = uSql.indexOf("FROM", fieldStart);
         String cSql = sql.substring(0, fieldStart) + " COUNT(*) AS Q$CNT "
                 + sql.substring(fieldEnd);
         SQLResult result;
-        try {
-            result = SQL_QUERY(dataSource, cSql);
-            return ((BigDecimal) result.getData().get(0).getValue(0)).intValue();
-        } catch (Exception e) {
-            return -1;
-        }
+        result = SQL_QUERY(dataSource, cSql);
+         Object count = result.getData().get(0).getValue(0);
+         if(count instanceof BigDecimal){
+             return ((BigDecimal) count).intValue();
+         }else if(count instanceof Long){
+             return ((Long) count).intValue();
+         }else if (count instanceof Number){
+             return ((Number) count).intValue();
+         }
+         return -1;
     }
 
     /**

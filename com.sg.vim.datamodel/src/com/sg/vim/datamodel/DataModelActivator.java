@@ -3,6 +3,8 @@ package com.sg.vim.datamodel;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+import com.sg.vim.datamodel.flservice.FuelDataSysSTD;
+import com.sg.vim.datamodel.flservice.FuelDataSysSTDSoap;
 import com.sg.vim.datamodel.vidcservice.CertificateRequestService;
 import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
 
@@ -36,6 +38,11 @@ public class DataModelActivator implements BundleActivator {
     public static CertificateRequestServiceSoap getVIDCService() {
         CertificateRequestServiceSoap service = new CertificateRequestService()
                 .getCertificateRequestServiceSoap();
+        return service;
+    }
+    
+    public static FuelDataSysSTDSoap getFUELDATAService() {
+        FuelDataSysSTDSoap service = new FuelDataSysSTD().getFuelDataSysSTDSoap();
         return service;
     }
 

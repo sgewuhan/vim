@@ -34,7 +34,7 @@ public class CertPropertyTester extends PropertyTester {
                 return canReprint((DBObject) receiver);
 
             } else if (ACT_UPLOAD.equals(args[0])) {
-                return canUpload((DBObject) receiver);
+                return canUpload((DBObject) receiver,expectedValue);
 
             } else if (ACT_REUPLOAD.equals(args[0])) {
                 return canReUpload((DBObject) receiver);
@@ -105,13 +105,16 @@ public class CertPropertyTester extends PropertyTester {
         return false;
     }
 
-    private boolean canUpload(DBObject data) {
-
-        if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
-            Object pdate = data.get(IVIMFields.PRINTDATE);
-            if (pdate instanceof Date) {
-                long i = new Date().getTime() - ((Date) pdate).getTime();
-                return i <= 2 * 24 * 60 * 60 * 1000;
+    private boolean canUpload(DBObject data, Object expectedValue) {
+        if("fuellabel".equals(expectedValue)){
+            return IVIMFields.LC_PRINTED.equals(getLifecycle(data));
+        }else{
+            if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
+                Object pdate = data.get(IVIMFields.PRINTDATE);
+                if (pdate instanceof Date) {
+                    long i = new Date().getTime() - ((Date) pdate).getTime();
+                    return i <= 2 * 24 * 60 * 60 * 1000;
+                }
             }
         }
 

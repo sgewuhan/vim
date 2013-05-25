@@ -5896,6 +5896,29 @@
                </and>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.sg.vim.print.upload.fuellabel"
+               icon="image/upload_24.png"
+               label="上传"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.fuellabel">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="true"
@@ -6052,6 +6075,12 @@
                label="打印"
                style="push">
          </command>
+         <command
+               commandId="com.sg.vim.print.upload.fuellabel"
+               icon="image/upload_24.png"
+               label="上传"
+               style="push">
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -6105,6 +6134,10 @@
       <command
             id="com.sg.vim.print.print.fuellabel"
             name="打印">
+      </command>
+      <command
+            id="com.sg.vim.print.upload.fuellabel"
+            name="上传">
       </command>
    </extension>
    <extension
@@ -6302,6 +6335,24 @@
                         args="remove"
                         property="com.sg.vim.print.test.cando"
                         value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.UploadFuelLabel"
+            commandId="com.sg.vim.print.upload.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="upload"
+                        property="com.sg.vim.print.test.cando"
+                        value="fuellabel">
                   </test>
                </iterate>
             </with>

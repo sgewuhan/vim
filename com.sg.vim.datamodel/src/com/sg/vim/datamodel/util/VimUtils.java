@@ -41,6 +41,10 @@ import com.sg.vim.datamodel.BasicInfo;
 import com.sg.vim.datamodel.COCInfo;
 import com.sg.vim.datamodel.DataModelActivator;
 import com.sg.vim.datamodel.IVIMFields;
+import com.sg.vim.datamodel.flservice.ArrayOfRllxParamEntity;
+import com.sg.vim.datamodel.flservice.ArrayOfVehicleBasicInfo;
+import com.sg.vim.datamodel.flservice.FuelDataSysSTDSoap;
+import com.sg.vim.datamodel.flservice.VehicleBasicInfo;
 import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
 import com.sg.vim.datamodel.vidcservice.ArrayOfString;
 import com.sg.vim.datamodel.vidcservice.CertificateInfo;
@@ -63,6 +67,8 @@ public class VimUtils {
     public static String LOCAL_SERVER;
 
     public static final String MES_DB = "mes";
+
+    private static final String MES_DB2 = "mes2";
 
     private static final String SQL_GET_PRODUCINFOR = "select erp_product_code,safety_components_vin,manufacture_date "
             + "from bqyx_mes.mes_mp_erp_code_lot_view "
@@ -117,6 +123,12 @@ public class VimUtils {
             IVIMFields.mVeh_Zzbh, IVIMFields.mVeh_Cddbj };
 
     public static String LOCAL_CERT_ARRESS = null;
+
+    public static String FUELLABEL_USERNAME;
+
+    public static String FUELLABEL_PASSWORD;
+
+    public static String FUELLABEL_OKEY;
 
     public static void setValues(Browser browser, DBObject dbo) {
         StringBuilder sb = new StringBuilder();
@@ -376,32 +388,33 @@ public class VimUtils {
             DBObject productCodeData, SQLRow mesRawData, String vin) {
         BasicDBObject result = new BasicDBObject();
 
-        // f_0_2c1
+        // f_0_2c1 公告型号
         result.put(IVIMFields.F_0_2C1, cocData.get(IVIMFields.F_0_2C1));
-        // f_c4
+        // f_c4 发动机型号
         result.put(IVIMFields.F_C4, cocData.get(IVIMFields.F_C4));
-        // f_25
+        // f_25 燃料种类
         result.put(IVIMFields.F_25, cocData.get(IVIMFields.F_25));
-        // f_24
+        // f_24 排量
         result.put(IVIMFields.F_24, cocData.get(IVIMFields.F_24));
-        // c_01
+        // c_01 功率
         result.put(IVIMFields.C_01, cocData.get(IVIMFields.C_01));
-        // f_28
+        // f_28 变速器型式
         result.put(IVIMFields.F_28, cocData.get(IVIMFields.F_28));
-        // d_22
+        // d_22 驱动形式
         result.put(IVIMFields.D_22, cocData.get(IVIMFields.D_22));
-        // c_08
+        // c_08 整备质量
         result.put(IVIMFields.C_08, cocData.get(IVIMFields.C_08));
+        // 额定总质量
         result.put(IVIMFields.F_14_1, cocData.get(IVIMFields.F_14_1));
-        // g_32
+        // g_32 
         result.put(IVIMFields.G_32, cocData.get(IVIMFields.G_32));
-        // d_14
+        // d_14 城市油耗
         result.put(IVIMFields.D_14, cocData.get(IVIMFields.D_14));
-        // d_15
+        // d_15 市郊油耗
         result.put(IVIMFields.D_15, cocData.get(IVIMFields.D_15));
-        // d_16
+        // d_16 综合油耗
         result.put(IVIMFields.D_16, cocData.get(IVIMFields.D_16));
-        // g_33
+        // g_33 
         result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
         // g_34 //取制造日期
         try {
@@ -416,6 +429,30 @@ public class VimUtils {
         }
         // f_0_6b //取vin
         result.put(IVIMFields.F_0_6b, vin);
+
+        // 打印不需要但是上传需要的
+        //车辆制造企业
+        result.put(IVIMFields.F_0_1, cocData.get(IVIMFields.F_0_1));
+        //车辆类别
+        result.put(IVIMFields.F_0_4, cocData.get(IVIMFields.F_0_4));
+        //最高车速
+        result.put(IVIMFields.F_44, cocData.get(IVIMFields.F_44));
+        //轮胎规格
+        result.put(IVIMFields.F_32A, cocData.get(IVIMFields.F_32A));
+        //轴距
+        result.put(IVIMFields.F_3, cocData.get(IVIMFields.F_3));
+        //车辆名称
+        result.put(IVIMFields.F_0_2_1, cocData.get(IVIMFields.F_0_2_1));
+        //座位排数
+        result.put(IVIMFields.D_17, cocData.get(IVIMFields.D_17));
+        //额定载客
+        result.put(IVIMFields.F_42_1, cocData.get(IVIMFields.F_42_1));
+        //前轮距
+        result.put(IVIMFields.F_5A, cocData.get(IVIMFields.F_5A));
+        //后轮距
+        result.put(IVIMFields.F_5B, cocData.get(IVIMFields.F_5B));
+        //coc id
+        result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
         return result;
     }
@@ -450,16 +487,14 @@ public class VimUtils {
             result.put(IVIMFields.F_4_1_1_O, "" + qzj + "/" + hzj);
         }
 
-        //处理座位数
+        // 处理座位数
         Object zws = cocData.get(IVIMFields.F_42_1);
-        if(Utils.isNullOrEmptyString(zws)){
-        	zws = 
-        			cocData.get(IVIMFields.C_02);
+        if (Utils.isNullOrEmptyString(zws)) {
+            zws = cocData.get(IVIMFields.C_02);
         }
-        
+
         result.put(IVIMFields.F_42_1_O, zws);
-        
-        
+
         // 处理发动机编号
 
         // Veh_FDjh F_21a 发动机号 映射
@@ -523,14 +558,6 @@ public class VimUtils {
         return result;
     }
 
-    private static String getColorNameByCode(String colorCode) {
-        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, "colors");
-        DBObject d = c.findOne(new BasicDBObject().append(IVIMFields.color_code, colorCode));
-        if (d != null) {
-            return (String) d.get(IVIMFields.color_name);
-        }
-        return null;
-    }
 
     public static DBObject transferCerfData(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, String vin, boolean isDP) throws Exception {
@@ -804,15 +831,21 @@ public class VimUtils {
         }
     }
 
-    static String getResultMessage(OperateResult oResult) {
-        StringBuffer sb = new StringBuffer();
+    public static void uploadFuelLabel(List<DBObject> fuelLabelList) throws Exception {
+        FuelDataSysSTDSoap service = DataModelActivator.getFUELDATAService();
+        ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
 
-        sb.append(String.format("操作结果:%s\r\n", oResult.getResultCode()));
-
-        for (NameValuePair nvp : oResult.getResultDetail().getNameValuePair()) {
-            sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
+        for (int i = 0; i < fuelLabelList.size(); i++) {
+            VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i));
+            vehicleInfoList.getVehicleBasicInfo().add(vbi);
         }
-        return sb.toString();
+
+        com.sg.vim.datamodel.flservice.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME,
+                FUELLABEL_PASSWORD, vehicleInfoList, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
+        }
     }
 
     public static void uploadCert2(List<DBObject> certList, String memo) throws Exception {
@@ -863,6 +896,10 @@ public class VimUtils {
 
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
         return getCertificateInfo(data, false);
+    }
+
+    private static VehicleBasicInfo getVehicleBasicInfo(DBObject data) throws Exception {
+        return getVehicleBasicInfo(data, false);
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data, boolean isUpdate)
@@ -1567,6 +1604,127 @@ public class VimUtils {
         return info;
     }
 
+    private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate) throws Exception {
+        VehicleBasicInfo info = new VehicleBasicInfo();
+        // 序号 属性 中文名称 数据类型
+        // （soap描述） 说明
+        // 1 V_Id 反馈码 s:string 系统生成，无需操作。
+
+        // 2 Vin 车辆备案号（VIN码） s:string 主表车辆备案号（VIN码）字段（规定时间内上报时使用）
+        info.setVin((String) data.get(IVIMFields.F_0_6b));
+        
+        // 3 App_Vin 车辆备案号（VIN码） s:string 申请表车辆备案号（VIN码）字段（申请补传、修改、撤销时使用）
+        if (isUpdate) {
+            info.setAppVin((String) data.get(IVIMFields.F_0_6b));
+        }
+        
+        // 4 User_Id 企业登录用户名 s:string
+        info.setUserId(FUELLABEL_USERNAME);
+        
+        // 5 Qcscqy 汽车生产企业 s:string
+        info.setQcscqy((String) data.get(IVIMFields.F_0_1));
+        
+        // 6 Jkqczjxs 进口汽车经销商 s:string 国内生产商此项可为空，进口商企业为必填项
+        
+        // 7 Clxh 车辆型号 s:string
+        info.setClxh((String) data.get(IVIMFields.F_0_2C1));
+        
+        // 8 Clzl 车辆种类 s:string 从“乘用车（M1）、轻型客车（M2）、轻型货车（N1）”下拉框中选择，其中，M1、M2、N1 的定义按GB/T
+        // 15089-2001《机动车辆及挂车分类》
+        info.setClzl((String) data.get(IVIMFields.F_0_4));
+        
+        // 9 Rllx 燃料类型 s:string 汽油、柴油、两用燃料、双燃料、纯电动、非插电式混合动力、插电式混合动力、燃料电池
+        info.setRllx((String) data.get(IVIMFields.F_25));
+        
+        // Zczbzl 整车整备质量 s:string
+        info.setZczbzl((String) data.get(IVIMFields.C_08));
+        
+        // Zgcs 最高车速 s:string
+        info.setZgcs((String) data.get(IVIMFields.F_44));
+        
+        // Ltgg 轮胎规格 s:string
+        info.setLtgg((String) data.get(IVIMFields.F_32A));
+        
+        // Zj 轴距 s:string
+        info.setZj((String) data.get(IVIMFields.F_3));
+        
+        // Clzzrq 车辆制造日期/进口日期 s:string
+        String value = (String) data.get(IVIMFields.mVeh_Clzzrq);
+        // Assert.isNotNull(value, "车辆制造日期");
+        Date dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
+        GregorianCalendar nowGregorianCalendar = new GregorianCalendar();
+        nowGregorianCalendar.setTime(dValue);
+        XMLGregorianCalendar xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
+        info.setClzzrq(xmlDatetime);
+
+        // Tymc 通用名称 s:string
+        info.setTymc((String) data.get(IVIMFields.F_0_2_1));
+        
+        // Yyc 越野车（G类） s:string 是/否
+        info.setTymc("否");
+
+        // Zwps 座位排数 s:string
+        info.setZwps((String) data.get(IVIMFields.D_17));
+        
+        // Zdsjzzl 最大设计总质量 s:string
+        info.setZdsjzzl((String) data.get(IVIMFields.F_14_1));
+        
+        // Edzk 额定载客 s:string
+        info.setEdzk((String) data.get(IVIMFields.F_42_1));
+        
+        // Lj 轮距（前/后） s:string
+        String qlj = (String) data.get(IVIMFields.F_5A);
+        String hlj = (String) data.get(IVIMFields.F_5B);
+        info.setLj(qlj+"/"+hlj);
+        
+        // Qdxs 驱动型式 s:string 从“前轮驱动、后轮驱动、分时全轮驱动、全时全轮驱动、智能(适时)全轮驱动”下拉框中选择
+        info.setQdxs((String)data.get(IVIMFields.D_22));
+        
+        // CreateTime 上传时间 s:datetime 此项可为空，server端处理此字段
+        // UpdateTime 更新时间 s:datetime 此项可为空，server端处理此字段
+        // Status 状态 s:string 此项可为空，server端处理此字段
+        // 状态说明见表五
+
+        // Jyjgmc 检测机构名称 s:string
+        info.setJyjgmc("");
+        
+        // Jybgbh 检测报告编号 s:string
+        info.setJybgbh("");
+        
+        // Apply_Type 申请操作类型 s:string 此项可为空，server端处理此字段
+        // Check s:string 辅助字段，企业开发时忽略此字段
+        // Reason 申请原因字段 s:string 在申请补传，申请修改时（即调用接口4: UploadOverTime，5 :ApplyUpdate）时此字段为必填项
+        // EntityList 燃料参数数组 RllxParamEntity[] 数据结构见表四
+        ArrayOfRllxParamEntity arrayRllx = new ArrayOfRllxParamEntity();
+        arrayRllx.getRllxParamEntity();
+        info.setEntityList(arrayRllx);
+        return info;
+    }
+    
+
+    static String getResultMessage(Object oResult) {
+        StringBuffer sb = new StringBuffer();
+        if (oResult instanceof OperateResult) {
+
+            sb.append(String.format("操作结果:%s\r\n", ((OperateResult) oResult).getResultCode()));
+
+            for (NameValuePair nvp : ((OperateResult) oResult).getResultDetail().getNameValuePair()) {
+                sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
+            }
+            return sb.toString();
+        } else if (oResult instanceof com.sg.vim.datamodel.flservice.OperateResult) {
+            sb.append(String.format("操作结果:%s\r\n",
+                    ((com.sg.vim.datamodel.flservice.OperateResult) oResult).getResultCode()));
+
+            for (com.sg.vim.datamodel.flservice.NameValuePair nvp : ((com.sg.vim.datamodel.flservice.OperateResult) oResult)
+                    .getResultDetail().getNameValuePair()) {
+                sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
+            }
+            return sb.toString();
+        }
+        return "";
+    }
+
     public static String getLifecycle(String vin, String collectionName) {
         DBCollection col = DBActivator.getCollection("appportal", collectionName);
         DBObject d = col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin),
@@ -1588,6 +1746,16 @@ public class VimUtils {
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
     }
 
+
+    public static String getColorNameByCode(String colorCode) {
+        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, "colors");
+        DBObject d = c.findOne(new BasicDBObject().append(IVIMFields.color_code, colorCode));
+        if (d != null) {
+            return (String) d.get(IVIMFields.color_name);
+        }
+        return null;
+    }
+    
     public static DBObject getFuelLabelByVin(String vin) {
         DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_FUELABEL);
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
@@ -1648,9 +1816,7 @@ public class VimUtils {
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
 
         col.update(query, update, false, true);
-
         return setting;
-
     }
 
     public static DBObject saveUpload2Data(List<ObjectId> idList, String memo) {
@@ -1867,6 +2033,27 @@ public class VimUtils {
         }
     }
 
+    public static DBObject saveFuelLabelUploadData(List<ObjectId> idList, String memo) {
+        Date date = new Date();
+        DBObject accountInfo = UserSessionContext.getAccountInfo();
+        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
+                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
+                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
+                .append(IVIMFields.ACTION_REC_MEMO, memo);
+
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
+        DBObject query = new BasicDBObject().append("_id",
+                new BasicDBObject().append("$in", idList));
+        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
+                .append(IVIMFields.UPLOADDATE, date)
+                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
+        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
+                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
+
+        col.update(query, update, false, true);
+        return setting;
+    }
+
     public static void printFuelLabel(Browser browser, DBObject dbObject) throws Exception {
         HashMap<String, String> printerdata = getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[2]);
         if (printerdata == null) {
@@ -1972,6 +2159,134 @@ public class VimUtils {
         update.put(IVIMFields.F_25, sb.toString());
         COCInfo cService = new COCInfo();
         cService.update((ObjectId) cocInfo.get("_id"), update);
+    }
+
+    public static void mntMesProductInfo(DBObject product) throws Exception {
+        Object cocid = product.get(IVIMFields.COC_ID);
+        System.out.println();
+        if (!(cocid instanceof ObjectId)) {
+            return;
+        }
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCINFO);
+        DBObject coc = col.findOne(new BasicDBObject().append("_id", cocid));
+
+        // 查询是否已经存在
+        StringBuffer sqlquery = new StringBuffer();
+        sqlquery.append("SELECT id FROM MES_PRODUCT_VEHICLE_CODE where id = ");
+        sqlquery.append("'" + product.get("_id") + "'");
+        int cnt = SQLUtil.SQL_COUNT(MES_DB2, sqlquery.toString());
+        if (cnt != 0) {
+            StringBuffer sqlUpdate = new StringBuffer();
+            sqlUpdate.append("UPDATE MES_PRODUCT_VEHICLE_CODE SET ");
+            sqlUpdate.append("NOTICE_CODE=");
+            sqlUpdate.append("'" + product.get(IVIMFields.F_0_2C1) + "',");
+            sqlUpdate.append("ERP_PRODUCT_CODE=");
+            sqlUpdate.append("'" + product.get(IVIMFields.E_02) + "',");
+            sqlUpdate.append("ENGINE_TYPE=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_C4) + "',");
+            sqlUpdate.append("RATED_PASSENGER=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_42_1) + "',");
+            sqlUpdate.append("FUEL_TYPE=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_25) + "',");
+            sqlUpdate.append("DRIVER_TYPE=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.D_22) + "',");
+            sqlUpdate.append("CURB_WEIGHT=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.C_08) + "',");
+            sqlUpdate.append("VEHICLE_BRAND=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_C0_2) + "',");
+            sqlUpdate.append("VEHICLE_TYPE=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.C_22) + "',");
+            sqlUpdate.append("OUTPUT_VOLUME=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_24) + "',");
+            sqlUpdate.append("POWER=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.C_01) + "',");
+            sqlUpdate.append("TOTAL_QUALITY=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_14_1) + "',");
+            sqlUpdate.append("BODY_COLOR=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_38) + "',");
+            sqlUpdate.append("TYRE_SIZE=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_32A) + "',");
+            sqlUpdate.append("MAXIMUN_NET_POWER=");
+            sqlUpdate.append("'" + coc.get(IVIMFields.F_26) + "'");
+            sqlUpdate.append(" WHERE ID=");
+            sqlUpdate.append("'" + product.get("_id") + "'");
+
+            SQLUtil.SQL_UPDATE(MES_DB2, sqlUpdate.toString());
+        } else {
+            StringBuffer sqlInsert = new StringBuffer();
+            sqlInsert.append("insert into MES_PRODUCT_VEHICLE_CODE (");
+            sqlInsert.append("ID,");
+            sqlInsert.append("NOTICE_CODE,");
+            sqlInsert.append("ERP_PRODUCT_CODE,");
+            sqlInsert.append("ENGINE_TYPE,");
+            sqlInsert.append("RATED_PASSENGER,");
+            sqlInsert.append("FUEL_TYPE,");
+            sqlInsert.append("DRIVER_TYPE,");
+            sqlInsert.append("CURB_WEIGHT,");
+            sqlInsert.append("VEHICLE_BRAND,");
+            sqlInsert.append("VEHICLE_TYPE,");
+            sqlInsert.append("OUTPUT_VOLUME,");
+            sqlInsert.append("POWER,");
+            sqlInsert.append("TOTAL_QUALITY,");
+            sqlInsert.append("BODY_COLOR,");
+            sqlInsert.append("TYRE_SIZE,");
+            sqlInsert.append("MAXIMUN_NET_POWER");
+            sqlInsert.append(") values (");
+
+            // sqlInsert.append("ID,");
+            sqlInsert.append("'" + product.get("_id") + "',");
+
+            // sqlInsert.append("NOTICE_CODE,");
+            sqlInsert.append("'" + product.get(IVIMFields.F_0_2C1) + "',");
+
+            // sqlInsert.append("ERP_PRODUCT_CODE,");
+            sqlInsert.append("'" + product.get(IVIMFields.E_02) + "',");
+
+            // sqlInsert.append("ENGINE_TYPE,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_C4) + "',");
+
+            // sqlInsert.append("RATED_PASSENGER,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_42_1) + "',");
+
+            // sqlInsert.append("FUEL_TYPE,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_25) + "',");
+
+            // sqlInsert.append("DRIVER_TYPE,");
+            sqlInsert.append("'" + coc.get(IVIMFields.D_22) + "',");
+
+            // sqlInsert.append("CURB_WEIGHT,");
+            sqlInsert.append("'" + coc.get(IVIMFields.C_08) + "',");
+
+            // sqlInsert.append("VEHICLE_BRAND,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_C0_2) + "',");
+
+            // sqlInsert.append("VEHICLE_TYPE,");
+            sqlInsert.append("'" + coc.get(IVIMFields.C_22) + "',");
+
+            // sqlInsert.append("OUTPUT_VOLUME,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_24) + "',");
+
+            // sqlInsert.append("POWER,");
+            sqlInsert.append("'" + coc.get(IVIMFields.C_01) + "',");
+
+            // sqlInsert.append("TOTAL_QUALITY,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_14_1) + "',");
+
+            // sqlInsert.append("BODY_COLOR,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_38) + "',");
+
+            // sqlInsert.append("TYRE_SIZE,");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_32A) + "',");
+
+            // sqlInsert.append("MAXIMUN_NET_POWER");
+            sqlInsert.append("'" + coc.get(IVIMFields.F_26) + "'");
+
+            sqlInsert.append(")");
+
+            String[] sqls = new String[] { sqlInsert.toString() };
+            SQLUtil.SQL_EXECUTE(MES_DB2, sqls);
+        }
+
     }
 
 }

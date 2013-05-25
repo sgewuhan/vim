@@ -47,6 +47,9 @@ public class Vim implements BundleActivator {
             VimUtils.COC_REPRINT="true".equalsIgnoreCase(appProps.getProperty("reprint.coc"));
             VimUtils.FL_REPRINT="true".equalsIgnoreCase(appProps.getProperty("reprint.fuallabel"));
             VimUtils.LOCAL_SERVER=appProps.getProperty("vidc.localaddress");
+            VimUtils.FUELLABEL_USERNAME=appProps.getProperty("flsys.username");
+            VimUtils.FUELLABEL_PASSWORD=appProps.getProperty("flsys.password");
+            VimUtils.FUELLABEL_OKEY=appProps.getProperty("flsys.okey");
             
             VimUtils.debug = debug;
         } catch (Exception e) {
