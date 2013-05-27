@@ -977,176 +977,129 @@
             <column
                   column="vin"
                   name="VIN"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="clxh"
                   name="车辆型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjxh"
                   name="发动机型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjscc"
                   name="发动机生产厂"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="mdate"
                   name="mdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="qdate"
                   name="qdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
          </filterAction>
          <searchAction>
             <column
                   column="vin"
                   name="VIN"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="clxh"
                   name="车辆型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjxh"
                   name="发动机型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjscc"
                   name="发动机生产厂"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="mdate"
                   name="mdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="qdate"
                   name="qdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
          </searchAction>
          <exportAction>
             <column
                   column="vin"
                   name="VIN"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="clxh"
                   name="车辆型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjxh"
                   name="发动机型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjscc"
                   name="发动机生产厂"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="mdate"
                   name="mdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="qdate"
                   name="qdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
          </exportAction>
          <queryAction>
             <column
                   column="vin"
                   name="VIN"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="clxh"
                   name="车辆型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjxh"
                   name="发动机型号"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="fdjscc"
                   name="发动机生产厂"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="mdate"
                   name="mdate"
-                  style="SWT.LEFT"
-                  type="String"
-                  width="120">
+                  type="String">
             </column>
             <column
                   column="qdate"
                   name="qdate"
-                  style="SWT.LEFT"
                   type="String"
-                  width="120">
+                  >
             </column>
          </queryAction>
       </navigator>
@@ -4195,6 +4148,95 @@
             targetId="systempage">
       </pageExtendsions>
       <editor
+            collectionName="env"
+            dbName="appportal"
+            id="com.sg.vim.print.editor.env"
+            name="环保上传数据">
+         <basicpage
+               description="环保上传数据"
+               id="1"
+               title="基本信息">
+            <pagecolumn
+                  id="1">
+               <section
+                     label="基本信息">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="vin"
+                        label="VIN"
+                        labelVisible="true"
+                        name="vin"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="clxh"
+                        label="车辆型号"
+                        labelVisible="true"
+                        name="clxh"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="fdjxh"
+                        label="发动机型号"
+                        labelVisible="true"
+                        name="fdjxh"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="fdjscc"
+                        label="发动机生产厂"
+                        labelVisible="true"
+                        name="fdjscc"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+				  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="mdate"
+                        label="mdate"
+                        labelVisible="true"
+                        name="mdate"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="false"
+                        id="qdate"
+                        label="qdate"
+                        labelVisible="true"
+                        name="qdate"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+      </editor>
+      <editor
             collectionName="certificate"
             dbName="appportal"
             id="com.sg.vim.print.editor.certificate_edit"
@@ -5088,6 +5130,11 @@
                </section>
             </pagecolumn>
          </basicpage>
+         <versionControl>
+            <fieldname
+                  fieldname="all">
+            </fieldname>
+         </versionControl>
       </editor>
    </extension>
    <extension
