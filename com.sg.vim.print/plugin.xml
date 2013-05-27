@@ -7120,6 +7120,50 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:com.sg.vim.table.env">
+         <command
+               commandId="com.sg.ui.command.edit"
+               icon="image/edit_24.png"
+               label="编辑"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.refresh"
+               icon="image/refresh_24.png"
+               label="更新"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.export"
+               icon="image/export_24.png"
+               label="导出"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.addtocompare"
+               icon="image/compare_24.png"
+               label="加入对比"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.cocpaper.sep2"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.upload.env"
+               icon="image/upload_24.png"
+               label="上传"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.cancel.env"
+               icon="image/cancel_24.png"
+               label="撤销"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
