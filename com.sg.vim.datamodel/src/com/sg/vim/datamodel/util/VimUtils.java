@@ -44,6 +44,7 @@ import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.flservice.ArrayOfRllxParamEntity;
 import com.sg.vim.datamodel.flservice.ArrayOfVehicleBasicInfo;
 import com.sg.vim.datamodel.flservice.FuelDataSysSTDSoap;
+import com.sg.vim.datamodel.flservice.RllxParamEntity;
 import com.sg.vim.datamodel.flservice.VehicleBasicInfo;
 import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
 import com.sg.vim.datamodel.vidcservice.ArrayOfString;
@@ -1696,7 +1697,8 @@ public class VimUtils {
         // Reason 申请原因字段 s:string 在申请补传，申请修改时（即调用接口4: UploadOverTime，5 :ApplyUpdate）时此字段为必填项
         // EntityList 燃料参数数组 RllxParamEntity[] 数据结构见表四
         ArrayOfRllxParamEntity arrayRllx = new ArrayOfRllxParamEntity();
-        arrayRllx.getRllxParamEntity();
+        RllxParamEntity e = new RllxParamEntity();
+        arrayRllx.getRllxParamEntity().add(e);
         info.setEntityList(arrayRllx);
         return info;
     }
