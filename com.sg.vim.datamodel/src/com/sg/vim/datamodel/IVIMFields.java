@@ -477,6 +477,9 @@ public class IVIMFields {
     public static final String mVeh__Wzghzbh = "Veh_Wzghzbh";
 
     public static final String mVeh__Pzxlh = "Veh_Pzxlh";
+    
+    public static final String mVeh__Fdjscc = "Veh_fdkscc";
+
 
     // *********以下字段用于打印机设置数据的保存
     public static final String mVeh_A_PrinterFunction = "Veh_A_PrinterFunction";
@@ -539,5 +542,13 @@ public class IVIMFields {
     public static final String color_name = "color_name";
     public static final String color_code = "color_code";
     public static final String IS_DIRTY = "isdirty";
+    public static final String COL_ENV = "env";
+    
+    public static final String env_clxh = "clxh";
+    public static final String env_vin = "vin";
+    public static final String env_fdjxh = "fdjxh";
+    public static final String env_fdjscc = "fdjscc";
+    public static final String env_mdate = "mdate";
+    public static final String env_qdate = "qdate";
 
 }

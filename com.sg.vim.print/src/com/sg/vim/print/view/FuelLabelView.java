@@ -222,7 +222,7 @@ public class FuelLabelView extends GenericPrintabelView {
                 input.getData().getData().removeField(IVIMFields.mVeh_A_update_memo);
                 List<DBObject> certList = new ArrayList<DBObject>();
                 certList.add(input.getData().getData());
-                VimUtils.updateCert(certList, memo);
+                VimUtils.updateFuellabel(certList, memo);
                 return true;
             }
 

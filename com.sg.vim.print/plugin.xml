@@ -21,7 +21,7 @@
                id="com.sg.vim.view.cocpaper"
                minimized="false"
                moveable="false"
-               ratio="0.3"
+               ratio="1"
                relationship="stack"
                relative="com.sg.vim.view.certificate"
                showTitle="true"
@@ -30,6 +30,17 @@
          <view
                closeable="false"
                id="com.sg.vim.view.fuellabel"
+               minimized="false"
+               moveable="false"
+               ratio="1"
+               relationship="stack"
+               relative="com.sg.vim.view.certificate"
+               showTitle="true"
+               standalone="false">
+         </view>
+         <view
+               closeable="false"
+               id="com.sg.vim.view.env"
                minimized="false"
                moveable="false"
                ratio="1"
@@ -83,6 +94,12 @@
             class="com.sg.vim.print.view.CertificateView"
             id="com.sg.vim.view.certificate"
             name="合格证"
+            restorable="true">
+      </view>
+      <view
+            class="com.sg.vim.print.view.EnvView"
+            id="com.sg.vim.view.env"
+            name="环保数据上报"
             restorable="true">
       </view>
       <view
@@ -952,6 +969,186 @@
                   type="String">
             </column>
          </exportAction>
+      </navigator>
+      <navigator
+            id="com.sg.vim.view.env"
+            table="com.sg.vim.table.env">
+         <filterAction>
+            <column
+                  column="vin"
+                  name="VIN"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="clxh"
+                  name="车辆型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjxh"
+                  name="发动机型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjscc"
+                  name="发动机生产厂"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="mdate"
+                  name="mdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="qdate"
+                  name="qdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+         </filterAction>
+         <searchAction>
+            <column
+                  column="vin"
+                  name="VIN"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="clxh"
+                  name="车辆型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjxh"
+                  name="发动机型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjscc"
+                  name="发动机生产厂"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="mdate"
+                  name="mdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="qdate"
+                  name="qdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+         </searchAction>
+         <exportAction>
+            <column
+                  column="vin"
+                  name="VIN"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="clxh"
+                  name="车辆型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjxh"
+                  name="发动机型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjscc"
+                  name="发动机生产厂"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="mdate"
+                  name="mdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="qdate"
+                  name="qdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+         </exportAction>
+         <queryAction>
+            <column
+                  column="vin"
+                  name="VIN"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="clxh"
+                  name="车辆型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjxh"
+                  name="发动机型号"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="fdjscc"
+                  name="发动机生产厂"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="mdate"
+                  name="mdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+            <column
+                  column="qdate"
+                  name="qdate"
+                  style="SWT.LEFT"
+                  type="String"
+                  width="120">
+            </column>
+         </queryAction>
       </navigator>
    </extension>
    <extension
@@ -6086,6 +6283,69 @@
                   type="String">
             </column>
          </columnGroup>
+      </table>
+      <table
+            canCreate="false"
+            canDelete="false"
+            canEdit="true"
+            collectionName="env"
+            dbName="appportal"
+            doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
+            editorId="com.sg.vim.print.editor.env"
+            fix="1"
+            fullSelection="true"
+            headerVisiable="true"
+            id="com.sg.vim.table.env"
+            idfield="_id"
+            inputProvider="com.sg.vim.datamodel.EnvInput"
+            limit="100"
+            multiSelection="true"
+            popupMenu="popup:com.sg.vim.table.env"
+            queryMode="false"
+            useHashlookup="false"
+            virtual="false">
+         <column
+               column="vin"
+               name="VIN"
+               style="SWT.LEFT"
+               type="String"
+               width="120">
+         </column>
+         <column
+               column="clxh"
+               name="车辆型号"
+               style="SWT.LEFT"
+               type="String"
+               width="120">
+         </column>
+         <column
+               column="fdjxh"
+               name="发动机型号"
+               style="SWT.LEFT"
+               type="String"
+               width="120">
+         </column>
+         <column
+               column="fdjscc"
+               name="发动机生产厂"
+               style="SWT.LEFT"
+               type="String"
+               width="120">
+         </column>
+         <column
+               column="mdate"
+               name="mdate"
+               style="SWT.LEFT"
+               type="String"
+               width="120">
+         </column>
+         <column
+               column="qdate"
+               name="qdate"
+               style="SWT.LEFT"
+               type="String"
+               width="120">
+         </column>
       </table>
    </extension>
    <extension

@@ -1369,7 +1369,7 @@
             <column
                   column="d_01"
                   name="生效日期"
-                  type="String">
+                  type="Date">
             </column>
             <column
                   column="d_19"

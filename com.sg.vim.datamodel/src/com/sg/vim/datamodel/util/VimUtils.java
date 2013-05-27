@@ -952,10 +952,13 @@ public class VimUtils {
         result.put(IVIMFields.mVeh__Qzdczfs, cocData.get(IVIMFields.C_19));
         result.put(IVIMFields.mVeh__Qzdfs, cocData.get(IVIMFields.C_20));
         result.put(IVIMFields.mVeh__Pzxlh, confid);
+        // 环保上传需要
+        result.put(IVIMFields.mVeh__Fdjscc, cocData.get(IVIMFields.F_20));
         // 完整合格证编号需要在打印后传递
 
         // coc id
         result.put(IVIMFields.COC_ID, cocData.get("_id"));
+
 
         return result;
     }
@@ -985,8 +988,8 @@ public class VimUtils {
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
         }
 
-        com.sg.vim.datamodel.service.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME,
-                FUELLABEL_PASSWORD, vehicleInfoList, FUELLABEL_OKEY);
+        OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                vehicleInfoList, FUELLABEL_OKEY);
         int rCode = r.getResultCode();
         if (rCode == 1) {
             throw new Exception(getResultMessage(r));
@@ -1042,6 +1045,22 @@ public class VimUtils {
         }
     }
 
+    public static void updateFuellabel(List<DBObject> fuelLabelList, String memo) throws Exception {
+        FuelDataSysSTDSoap service = DataModelActivator.getFUELDATAService();
+        ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
+
+        for (int i = 0; i < fuelLabelList.size(); i++) {
+            VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i), true, memo);
+            vehicleInfoList.getVehicleBasicInfo().add(vbi);
+        }
+        OperateResult r = service.applyUpdate(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                vehicleInfoList, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
+        }
+    }
+
     public static void deleteCert(List<String> certNumberList, String memo) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfString wzhgzbhs = new ArrayOfString();
@@ -1056,14 +1075,18 @@ public class VimUtils {
         }
     }
 
-    public static void deleteFuelLabel(List<String> vinList, String memo) {
+    public static void deleteFuelLabel(List<String> vinList, String memo) throws Exception {
         FuelDataSysSTDSoap service = DataModelActivator.getFUELDATAService();
         com.sg.vim.datamodel.service.ArrayOfString vinStringList = new com.sg.vim.datamodel.service.ArrayOfString();
         for (int i = 0; i < vinList.size(); i++) {
             vinStringList.getString().add(vinList.get(i));
         }
-        service.applyDelete(FUELLABEL_USERNAME, FUELLABEL_PASSWORD, vinStringList, memo,
-                FUELLABEL_OKEY);
+        OperateResult r = service.applyDelete(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                vinStringList, memo, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
+        }
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
@@ -2444,6 +2467,56 @@ public class VimUtils {
 
         return cnt > 0;
 
+    }
+
+    public static void createEnvData(DBObject certData) {
+
+        BasicDBObject data = new BasicDBObject();
+        // vin
+        // 字符串17位
+        // 车辆识别代码
+        //
+        data.put(IVIMFields.env_vin, certData.get(IVIMFields.mVeh_Clsbdh));
+        // clxh
+        // 字符串200位
+        // 车辆型号
+        //
+        data.put(IVIMFields.env_clxh, certData.get(IVIMFields.mVeh_Clxh));
+
+        // fdjxh
+        // 字符串200位
+        // 车辆发动机型号
+        //
+        data.put(IVIMFields.env_fdjxh, certData.get(IVIMFields.mVeh_Fdjxh));
+
+        // fdjscc
+        // 字符串200位
+        // 车辆发动机生产厂
+        //
+        data.put(IVIMFields.env_fdjscc, certData.get(IVIMFields.mVeh_Fdjxh));
+
+        // mdate
+        // 日期型
+        // 格式为yyyy-mm-dd，如2011-9-1或2011-09-01均可
+        // 如无法确定具体日，可以定为1日
+        //
+        data.put(IVIMFields.env_mdate, certData.get(IVIMFields.mVeh_Clzzrq));
+
+        // qdate
+        // 日期型
+        // 格式为yyyy-mm-dd，如2011-9-11
+        data.put(IVIMFields.env_qdate, certData.get(IVIMFields.mVeh_Clzzrq));
+        
+
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_ENV);
+        Object vin = certData.get(IVIMFields.mVeh_Clsbdh);
+        long count = col.count(new BasicDBObject().append(IVIMFields.env_vin, vin));
+        if(count>0){
+            col.update(new BasicDBObject().append(IVIMFields.env_vin, vin), new BasicDBObject().append("$set", data));
+        }else{
+            col.insert(data);
+        }
+    
     }
 
 }

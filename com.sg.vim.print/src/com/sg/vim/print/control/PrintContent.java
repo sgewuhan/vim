@@ -698,7 +698,14 @@ public class PrintContent extends Composite {
                 if (currentModule == dpCertPrintModule) {
                     qxCertPrintModule.setValue(IVIMFields.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
                 }
+                
                 savePrintData(currentModule);
+
+                if(currentModule == qxCertPrintModule){
+                    //生成环保数据
+                    VimUtils.createEnvData(currentModule.getData());
+                }
+                
             }
             return;
         }
