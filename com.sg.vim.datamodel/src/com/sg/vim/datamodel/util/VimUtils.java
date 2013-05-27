@@ -2289,12 +2289,12 @@ public class VimUtils {
 
         // 查询是否已经存在
         StringBuffer sqlquery = new StringBuffer();
-        sqlquery.append("SELECT id FROM MES_PRODUCT_VEHICLE_CODE where id = ");
+        sqlquery.append("SELECT id FROM bqyx_mes.MES_PRODUCT_VEHICLE_CODE where id = ");
         sqlquery.append("'" + product.get("_id") + "'");
         int cnt = SQLUtil.SQL_COUNT(MES_DB2, sqlquery.toString());
         if (cnt != 0) {
             StringBuffer sqlUpdate = new StringBuffer();
-            sqlUpdate.append("UPDATE MES_PRODUCT_VEHICLE_CODE SET ");
+            sqlUpdate.append("UPDATE bqyx_mes.MES_PRODUCT_VEHICLE_CODE SET ");
             sqlUpdate.append("NOTICE_CODE=");
             sqlUpdate.append("'" + product.get(IVIMFields.F_0_2C1) + "',");
             sqlUpdate.append("ERP_PRODUCT_CODE=");
@@ -2331,7 +2331,7 @@ public class VimUtils {
             SQLUtil.SQL_UPDATE(MES_DB2, sqlUpdate.toString());
         } else {
             StringBuffer sqlInsert = new StringBuffer();
-            sqlInsert.append("insert into MES_PRODUCT_VEHICLE_CODE (");
+            sqlInsert.append("insert into bqyx_mes.MES_PRODUCT_VEHICLE_CODE (");
             sqlInsert.append("ID,");
             sqlInsert.append("NOTICE_CODE,");
             sqlInsert.append("ERP_PRODUCT_CODE,");
