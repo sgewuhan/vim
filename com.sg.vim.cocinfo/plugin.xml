@@ -6255,6 +6255,16 @@
                label="查看配置序号"
                style="push">
          </command>
+         <separator
+               name="com.sg.vim.table.productcode.separator3"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.command.productcode.exportmes"
+               icon="image/export_24.png"
+               label="导出到MES"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="true"
@@ -6448,6 +6458,10 @@
       <command
             id="com.sg.vim.command.productcode.openbasic"
             name="查看公告车型">
+      </command>
+      <command
+            id="com.sg.vim.command.productcode.exportmes"
+            name="导出到MES">
       </command>
    </extension>
    <extension
@@ -6691,6 +6705,10 @@
                </iterate>
             </with>
          </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.cocinfo.handler.ExportProductToMES"
+            commandId="com.sg.vim.command.productcode.exportmes">
       </handler>
    </extension>
    <extension
