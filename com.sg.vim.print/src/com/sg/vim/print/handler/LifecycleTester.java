@@ -8,7 +8,7 @@ import com.mongodb.DBObject;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
 
-public class CertPropertyTester extends PropertyTester {
+public class LifecycleTester extends PropertyTester {
 
     public static final String ACT_REPRINT = "reprint";
 
@@ -23,8 +23,10 @@ public class CertPropertyTester extends PropertyTester {
     public static final String ACT_EDIT = "edit";
 
     public static final String ACT_PRINT = "print";
+    
+    public static final String ACT_REASSY = "reassembly";
 
-    public CertPropertyTester() {
+    public LifecycleTester() {
     }
 
     @Override
@@ -34,7 +36,7 @@ public class CertPropertyTester extends PropertyTester {
                 return canReprint((DBObject) receiver);
 
             } else if (ACT_UPLOAD.equals(args[0])) {
-                return canUpload((DBObject) receiver,expectedValue);
+                return canUpload((DBObject) receiver, expectedValue);
 
             } else if (ACT_REUPLOAD.equals(args[0])) {
                 return canReUpload((DBObject) receiver);
@@ -49,28 +51,35 @@ public class CertPropertyTester extends PropertyTester {
                 return canEdit((DBObject) receiver);
 
             } else if (ACT_PRINT.equals(args[0])) {
-                return canPrint((DBObject) receiver,expectedValue);
+                return canPrint((DBObject) receiver, expectedValue);
 
+            } else if(ACT_REASSY.equals(args[0])){
+                return canReassembly((DBObject) receiver);
             }
         }
         return false;
     }
 
+    private boolean canReassembly(DBObject data) {
+        //已经撤销的可以
+        return IVIMFields.LC_CANCELED.equals(getLifecycle(data));
+    }
+
     private boolean canPrint(DBObject data, Object type) {
         boolean b = IVIMFields.LC_ABANDON.equals(getLifecycle(data));
-        if(!b){
+        if (!b) {
             return false;
         }
-        
-        //当设置了可以重复打印时，如果该项为作废时，可以再次打印
-        if("cocRePrintable".equals(type)){
+
+        // 当设置了可以重复打印时，如果该项为作废时，可以再次打印
+        if ("cocRePrintable".equals(type)) {
             return VimUtils.COC_REPRINT;
-        }else if("flRePrintable".equals(type)){
+        } else if ("flRePrintable".equals(type)) {
             return VimUtils.FL_REPRINT;
         }
-        
+
         return false;
-        
+
     }
 
     private String getLifecycle(DBObject data) {
@@ -106,15 +115,11 @@ public class CertPropertyTester extends PropertyTester {
     }
 
     private boolean canUpload(DBObject data, Object expectedValue) {
-        if("fuellabel".equals(expectedValue)){
-            return IVIMFields.LC_PRINTED.equals(getLifecycle(data));
-        }else{
-            if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
-                Object pdate = data.get(IVIMFields.PRINTDATE);
-                if (pdate instanceof Date) {
-                    long i = new Date().getTime() - ((Date) pdate).getTime();
-                    return i <= 2 * 24 * 60 * 60 * 1000;
-                }
+        if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
+            Object pdate = data.get(IVIMFields.PRINTDATE);
+            if (pdate instanceof Date) {
+                long i = new Date().getTime() - ((Date) pdate).getTime();
+                return i <= 2 * 24 * 60 * 60 * 1000;
             }
         }
 

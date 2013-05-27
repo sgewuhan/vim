@@ -396,4 +396,8 @@ public class CertificateView extends TableNavigator {
 
 	}
 
+    public void doReAssembly() {
+        
+    }
+
 }

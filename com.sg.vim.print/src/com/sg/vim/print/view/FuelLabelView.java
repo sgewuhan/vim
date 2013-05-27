@@ -77,4 +77,19 @@ public class FuelLabelView extends GenericPrintabelView {
         }        
     }
 
+    public void doCancel(DBObject firstElement) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void doReUpload() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void doReAssembly() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

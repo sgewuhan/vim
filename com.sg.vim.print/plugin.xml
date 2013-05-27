@@ -58,7 +58,7 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="com.sg.vim.print.handler.CertPropertyTester"
+            class="com.sg.vim.print.handler.LifecycleTester"
             id="com.sg.vim.print.test.action"
             namespace="com.sg.vim.print.test"
             properties="cando"
@@ -5851,29 +5851,6 @@
             allPopups="false"
             locationURI="toolbar:main?after=com.sg.ui.separator3">
          <command
-               commandId="com.sg.vim.print.remove.fuellabel"
-               icon="image/remove_24.png"
-               label="作废"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <and>
-                  <with
-                        variable="activePartId">
-                     <equals
-                           value="com.sg.vim.view.fuellabel">
-                     </equals>
-                  </with>
-                  <with
-                        variable="activeWorkbenchWindow.activePerspective">
-                     <equals
-                           value="com.sg.vim.perspective.printdata">
-                     </equals>
-                  </with>
-               </and>
-            </visibleWhen>
-         </command>
-         <command
                commandId="com.sg.vim.print.print.fuellabel"
                icon="image/print_24.png"
                label="打印"
@@ -5908,6 +5885,75 @@
                         variable="activePartId">
                      <equals
                            value="com.sg.vim.view.fuellabel">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.vim.print.remove.fuellabel"
+               icon="image/remove_24.png"
+               label="作废"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.fuellabel">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.vim.print.reupload.fuellabel"
+               icon="image/upload2_24.png"
+               label="补传"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.certificate">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.vim.print.cancel.fuellabel"
+               icon="image/cancel_24.png"
+               label="撤销"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.certificate">
                      </equals>
                   </with>
                   <with
@@ -5987,6 +6033,16 @@
                label="修改"
                style="push">
          </command>
+         <separator
+               name="com.sg.vim.table.certificate.sep3"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.reassemably"
+               icon="image/assembly_24.png"
+               label="重新组装数据"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="true"
@@ -6031,6 +6087,16 @@
                label="打印"
                style="push">
          </command>
+         <separator
+               name="com.sg.vim.table.cocpaper.sep3"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.reassemably"
+               icon="image/assembly_24.png"
+               label="重新组装数据"
+               style="push">
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="true"
@@ -6064,12 +6130,6 @@
                visible="true">
          </separator>
          <command
-               commandId="com.sg.vim.print.remove.fuellabel"
-               icon="image/remove_24.png"
-               label="作废"
-               style="push">
-         </command>
-         <command
                commandId="com.sg.vim.print.print.fuellabel"
                icon="image/print_24.png"
                label="打印"
@@ -6079,6 +6139,34 @@
                commandId="com.sg.vim.print.upload.fuellabel"
                icon="image/upload_24.png"
                label="上传"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.reupload.fuellabel"
+               icon="image/upload2_24.png"
+               label="补传"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.cancel.fuellabel"
+               icon="image/cancel_24.png"
+               label="撤销"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.vim.print.remove.fuellabel"
+               icon="image/remove_24.png"
+               label="作废"
+               style="push">
+         </command>
+         <separator
+               name="com.sg.vim.table.cocpaper.sep3"
+               visible="true">
+         </separator>
+         <command
+               commandId="com.sg.vim.print.reassemably"
+               icon="image/assembly_24.png"
+               label="重新组装数据"
                style="push">
          </command>
       </menuContribution>
@@ -6138,6 +6226,18 @@
       <command
             id="com.sg.vim.print.upload.fuellabel"
             name="上传">
+      </command>
+      <command
+            id="com.sg.vim.print.reupload.fuellabel"
+            name="补传">
+      </command>
+      <command
+            id="com.sg.vim.print.cancel.fuellabel"
+            name="撤消">
+      </command>
+      <command
+            id="com.sg.vim.print.reassemably"
+            name="重新组装数据">
       </command>
    </extension>
    <extension
@@ -6352,7 +6452,61 @@
                   <test
                         args="upload"
                         property="com.sg.vim.print.test.cando"
-                        value="fuellabel">
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.Reassemably"
+            commandId="com.sg.vim.print.reassemably">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="reassembly"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.ReuploadFuelLabel"
+            commandId="com.sg.vim.print.reupload.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="reupload"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.CancelFuelLabel"
+            commandId="com.sg.vim.print.cancel.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="cancel"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
                   </test>
                </iterate>
             </with>

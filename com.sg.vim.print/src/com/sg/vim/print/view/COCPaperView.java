@@ -43,5 +43,10 @@ public class COCPaperView extends GenericPrintabelView {
         VimUtils.printCOC(browser, dbObject);
     }
 
+    public void doReAssembly() {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }
