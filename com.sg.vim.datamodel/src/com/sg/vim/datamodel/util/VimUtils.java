@@ -366,12 +366,38 @@ public class VimUtils {
     }
 
     public static DataObjectEditorInput getCOCInput(DBObject cocData, DBObject confData,
-            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler, String vin) {
+            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
+            String vin, ObjectId reassemblyId) {
         DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
                 .getConfigurator(COCPAPER_EDITOR);
         DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
         DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
         DataObject data = new DataObject(c, dbObject);
+        if (reassemblyId != null) {
+            data.setValue("_id", reassemblyId);
+        }
+        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
+        editorInput.setEditable(!debug);
+        return editorInput;
+    }
+
+    public static DataObjectEditorInput getCOCInput(DBObject cocData, DBObject confData,
+            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler, String vin) {
+        return getCOCInput(cocData, confData, productCodeData, mesRawData, saveHandler, vin, null);
+    }
+
+    public static DataObjectEditorInput getFLInput(DBObject cocData, DBObject confData,
+            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
+            String vin, ObjectId reassemblyId) {
+        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
+                .getConfigurator(FUELLABEL_EDITOR);
+        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
+        DBObject dbObject = transferFuelLabelData(cocData, confData, productCodeData, mesRawData,
+                vin);
+        DataObject data = new DataObject(c, dbObject);
+        if (reassemblyId != null) {
+            data.setValue("_id", reassemblyId);
+        }
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
         editorInput.setEditable(!debug);
 
@@ -380,16 +406,7 @@ public class VimUtils {
 
     public static DataObjectEditorInput getFLInput(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler, String vin) {
-        DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
-                .getConfigurator(FUELLABEL_EDITOR);
-        DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
-        DBObject dbObject = transferFuelLabelData(cocData, confData, productCodeData, mesRawData,
-                vin);
-        DataObject data = new DataObject(c, dbObject);
-        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-        editorInput.setEditable(!debug);
-
-        return editorInput;
+        return getFLInput(cocData, confData, productCodeData, mesRawData, saveHandler, vin, null);
     }
 
     private static DBObject transferFuelLabelData(DBObject cocData, DBObject confData,
@@ -2293,7 +2310,7 @@ public class VimUtils {
         COCInfo cService = new COCInfo();
         ObjectId cocId = (ObjectId) cocInfo.get("_id");
         cService.update(cocId, update);
-        
+
         markCOCDirty(cocId);
     }
 
@@ -2445,8 +2462,9 @@ public class VimUtils {
         if (cnt <= 0) {
             cnt = rs.getN();
         }
-        
-        return cnt>0;
+
+        return cnt > 0;
 
     }
+
 }

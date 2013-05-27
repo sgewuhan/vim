@@ -1,12 +1,18 @@
 package com.sg.vim.print.view;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.browser.Browser;
 
 import com.mongodb.DBObject;
+import com.sg.sqldb.utility.SQLRow;
+import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.datamodel.IVIMFields;
+import com.sg.vim.datamodel.util.DataAssembly;
 import com.sg.vim.datamodel.util.VimUtils;
 
 public class COCPaperView extends GenericPrintabelView {
@@ -44,8 +50,35 @@ public class COCPaperView extends GenericPrintabelView {
     }
 
     public void doReAssembly() {
-        // TODO Auto-generated method stub
+        IStructuredSelection selection = getNavigator().getViewer().getSelection();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
         
+        Iterator<?> iter = selection.iterator();
+        while (iter.hasNext()) {
+            DBObject dataItem = (DBObject) iter.next();
+            final ObjectId _id = (ObjectId) dataItem.get("_id");
+            // È¡³övin
+            final String vin = (String) dataItem.get(IVIMFields.mVeh_Clsbdh);
+            new DataAssembly(vin) {
+
+                @Override
+                protected void asyncAssemblyDone(IStatus result, SQLRow mesRawData,
+                        DBObject productCodeData, DBObject cocData, DBObject confData,
+                        DBObject dpcocData, DBObject dpconfData) {
+                    try {
+                        DataObjectEditorInput input = VimUtils.getCOCInput(cocData, confData,
+                                productCodeData, mesRawData,null, vin,_id);
+                        input.save();
+                        
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+        }
     }
 
 
