@@ -42,17 +42,17 @@ import com.sg.vim.datamodel.BasicInfo;
 import com.sg.vim.datamodel.COCInfo;
 import com.sg.vim.datamodel.DataModelActivator;
 import com.sg.vim.datamodel.IVIMFields;
-import com.sg.vim.datamodel.flservice.ArrayOfRllxParamEntity;
-import com.sg.vim.datamodel.flservice.ArrayOfVehicleBasicInfo;
-import com.sg.vim.datamodel.flservice.FuelDataSysSTDSoap;
-import com.sg.vim.datamodel.flservice.RllxParamEntity;
-import com.sg.vim.datamodel.flservice.VehicleBasicInfo;
-import com.sg.vim.datamodel.vidcservice.ArrayOfCertificateInfo;
-import com.sg.vim.datamodel.vidcservice.ArrayOfString;
-import com.sg.vim.datamodel.vidcservice.CertificateInfo;
-import com.sg.vim.datamodel.vidcservice.CertificateRequestServiceSoap;
-import com.sg.vim.datamodel.vidcservice.NameValuePair;
-import com.sg.vim.datamodel.vidcservice.OperateResult;
+import com.sg.vim.datamodel.service.ArrayOfString;
+import com.sg.vim.datamodel.service.NameValuePair;
+import com.sg.vim.datamodel.service.OperateResult;
+import com.sg.vim.datamodel.service.fuellabel.ArrayOfRllxParamEntity;
+import com.sg.vim.datamodel.service.fuellabel.ArrayOfVehicleBasicInfo;
+import com.sg.vim.datamodel.service.fuellabel.FuelDataSysSTDSoap;
+import com.sg.vim.datamodel.service.fuellabel.RllxParamEntity;
+import com.sg.vim.datamodel.service.fuellabel.VehicleBasicInfo;
+import com.sg.vim.datamodel.service.vidc.ArrayOfCertificateInfo;
+import com.sg.vim.datamodel.service.vidc.CertificateInfo;
+import com.sg.vim.datamodel.service.vidc.CertificateRequestServiceSoap;
 
 public class VimUtils {
 
@@ -985,7 +985,7 @@ public class VimUtils {
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
         }
 
-        com.sg.vim.datamodel.flservice.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME,
+        com.sg.vim.datamodel.service.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME,
                 FUELLABEL_PASSWORD, vehicleInfoList, FUELLABEL_OKEY);
         int rCode = r.getResultCode();
         if (rCode == 1) {
@@ -1018,7 +1018,7 @@ public class VimUtils {
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
         }
 
-        com.sg.vim.datamodel.flservice.OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME,
+        com.sg.vim.datamodel.service.OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME,
                 FUELLABEL_PASSWORD, vehicleInfoList, FUELLABEL_OKEY);
         int rCode = r.getResultCode();
         if (rCode == 1) {
@@ -1058,7 +1058,7 @@ public class VimUtils {
 
     public static void deleteFuelLabel(List<String> vinList, String memo) {
         FuelDataSysSTDSoap service = DataModelActivator.getFUELDATAService();
-        com.sg.vim.datamodel.flservice.ArrayOfString vinStringList = new com.sg.vim.datamodel.flservice.ArrayOfString();
+        com.sg.vim.datamodel.service.ArrayOfString vinStringList = new com.sg.vim.datamodel.service.ArrayOfString();
         for (int i = 0; i < vinList.size(); i++) {
             vinStringList.getString().add(vinList.get(i));
         }
@@ -1885,27 +1885,15 @@ public class VimUtils {
         return info;
     }
 
-    static String getResultMessage(Object oResult) {
+    private static String getResultMessage(Object oResult) {
         StringBuffer sb = new StringBuffer();
-        if (oResult instanceof OperateResult) {
 
-            sb.append(String.format("操作结果:%s\r\n", ((OperateResult) oResult).getResultCode()));
+        sb.append(String.format("操作结果:%s\r\n", ((OperateResult) oResult).getResultCode()));
 
-            for (NameValuePair nvp : ((OperateResult) oResult).getResultDetail().getNameValuePair()) {
-                sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
-            }
-            return sb.toString();
-        } else if (oResult instanceof com.sg.vim.datamodel.flservice.OperateResult) {
-            sb.append(String.format("操作结果:%s\r\n",
-                    ((com.sg.vim.datamodel.flservice.OperateResult) oResult).getResultCode()));
-
-            for (com.sg.vim.datamodel.flservice.NameValuePair nvp : ((com.sg.vim.datamodel.flservice.OperateResult) oResult)
-                    .getResultDetail().getNameValuePair()) {
-                sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
-            }
-            return sb.toString();
+        for (NameValuePair nvp : ((OperateResult) oResult).getResultDetail().getNameValuePair()) {
+            sb.append(String.format("%s:%s\r\n", nvp.getName(), nvp.getValue()));
         }
-        return "";
+        return sb.toString();
     }
 
     public static String getLifecycle(String vin, String collectionName) {

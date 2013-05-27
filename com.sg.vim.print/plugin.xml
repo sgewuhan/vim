@@ -4673,6 +4673,22 @@
                title="汽车燃料消耗量标识">
             <pagecolumn>
                <section
+                     expand="true"
+                     label="修改原因">
+                  <field
+                        computeField="false"
+                        editPart="Text(Multi Line)"
+                        editable="true"
+                        id="updatememo"
+                        label="修改原因"
+                        labelVisible="false"
+                        name="updatememo"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+               <section
                      label="基本信息">
                   <field
                         computeField="false"
@@ -6418,7 +6434,7 @@
                   <with
                         variable="activePartId">
                      <equals
-                           value="com.sg.vim.view.certificate">
+                           value="com.sg.vim.view.fuellabel">
                      </equals>
                   </with>
                   <with
