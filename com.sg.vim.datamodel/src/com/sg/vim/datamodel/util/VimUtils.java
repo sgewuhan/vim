@@ -407,7 +407,7 @@ public class VimUtils {
         result.put(IVIMFields.C_08, cocData.get(IVIMFields.C_08));
         // 额定总质量
         result.put(IVIMFields.F_14_1, cocData.get(IVIMFields.F_14_1));
-        // g_32 
+        // g_32
         result.put(IVIMFields.G_32, cocData.get(IVIMFields.G_32));
         // d_14 城市油耗
         result.put(IVIMFields.D_14, cocData.get(IVIMFields.D_14));
@@ -415,7 +415,7 @@ public class VimUtils {
         result.put(IVIMFields.D_15, cocData.get(IVIMFields.D_15));
         // d_16 综合油耗
         result.put(IVIMFields.D_16, cocData.get(IVIMFields.D_16));
-        // g_33 
+        // g_33
         result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
         // g_34 //取制造日期
         try {
@@ -432,29 +432,29 @@ public class VimUtils {
         result.put(IVIMFields.F_0_6b, vin);
 
         // 打印不需要但是上传需要的
-        //车辆制造企业
+        // 车辆制造企业
         result.put(IVIMFields.F_0_1, cocData.get(IVIMFields.F_0_1));
-        //车辆类别
+        // 车辆类别
         result.put(IVIMFields.F_0_4, cocData.get(IVIMFields.F_0_4));
-        //最高车速
+        // 最高车速
         result.put(IVIMFields.F_44, cocData.get(IVIMFields.F_44));
-        //轮胎规格
+        // 轮胎规格
         result.put(IVIMFields.F_32A, cocData.get(IVIMFields.F_32A));
-        //轴距
+        // 轴距
         result.put(IVIMFields.F_3, cocData.get(IVIMFields.F_3));
-        //车辆名称
+        // 车辆名称
         result.put(IVIMFields.F_0_2_1, cocData.get(IVIMFields.F_0_2_1));
-        //座位排数
+        // 座位排数
         result.put(IVIMFields.D_17, cocData.get(IVIMFields.D_17));
-        //额定载客
+        // 额定载客
         result.put(IVIMFields.F_42_1, cocData.get(IVIMFields.F_42_1));
-        //前轮距
+        // 前轮距
         result.put(IVIMFields.F_5A, cocData.get(IVIMFields.F_5A));
-        //后轮距
+        // 后轮距
         result.put(IVIMFields.F_5B, cocData.get(IVIMFields.F_5B));
-        //销售车型
+        // 销售车型
         result.put(IVIMFields.D_20, cocData.get(IVIMFields.D_20));
-        //coc id
+        // coc id
         result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
         return result;
@@ -561,20 +561,29 @@ public class VimUtils {
         return result;
     }
 
-
     public static DBObject transferCerfData(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, String vin, boolean isDP) throws Exception {
         BasicDBObject result = new BasicDBObject();
         // Veh_ClzzqymC F_0_1 车辆制造企业名称 映射
-        result.put(IVIMFields.mVeh_Clzzqymc, cocData.get(IVIMFields.F_0_1));
+        Object value = cocData.get(IVIMFields.F_0_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clzzqymc, value);
+
         // Veh_ClmC F_0_2_1 车辆名称 映射
-        result.put(IVIMFields.mVeh_Clmc, cocData.get(IVIMFields.F_0_2_1));
+        value = cocData.get(IVIMFields.F_0_2_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clmc, value);
+
         // Veh_Clxh F_0_2C1 车辆型号 映射
-        result.put(IVIMFields.mVeh_Clxh, cocData.get(IVIMFields.F_0_2C1));
+        value = cocData.get(IVIMFields.F_0_2C1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clxh, value);
 
         // Veh_Dpxh CCC_04 底盘型号 映射
         if (!isDP) {
-            result.put(IVIMFields.mVeh_Dpxh, cocData.get(IVIMFields.CCC_04));
+            value = cocData.get(IVIMFields.CCC_04);
+            if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                result.put(IVIMFields.mVeh_Dpxh, value);
         }
 
         // Veh_Csys F_38 车身颜色 从成品字典取
@@ -586,133 +595,241 @@ public class VimUtils {
             throw new Exception("无法在颜色对照表中找到成品码对应的颜色\n颜色id为:" + colorCode);
         }
         result.put(IVIMFields.mVeh_Csys, colorName);
-        // } else {
-        // String colorName = (String) cocData.get(IVIMFields.F_38);
-        // result.put(IVIMFields.mVeh_Csys, colorName);
-        // }
 
         // Veh_FDjh F_21a 发动机号 映射
         String code = (String) mesRawData.getValue("SAFETY_COMPONENTS_VIN");
         result.put(IVIMFields.mVeh_Fdjh, code.substring(code.length() - 9));
+
         // Veh_Rlzl F_25 燃料种类 映射
-        result.put(IVIMFields.mVeh_Rlzl, cocData.get(IVIMFields.F_25));
+        value = cocData.get(IVIMFields.F_25);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Rlzl, value);
+
         // Veh_Gl C_01 功率 映射
-        result.put(IVIMFields.mVeh_Gl, cocData.get(IVIMFields.C_01));
+        value = cocData.get(IVIMFields.C_01);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Gl, value);
+
         // Veh_Pl F_24 排量 映射
-        result.put(IVIMFields.mVeh_Pl, cocData.get(IVIMFields.F_24));
+        value = cocData.get(IVIMFields.F_24);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Pl, value);
+
         // Veh_PFbz C_06 排放标准 映射
-        result.put(IVIMFields.mVeh_Pfbz, cocData.get(IVIMFields.C_06));
+        value = cocData.get(IVIMFields.C_06);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Pfbz, value);
+
         // Veh_Yh C_03 油耗 映射
-        result.put(IVIMFields.mVeh_Yh, cocData.get(IVIMFields.D_16));// 取C_03还是D_16?
+        value = cocData.get(IVIMFields.D_16);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Yh, value);// 取C_03还是D_16?
+
         // Veh_WkC F_6_1 外廓长 映射
-        result.put(IVIMFields.mVeh_Wkc, cocData.get(IVIMFields.F_6_1));
+        value = cocData.get(IVIMFields.F_6_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Wkc, value);
+
         // Veh_Wkk F_7_1 外廓宽 映射
-        result.put(IVIMFields.mVeh_Wkk, cocData.get(IVIMFields.F_7_1));
+        value = cocData.get(IVIMFields.F_7_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Wkk, value);
+
         // Veh_Wkg F_8 外廓高 映射
-        result.put(IVIMFields.mVeh_Wkg, cocData.get(IVIMFields.F_8));
+        value = cocData.get(IVIMFields.F_8);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Wkg, value);
+
         if (!isDP) {
             // Veh_HxnbC F_C7_1 货厢内部长 映射
-            result.put(IVIMFields.mVeh_Hxnbc, cocData.get(IVIMFields.F_C7_1));
+            value = cocData.get(IVIMFields.F_C7_1);
+            if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                result.put(IVIMFields.mVeh_Hxnbc, value);
+
             // Veh_Hxnbk F_C7_2 货厢内部宽 映射
-            result.put(IVIMFields.mVeh_Hxnbk, cocData.get(IVIMFields.F_C7_2));
+            value = cocData.get(IVIMFields.F_C7_2);
+            if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                result.put(IVIMFields.mVeh_Hxnbk, value);
+
             // Veh_Hxnbg F_C7_3 货厢内部高 映射
-            result.put(IVIMFields.mVeh_Hxnbg, cocData.get(IVIMFields.F_C7_3));
+            value = cocData.get(IVIMFields.F_C7_3);
+            if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                result.put(IVIMFields.mVeh_Hxnbg, value);
         }
+
         // Veh_Gbthps F_C6 钢板弹簧片数 映射
         // 处理钢板簧，在成品码中取
-        Object fc6 = productCodeData.get(IVIMFields.F_C6);
-        result.put(IVIMFields.mVeh_Gbthps, fc6);
+        value = productCodeData.get(IVIMFields.F_C6);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Gbthps, value);
+
         // Veh_FDjxh F_C4 发动机型号 映射
-        result.put(IVIMFields.mVeh_Fdjxh, cocData.get(IVIMFields.F_C4));
+        value = cocData.get(IVIMFields.F_C4);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Fdjxh, value);
+
         // Veh_Lts F_1_1 轮胎数 映射
-        result.put(IVIMFields.mVeh_Lts, cocData.get(IVIMFields.F_1_1));
+        value = cocData.get(IVIMFields.F_1_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Lts, value);
+
         // Veh_Ltgg F_32A 轮胎规格 映射 轮胎规格合格证
-        result.put(IVIMFields.mVeh_Ltgg, cocData.get(IVIMFields.F_32A));
+        value = cocData.get(IVIMFields.F_32A);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Ltgg, value);
+
         // Veh_Qlj F_5a 前轮距 映射
-        result.put(IVIMFields.mVeh_Qlj, cocData.get(IVIMFields.F_5A));
+        value = cocData.get(IVIMFields.F_5A);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Qlj, value);
+
         // Veh_Hlj F_5b 后轮距 映射
-        result.put(IVIMFields.mVeh_Hlj, cocData.get(IVIMFields.F_5B));
+        value = cocData.get(IVIMFields.F_5B);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Hlj, value);
+
         // Veh_Zj F_3 轴距 映射
-        result.put(IVIMFields.mVeh_Zj, cocData.get(IVIMFields.F_3));
+        value = cocData.get(IVIMFields.F_3);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zj, value);
+
         // Veh_Zh F_14_2 轴荷 映射
-        result.put(IVIMFields.mVeh_Zh, cocData.get(IVIMFields.F_14_2));
+        value = cocData.get(IVIMFields.F_14_2);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zh, value);
+
         // Veh_Zs F_1 轴数 映射
-        result.put(IVIMFields.mVeh_Zs, cocData.get(IVIMFields.F_1));
+        value = cocData.get(IVIMFields.F_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zs, value);
+
         // Veh_Zxxs F_C34 转向形式 映射
-        result.put(IVIMFields.mVeh_Zxxs, cocData.get(IVIMFields.F_C34));
+        value = cocData.get(IVIMFields.F_C34);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zxxs, value);
+
         // Veh_Zzl F_14_1 总质量 映射
-        result.put(IVIMFields.mVeh_Zzl, cocData.get(IVIMFields.F_14_1));
+        value = cocData.get(IVIMFields.F_14_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zzl, value);
+
         // Veh_Zbzl C_08 整备质量 映射
-        result.put(IVIMFields.mVeh_Zbzl, cocData.get(IVIMFields.C_08));
+        value = cocData.get(IVIMFields.C_08);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zbzl, value);
+
         // Veh_EDzzl C_09 额定载质量 映射
-        result.put(IVIMFields.mVeh_Edzzl, cocData.get(IVIMFields.C_09));
+        value = cocData.get(IVIMFields.C_09);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Edzzl, value);
+
         // Veh_Zzllyxs F_C5 载质量利用系数 映射
-        result.put(IVIMFields.mVeh_Zzllyxs, cocData.get(IVIMFields.F_C5));
+        value = cocData.get(IVIMFields.F_C5);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zzllyxs, value);
+
         // Veh_Zqyzzl C_10 准牵引总质量 映射
-        result.put(IVIMFields.mVeh_Zqyzzl, cocData.get(IVIMFields.C_10));
+        value = cocData.get(IVIMFields.C_10);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zqyzzl, value);
+
         // Veh_BgCazzDyxzzl C_04 半挂车鞍座最大允许总质量 映射
-        result.put(IVIMFields.mVeh_Bgcazzdyxzzl, cocData.get(IVIMFields.C_04));
+        value = cocData.get(IVIMFields.C_04);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Bgcazzdyxzzl, value);
+
         // Veh_JsszCrs C_02 驾驶室准乘人数 映射 全项不填，底盘必填
-        Object cllb = cocData.get(IVIMFields.F_0_4);
         if (isDP) {
-            Object c_02 = cocData.get(IVIMFields.C_02);
-            if (!debug && Utils.isNullOrEmptyString(c_02)) {
-                throw new Exception("驾驶室准乘人数在底盘合格证数据中不可为空");
-            }
-            result.put(IVIMFields.mVeh_Jsszcrs, c_02);
+            value = cocData.get(IVIMFields.C_02);
+            // "驾驶室准乘人数在底盘合格证数据中不可为空";
+            if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                result.put(IVIMFields.mVeh_Jsszcrs, value);
         } else {
-            if ("N1".equals(cllb)) {
-                Object c_02 = cocData.get(IVIMFields.C_02);
-                if (!debug && Utils.isNullOrEmptyString(c_02)) {
-                    throw new Exception("驾驶室准乘人数在N1类全项合格证数据中不可为空");
-                }
-                result.put(IVIMFields.mVeh_Jsszcrs, c_02);
+            if ("N1".equals(cocData.get(IVIMFields.F_0_4))) {
+                value = cocData.get(IVIMFields.C_02);
+                // 驾驶室准乘人数在N1类全项合格证数据中不可为空
+                if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                    result.put(IVIMFields.mVeh_Jsszcrs, value);
             }
         }
+
         // Veh_EDzk F_42_1 额定载客 映射
         if (!isDP) {
             // 如果是M1类，取额定载客
-            if ("M1".equals(cllb)) {
-                Object f_42_1 = cocData.get(IVIMFields.F_42_1);
-                if (!debug && Utils.isNullOrEmptyString(f_42_1)) {
-                    throw new Exception("额定载客数在M1类全项合格证数据中不可为空");
-                }
-                result.put(IVIMFields.mVeh_Edzk, f_42_1);
+            if ("M1".equals(cocData.get(IVIMFields.F_0_4))) {
+                value = cocData.get(IVIMFields.F_42_1);
+                // "额定载客数在M1类全项合格证数据中不可为空");
+                if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+                    result.put(IVIMFields.mVeh_Edzk, value);
             }
-
         }
+
         // Veh_ZgCs F_44 最高车速 映射
-        result.put(IVIMFields.mVeh_Zgcs, cocData.get(IVIMFields.F_44));
+        value = cocData.get(IVIMFields.F_44);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zgcs, value);
+
         // Veh_Clpp F_C0_2 车辆品牌 映射
-        result.put(IVIMFields.mVeh_Clpp, cocData.get(IVIMFields.F_C0_2));
+        value = cocData.get(IVIMFields.F_C0_2);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clpp, value);
+
         // Veh_ClsbDh F_0_6b
         result.put(IVIMFields.mVeh_Clsbdh, vin);
+
         // Veh_DpiD C_12 底盘ID 映射
-        result.put(IVIMFields.mVeh_Dpid, cocData.get(IVIMFields.C_12));
+        value = cocData.get(IVIMFields.C_12);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Dpid, value);
+
         // Veh_Bz F_50 备注 映射 合格证备注
-        result.put(IVIMFields.mVeh_Bz, cocData.get(IVIMFields.C_11));
+        value = cocData.get(IVIMFields.C_11);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Bz, value);
+
         // Veh_Clztxx C_23 车辆状态信息 值转换
-        result.put(IVIMFields.mVeh_Clztxx, cocData.get(IVIMFields.C_23));
+        value = cocData.get(IVIMFields.C_23);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clztxx, value);
+
         // Veh_ClFl C_22 车辆分类 映射
-        result.put(IVIMFields.mVeh_Clfl, cocData.get(IVIMFields.C_22));
+        value = cocData.get(IVIMFields.C_22);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clfl, value);
+
         // Veh_Zxzs C_13 转向轴个数 映射
-        result.put(IVIMFields.mVeh_Zxzs, cocData.get(IVIMFields.C_13));
+        value = cocData.get(IVIMFields.C_13);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Zxzs, value);
+
         // Veh_CDDbj C_21 纯电动标记 值转换
-        Object object = cocData.get(IVIMFields.C_21);
-        if ("是".equals(object)) {
+        value = cocData.get(IVIMFields.C_21);
+        if ("是".equals(value)) {
             result.put(IVIMFields.mVeh_Cddbj, "1");
         } else {
             result.put(IVIMFields.mVeh_Cddbj, "2");
         }
+
         // Veh_ClsCDwmC F_0_1 车辆生产单位名称 映射
-        result.put(IVIMFields.mVeh_Clscdwmc, cocData.get(IVIMFields.F_0_1));
+        value = cocData.get(IVIMFields.F_0_1);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Clscdwmc, value);
+
         // Veh_CpsCDz D_04 车辆生产单位地址 映射
-        result.put(IVIMFields.mVeh_Cpscdz, cocData.get(IVIMFields.D_04));
+        value = cocData.get(IVIMFields.D_04);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Cpscdz, value);
+
         // Veh_QyiD C_14 企业ID 映射
-        String companyId = (String) cocData.get(IVIMFields.C_24);
-        result.put(IVIMFields.mVeh_Qyid, companyId);
+        value = (String) cocData.get(IVIMFields.C_24);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Qyid, value);
+
         // Veh_Qybz C_17 企业标准 映射
-        result.put(IVIMFields.mVeh_Qybz, cocData.get(IVIMFields.C_17));
+        value = cocData.get(IVIMFields.C_17);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Qybz, value);
+
         // Veh_Cpggh D_23 产品公告号 值转换 由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位
         String productPublicId = (String) cocData.get(IVIMFields.D_23);
         // 配置序号
@@ -723,19 +840,20 @@ public class VimUtils {
         if (Utils.isNullOrEmpty(confid)) {
             confid = "";
         }
-        String string = productPublicId + confid;
-        // if (!debug && string.length() != 25) {
-        // throw new Exception(
+        value = productPublicId + confid;
         // "无法取得正确的产品公告号。\n值转换  由公告信息获得,11位字符，其后串联配置序列号14位字符，共25位");
-        // }
-        result.put(IVIMFields.mVeh_Cpggh, string);
+        result.put(IVIMFields.mVeh_Cpggh, value);
+
         result.put(IVIMFields.D_23, productPublicId);
         result.put(IVIMFields.H_01, confid);
 
         // Veh_GgpC D_18 公告批次 映射
-        result.put(IVIMFields.mVeh_Ggpc, cocData.get(IVIMFields.D_18));
+        value = cocData.get(IVIMFields.D_18);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Ggpc, value);
+
         // Veh_Ggsxrq D_01 公告生效日期 映射
-        Object value = cocData.get(IVIMFields.D_01);
+        value = cocData.get(IVIMFields.D_01);
         try {
             Date date;
             date = Utils.getDateValue(value, true);
@@ -764,39 +882,35 @@ public class VimUtils {
 
         // Veh_Fzrq 发证日期 字符 14 YYYY年MM月DD日
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-        string = sdf.format(new Date());
-        result.put(IVIMFields.mVeh_Fzrq, string);
+        value = sdf.format(new Date());
+        result.put(IVIMFields.mVeh_Fzrq, value);
+
         // Veh_Cjh vin vin
         result.put(IVIMFields.mVeh_Cjh, "");
+
         // Veh_Clzzrq 车辆制造日期
         String mftDate = (String) mesRawData.getValue(FIELD_MFT_DATE);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         Date _date = sdf2.parse(mftDate);
-        string = sdf.format(_date);
-        result.put(IVIMFields.mVeh_Clzzrq, string);
-        // Veh_Qyqtxx 公告中的其他
-        result.put(IVIMFields.mVeh_Qyqtxx, cocData.get(IVIMFields.C_18));
+        value = sdf.format(_date);
+        result.put(IVIMFields.mVeh_Clzzrq, value);
 
+        // Veh_Qyqtxx 公告中的其他
+        value = cocData.get(IVIMFields.C_18);
+        if (!Utils.isNullOrEmptyString(value) && (!"不适用".equals(value)))
+            result.put(IVIMFields.mVeh_Qyqtxx, value);
+        // 不填项
         // // // Veh_Tmxx 条码 不填
-        // // result.put(IVIMFields.mVeh_Tmxx, cocData.get(IVIMFields.F_0_1));
         // // Veh_Jyw 待测 校验不填
-        // // result.put(IVIMFields.mVeh_Jyw, cocData.get(IVIMFields.F_0_1));
         // // Veh_PrinterName 待测
-        // result.put(IVIMFields.mVeh_PrinterName, "");
         // // Veh_PrintPosLeFt 待测
-        // result.put(IVIMFields.mVeh_PrintPosLeft, "15");
         // // Veh_PrintPosTop 待测
-        // result.put(IVIMFields.mVeh_PrintPosTop, "15");
         // // Veh_ConneCt 待测
-        // result.put(IVIMFields.mVeh_Connect, "com1");
         // // Veh_BauD 待测
-        // result.put(IVIMFields.mVeh_Baud, "9600");
         // // Veh_Parity 待测
-        // result.put(IVIMFields.mVeh_Parity, "N");
         // // Veh_Databits 待测
-        // result.put(IVIMFields.mVeh_Databits, "8");
         // // Veh_Stopbits 待测
-        // result.put(IVIMFields.mVeh_Stopbits, "1");
+        // Veh_Dywym 待测
 
         // Veh_Zzbh 纸张编号
         // *****************************输入的值并不是要传递到合格证的值，同时在字段展现时也作了相应的处理
@@ -804,7 +918,6 @@ public class VimUtils {
         // 参见doTransferBeforeInvokePrint()
         // result.put(IVIMFields.mVeh_Zzbh, "");
 
-        // Veh_Dywym 待测
         // result.put(IVIMFields.mVeh_Dywym, "");// 返回值，不填
 
         /** 以下是打印不需要的参数，但是在上传时需要的参数 **/
@@ -1607,7 +1720,8 @@ public class VimUtils {
         return info;
     }
 
-    private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate) throws Exception {
+    private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate)
+            throws Exception {
         VehicleBasicInfo info = new VehicleBasicInfo();
         // 序号 属性 中文名称 数据类型
         // （soap描述） 说明
@@ -1615,85 +1729,86 @@ public class VimUtils {
 
         // 2 Vin 车辆备案号（VIN码） s:string 主表车辆备案号（VIN码）字段（规定时间内上报时使用）
         info.setVin((String) data.get(IVIMFields.F_0_6b));
-        
+
         // 3 App_Vin 车辆备案号（VIN码） s:string 申请表车辆备案号（VIN码）字段（申请补传、修改、撤销时使用）
         if (isUpdate) {
             info.setAppVin((String) data.get(IVIMFields.F_0_6b));
         }
-        
+
         // 4 User_Id 企业登录用户名 s:string
         info.setUserId(FUELLABEL_USERNAME);
-        
+
         // 5 Qcscqy 汽车生产企业 s:string
         info.setQcscqy((String) data.get(IVIMFields.F_0_1));
-        
+
         // 6 Jkqczjxs 进口汽车经销商 s:string 国内生产商此项可为空，进口商企业为必填项
-        
+
         // 7 Clxh 车辆型号 s:string
         info.setClxh((String) data.get(IVIMFields.F_0_2C1));
-        
+
         // 8 Clzl 车辆种类 s:string 从“乘用车（M1）、轻型客车（M2）、轻型货车（N1）”下拉框中选择，其中，M1、M2、N1 的定义按GB/T
         // 15089-2001《机动车辆及挂车分类》
         info.setClzl((String) data.get(IVIMFields.F_0_4));
-        
+
         // 9 Rllx 燃料类型 s:string 汽油、柴油、两用燃料、双燃料、纯电动、非插电式混合动力、插电式混合动力、燃料电池
         info.setRllx((String) data.get(IVIMFields.F_25));
-        
+
         // Zczbzl 整车整备质量 s:string
         info.setZczbzl((String) data.get(IVIMFields.C_08));
-        
+
         // Zgcs 最高车速 s:string
         info.setZgcs((String) data.get(IVIMFields.F_44));
-        
+
         // Ltgg 轮胎规格 s:string
         info.setLtgg((String) data.get(IVIMFields.F_32A));
-        
+
         // Zj 轴距 s:string
         info.setZj((String) data.get(IVIMFields.F_3));
-        
+
         // Clzzrq 车辆制造日期/进口日期 s:string
         String value = (String) data.get(IVIMFields.mVeh_Clzzrq);
         // Assert.isNotNull(value, "车辆制造日期");
         Date dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
         GregorianCalendar nowGregorianCalendar = new GregorianCalendar();
         nowGregorianCalendar.setTime(dValue);
-        XMLGregorianCalendar xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
+        XMLGregorianCalendar xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(
+                nowGregorianCalendar);
         info.setClzzrq(xmlDatetime);
 
         // Tymc 通用名称 s:string //销售车型
         info.setTymc((String) data.get(IVIMFields.D_20));
-        
+
         // Yyc 越野车（G类） s:string 是/否
-        info.setTymc((String)data.get(IVIMFields.D_30));
+        info.setTymc((String) data.get(IVIMFields.D_30));
 
         // Zwps 座位排数 s:string
         info.setZwps((String) data.get(IVIMFields.D_17));
-        
+
         // Zdsjzzl 最大设计总质量 s:string
         info.setZdsjzzl((String) data.get(IVIMFields.F_14_1));
-        
+
         // Edzk 额定载客 s:string
         info.setEdzk((String) data.get(IVIMFields.F_42_1));
-        
+
         // Lj 轮距（前/后） s:string
         String qlj = (String) data.get(IVIMFields.F_5A);
         String hlj = (String) data.get(IVIMFields.F_5B);
-        info.setLj(qlj+"/"+hlj);
-        
+        info.setLj(qlj + "/" + hlj);
+
         // Qdxs 驱动型式 s:string 从“前轮驱动、后轮驱动、分时全轮驱动、全时全轮驱动、智能(适时)全轮驱动”下拉框中选择
-        info.setQdxs((String)data.get(IVIMFields.D_22));
-        
+        info.setQdxs((String) data.get(IVIMFields.D_22));
+
         // CreateTime 上传时间 s:datetime 此项可为空，server端处理此字段
         // UpdateTime 更新时间 s:datetime 此项可为空，server端处理此字段
         // Status 状态 s:string 此项可为空，server端处理此字段
         // 状态说明见表五
 
         // Jyjgmc 检测机构名称 s:string
-        info.setJyjgmc((String)data.get(IVIMFields.D_31));
-        
+        info.setJyjgmc((String) data.get(IVIMFields.D_31));
+
         // Jybgbh 检测报告编号 s:string
-        info.setJybgbh((String)data.get(IVIMFields.D_32));
-        
+        info.setJybgbh((String) data.get(IVIMFields.D_32));
+
         // Apply_Type 申请操作类型 s:string 此项可为空，server端处理此字段
         // Check s:string 辅助字段，企业开发时忽略此字段
         // Reason 申请原因字段 s:string 在申请补传，申请修改时（即调用接口4: UploadOverTime，5 :ApplyUpdate）时此字段为必填项
@@ -1704,7 +1819,6 @@ public class VimUtils {
         info.setEntityList(arrayRllx);
         return info;
     }
-    
 
     static String getResultMessage(Object oResult) {
         StringBuffer sb = new StringBuffer();
@@ -1750,7 +1864,6 @@ public class VimUtils {
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
     }
 
-
     public static String getColorNameByCode(String colorCode) {
         DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, "colors");
         DBObject d = c.findOne(new BasicDBObject().append(IVIMFields.color_code, colorCode));
@@ -1759,7 +1872,7 @@ public class VimUtils {
         }
         return null;
     }
-    
+
     public static DBObject getFuelLabelByVin(String vin) {
         DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_FUELABEL);
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
