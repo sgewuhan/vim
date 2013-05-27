@@ -134,6 +134,12 @@ public class IVIMFields {
     public static final String D_23 = "d_23";
     /** 产品型号名称 **/
     public static final String D_24 = "d_24";
+    /** 是否是越野车 **/
+    public static final String D_30 = "d_30";
+    /** 检测机构**/
+    public static final String D_31 = "d_31";
+    /** 检测报告 **/
+    public static final String D_32 = "d_32";
     /** 成品码 **/
     public static final String E_02 = "e_02";
     /** 成品名称 **/

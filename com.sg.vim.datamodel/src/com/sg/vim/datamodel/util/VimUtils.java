@@ -452,6 +452,8 @@ public class VimUtils {
         result.put(IVIMFields.F_5A, cocData.get(IVIMFields.F_5A));
         //后轮距
         result.put(IVIMFields.F_5B, cocData.get(IVIMFields.F_5B));
+        //销售车型
+        result.put(IVIMFields.D_20, cocData.get(IVIMFields.D_20));
         //coc id
         result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
@@ -1658,11 +1660,11 @@ public class VimUtils {
         XMLGregorianCalendar xmlDatetime = DatatypeFactory.newInstance().newXMLGregorianCalendar(nowGregorianCalendar);
         info.setClzzrq(xmlDatetime);
 
-        // Tymc 通用名称 s:string
-        info.setTymc((String) data.get(IVIMFields.F_0_2_1));
+        // Tymc 通用名称 s:string //销售车型
+        info.setTymc((String) data.get(IVIMFields.D_20));
         
         // Yyc 越野车（G类） s:string 是/否
-        info.setTymc("否");
+        info.setTymc((String)data.get(IVIMFields.D_30));
 
         // Zwps 座位排数 s:string
         info.setZwps((String) data.get(IVIMFields.D_17));
@@ -1687,10 +1689,10 @@ public class VimUtils {
         // 状态说明见表五
 
         // Jyjgmc 检测机构名称 s:string
-        info.setJyjgmc("");
+        info.setJyjgmc((String)data.get(IVIMFields.D_31));
         
         // Jybgbh 检测报告编号 s:string
-        info.setJybgbh("");
+        info.setJybgbh((String)data.get(IVIMFields.D_32));
         
         // Apply_Type 申请操作类型 s:string 此项可为空，server端处理此字段
         // Check s:string 辅助字段，企业开发时忽略此字段
