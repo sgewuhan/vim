@@ -500,7 +500,7 @@ public class IVIMFields {
     public static final String LC_CANCELED = "已撤消";
     public static final String LC_ABANDON = "已作废";
 
-    public static final String[] PRINTER_FUNCTIONS = new String[] { "打印合格证", "打印车辆一致性证书", "打印燃油标识" };
+    public static final String[] PRINTER_FUNCTIONS = new String[] { "打印整车合格证", "打印车辆一致性证书", "打印燃油标识","打印底盘合格证" };
     public static final String ACTION_REC = "action_rec";
     public static final String ACTION_REC_DATE = "act_date";
     public static final String ACTION_REC_TYPE = "act_type";

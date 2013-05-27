@@ -567,7 +567,7 @@ public class PrintContent extends Composite {
         setHGZPaperNumber(qxmodule);
         try {
             setZCHGZNumber(qxmodule);
-            setPrinter(qxmodule, IVIMFields.PRINTER_FUNCTIONS[0]);
+            setPrinter(qxmodule, IVIMFields.PRINTER_FUNCTIONS[3]);
         } catch (Exception e) {
             UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + e.getMessage(),
                     SWT.ICON_ERROR);

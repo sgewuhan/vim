@@ -1860,7 +1860,7 @@ public class VimUtils {
     }
 
     public static String getLifecycle(String vin, String collectionName) {
-        DBCollection col = DBActivator.getCollection("appportal", collectionName);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, collectionName);
         DBObject d = col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin),
                 new BasicDBObject().append(IVIMFields.LIFECYCLE, 1));
         if (d != null) {
@@ -1870,13 +1870,13 @@ public class VimUtils {
     }
 
     public static DBObject getCertDataByVin(String vin, String clztxx) {
-        DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_CERF);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
         return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
                 IVIMFields.mVeh_Clztxx, clztxx));
     }
 
     public static DBObject getCOCPaperDataByVin(String vin) {
-        DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_COCPAPER);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
     }
 
@@ -1890,12 +1890,12 @@ public class VimUtils {
     }
 
     public static DBObject getFuelLabelByVin(String vin) {
-        DBCollection col = DBActivator.getCollection("appportal", IVIMFields.COL_FUELABEL);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
         return col.findOne(new BasicDBObject().append(IVIMFields.F_0_6b, vin));
     }
 
     public static HashMap<String, String> getPrinterParameters(String printfunctionName) {
-        DBCollection col = DBActivator.getCollection("appportal", "printers");
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, "printers");
         DBObject data = col.findOne(new BasicDBObject().append(IVIMFields.mVeh_A_PrinterFunction,
                 printfunctionName));
         if (data != null) {
@@ -1915,19 +1915,19 @@ public class VimUtils {
     }
 
     public static int getCurrentMaxPaperOfCert() {
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
         int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
         return id;
     }
 
     public static int getMaxPaperOfCert() {
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
         int id = DBUtil.getIncreasedID(ids, "Veh_Zzbh");
         return id;
     }
 
     public static void setCurrentPaperCert(int startNumber) {
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
+        DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
         DBUtil.setCurrentID(ids, "Veh_Zzbh", startNumber);
     }
 

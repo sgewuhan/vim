@@ -275,7 +275,7 @@ public class PrinterSettingEditor extends EditorPart {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 if (e.detail == RWT.HYPERLINK) {
-                    if (e.text.equals("create")) {
+                    if (e.text.endsWith("create")) {
                         DBObject data = new BasicDBObject();
                         data.put(IVIMFields.mVeh_PrintPosLeft, "15");
                         data.put(IVIMFields.mVeh_PrintPosTop, "15");
@@ -288,7 +288,7 @@ public class PrinterSettingEditor extends EditorPart {
                         viewer.refresh();
                         isDirty = true;
                         firePropertyChange(PROP_DIRTY);
-                    } else if (e.text.startsWith("remove@")) {
+                    } else if (e.text.contains("remove@")) {
                         int index = Integer.parseInt(e.text.split("@")[1]);
                         input.remove(index);
                         viewer.refresh();
