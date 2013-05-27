@@ -75,6 +75,13 @@
             properties="cando"
             type="java.lang.Object">
       </propertyTester>
+      <propertyTester
+            class="com.sg.vim.print.handler.LifecycleTester2"
+            id="com.sg.vim.print.test2.action"
+            namespace="com.sg.vim.print.test2"
+            properties="cando"
+            type="java.lang.Object">
+      </propertyTester>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -99,7 +106,7 @@
       <view
             class="com.sg.vim.print.view.EnvView"
             id="com.sg.vim.view.env"
-            name="环保数据上报"
+            name="型式核准"
             restorable="true">
       </view>
       <view
@@ -4151,9 +4158,9 @@
             collectionName="env"
             dbName="appportal"
             id="com.sg.vim.print.editor.env"
-            name="环保上传数据">
+            name="型式核准数据">
          <basicpage
-               description="环保上传数据"
+               description="型式核准数据"
                id="1"
                title="基本信息">
             <pagecolumn
@@ -4236,6 +4243,11 @@
             </pagecolumn>
          </basicpage>
       </editor>
+      <pageExtendsions
+            id="com.sg.vim.print.editor.env"
+            location="after=1"
+            targetId="systempage">
+      </pageExtendsions>
       <editor
             collectionName="certificate"
             dbName="appportal"
@@ -5125,6 +5137,100 @@
                         persistable="true"
                         required="false"
                         tooltips="合格证上的制造日期"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
+         <versionControl>
+            <fieldname
+                  fieldname="all">
+            </fieldname>
+         </versionControl>
+      </editor>
+      <editor
+            collectionName="env"
+            dbName="appportal"
+            id="com.sg.vim.print.editor.env_edit"
+            name="修改上传型式核准数据">
+         <basicpage
+               description="型式核准数据"
+               id="1"
+               title="基本信息">
+            <pagecolumn
+                  id="1">
+               <section
+                     label="基本信息">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="vin"
+                        label="VIN"
+                        labelVisible="true"
+                        name="vin"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="clxh"
+                        label="车辆型号"
+                        labelVisible="true"
+                        name="clxh"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="fdjxh"
+                        label="发动机型号"
+                        labelVisible="true"
+                        name="fdjxh"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="fdjscc"
+                        label="发动机生产厂"
+                        labelVisible="true"
+                        name="fdjscc"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="mdate"
+                        label="mdate"
+                        labelVisible="true"
+                        name="mdate"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="qdate"
+                        label="qdate"
+                        labelVisible="true"
+                        name="qdate"
+                        persistable="true"
+                        required="false"
                         type="String">
                   </field>
                </section>
@@ -6755,6 +6861,56 @@
          </command>
       </menuContribution>
       <menuContribution
+            allPopups="false"
+            locationURI="toolbar:main?after=com.sg.ui.separator3">
+         <command
+               commandId="com.sg.vim.print.upload.env"
+               icon="image/upload_24.png"
+               label="上传"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.env">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="com.sg.vim.print.cancel.env"
+               icon="image/cancel_24.png"
+               label="撤销"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="com.sg.vim.view.env">
+                     </equals>
+                  </with>
+                  <with
+                        variable="activeWorkbenchWindow.activePerspective">
+                     <equals
+                           value="com.sg.vim.perspective.printdata">
+                     </equals>
+                  </with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
             allPopups="true"
             locationURI="popup:com.sg.vim.table.certificate">
          <command
@@ -7036,6 +7192,17 @@
       <command
             id="com.sg.vim.print.reassemably"
             name="重新组装数据">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.sg.vim.print.upload.env"
+            name="上传">
+      </command>
+      <command
+            id="com.sg.vim.print.cancel.env"
+            name="撤消">
       </command>
    </extension>
    <extension
@@ -7334,6 +7501,43 @@
                   </iterate>
                </with>
             </and>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.sg.vim.print.handler.UploadEnv"
+            commandId="com.sg.vim.print.upload.env">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="upload"
+                        property="com.sg.vim.print.test2.cando">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.print.handler.CancelEnv"
+            commandId="com.sg.vim.print.cancel.env">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="cancel"
+                        property="com.sg.vim.print.test2.cando">
+                  </test>
+               </iterate>
+            </with>
          </enabledWhen>
       </handler>
    </extension>
