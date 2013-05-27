@@ -1009,6 +1009,23 @@ public class VimUtils {
         }
     }
 
+    public static void uploadFuelLabel2(List<DBObject> fuelLabelList, String memo) throws Exception {
+        FuelDataSysSTDSoap service = DataModelActivator.getFUELDATAService();
+        ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
+
+        for (int i = 0; i < fuelLabelList.size(); i++) {
+            VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i), true, memo);
+            vehicleInfoList.getVehicleBasicInfo().add(vbi);
+        }
+
+        com.sg.vim.datamodel.flservice.OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME,
+                FUELLABEL_PASSWORD, vehicleInfoList, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
+        }
+    }
+
     public static void updateCert(List<DBObject> certList, String memo) throws Exception {
         CertificateRequestServiceSoap vidService = DataModelActivator.getVIDCService();
         ArrayOfCertificateInfo cis = new ArrayOfCertificateInfo();
@@ -1044,7 +1061,7 @@ public class VimUtils {
     }
 
     private static VehicleBasicInfo getVehicleBasicInfo(DBObject data) throws Exception {
-        return getVehicleBasicInfo(data, false);
+        return getVehicleBasicInfo(data, false, null);
     }
 
     private static CertificateInfo getCertificateInfo(DBObject data, boolean isUpdate)
@@ -1749,7 +1766,7 @@ public class VimUtils {
         return info;
     }
 
-    private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate)
+    private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate, String memo)
             throws Exception {
         VehicleBasicInfo info = new VehicleBasicInfo();
         // 序号 属性 中文名称 数据类型
@@ -1837,6 +1854,11 @@ public class VimUtils {
 
         // Jybgbh 检测报告编号 s:string
         info.setJybgbh((String) data.get(IVIMFields.D_32));
+
+        if (isUpdate && !Utils.isNullOrEmpty(memo)) {
+            // 原因
+            info.setReason(memo);
+        }
 
         // Apply_Type 申请操作类型 s:string 此项可为空，server端处理此字段
         // Check s:string 辅助字段，企业开发时忽略此字段
@@ -1948,36 +1970,16 @@ public class VimUtils {
         DBUtil.setCurrentID(ids, "Veh_Zzbh", startNumber);
     }
 
-    public static DBObject saveUploadData(List<ObjectId> idList, String memo) {
+    public static DBObject saveUploadData(List<ObjectId> idList, String memo, String colname,
+            String actionType) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
                 .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
-                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
+                .append(IVIMFields.ACTION_REC_TYPE, actionType)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
 
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
-        DBObject query = new BasicDBObject().append("_id",
-                new BasicDBObject().append("$in", idList));
-        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
-                .append(IVIMFields.UPLOADDATE, date)
-                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
-        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
-                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-
-        col.update(query, update, false, true);
-        return setting;
-    }
-
-    public static DBObject saveUpload2Data(List<ObjectId> idList, String memo) {
-        Date date = new Date();
-        DBObject accountInfo = UserSessionContext.getAccountInfo();
-        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
-                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
-                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD2)
-                .append(IVIMFields.ACTION_REC_MEMO, memo);
-
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, colname);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
         DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
@@ -2181,27 +2183,6 @@ public class VimUtils {
             col.update(query, update, false, true);
             data.put("_id", oid);
         }
-    }
-
-    public static DBObject saveFuelLabelUploadData(List<ObjectId> idList, String memo) {
-        Date date = new Date();
-        DBObject accountInfo = UserSessionContext.getAccountInfo();
-        BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
-                .append(IVIMFields.ACTION_REC_ACCOUNT, accountInfo)
-                .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD)
-                .append(IVIMFields.ACTION_REC_MEMO, memo);
-
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
-        DBObject query = new BasicDBObject().append("_id",
-                new BasicDBObject().append("$in", idList));
-        DBObject setting = new BasicDBObject().append(IVIMFields.UPLOADACCOUNT, accountInfo)
-                .append(IVIMFields.UPLOADDATE, date)
-                .append(IVIMFields.LIFECYCLE, IVIMFields.LC_UPLOADED);
-        BasicDBObject update = new BasicDBObject().append("$set", setting).append("$push",
-                new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
-
-        col.update(query, update, false, true);
-        return setting;
     }
 
     public static void printFuelLabel(Browser browser, DBObject dbObject) throws Exception {

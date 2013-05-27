@@ -71,7 +71,7 @@ public class CertificateView extends TableNavigator {
         super.dispose();
     }
 
-    private String getMemo(String title) {
+    protected String getMemo(String title) {
         IInputValidator validator = new IInputValidator() {
 
             @Override
@@ -118,6 +118,7 @@ public class CertificateView extends TableNavigator {
                 }
 
                 getNavigator().getViewer().update(currentPrintData, null);
+
             }
         }
 
@@ -179,7 +180,8 @@ public class CertificateView extends TableNavigator {
                 dataList.add(dataItem);
             }
             VimUtils.uploadCert2(dataList, memo);
-            DBObject setting = VimUtils.saveUpload2Data(idList, memo);
+            DBObject setting = VimUtils.saveUploadData(idList, memo, IVIMFields.COL_CERF,
+                    IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD2);
             for (int i = 0; i < dataList.size(); i++) {
                 DBObject item = dataList.get(i);
                 item.putAll(setting);
@@ -246,12 +248,15 @@ public class CertificateView extends TableNavigator {
         }
         try {
             VimUtils.uploadCert(dataList);
-            DBObject setting = VimUtils.saveUploadData(idList, "");
+            DBObject setting = VimUtils.saveUploadData(idList, "", IVIMFields.COL_CERF,
+                    IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD);
 
             for (int i = 0; i < dataList.size(); i++) {
                 DBObject item = dataList.get(i);
                 item.putAll(setting);
             }
+            
+            getNavigator().getViewer().update(dataList.toArray(), null);
         } catch (Exception e) {
             UIUtils.showMessage(getSite().getShell(), "合格证上传", e.getMessage(), SWT.ICON_ERROR
                     | SWT.OK);
@@ -288,6 +293,8 @@ public class CertificateView extends TableNavigator {
                 DBObject item = dataList.get(i);
                 item.putAll(setting);
             }
+            
+            getNavigator().getViewer().update(dataList.toArray(), null);
         } catch (Exception e) {
             UIUtils.showMessage(getSite().getShell(), "合格证撤消", e.getMessage(), SWT.ICON_ERROR
                     | SWT.OK);
@@ -402,9 +409,9 @@ public class CertificateView extends TableNavigator {
                         DBObject dpcocData, DBObject dpconfData) {
                     try {
                         DataObjectEditorInput input = VimUtils.getCerfInput(cocData, confData,
-                                productCodeData, mesRawData,null, vin, false,_id);
+                                productCodeData, mesRawData, null, vin, false, _id);
                         input.save();
-                        
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

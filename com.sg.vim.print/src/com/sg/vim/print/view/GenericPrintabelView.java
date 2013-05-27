@@ -93,7 +93,7 @@ public abstract class GenericPrintabelView extends TableNavigator {
         }
     }
 
-    private String getMemo(String title) {
+    protected String getMemo(String title) {
         IInputValidator validator = new IInputValidator() {
 
             @Override
@@ -124,5 +124,6 @@ public abstract class GenericPrintabelView extends TableNavigator {
             }
         }
     }
+    
 
 }

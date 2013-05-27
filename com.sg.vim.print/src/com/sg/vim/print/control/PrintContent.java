@@ -791,7 +791,8 @@ public class PrintContent extends Composite {
             idList.add((ObjectId) sb[i].getData().get("_id"));
         }
 
-        VimUtils.saveUploadData(idList, "");
+        VimUtils.saveUploadData(idList, "",IVIMFields.COL_CERF,
+                IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD);
     }
 
 }

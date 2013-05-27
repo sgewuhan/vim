@@ -507,13 +507,14 @@ public class IVIMFields {
     public static final String ACTION_REC_ACCOUNT = "act_account";
     public static final String ACTION_REC_MEMO = "act_memo";
     public static final String ACTION_REC_TYPE_VALUE_PRINT = "打印";
-    public static final Object ACTION_REC_TYPE_VALUE_UPLOAD = "上传";
-    public static final Object ACTION_REC_TYPE_VALUE_REPRINT = "补打";
-    public static final Object ACTION_REC_TYPE_VALUE_UPLOAD2 = "补传";
-    public static final Object ACTION_REC_TYPE_VALUE_CANCEL = "撤消";
-    public static final Object ACTION_REC_TYPE_VALUE_UPDATE = "修改";
-    public static final Object ACTION_REC_TYPE_VALUE_ABANDON = "作废";
+    public static final String ACTION_REC_TYPE_VALUE_UPLOAD = "上传";
+    public static final String ACTION_REC_TYPE_VALUE_REPRINT = "补打";
+    public static final String ACTION_REC_TYPE_VALUE_UPLOAD2 = "补传";
+    public static final String ACTION_REC_TYPE_VALUE_CANCEL = "撤消";
+    public static final String ACTION_REC_TYPE_VALUE_UPDATE = "修改";
+    public static final String ACTION_REC_TYPE_VALUE_ABANDON = "作废";
     public static final String mVeh_A_update_memo = "updatememo";
+
 
     public static final String SEQ_GZBH = "hgzbh";
     /**在COC证书上的合格证日期**/
