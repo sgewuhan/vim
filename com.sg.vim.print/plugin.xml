@@ -4533,7 +4533,11 @@
             queryMode="false"
             useHashlookup="false"
             virtual="false">
-<column column="lifecycle" name="状态" type="String"></column>
+<column
+      column="lifecycle"
+      labelProvider="com.sg.vim.print.labelprovider.LifecycleLabel"
+      name="状态"
+      type="String"></column>
 <column
       column="Veh_Clmc"
       name="车辆名称"
