@@ -4392,6 +4392,7 @@
             id="com.sg.vim.editor.cocinfo"
             image="image/contact_32.png"
             name="车辆一致性信息"
+            saveHandler="com.sg.vim.cocinfo.savehandler.SaveCOCInfo"
             titleToolTips="车辆一致性信息">
          <basicpage
                description="第一部分 车辆总体信息"

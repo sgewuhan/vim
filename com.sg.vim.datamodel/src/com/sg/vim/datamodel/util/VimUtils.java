@@ -27,6 +27,7 @@ import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 import com.sg.sqldb.DDB;
 import com.sg.sqldb.utility.SQLResult;
 import com.sg.sqldb.utility.SQLRow;
@@ -342,18 +343,26 @@ public class VimUtils {
 
     public static DataObjectEditorInput getCerfInput(DBObject cocData, DBObject confData,
             DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
-            String vin, boolean isDP) throws Exception {
+            String vin, boolean isDP, ObjectId reassemblyId) throws Exception {
         DataEditorConfigurator conf = (DataEditorConfigurator) UI.getEditorRegistry()
                 .getConfigurator(isDP ? DPCERT_EDITOR : QXCERT_EDITOR);
         DBCollection c = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
         DBObject dbObject = transferCerfData(cocData, confData, productCodeData, mesRawData, vin,
                 isDP);
         DataObject data = new DataObject(c, dbObject);
-        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-        if (debug) {
-            editorInput.setEditable(true);
+        if (reassemblyId != null) {
+            data.setValue("_id", reassemblyId);
         }
+        DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
+        editorInput.setEditable(!debug);
         return editorInput;
+    }
+
+    public static DataObjectEditorInput getCerfInput(DBObject cocData, DBObject confData,
+            DBObject productCodeData, SQLRow mesRawData, IEditorSaveHandler saveHandler,
+            String vin, boolean isDP) throws Exception {
+        return getCerfInput(cocData, confData, productCodeData, mesRawData, saveHandler, vin, isDP,
+                null);
     }
 
     public static DataObjectEditorInput getCOCInput(DBObject cocData, DBObject confData,
@@ -364,9 +373,8 @@ public class VimUtils {
         DBObject dbObject = transferCOCData(cocData, confData, productCodeData, mesRawData, vin);
         DataObject data = new DataObject(c, dbObject);
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-        if (debug) {
-            editorInput.setEditable(true);
-        }
+        editorInput.setEditable(!debug);
+
         return editorInput;
     }
 
@@ -379,9 +387,8 @@ public class VimUtils {
                 vin);
         DataObject data = new DataObject(c, dbObject);
         DataObjectEditorInput editorInput = new DataObjectEditorInput(data, conf, saveHandler);
-        if (debug) {
-            editorInput.setEditable(true);
-        }
+        editorInput.setEditable(!debug);
+
         return editorInput;
     }
 
@@ -558,6 +565,8 @@ public class VimUtils {
         Object fc6 = productCodeData.get(IVIMFields.F_C6);
         result.put(IVIMFields.F_C6, fc6);
 
+        // coc id
+        result.put(IVIMFields.COC_ID, cocData.get("_id"));
         return result;
     }
 
@@ -927,6 +936,9 @@ public class VimUtils {
         result.put(IVIMFields.mVeh__Qzdfs, cocData.get(IVIMFields.C_20));
         result.put(IVIMFields.mVeh__Pzxlh, confid);
         // 完整合格证编号需要在打印后传递
+
+        // coc id
+        result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
         return result;
     }
@@ -1815,6 +1827,10 @@ public class VimUtils {
         // EntityList 燃料参数数组 RllxParamEntity[] 数据结构见表四
         ArrayOfRllxParamEntity arrayRllx = new ArrayOfRllxParamEntity();
         RllxParamEntity e = new RllxParamEntity();
+        e.setParamCode("CT_BSRXS");
+        e.setParamValue("手动");
+        e.setVin((String) data.get(IVIMFields.F_0_6b));
+
         arrayRllx.getRllxParamEntity().add(e);
         info.setEntityList(arrayRllx);
         return info;
@@ -2275,7 +2291,10 @@ public class VimUtils {
         }
         update.put(IVIMFields.F_25, sb.toString());
         COCInfo cService = new COCInfo();
-        cService.update((ObjectId) cocInfo.get("_id"), update);
+        ObjectId cocId = (ObjectId) cocInfo.get("_id");
+        cService.update(cocId, update);
+        
+        markCOCDirty(cocId);
     }
 
     public static void mntMesProductInfo(DBObject product) throws Exception {
@@ -2406,4 +2425,28 @@ public class VimUtils {
 
     }
 
+    public static boolean markCOCDirty(ObjectId cocId) {
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
+        WriteResult rs = col.update(new BasicDBObject().append(IVIMFields.COC_ID, cocId),
+                new BasicDBObject().append("$set", new BasicDBObject(IVIMFields.IS_DIRTY,
+                        Boolean.TRUE)));
+        int cnt = rs.getN();
+
+        col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCPAPER);
+        rs = col.update(new BasicDBObject().append(IVIMFields.COC_ID, cocId), new BasicDBObject()
+                .append("$set", new BasicDBObject(IVIMFields.IS_DIRTY, Boolean.TRUE)));
+        if (cnt <= 0) {
+            cnt = rs.getN();
+        }
+
+        col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_FUELABEL);
+        rs = col.update(new BasicDBObject().append(IVIMFields.COC_ID, cocId), new BasicDBObject()
+                .append("$set", new BasicDBObject(IVIMFields.IS_DIRTY, Boolean.TRUE)));
+        if (cnt <= 0) {
+            cnt = rs.getN();
+        }
+        
+        return cnt>0;
+
+    }
 }

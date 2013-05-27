@@ -537,5 +537,6 @@ public class IVIMFields {
     
     public static final String color_name = "color_name";
     public static final String color_code = "color_code";
+    public static final String IS_DIRTY = "isdirty";
 
 }
