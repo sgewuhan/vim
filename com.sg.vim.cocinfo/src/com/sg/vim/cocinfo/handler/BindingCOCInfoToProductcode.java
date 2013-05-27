@@ -76,10 +76,10 @@ public class BindingCOCInfoToProductcode extends AbstractHandler {
             //Í¬²½MES
             try {
                 VimUtils.mntMesProductInfo(productCodeData);
-                idList.add(productCodeData.get(ProductCodeInfo.FIELD_SYSID));
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            idList.add(productCodeData.get(ProductCodeInfo.FIELD_SYSID));
         }
 
         DBCollection c = DBActivator.getCollection("appportal", "productcodeinfo");
