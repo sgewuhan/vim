@@ -2964,7 +2964,7 @@
                   </field>
                   <field
                         computeField="false"
-                        editPart="Text(Single Line)"
+                        editPart="Text(Multi Line)"
                         editable="true"
                         id="g_33"
                         label="对应限值"
