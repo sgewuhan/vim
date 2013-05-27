@@ -1056,6 +1056,16 @@ public class VimUtils {
         }
     }
 
+    public static void deleteFuelLabel(List<String> vinList, String memo) {
+        FuelDataSysSTDSoap service = DataModelActivator.getFUELDATAService();
+        com.sg.vim.datamodel.flservice.ArrayOfString vinStringList = new com.sg.vim.datamodel.flservice.ArrayOfString();
+        for (int i = 0; i < vinList.size(); i++) {
+            vinStringList.getString().add(vinList.get(i));
+        }
+        service.applyDelete(FUELLABEL_USERNAME, FUELLABEL_PASSWORD, vinStringList, memo,
+                FUELLABEL_OKEY);
+    }
+
     private static CertificateInfo getCertificateInfo(DBObject data) throws Exception {
         return getCertificateInfo(data, false);
     }

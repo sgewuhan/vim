@@ -9,7 +9,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.sg.vim.print.view.FuelLabelView;
 
-public class CancelFuelLabel extends AbstractHandler {
+public class EditFuellabel extends AbstractHandler {
 
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -20,7 +20,7 @@ public class CancelFuelLabel extends AbstractHandler {
         
         IWorkbenchPart part = HandlerUtil.getActivePart(event);
         if(part instanceof FuelLabelView){
-            ((FuelLabelView)part).doCancel();
+            ((FuelLabelView)part).doEdit();
         }
         return null;
     }

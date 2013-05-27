@@ -38,6 +38,7 @@ public class CertificateView extends TableNavigator {
     private DBObject currentPrintData;
     private Browser browser;
     private int startNumber;
+    // private DataObjectEditor editor;
     private DataObjectEditor editor;
 
     @Override
@@ -255,7 +256,7 @@ public class CertificateView extends TableNavigator {
                 DBObject item = dataList.get(i);
                 item.putAll(setting);
             }
-            
+
             getNavigator().getViewer().update(dataList.toArray(), null);
         } catch (Exception e) {
             UIUtils.showMessage(getSite().getShell(), "合格证上传", e.getMessage(), SWT.ICON_ERROR
@@ -293,7 +294,7 @@ public class CertificateView extends TableNavigator {
                 DBObject item = dataList.get(i);
                 item.putAll(setting);
             }
-            
+
             getNavigator().getViewer().update(dataList.toArray(), null);
         } catch (Exception e) {
             UIUtils.showMessage(getSite().getShell(), "合格证撤消", e.getMessage(), SWT.ICON_ERROR
@@ -305,6 +306,11 @@ public class CertificateView extends TableNavigator {
         IStructuredSelection selection = getNavigator().getViewer().getSelection();
         if (selection == null || selection.isEmpty()) {
             return;
+        }
+        
+        if(editor!=null){
+            UIUtils.showMessage(getSite().getShell(), "更新合格证数据",
+                    "您不能同时更新多条合格证数据。", SWT.OK);
         }
 
         final DBObject data = (DBObject) selection.getFirstElement();
@@ -348,6 +354,7 @@ public class CertificateView extends TableNavigator {
                 UIUtils.showMessage(getSite().getShell(), "更新合格证数据", "已提交更新国家合格证服务器的数据。\n编辑器即将关闭。",
                         SWT.OK | SWT.ICON_INFORMATION);
                 editor.close(false);
+                editor = null;
                 return true;
             }
         };
