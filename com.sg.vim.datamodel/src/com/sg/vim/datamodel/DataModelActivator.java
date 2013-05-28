@@ -5,6 +5,8 @@ import org.osgi.framework.BundleContext;
 
 import com.sg.vim.datamodel.service.fuellabel.FuelDataSysSTD;
 import com.sg.vim.datamodel.service.fuellabel.FuelDataSysSTDSoap;
+import com.sg.vim.datamodel.service.vecc_sepa.WSVin;
+import com.sg.vim.datamodel.service.vecc_sepa.WSVinSoap;
 import com.sg.vim.datamodel.service.vidc.CertificateRequestService;
 import com.sg.vim.datamodel.service.vidc.CertificateRequestServiceSoap;
 
@@ -40,10 +42,14 @@ public class DataModelActivator implements BundleActivator {
                 .getCertificateRequestServiceSoap();
         return service;
     }
-    
+
     public static FuelDataSysSTDSoap getFUELDATAService() {
         FuelDataSysSTDSoap service = new FuelDataSysSTD().getFuelDataSysSTDSoap();
         return service;
     }
 
+    public static WSVinSoap getWVINService() {
+        WSVinSoap service = new WSVin().getWSVinSoap();
+        return service;
+    }
 }

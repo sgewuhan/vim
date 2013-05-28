@@ -3137,22 +3137,6 @@
                width="80">
          </column>
          <column
-               column="c_22"
-               name="车辆类型"
-               type="String">
-         </column>
-         <column
-               column="c_23"
-               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
-               name="车辆状态信息"
-               type="String">
-         </column>
-         <column
-               column="f_c4"
-               name="发动机型号"
-               type="String">
-         </column>
-         <column
                column="f_32"
                name="轮胎规格"
                type="String">
@@ -3163,41 +3147,32 @@
                type="String">
          </column>
          <column
-               column="f_0_2a"
-               name="车型系列\n代号/名称"
+               column="f_c4"
+               name="发动机型号"
                type="String">
          </column>
          <column
-               column="f_0_2b"
-               name="单元代号/名称"
+               column="f_30"
+               name="主传动比"
                type="String">
          </column>
-         <column
-               column="f_0_2c"
-               name="车型代号/名称"
-               type="String">
-         </column>
+         <!--
          <columnGroup
                defaultGroup="true"
                name="车辆基本信息">
             <column
-                  column="f_0_1"
-                  name="车辆制造企业名称"
+                  column="f_0_2c"
+                  name="车型代号/名称"
                   type="String">
             </column>
             <column
-                  column="f_c0_1"
-                  name="车辆制造国"
+                  column="f_0_2b"
+                  name="单元代号/名称"
                   type="String">
             </column>
             <column
-                  column="f_c0_2"
-                  name="中文品牌"
-                  type="String">
-            </column>
-            <column
-                  column="f_c0_3"
-                  name="英文品牌"
+                  column="f_0_2a"
+                  name="车型系列\n代号/名称"
                   type="String">
             </column>
             <column
@@ -3515,11 +3490,6 @@
                   type="String">
             </column>
             <column
-                  column="f_30"
-                  name="主传动比"
-                  type="String">
-            </column>
-            <column
                   column="f_32"
                   name="轮胎规格"
                   type="String">
@@ -3653,19 +3623,7 @@
                   type="String">
             </column>
          </columnGroup>
-            
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-            
+         -->
       </table>
       <table
             canCreate="false"
@@ -3698,22 +3656,6 @@
                width="80">
          </column>
          <column
-               column="c_22"
-               name="车辆类型"
-               type="String">
-         </column>
-         <column
-               column="c_23"
-               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
-               name="车辆状态信息"
-               type="String">
-         </column>
-         <column
-               column="f_c4"
-               name="发动机型号"
-               type="String">
-         </column>
-         <column
                column="f_32"
                name="轮胎规格"
                type="String">
@@ -3724,41 +3666,43 @@
                type="String">
          </column>
          <column
-               column="f_0_2a"
-               name="车型系列\n代号/名称"
+               column="f_c4"
+               name="发动机型号"
                type="String">
          </column>
          <column
-               column="f_0_2b"
-               name="单元代号/名称"
+               column="f_30"
+               name="主传动比"
                type="String">
          </column>
-         <column
-               column="f_0_2c"
-               name="车型代号/名称"
-               type="String">
-         </column>
+         <!--
          <columnGroup
                defaultGroup="true"
                name="车辆基本信息">
             <column
-                  column="f_0_1"
-                  name="车辆制造企业名称"
+                  column="f_0_2c"
+                  name="车型代号/名称"
                   type="String">
             </column>
             <column
-                  column="f_c0_1"
-                  name="车辆制造国"
+                  column="f_0_2b"
+                  name="单元代号/名称"
                   type="String">
             </column>
             <column
-                  column="f_c0_2"
-                  name="中文品牌"
+                  column="f_0_2a"
+                  name="车型系列\n代号/名称"
                   type="String">
             </column>
             <column
-                  column="f_c0_3"
-                  name="英文品牌"
+                  column="c_23"
+                  labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
+                  name="车辆状态信息"
+                  type="String">
+            </column>
+            <column
+                  column="c_22"
+                  name="车辆类型"
                   type="String">
             </column>
             <column
@@ -4076,11 +4020,6 @@
                   type="String">
             </column>
             <column
-                  column="f_30"
-                  name="主传动比"
-                  type="String">
-            </column>
-            <column
                   column="f_32"
                   name="轮胎规格"
                   type="String">
@@ -4214,6 +4153,7 @@
                   type="String">
             </column>
          </columnGroup>
+         -->
       </table>
       <table
             canCreate="false"
@@ -4324,12 +4264,6 @@
                type="String">
          </column>
          <column
-               column="c_23"
-               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
-               name="车辆状态信息"
-               type="String">
-         </column>
-         <column
                column="f_c4"
                name="发动机型号"
                type="String">
@@ -4362,26 +4296,6 @@
          <columnGroup
                defaultGroup="true"
                name="车辆基本信息">
-            <column
-                  column="f_0_1"
-                  name="车辆制造企业名称"
-                  type="String">
-            </column>
-            <column
-                  column="f_c0_1"
-                  name="车辆制造国"
-                  type="String">
-            </column>
-            <column
-                  column="f_c0_2"
-                  name="中文品牌"
-                  type="String">
-            </column>
-            <column
-                  column="f_c0_3"
-                  name="英文品牌"
-                  type="String">
-            </column>
             <column
                   column="f_0_4"
                   name="车辆类别"
@@ -4887,7 +4801,8 @@
             dbName="appportal"
             id="com.sg.vim.editor.cocinfo"
             image="image/contact_32.png"
-            name="车辆一致性信息"
+            labelFieldName="f_0_2c1"
+            name="一致性信息"
             saveHandler="com.sg.vim.cocinfo.savehandler.SaveCOCInfo"
             titleToolTips="车辆一致性信息">
          <basicpage

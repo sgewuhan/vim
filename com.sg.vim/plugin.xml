@@ -6,12 +6,27 @@
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="perspective.home"
-            name="车型数据维护">
+            name="公告车型">
+      </perspective>
+      <perspective
+            class="com.sg.vim.EditorHidePerspective"
+            id="perspective.home1"
+            name="车辆一致性">
+      </perspective>
+      <perspective
+            class="com.sg.vim.EditorHidePerspective"
+            id="perspective.home2"
+            name="配置序号">
+      </perspective>
+      <perspective
+            class="com.sg.vim.EditorHidePerspective"
+            id="perspective.home3"
+            name="成品铭牌">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"
             id="com.sg.vim.perspective.cocinfo"
-            name="成品码管理">
+            name="成品码">
       </perspective>
       <perspective
             class="com.sg.vim.EditorHidePerspective"
@@ -56,13 +71,45 @@
          point="com.mobnut.portal.scenario">
       <scenario
             id="com.sg.vim.scenario.mnt"
-            name="数据维护">
+            name="基础数据维护">
          <perspective
                default="true"
                id="perspective.home">
          </perspective>
          <perspective
                id="com.sg.vim.perspective.cocinfo">
+         </perspective>
+      </scenario>
+      <scenario
+            id="com.sg.vim.scenario.mnt1"
+            name="公告车型数据维护">
+         <perspective
+               default="true"
+               id="perspective.home">
+         </perspective>
+      </scenario>
+      <scenario
+            id="com.sg.vim.scenario.mnt2"
+            name="车辆一致性数据维护">
+         <perspective
+               default="true"
+               id="perspective.home1">
+         </perspective>
+      </scenario>
+      <scenario
+            id="com.sg.vim.scenario.mnt3"
+            name="配置序号数据维护">
+         <perspective
+               default="true"
+               id="perspective.home2">
+         </perspective>
+      </scenario>
+      <scenario
+            id="com.sg.vim.scenario.mnt4"
+            name="铭牌数据查询">
+         <perspective
+               default="true"
+               id="perspective.home3">
          </perspective>
       </scenario>
       <scenario

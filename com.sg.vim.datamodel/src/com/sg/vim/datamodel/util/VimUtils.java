@@ -1,5 +1,8 @@
 package com.sg.vim.datamodel.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,12 +15,20 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.bson.types.ObjectId;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.rap.rwt.RWT;
 import org.eclipse.rap.rwt.client.service.UrlLauncher;
 import org.eclipse.swt.browser.Browser;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
@@ -48,8 +59,12 @@ import com.sg.vim.datamodel.service.OperateResult;
 import com.sg.vim.datamodel.service.fuellabel.ArrayOfRllxParamEntity;
 import com.sg.vim.datamodel.service.fuellabel.ArrayOfVehicleBasicInfo;
 import com.sg.vim.datamodel.service.fuellabel.FuelDataSysSTDSoap;
+import com.sg.vim.datamodel.service.fuellabel.ObjectFactory;
 import com.sg.vim.datamodel.service.fuellabel.RllxParamEntity;
 import com.sg.vim.datamodel.service.fuellabel.VehicleBasicInfo;
+import com.sg.vim.datamodel.service.vecc_sepa.LoginW;
+import com.sg.vim.datamodel.service.vecc_sepa.LoginWResponse;
+import com.sg.vim.datamodel.service.vecc_sepa.WSVinSoap;
 import com.sg.vim.datamodel.service.vidc.ArrayOfCertificateInfo;
 import com.sg.vim.datamodel.service.vidc.CertificateInfo;
 import com.sg.vim.datamodel.service.vidc.CertificateRequestServiceSoap;
@@ -131,9 +146,9 @@ public class VimUtils {
     public static String FUELLABEL_PASSWORD;
 
     public static String FUELLABEL_OKEY;
-    
+
     public static String ENV_USERNAME;
-    
+
     public static String ENV_PASSWORD;
 
     public static void setValues(Browser browser, DBObject dbo) {
@@ -963,7 +978,6 @@ public class VimUtils {
         // coc id
         result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
-
         return result;
     }
 
@@ -998,6 +1012,48 @@ public class VimUtils {
         if (rCode == 1) {
             throw new Exception(getResultMessage(r));
         }
+    }
+
+    public static void main(String[] args) throws ParserConfigurationException, SAXException,
+            IOException {
+        String res = "<result>\n" + "<succeed>\"true\"</succeed>\n"
+                + "<data>\"HHVESGTOTHLDUVUMMCQUNCPURNSFQLTW\"</data>\n" + "</result>";
+        DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = fac.newDocumentBuilder();
+        Document doc = builder.parse(new ByteArrayInputStream(res.getBytes()));
+        Element element = doc.getDocumentElement();
+        NodeList n = element.getChildNodes();
+
+        if (n != null) {
+            for (int i = 0; i < n.getLength(); i++) {
+                Node book = n.item(i);
+                for (Node node = book.getFirstChild(); node != null; node = node.getNextSibling()) {
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+                        if (node.getNodeName().equals("succeed")) {
+                            String name = node.getNodeValue();
+                            String name1 = node.getFirstChild().getNodeValue();
+                            System.out.println(name);
+                            System.out.println(name1);
+                        }
+                        if (node.getNodeName().equals("data")) {
+                            String price = node.getFirstChild().getNodeValue();
+                            System.out.println(price);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static void uploadEnv(List<DBObject> list) throws Exception {
+        WSVinSoap service = DataModelActivator.getWVINService();
+        String res = service.loginW(ENV_USERNAME, ENV_PASSWORD);
+        DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = fac.newDocumentBuilder();
+        Document doc = builder.parse(new ByteArrayInputStream(res.getBytes()));
+        NodeList cnodes = doc.getChildNodes();
+
     }
 
     public static void uploadCert2(List<DBObject> certList, String memo) throws Exception {
@@ -2510,17 +2566,17 @@ public class VimUtils {
         // 日期型
         // 格式为yyyy-mm-dd，如2011-9-11
         data.put(IVIMFields.env_qdate, certData.get(IVIMFields.mVeh_Clzzrq));
-        
 
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_ENV);
         Object vin = certData.get(IVIMFields.mVeh_Clsbdh);
         long count = col.count(new BasicDBObject().append(IVIMFields.env_vin, vin));
-        if(count>0){
-            col.update(new BasicDBObject().append(IVIMFields.env_vin, vin), new BasicDBObject().append("$set", data));
-        }else{
+        if (count > 0) {
+            col.update(new BasicDBObject().append(IVIMFields.env_vin, vin),
+                    new BasicDBObject().append("$set", data));
+        } else {
             col.insert(data);
         }
-    
+
     }
 
 }

@@ -16,26 +16,56 @@
                               showTitle="true"
                               standalone="false">
                         </view>
+                     </perspectiveExtension>
+                  </extension>
+                  <extension
+                        point="org.eclipse.ui.perspectiveExtensions">
+                     <perspectiveExtension
+                           targetID="perspective.home1">
                         <view
                               closeable="false"
                               id="com.sg.vim.cocinfo.mnt"
                               minimized="false"
-                              relationship="stack"
-                              relative="com.sg.vim.view.basic">
+                              moveable="false"
+                              ratio="1"
+                              relationship="left"
+                              relative="org.eclipse.ui.editorss"
+                              showTitle="true"
+                              standalone="false">
                         </view>
+                     </perspectiveExtension>
+                  </extension>
+                  <extension
+                        point="org.eclipse.ui.perspectiveExtensions">
+                     <perspectiveExtension
+                           targetID="perspective.home2">
                         <view
                               closeable="false"
                               id="com.sg.vim.configcode.mnt"
                               minimized="false"
-                              relationship="stack"
-                              relative="com.sg.vim.view.basic">
+                              moveable="false"
+                              ratio="1"
+                              relationship="left"
+                              relative="org.eclipse.ui.editorss"
+                              showTitle="true"
+                              standalone="false">
                         </view>
+                     </perspectiveExtension>
+                  </extension>
+                  <extension
+                        point="org.eclipse.ui.perspectiveExtensions">
+                     <perspectiveExtension
+                           targetID="perspective.home3">
                         <view
                               closeable="false"
                               id="com.sg.vim.view.nameplate"
                               minimized="false"
-                              relationship="stack"
-                              relative="com.sg.vim.view.basic">
+                              moveable="false"
+                              ratio="1"
+                              relationship="left"
+                              relative="org.eclipse.ui.editorss"
+                              showTitle="true"
+                              standalone="false">
                         </view>
                      </perspectiveExtension>
                   </extension>
@@ -1197,6 +1227,16 @@
             table="com.sg.vim.table.nameplate">
          <filterAction>
             <column
+                  column="e_02"
+                  name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="e_03"
+                  name="成品名称"
+                  type="String">
+            </column>
+            <column
                   column="f_0_2c1"
                   name="车辆型号"
                   type="String">
@@ -1248,6 +1288,16 @@
             </column>
          </filterAction>
          <searchAction>
+            <column
+                  column="e_02"
+                  name="成品码"
+                  type="String">
+            </column>
+            <column
+                  column="e_03"
+                  name="成品名称"
+                  type="String">
+            </column>
             <column
                   column="f_0_2c1"
                   name="车辆型号"
@@ -1794,8 +1844,8 @@
             dbName="appportal"
             id="com.sg.vim.editor.basicinfo"
             image="image/car_32.png"
-            labelFieldName="d_23"
-            name="公告车型信息"
+            labelFieldName="f_0_2c1"
+            name="公告"
             recreateable="true"
             saveHandler="com.sg.vim.publicdata.savehandler.BasicInfoSaveHandler">
          <basicpage
@@ -1979,19 +2029,45 @@
                   </fieldgroup>
                </section>
                <section
-                     expand="true"
-                     label="车辆图片">
+                     label="其他信息">
                   <field
                         computeField="false"
-                        editPart="ImageUploader(Multi)"
+                        editPart="Text(Multi Line)"
                         editable="true"
-                        id="photo"
-                        label="车辆照片"
-                        labelVisible="false"
-                        name="photo"
+                        heightHint="60"
+                        id="c_18"
+                        label="其它信息"
+                        labelVisible="true"
+                        name="c_18"
                         persistable="true"
                         required="false"
-                        type="File">
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="60"
+                        id="d_31"
+                        label="检测机构"
+                        labelVisible="true"
+                        name="d_31"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        heightHint="60"
+                        id="d_32"
+                        label="检测报告"
+                        labelVisible="true"
+                        name="d_32"
+                        persistable="true"
+                        required="false"
+                        type="String">
                   </field>
                </section>
             </pagecolumn>
@@ -2119,44 +2195,21 @@
                         required="false"
                         type="String">
                   </field>
+               </section>
+               <section
+                     expand="false"
+                     label="车辆图片">
                   <field
                         computeField="false"
-                        editPart="Text(Multi Line)"
+                        editPart="ImageUploader(Multi)"
                         editable="true"
-                        heightHint="60"
-                        id="c_18"
-                        label="其它信息"
-                        labelVisible="true"
-                        name="c_18"
+                        id="photo"
+                        label="车辆照片"
+                        labelVisible="false"
+                        name="photo"
                         persistable="true"
                         required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        heightHint="60"
-                        id="d_31"
-                        label="检测机构"
-                        labelVisible="true"
-                        name="d_31"
-                        persistable="true"
-                        required="false"
-                        type="String">
-                  </field>
-                  <field
-                        computeField="false"
-                        editPart="Text(Single Line)"
-                        editable="true"
-                        heightHint="60"
-                        id="d_32"
-                        label="检测报告"
-                        labelVisible="true"
-                        name="d_32"
-                        persistable="true"
-                        required="false"
-                        type="String">
+                        type="File">
                   </field>
                </section>
             </pagecolumn>
