@@ -20,6 +20,7 @@ import org.eclipse.rap.rwt.service.ServerPushSession;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.mobnut.commons.util.Utils;
 import com.mobnut.db.DBActivator;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -140,7 +141,6 @@ public class SyncMESCert extends AbstractHandler {
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
         try {
-
             SQL_QUERY(VimUtils.MES_DB, (TableNavigator) HandlerUtil.getActivePart(event));
         } catch (Exception e) {
             e.printStackTrace();
@@ -202,7 +202,7 @@ public class SyncMESCert extends AbstractHandler {
                 columns[i] = meta.getColumnName(i + 1);
             }
 
-//            int index = 0;
+            // int index = 0;
             while (rs.next()) {
                 BasicDBObject ist = new BasicDBObject();
                 for (int i = 0; i < columns.length; i++) {
@@ -247,7 +247,8 @@ public class SyncMESCert extends AbstractHandler {
 
         // ID VARCHAR2(32)
         // VEH_HGZBH VARCHAR2(20) Y 合格证编号
-        cert.put(IVIMFields.mVeh__Wzghzbh, ist.get(MES_VEH_HGZBH));// Veh_Wzghzbh";
+        String hgzbh = (String) ist.get(MES_VEH_HGZBH);
+        cert.put(IVIMFields.mVeh__Wzghzbh, hgzbh);// Veh_Wzghzbh";
 
         // VEH_FZRQ DATE Y 发证时间
         cert.put(IVIMFields.mVeh_Fzrq, ist.get(MES_VEH_FZRQ));// Veh_Fzrq";//发证日期字符14YYYY年MM月DD日
@@ -372,7 +373,13 @@ public class SyncMESCert extends AbstractHandler {
         }
 
         // VEH_ZCHGZBH VARCHAR2(20) Y 整车合格证编号
-        cert.put(IVIMFields.mVeh_Zchgzbh, ist.get(MES_VEH_ZCHGZBH));// Veh_Zchgzbh";//整车合格证编号字符14
+        Object object = ist.get(MES_VEH_ZCHGZBH);
+        if (Utils.isNullOrEmptyString(object)) {
+            try{
+                object = hgzbh.substring(0, 4) + hgzbh.substring(5);
+            }catch(Exception e){}
+        }
+        cert.put(IVIMFields.mVeh_Zchgzbh, object);// Veh_Zchgzbh";//整车合格证编号字符14
 
         // VEH_CLPP VARCHAR2(50) Y 车辆品牌
         cert.put(IVIMFields.mVeh_Clpp, ist.get(MES_VEH_CLPP));// Veh_Clpp";//车辆品牌字符30
