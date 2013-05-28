@@ -218,12 +218,15 @@ public class SyncMESCert extends AbstractHandler {
                     }
                 }
 
-                monitor.setTaskName("正在处理(" + index + "): " + (String) ist.get(MES_VEH_HGZBH));
-                if (monitor.isCanceled()) {
-                    return;
-                }
+                try{
+                    monitor.setTaskName("正在处理(" + index + "): " + (String) ist.get(MES_VEH_HGZBH));
+                    monitor.worked(index++);
+                    if (monitor.isCanceled()) {
+                        return;
+                    }
+                }catch(Exception e){}
+
                 BasicDBObject cert = importMESItem(ist);
-                monitor.worked(index++);
                 if(ins.size()==500){
                     collection.insert(ins);
                     ins.clear();
@@ -235,7 +238,6 @@ public class SyncMESCert extends AbstractHandler {
             }
             monitor.done();
         } catch (Exception e) {
-            System.out.println("SQL：" + SQL);
             throw e;
         } finally {
             try {
