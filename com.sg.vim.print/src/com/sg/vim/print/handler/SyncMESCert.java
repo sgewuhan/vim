@@ -168,7 +168,7 @@ public class SyncMESCert extends AbstractHandler {
             }
 
         });
-
+        job.schedule();
     }
 
     protected void run(String dataSource, IProgressMonitor monitor) throws Exception {
