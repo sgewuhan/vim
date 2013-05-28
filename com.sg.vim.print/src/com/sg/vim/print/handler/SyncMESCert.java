@@ -240,6 +240,7 @@ public class SyncMESCert extends AbstractHandler {
                 }
                 
             }
+            collection.insert(ins);
             monitor.done();
         } catch (Exception e) {
             throw e;
