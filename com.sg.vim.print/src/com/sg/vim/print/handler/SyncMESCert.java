@@ -203,7 +203,6 @@ public class SyncMESCert extends AbstractHandler {
             ResultSetMetaData meta = rs.getMetaData();
 
             int count = meta.getColumnCount();
-            
 
             String[] columns = new String[count];
             for (int i = 0; i < count; i++) {
@@ -211,7 +210,7 @@ public class SyncMESCert extends AbstractHandler {
             }
 
             int index = 0;
-            
+
             List<DBObject> ins = new ArrayList<DBObject>();
             while (rs.next()) {
                 BasicDBObject ist = new BasicDBObject();
@@ -222,25 +221,30 @@ public class SyncMESCert extends AbstractHandler {
                     }
                 }
 
-                try{
+                try {
                     monitor.setTaskName("正在处理(" + index + "): " + (String) ist.get(MES_VEH_HGZBH));
                     monitor.worked(index++);
                     if (monitor.isCanceled()) {
                         return;
                     }
-                }catch(Exception e){}
+                } catch (Exception e) {
+                }
 
                 BasicDBObject cert = importMESItem(ist);
-                if(ins.size()==500){
-                    collection.insert(ins);
-                    ins.clear();
-                    ins.add(cert);
-                }else{
-                    ins.add(cert);
+                if (cert != null) {
+
+                    if (ins.size() == 500) {
+                        collection.insert(ins);
+                        ins.clear();
+                        ins.add(cert);
+                    } else {
+                        ins.add(cert);
+                    }
                 }
-                
             }
-            collection.insert(ins);
+            if(ins.size()>0){
+                collection.insert(ins);
+            }
             monitor.done();
         } catch (Exception e) {
             throw e;
