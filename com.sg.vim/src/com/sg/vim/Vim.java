@@ -50,6 +50,8 @@ public class Vim implements BundleActivator {
             VimUtils.FUELLABEL_USERNAME=appProps.getProperty("flsys.username");
             VimUtils.FUELLABEL_PASSWORD=appProps.getProperty("flsys.password");
             VimUtils.FUELLABEL_OKEY=appProps.getProperty("flsys.okey");
+            VimUtils.ENV_USERNAME=appProps.getProperty("env.username");
+            VimUtils.ENV_PASSWORD=appProps.getProperty("env.password");
             
             VimUtils.debug = debug;
         } catch (Exception e) {

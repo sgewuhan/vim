@@ -131,6 +131,10 @@ public class VimUtils {
     public static String FUELLABEL_PASSWORD;
 
     public static String FUELLABEL_OKEY;
+    
+    public static String ENV_USERNAME;
+    
+    public static String ENV_PASSWORD;
 
     public static void setValues(Browser browser, DBObject dbo) {
         StringBuilder sb = new StringBuilder();
