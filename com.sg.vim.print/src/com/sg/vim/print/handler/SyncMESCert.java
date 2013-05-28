@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.rap.rwt.service.ServerPushSession;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -121,15 +122,25 @@ public class SyncMESCert extends AbstractHandler {
     private static final String MES_ABOLISH_CAUSE = "ABOLISH_CAUSE";
     private static final String MES_DELETE_CAUSE = "DELETE_CAUSE";
     private DBCollection collection;
+    private ServerPushSession pushSession;
 
     public SyncMESCert() {
         super();
         collection = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
+        pushSession = new ServerPushSession();
+        pushSession.start();
+    }
+
+    @Override
+    public void dispose() {
+        pushSession.stop();
+        super.dispose();
     }
 
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
         try {
+
             SQL_QUERY(VimUtils.MES_DB, (TableNavigator) HandlerUtil.getActivePart(event));
         } catch (Exception e) {
             e.printStackTrace();
