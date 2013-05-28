@@ -4,17 +4,29 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.mobnut.db.DBActivator;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.sg.sqldb.DDB;
+import com.sg.ui.part.view.TableNavigator;
 import com.sg.vim.datamodel.IVIMFields;
 import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.print.PrintActivator;
 
 public class SyncMESCert extends AbstractHandler {
 
@@ -118,8 +130,7 @@ public class SyncMESCert extends AbstractHandler {
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
         try {
-            SQL_QUERY(VimUtils.MES_DB, SQL);
-
+            SQL_QUERY(VimUtils.MES_DB, (TableNavigator) HandlerUtil.getActivePart(event));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,26 +138,60 @@ public class SyncMESCert extends AbstractHandler {
         return null;
     }
 
-    public void SQL_QUERY(String dataSource, String sql) throws Exception {
+    public void SQL_QUERY(final String dataSource, final TableNavigator part) throws Exception {
+        final Display display = part.getSite().getShell().getDisplay();
+        Job job = new Job("同步MES中已经上传的合格证数据") {
+
+            @Override
+            protected IStatus run(IProgressMonitor monitor) {
+                try {
+                    SyncMESCert.this.run(dataSource, monitor);
+                } catch (Exception e) {
+                    return new Status(IStatus.ERROR, PrintActivator.PLUGIN_ID, Status.OK,
+                            "同步时发生错误", e);
+                }
+                return Status.OK_STATUS;
+            }
+        };
+        job.setUser(true);
+        job.addJobChangeListener(new JobChangeAdapter() {
+
+            @Override
+            public void done(IJobChangeEvent event) {
+                display.syncExec(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        part.refresh2();
+                    }
+                });
+            }
+
+        });
+
+    }
+
+    protected void run(String dataSource, IProgressMonitor monitor) throws Exception {
         Connection conn = DDB.getDefault().getConnection(dataSource);
 
         Statement stat = null;
         ResultSet rs = null;
         try {
             stat = conn.createStatement();
-            rs = stat.executeQuery(sql);
+            rs = stat.executeQuery(SQL);
             if (rs == null)
                 return;
             ResultSetMetaData meta = rs.getMetaData();
 
             int count = meta.getColumnCount();
+            monitor.beginTask("开始同步数据", count);
 
             String[] columns = new String[count];
             for (int i = 0; i < count; i++) {
                 columns[i] = meta.getColumnName(i + 1);
             }
 
-            int index = 0;
+//            int index = 0;
             while (rs.next()) {
                 BasicDBObject ist = new BasicDBObject();
                 for (int i = 0; i < columns.length; i++) {
@@ -157,11 +202,11 @@ public class SyncMESCert extends AbstractHandler {
                 }
 
                 importMESItem(ist);
-                System.out.println(index++);
+                monitor.worked(1);
             }
 
         } catch (Exception e) {
-            System.out.println("SQL：" + sql);
+            System.out.println("SQL：" + SQL);
             throw e;
         } finally {
             try {
@@ -174,6 +219,7 @@ public class SyncMESCert extends AbstractHandler {
         }
 
         return;
+
     }
 
     private void importMESItem(BasicDBObject ist) {
@@ -306,7 +352,12 @@ public class SyncMESCert extends AbstractHandler {
         cert.put(IVIMFields.mVeh_Zgcs, ist.get(MES_VEH_ZGCS));// Veh_Zgcs";//最高车速字符5
 
         // VEH_CLZZRQ DATE Y 车辆制造日期
-        cert.put(IVIMFields.mVeh_Clzzrq, ist.get(MES_VEH_CLZZRQ));// Veh_Clzzrq";//车辆制造日期字符14YYYY年MM月DD日
+        Object value = ist.get(MES_VEH_CLZZRQ);
+        if (value instanceof Date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+            String mdate = sdf.format(value);
+            cert.put(IVIMFields.mVeh_Clzzrq, mdate);// Veh_Clzzrq";//车辆制造日期字符14YYYY年MM月DD日
+        }
 
         // VEH_ZCHGZBH VARCHAR2(20) Y 整车合格证编号
         cert.put(IVIMFields.mVeh_Zchgzbh, ist.get(MES_VEH_ZCHGZBH));// Veh_Zchgzbh";//整车合格证编号字符14
@@ -384,7 +435,11 @@ public class SyncMESCert extends AbstractHandler {
         cert.put(IVIMFields.mVeh_Ggpc, ist.get(MES_GGPC));// Veh_Ggpc";//公告批次
 
         // GGSXRQ DATE Y 公告生效日期
-        cert.put(IVIMFields.mVeh_Ggsxrq, ist.get(MES_GGSXRQ));// Veh_Ggsxrq";//公告生效日期
+        value = ist.get(MES_GGSXRQ);
+        if (value instanceof Date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            cert.put(IVIMFields.mVeh_Ggsxrq, sdf.format((Date) value));// Veh_Ggsxrq";//公告生效日期
+        }
 
         // PZXLH VARCHAR2(50) Y 配置序列号
         cert.put(IVIMFields.mVeh__Pzxlh, ist.get(MES_PZXLH));// Veh_Pzxlh";
