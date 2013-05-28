@@ -186,11 +186,16 @@ public class SyncMESCert extends AbstractHandler {
     }
 
     protected void run(String dataSource, IProgressMonitor monitor) throws Exception {
+        monitor.beginTask("开始同步数据", IProgressMonitor.UNKNOWN);
+
         Connection conn = DDB.getDefault().getConnection(dataSource);
 
         Statement stat = null;
         ResultSet rs = null;
         try {
+            monitor.setTaskName("正在查询MES数据");
+            monitor.worked(10);
+
             stat = conn.createStatement();
             rs = stat.executeQuery(SQL);
             if (rs == null)
@@ -198,8 +203,7 @@ public class SyncMESCert extends AbstractHandler {
             ResultSetMetaData meta = rs.getMetaData();
 
             int count = meta.getColumnCount();
-            monitor.beginTask("开始同步数据", 10000);
-            monitor.worked(0);
+            
 
             String[] columns = new String[count];
             for (int i = 0; i < count; i++) {
