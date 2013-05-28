@@ -201,6 +201,7 @@ public class SyncMESCert extends AbstractHandler {
                     }
                 }
 
+                monitor.setTaskName((String) ist.get(MES_VEH_CLMC));
                 importMESItem(ist);
                 monitor.worked(1);
             }
