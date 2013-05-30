@@ -2634,6 +2634,11 @@
          </createEditor>
          <exportAction>
             <column
+                  column="ccc_12"
+                  name="车辆一致性证书编号"
+                  type="String">
+            </column>
+            <column
                   column="f_0_1"
                   name="制造企业名称"
                   type="String">
@@ -3156,6 +3161,12 @@
                name="主传动比"
                type="String">
          </column>
+	     <column
+               column="f_6_1"
+               labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+               name="长宽高"
+               type="String">
+         </column>
          <!--
          <columnGroup
                defaultGroup="true"
@@ -3673,6 +3684,12 @@
          <column
                column="f_30"
                name="主传动比"
+               type="String">
+         </column>
+         <column
+               column="f_6_1"
+               labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+               name="长宽高"
                type="String">
          </column>
          <!--
