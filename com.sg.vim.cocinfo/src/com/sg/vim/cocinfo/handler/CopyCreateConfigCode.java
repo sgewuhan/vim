@@ -6,51 +6,28 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.mobnut.commons.util.ModelTransfer;
-import com.mobnut.db.DBActivator;
-import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.sg.ui.UIUtils;
-import com.sg.ui.model.DataObject;
-import com.sg.ui.model.DataObjectCollectionService;
+import com.sg.vim.datamodel.util.VimUtils;
 
 public class CopyCreateConfigCode extends AbstractHandler {
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
-		//获得当前选择的记录
-		IStructuredSelection selection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
-		if(selection == null || selection.isEmpty()){
-			return null;
-		}
-		Object selected = selection.getFirstElement();
-		if(!(selected instanceof DBObject)){
-			return null;
-		}
-		
-		DBObject srcData = (DBObject)selected;
-		
-		DataObjectCollectionService dataObjectService = new DataObjectCollectionService();
-		DBObject tgtData = ModelTransfer.transfer(srcData, dataObjectService.getReservedKeys(DataObjectCollectionService.CLONE_RESERVED));
-	    tgtData.put("basicinfo_id",srcData.get("_id"));
+    @Override
+    public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		//准备编辑器的输入数据
-		DBCollection collection = DBActivator.getCollection("appportal", "configcodeinfo");
-		DataObject editData = new DataObject(collection,tgtData);
-		
-		
-		//使用哪一个编辑器打开
-		String editorId = "com.sg.vim.editor.configcode";
-		try {
-			UIUtils.create(editorId, editData, true, null);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        // 获得当前选择的记录
+        IStructuredSelection selection = (IStructuredSelection) HandlerUtil
+                .getCurrentSelection(event);
+        if (selection == null || selection.isEmpty()) {
+            return null;
+        }
+        Object selected = selection.getFirstElement();
+        if (!(selected instanceof DBObject)) {
+            return null;
+        }
 
-		
-		return null;
-	}
+        VimUtils.copyCreateCFG((DBObject) selected);
+
+        return null;
+    }
 
 }

@@ -19,7 +19,7 @@ public class SaveCOCInfo implements IEditorSaveHandler {
     @Override
     public boolean doSaveBefore(DataObjectEditorInput input, IProgressMonitor monitor,
             String operation) throws Exception {
-        return false;
+        return true;
     }
 
     @Override
