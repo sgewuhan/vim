@@ -123,17 +123,39 @@ public class QXCertPrintModule extends PrintModule {
         }
     }
     
+//    @Override
+//    public String getDisplayedPaperNumber() {
+//        if(paperNumber==null){
+//            return "";
+//        }else{
+//            return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><br/><ins>No.</ins>: "+getInputPaperNumber()+"</span>";
+//        }
+//    }
+    
     @Override
     public String getDisplayedPaperNumber() {
-        if(paperNumber==null){
-            return "";
-        }else{
-            return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><br/><ins>No.</ins>: "+getInputPaperNumber()+"</span>";
+        if (paperNumber == null) {
+            if (canPrintData()) {
+                int currentId = VimUtils.getCurrentMaxPaperOfZCCert();
+                String s = String.format("%" + 0 + 7 + "d", currentId);
+                return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><small>" + "使用自动纸张编号, 当前值:"
+                        + s + "<br/>或者<ins>双击</ins>设置起始纸张编号</small></span>";
+            } else {
+                return "";
+            }
+        } else {
+            return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'>起始纸张编号<br/><ins>No.</ins>: "
+                    + getInputPaperNumber() + "</span>";
         }
     }
     
     public boolean canPrintData() {//只有无状态才能打印
         return (!isHasPrint())&&(getInput() != null)&&(lifecycle==null);
+    }
+    
+    @Override
+    public boolean canInputPaperNumber() {
+        return canPrintData();
     }
 
 }

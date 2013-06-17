@@ -11,7 +11,9 @@ import org.eclipse.swt.widgets.Text;
 import com.mobnut.commons.util.Utils;
 import com.sg.ui.UIUtils;
 import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.print.module.DPCertPrintModule;
 import com.sg.vim.print.module.PrintModule;
+import com.sg.vim.print.module.QXCertPrintModule;
 
 public class CertPrintModuleSeqEditingSupport extends EditingSupport {
 
@@ -26,7 +28,7 @@ public class CertPrintModuleSeqEditingSupport extends EditingSupport {
         text.setData(RWT.CUSTOM_VARIANT, "big");
     }
 
-    protected void checkInput(String value) throws Exception {
+    protected void checkInput(String value, PrintModule printModule) throws Exception {
         int i;
         try {
             i = Integer.parseInt(value);
@@ -34,29 +36,38 @@ public class CertPrintModuleSeqEditingSupport extends EditingSupport {
             throw new Exception("请输入数字");
         }
 
-        int id = VimUtils.getCurrentMaxPaperOfCert();
-        if (id > i) {
-            throw new Exception("您设置的起始顺序号不能小于当前的顺序号。");
+        if(printModule instanceof QXCertPrintModule){
+            int id = VimUtils.getCurrentMaxPaperOfZCCert();
+            if (id > i) {
+                throw new Exception("您设置的起始顺序号不能小于当前的顺序号。");
+            }
+        }else if(printModule instanceof DPCertPrintModule){
+            int id = VimUtils.getCurrentMaxPaperOfDPCert();
+            if (id > i) {
+                throw new Exception("您设置的起始顺序号不能小于当前的顺序号。");
+            }
         }
 
     }
 
     @Override
     protected void setValue(Object element, Object value) {
+        PrintModule printModule = (PrintModule) element;
+
         if (Utils.isNullOrEmptyString(value)) {
             return;
         }
         try {
-            checkInput((String) value);
+            checkInput((String) value,printModule);
         } catch (Exception e) {
             UIUtils.showMessage(getViewer().getControl().getShell(), "输入纸张编号", e.getMessage(),
                     SWT.ICON_ERROR | SWT.CLOSE);
             return;
         }
         int i = Integer.parseInt((String) value);
-        ((PrintModule) element).setInputPaperNumber(i);
+        printModule.setInputPaperNumber(i);
         getViewer().update(element, null);
-        PrintModule[] sub = ((PrintModule) element).getSubModules();
+        PrintModule[] sub = printModule.getSubModules();
         getViewer().update(sub, null);
     }
 

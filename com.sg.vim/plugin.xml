@@ -62,9 +62,16 @@
       <seq
             collectionname="ids"
             dbname="appportal"
-            id="com.sg.vim.seq.ggzzzh"
-            name="合格证纸张顺序号"
-            seqname="Veh_Zzbh">
+            id="com.sg.vim.seq.dphgzzzh"
+            name="底盘合格证纸张顺序号"
+            seqname="Veh_dpZzbh">
+      </seq>
+      <seq
+            collectionname="ids"
+            dbname="appportal"
+            id="com.sg.vim.seq.zchgzzzh"
+            name="整车合格证纸张顺序号"
+            seqname="Veh_zcZzbh">
       </seq>
    </extension>
    <extension

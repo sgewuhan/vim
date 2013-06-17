@@ -134,7 +134,7 @@ public class PrintContent extends Composite {
         fd.left = new FormAttachment();
         fd.width = 1;
         fd.height = 1;
-        
+
         fuelBrowser = createFuelBrowser(this);
         fd = new FormData();
         fuelBrowser.setLayoutData(fd);
@@ -528,7 +528,7 @@ public class PrintContent extends Composite {
             }
 
             VimUtils.printCOC(cocBrowser, cocPrintModule.getInput().getData().getData());
-            
+
             // 设置模printed
             modules[1].setLifecycle(IVIMFields.LC_PRINTED);
             navigator.update(cocPrintModule, null);
@@ -549,7 +549,7 @@ public class PrintContent extends Composite {
             setHGZPaperNumber(dpmodule);
             try {
                 setZCHGZNumber(dpmodule);
-                setPrinter(dpmodule, IVIMFields.PRINTER_FUNCTIONS[0]);
+                setPrinter(dpmodule, IVIMFields.PRINTER_FUNCTIONS[3]);
             } catch (Exception e) {
                 UIUtils.showMessage(getShell(), "打印", "底盘合格证打印数据发生错误\n" + e.getMessage(),
                         SWT.ICON_ERROR);
@@ -567,7 +567,7 @@ public class PrintContent extends Composite {
         setHGZPaperNumber(qxmodule);
         try {
             setZCHGZNumber(qxmodule);
-            setPrinter(qxmodule, IVIMFields.PRINTER_FUNCTIONS[3]);
+            setPrinter(qxmodule, IVIMFields.PRINTER_FUNCTIONS[0]);
         } catch (Exception e) {
             UIUtils.showMessage(getShell(), "打印", "整车合格证打印数据发生错误\n" + e.getMessage(),
                     SWT.ICON_ERROR);
@@ -625,14 +625,14 @@ public class PrintContent extends Composite {
 
     private void setHGZPaperNumber(PrintModule module) {
         Integer inputPageNumber = module.getPaperNumber();
-        DBCollection ids = DBActivator.getCollection("appportal", "ids");
-        String pnum;
-        if (inputPageNumber != null) {
-            pnum = String.format("%07d", inputPageNumber.intValue());
-        } else {
-            pnum = DBUtil.getIncreasedID(ids, "Veh_Zzbh", "0", 7);
+        if (inputPageNumber == null) {
+            if (module instanceof DPCertPrintModule) {
+                inputPageNumber = VimUtils.getMaxPaperOfDPCert();
+            } else {
+                inputPageNumber = VimUtils.getMaxPaperOfZCCert();
+            }
         }
-        module.setValue(IVIMFields.mVeh_Zzbh, pnum);
+        module.setValue(IVIMFields.mVeh_Zzbh, String.format("%07d", inputPageNumber.intValue()));
     }
 
     private void setPrinter(PrintModule module, String printfunctionName) throws Exception {
@@ -698,14 +698,14 @@ public class PrintContent extends Composite {
                 if (currentModule == dpCertPrintModule) {
                     qxCertPrintModule.setValue(IVIMFields.mVeh_Dphgzbh, mVeh__Wzghzbh);// 将底盘生成的合格证号写入到整车数据中
                 }
-                
+
                 savePrintData(currentModule);
 
-                if(currentModule == qxCertPrintModule){
-                    //生成环保数据
+                if (currentModule == qxCertPrintModule) {
+                    // 生成环保数据
                     VimUtils.createEnvData(currentModule.getData());
                 }
-                
+
             }
             return;
         }
@@ -798,7 +798,7 @@ public class PrintContent extends Composite {
             idList.add((ObjectId) sb[i].getData().get("_id"));
         }
 
-        VimUtils.saveUploadData(idList, "",IVIMFields.COL_CERF,
+        VimUtils.saveUploadData(idList, "", IVIMFields.COL_CERF,
                 IVIMFields.ACTION_REC_TYPE_VALUE_UPLOAD);
     }
 

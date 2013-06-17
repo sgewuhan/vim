@@ -34,10 +34,23 @@ import com.sg.vim.datamodel.util.VimUtils;
 
 public class CertificateView extends TableNavigator {
 
+    private final class NumberInputValidator implements IInputValidator {
+        @Override
+        public String isValid(String newText) {
+            if (Utils.isNumbers(newText)) {
+                return null;
+            } else {
+                return "您需要输入合法的数字";
+            }
+        }
+    }
+
     private BrowserFunction printCertResultFunction;
     private DBObject currentPrintData;
     private Browser browser;
-    private int startNumber;
+    private int zcStartNumber = -1;
+    private int dpStartNumber = -1;
+
     // private DataObjectEditor editor;
     private DataObjectEditor editor;
 
@@ -135,16 +148,22 @@ public class CertificateView extends TableNavigator {
             return;
         }
 
-        HashMap<String, String> printerPara = VimUtils
-                .getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[0]);
-        if (printerPara == null) {
-            return;
-        }
+        HashMap<String, String> printerPara;
 
         // 设置纸张编号
-        VimUtils.setCurrentPaperCert(startNumber);
-        String pnum = String.format("%07d", startNumber);
-        currentPrintData.put(IVIMFields.mVeh_Zzbh, pnum);
+        if ("QX".equals(currentPrintData.get(IVIMFields.mVeh_Clztxx))) {
+            setZCPaperNumber();
+            VimUtils.setCurrentPaperZCCert(zcStartNumber);
+            String pnum = String.format("%07d", zcStartNumber);
+            currentPrintData.put(IVIMFields.mVeh_Zzbh, pnum);
+            printerPara = VimUtils.getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[0]);
+        } else {
+            setDPPaperNumber();
+            VimUtils.setCurrentPaperDPCert(dpStartNumber);
+            String pnum = String.format("%07d", dpStartNumber);
+            currentPrintData.put(IVIMFields.mVeh_Zzbh, pnum);
+            printerPara = VimUtils.getPrinterParameters(IVIMFields.PRINTER_FUNCTIONS[3]);
+        }
 
         // 设置打印机
         Iterator<String> iter = printerPara.keySet().iterator();
@@ -196,41 +215,77 @@ public class CertificateView extends TableNavigator {
     }
 
     public void doRePrint() {
-        // 取出当前的纸张编号值
-        int num = VimUtils.getMaxPaperOfCert();
-        String initialValue = String.format("%" + 0 + 7 + "d", num);
-        IInputValidator validator = new IInputValidator() {
-
-            @Override
-            public String isValid(String newText) {
-                if (Utils.isNumbers(newText)) {
-                    return null;
-                } else {
-                    return "您需要输入合法的数字";
-                }
-            }
-
-        };
-        InputDialog input = new InputDialog(getSite().getShell(), "合格证补打", "请输入新的合格证纸张编号:",
-                initialValue, validator);
-        int open = input.open();
-        if (open != InputDialog.OK) {
-            return;
-        }
-        startNumber = Integer.parseInt(input.getValue());
-        int maxNumber = VimUtils.getCurrentMaxPaperOfCert();
-        if (maxNumber > startNumber) {
-            UIUtils.showMessage(getSite().getShell(), "合格证补打", "输入的纸张编号已被占用\n请重新补打并设置正确的纸张编号。",
-                    SWT.ICON_ERROR | SWT.OK);
-            return;
-        }
-
         IStructuredSelection selection = getNavigator().getViewer().getSelection();
         Iterator<?> iter = selection.iterator();
         while (iter.hasNext()) {
             DBObject data = (DBObject) iter.next();
             doRePrint(data);
         }
+    }
+
+    private void setDPPaperNumber() {
+        if (this.dpStartNumber != -1) {
+            return;
+        }
+
+        int dpStartNumber = getInputDPPaperNumber();
+
+        int maxNumber = VimUtils.getCurrentMaxPaperOfDPCert();
+        if (maxNumber > dpStartNumber) {
+            int re = UIUtils.showMessage(getSite().getShell(), "合格证补打",
+                    "输入的纸张编号已被占用\n选择“是”使用该底盘合格证纸张编号（可能产生重复的纸张编号）\n选择“否”进行重新设置。", SWT.ICON_WARNING
+                            | SWT.YES | SWT.NO);
+            if (re == SWT.NO) {
+                setDPPaperNumber();
+                return;
+            }
+        }
+        this.dpStartNumber = dpStartNumber;
+    }
+
+    private int getInputDPPaperNumber() {
+        int maxPaperOfDPCert = VimUtils.getMaxPaperOfDPCert();
+        String initialValue = String.format("%" + 0 + 7 + "d", maxPaperOfDPCert);
+        InputDialog input = new InputDialog(getSite().getShell(), "合格证补打",
+                "如果您需要设置新的底盘合格证纸张编号，请输入:", initialValue, new NumberInputValidator());
+        int open = input.open();
+        if (open != InputDialog.OK) {
+            return maxPaperOfDPCert;
+        }
+        int dpStartNumber = Integer.parseInt(input.getValue());
+        return dpStartNumber;
+    }
+
+    private void setZCPaperNumber() {
+        if (this.zcStartNumber != -1) {
+            return;
+        }
+        int zcStartNumber = getInputZCPaperNumber();
+
+        int maxNumber = VimUtils.getCurrentMaxPaperOfZCCert();
+        if (maxNumber > dpStartNumber) {
+            int re = UIUtils.showMessage(getSite().getShell(), "合格证补打",
+                    "输入的纸张编号已被占用\n选择“是”使用该整车合格证纸张编号（可能产生重复的纸张编号）\n选择“否”进行重新设置。", SWT.ICON_WARNING
+                            | SWT.YES | SWT.NO);
+            if (re == SWT.NO) {
+                setZCPaperNumber();
+                return;
+            }
+        }
+        this.zcStartNumber = zcStartNumber;
+    }
+    
+    private int getInputZCPaperNumber() {
+        int maxPaperOfZCCert = VimUtils.getMaxPaperOfZCCert();
+        String initialValue = String.format("%" + 0 + 7 + "d", maxPaperOfZCCert);
+        InputDialog input = new InputDialog(getSite().getShell(), "合格证补打",
+                "如果您需要设置新的整车合格证纸张编号，请输入:", initialValue, new NumberInputValidator());
+        int open = input.open();
+        if (open != InputDialog.OK) {
+            return maxPaperOfZCCert;
+        }
+        int zcStartNumber = Integer.parseInt(input.getValue());
+        return zcStartNumber;
     }
 
     public void doUpload() {
@@ -307,10 +362,9 @@ public class CertificateView extends TableNavigator {
         if (selection == null || selection.isEmpty()) {
             return;
         }
-        
-        if(editor!=null){
-            UIUtils.showMessage(getSite().getShell(), "更新合格证数据",
-                    "您不能同时更新多条合格证数据。", SWT.OK);
+
+        if (editor != null) {
+            UIUtils.showMessage(getSite().getShell(), "更新合格证数据", "您不能同时更新多条合格证数据。", SWT.OK);
         }
 
         final DBObject data = (DBObject) selection.getFirstElement();

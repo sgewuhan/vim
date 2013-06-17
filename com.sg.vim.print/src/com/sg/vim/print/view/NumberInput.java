@@ -20,12 +20,13 @@ public class NumberInput extends Shell {
 
     protected int number;
 
-    public NumberInput(Shell shell,int style) {
+    public NumberInput(Shell shell,int style, String type) {
         super(shell, style);
-        createContent(this);
+        createContent(this,type);
+        
     }
 
-    private void createContent(Composite parent) {
+    private void createContent(Composite parent, String type) {
         setLayout(new FormLayout());
 
         Label label = new Label(parent, SWT.NONE);
@@ -44,7 +45,7 @@ public class NumberInput extends Shell {
         fd.right = new FormAttachment(100, -10);
 
         // 取出当前的纸张编号值
-        int num = VimUtils.getMaxPaperOfCert();
+        int num = "ZC".equals(type)?VimUtils.getMaxPaperOfZCCert():VimUtils.getMaxPaperOfDPCert();
         String s = String.format("%" + 0 + 7 + "d", num);
         zzbnInput.setText(s);
 

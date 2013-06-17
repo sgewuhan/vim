@@ -177,22 +177,6 @@ public class CertPrintModule extends PrintModule {
         return qxCertPrintModule;
     }
 
-    @Override
-    public String getDisplayedPaperNumber() {
-        if (paperNumber == null) {
-            if (canPrintData()) {
-                int currentId = VimUtils.getCurrentMaxPaperOfCert();
-                String s = String.format("%" + 0 + 7 + "d", currentId);
-                return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'><small>" + "使用自动纸张编号, 当前值:"
-                        + s + "<br/>或者<ins>双击</ins>设置起始纸张编号</small></span>";
-            } else {
-                return "";
-            }
-        } else {
-            return "<span style='FONT-FAMILY:微软雅黑;font-size:11pt'>起始纸张编号<br/><ins>No.</ins>: "
-                    + getInputPaperNumber() + "</span>";
-        }
-    }
 
     @Override
     public void setInputPaperNumber(int i) {
@@ -222,7 +206,7 @@ public class CertPrintModule extends PrintModule {
 
     @Override
     public boolean canInputPaperNumber() {
-        return canPrintData();
+        return false;
     }
 
     public boolean canUploadData() {// 只有已经打印的状态才能上传,屏蔽此功能

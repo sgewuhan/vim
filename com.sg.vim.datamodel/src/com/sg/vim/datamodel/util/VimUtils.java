@@ -2033,21 +2033,39 @@ public class VimUtils {
         return null;
     }
 
-    public static int getCurrentMaxPaperOfCert() {
+    public static int getCurrentMaxPaperOfDPCert() {
         DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
-        int id = DBUtil.getCurrentID(ids, "Veh_Zzbh");
+        int id = DBUtil.getCurrentID(ids, "Veh_dpZzbh");
         return id;
     }
 
-    public static int getMaxPaperOfCert() {
+    public static int getCurrentMaxPaperOfZCCert() {
         DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
-        int id = DBUtil.getIncreasedID(ids, "Veh_Zzbh");
+        int id = DBUtil.getCurrentID(ids, "Veh_zcZzbh");
         return id;
     }
 
-    public static void setCurrentPaperCert(int startNumber) {
+
+    public static int getMaxPaperOfDPCert() {
         DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
-        DBUtil.setCurrentID(ids, "Veh_Zzbh", startNumber);
+        int id = DBUtil.getIncreasedID(ids, "Veh_dpZzbh");
+        return id;
+    }
+    
+    public static int getMaxPaperOfZCCert() {
+        DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
+        int id = DBUtil.getIncreasedID(ids, "Veh_zcZzbh");
+        return id;
+    }
+    
+    public static void setCurrentPaperDPCert(int startNumber) {
+        DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
+        DBUtil.setCurrentID(ids, "Veh_dpZzbh", startNumber);
+    }
+    
+    public static void setCurrentPaperZCCert(int startNumber) {
+        DBCollection ids = DBActivator.getCollection(IVIMFields.DB_NAME, "ids");
+        DBUtil.setCurrentID(ids, "Veh_zcZzbh", startNumber);
     }
 
     public static DBObject saveUploadData(List<ObjectId> idList, String memo, String colname,
