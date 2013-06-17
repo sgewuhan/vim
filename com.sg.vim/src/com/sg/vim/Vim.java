@@ -1,20 +1,30 @@
 package com.sg.vim;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
-import org.osgi.framework.BundleActivator;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.internal.util.BundleUtility;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.mobnut.db.DBActivator;
-import com.sg.vim.cocinfo.SyncProductCodeData;
 import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.job.SyncProductCodeData;
 
 
-public class Vim implements BundleActivator {
+public class Vim extends AbstractUIPlugin {
 
+    public static final String PLUGIN_ID = "com.sg.vim";
     private static BundleContext context;
     
     static BundleContext getContext() {
@@ -24,6 +34,7 @@ public class Vim implements BundleActivator {
     private static boolean debug;
     private String syncTime;
     private SyncProductCodeData job;
+    private static Vim plugin;
 
     /*
      * (non-Javadoc)
@@ -64,6 +75,8 @@ public class Vim implements BundleActivator {
         
         job = new SyncProductCodeData() ;
         job.start(syncTime);
+        plugin = this;
+
     }
 
     /*
@@ -74,10 +87,52 @@ public class Vim implements BundleActivator {
     public void stop(BundleContext bundleContext) throws Exception {
         job.stop();
         Vim.context = null;
+        plugin = null;
     }
 
     public static boolean isDebug() {
         return debug;
     }
+    
+    @Override
+    protected void initializeImageRegistry(ImageRegistry reg) {
+        // 注册image目录下的所有文件
+        Bundle bundle = Platform.getBundle(PLUGIN_ID);
+        if (BundleUtility.isReady(bundle)) {
+
+            URL fullPathString = BundleUtility.find(bundle, "image");
+            try {
+                File folder = new File(FileLocator.toFileURL(fullPathString)
+                        .getFile());
+                File[] files = folder.listFiles();
+                ImageDescriptor imgd;
+                String key;
+                for (File f : files) {
+                    key = f.getName();
+                    imgd = AbstractUIPlugin.imageDescriptorFromPlugin(
+                            PLUGIN_ID, "image/" + key);
+                    reg.put(key, imgd);
+                }
+            } catch (Exception e) {
+            }
+        }
+
+        super.initializeImageRegistry(reg);
+    }
+
+    public static ImageDescriptor getImageDescriptor(String key) {
+
+        return getDefault().getImageRegistry().getDescriptor(key);
+    }
+
+    private static AbstractUIPlugin getDefault() {
+        return plugin;
+    }
+
+    public static Image getImage(String key) {
+
+        return getDefault().getImageRegistry().get(key);
+    }
+    
 
 }
