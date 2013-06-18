@@ -265,6 +265,14 @@
          </perspective>
       </scenario>
       <scenario
+            id="com.sg.vim.scenario.vin"
+            name="VIN成品码管理">
+         <perspective
+               default="true"
+               id="com.sg.vim.perspective.productmnt">
+         </perspective>
+      </scenario>
+      <scenario
             id="com.sg.vim.scenario.print"
             name="打印">
          <perspective
