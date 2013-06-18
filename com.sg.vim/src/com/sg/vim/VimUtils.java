@@ -1887,6 +1887,14 @@ public class VimUtils {
 
     private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate, String memo)
             throws Exception {
+        Object cocId = data.get(IVIMFields.COC_ID);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCINFO);
+        DBObject cocData = col.findOne(new BasicDBObject().append("_id", cocId));
+        if(cocData==null){
+            throw new Exception("无法获得对应的车辆一致性信息");
+        }
+        data.putAll(cocData);
+        
         VehicleBasicInfo info = new VehicleBasicInfo();
         // 序号 属性 中文名称 数据类型
         // （soap描述） 说明
