@@ -2239,7 +2239,7 @@ public class VimUtils {
         return setting;
     }
 
-    public static void saveRePrintData(DBObject data, DBObject info) {
+    public static void saveRePrintData(DBObject data, DBObject info,String collectionName) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
@@ -2247,7 +2247,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_REPRINT)
                 .append(IVIMFields.ACTION_REC_MEMO, "No.:" + data.get(IVIMFields.mVeh_Zzbh));
 
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, collectionName);
         DBObject query = new BasicDBObject().append("_id", data.get("_id"));
         BasicDBObject update = new BasicDBObject().append("$push",
                 new BasicDBObject().append(IVIMFields.ACTION_REC, rec));
@@ -2258,7 +2258,7 @@ public class VimUtils {
         col.update(query, update, false, true);
     }
 
-    public static DBObject saveCancelData(List<ObjectId> idList, String memo) {
+    public static DBObject saveCancelData(List<ObjectId> idList, String memo,String collectionName) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
@@ -2266,7 +2266,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_CANCEL)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
 
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, collectionName);
         DBObject query = new BasicDBObject().append("_id",
                 new BasicDBObject().append("$in", idList));
         DBObject setting = new BasicDBObject().append(IVIMFields.CANCELACCOUNT, accountInfo)
@@ -2279,7 +2279,7 @@ public class VimUtils {
         return setting;
     }
 
-    public static DBObject saveUpdateData(ObjectId id, String memo) {
+    public static DBObject saveUpdateData(ObjectId id, String memo,String collectionName) {
         Date date = new Date();
         DBObject accountInfo = UserSessionContext.getAccountInfo();
         BasicDBObject rec = new BasicDBObject().append(IVIMFields.ACTION_REC_DATE, date)
@@ -2287,7 +2287,7 @@ public class VimUtils {
                 .append(IVIMFields.ACTION_REC_TYPE, IVIMFields.ACTION_REC_TYPE_VALUE_UPDATE)
                 .append(IVIMFields.ACTION_REC_MEMO, memo);
 
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
+        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, collectionName);
         DBObject query = new BasicDBObject().append("_id", id);
         DBObject setting = new BasicDBObject().append(IVIMFields.UPDATEACCOUNT, accountInfo)
                 .append(IVIMFields.UPDATEDATE, date);

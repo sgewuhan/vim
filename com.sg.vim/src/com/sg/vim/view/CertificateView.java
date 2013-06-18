@@ -133,9 +133,9 @@ public class CertificateView extends TableNavigator {
                 info.put(IVIMFields.mVeh_Dywym, mVeh_Veh_Dywym);
                 // 尚未上传
                 if (IVIMFields.LC_PRINTED.equals(lc)) {
-                    VimUtils.saveRePrintData(currentPrintData, info);
+                    VimUtils.saveRePrintData(currentPrintData, info,IVIMFields.COL_CERF);
                 } else {
-                    VimUtils.saveRePrintData(currentPrintData, null);
+                    VimUtils.saveRePrintData(currentPrintData, null,IVIMFields.COL_CERF);
                 }
 
                 getNavigator().getViewer().update(currentPrintData, null);
@@ -350,7 +350,7 @@ public class CertificateView extends TableNavigator {
         }
         try {
             VimUtils.deleteCert(certNumberList, memo);
-            DBObject setting = VimUtils.saveCancelData(idList, memo);
+            DBObject setting = VimUtils.saveCancelData(idList, memo,IVIMFields.COL_CERF);
 
             for (int i = 0; i < dataList.size(); i++) {
                 DBObject item = dataList.get(i);
@@ -402,7 +402,7 @@ public class CertificateView extends TableNavigator {
             @Override
             public boolean doSaveAfter(DataObjectEditorInput input, IProgressMonitor monitor,
                     String operation) throws Exception {
-                VimUtils.saveUpdateData((ObjectId) data.get("_id"), memo);
+                VimUtils.saveUpdateData((ObjectId) data.get("_id"), memo,IVIMFields.COL_CERF);
                 // data与input同步
                 Iterator<String> iter = data.keySet().iterator();
                 while (iter.hasNext()) {

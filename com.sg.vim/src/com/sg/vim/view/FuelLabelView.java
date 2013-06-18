@@ -109,7 +109,7 @@ public class FuelLabelView extends GenericPrintabelView {
         }
         try {
             VimUtils.deleteFuelLabel(numberList, memo);
-            DBObject setting = VimUtils.saveCancelData(idList, memo);
+            DBObject setting = VimUtils.saveCancelData(idList, memo,IVIMFields.COL_FUELABEL);
 
             for (int i = 0; i < dataList.size(); i++) {
                 DBObject item = dataList.get(i);
@@ -232,7 +232,7 @@ public class FuelLabelView extends GenericPrintabelView {
             @Override
             public boolean doSaveAfter(DataObjectEditorInput input, IProgressMonitor monitor,
                     String operation) throws Exception {
-                VimUtils.saveUpdateData((ObjectId) data.get("_id"), memo);
+                VimUtils.saveUpdateData((ObjectId) data.get("_id"), memo,IVIMFields.COL_FUELABEL);
                 // dataÓëinputÍ¬²½
                 Iterator<String> iter = data.keySet().iterator();
                 while (iter.hasNext()) {
