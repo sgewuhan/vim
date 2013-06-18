@@ -38,6 +38,7 @@ import com.mobnut.portal.user.UserSessionContext;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 import com.sg.sqldb.DDB;
@@ -2005,8 +2006,17 @@ public class VimUtils {
 
     public static DBObject getCertDataByVin(String vin, String clztxx) {
         DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_CERF);
-        return col.findOne(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
+        DBCursor cur = col.find(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
                 IVIMFields.mVeh_Clztxx, clztxx));
+        DBObject ret = null;
+        while(cur.hasNext()){
+            DBObject certData = cur.next();
+            if (IVIMFields.LC_ABANDON.equals((String) certData.get(IVIMFields.LIFECYCLE))&&ret!=null){
+                continue;
+            }
+            ret = certData;
+        }
+        return ret;
     }
 
     public static DBObject getCOCPaperDataByVin(String vin) {
