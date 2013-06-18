@@ -450,33 +450,35 @@ public class VimUtils {
         BasicDBObject result = new BasicDBObject();
 
         // f_0_2c1 公告型号
-        result.put(IVIMFields.F_0_2C1, cocData.get(IVIMFields.F_0_2C1));
+        copyValue(result, cocData, IVIMFields.F_0_2C1);
         // f_c4 发动机型号
-        result.put(IVIMFields.F_C4, cocData.get(IVIMFields.F_C4));
+        copyValue(result, cocData, IVIMFields.F_C4);
         // f_25 燃料种类
-        result.put(IVIMFields.F_25, cocData.get(IVIMFields.F_25));
+        copyValue(result, cocData, IVIMFields.F_25);
         // f_24 排量
-        result.put(IVIMFields.F_24, cocData.get(IVIMFields.F_24));
+        copyValue(result, cocData, IVIMFields.F_24);
         // c_01 功率
-        result.put(IVIMFields.C_01, cocData.get(IVIMFields.C_01));
+        copyValue(result, cocData, IVIMFields.C_01);
         // f_28 变速器型式
-        result.put(IVIMFields.F_28, cocData.get(IVIMFields.F_28));
+        copyValue(result, cocData, IVIMFields.F_28);
+        // f_28_1 变速器档位数
+        copyValue(result, cocData, IVIMFields.F_28_1);
         // d_22 驱动形式
-        result.put(IVIMFields.D_22, cocData.get(IVIMFields.D_22));
+        copyValue(result, cocData, IVIMFields.D_22);
         // c_08 整备质量
-        result.put(IVIMFields.C_08, cocData.get(IVIMFields.C_08));
+        copyValue(result, cocData, IVIMFields.C_08);
         // 额定总质量
-        result.put(IVIMFields.F_14_1, cocData.get(IVIMFields.F_14_1));
+        copyValue(result, cocData, IVIMFields.F_14_1);
         // g_32
-        result.put(IVIMFields.G_32, cocData.get(IVIMFields.G_32));
+        copyValue(result, cocData, IVIMFields.G_32);
         // d_14 城市油耗
-        result.put(IVIMFields.D_14, cocData.get(IVIMFields.D_14));
+        copyValue(result, cocData, IVIMFields.D_14);
         // d_15 市郊油耗
-        result.put(IVIMFields.D_15, cocData.get(IVIMFields.D_15));
+        copyValue(result, cocData, IVIMFields.D_15);
         // d_16 综合油耗
-        result.put(IVIMFields.D_16, cocData.get(IVIMFields.D_16));
+        copyValue(result, cocData, IVIMFields.D_16);
         // g_33
-        result.put(IVIMFields.G_33, cocData.get(IVIMFields.G_33));
+        copyValue(result, cocData, IVIMFields.G_33);
         // g_34 //取制造日期
         try {
             String mftDate = (String) mesRawData.getValue(FIELD_MFT_DATE);
@@ -493,31 +495,47 @@ public class VimUtils {
 
         // 打印不需要但是上传需要的
         // 车辆制造企业
-        result.put(IVIMFields.F_0_1, cocData.get(IVIMFields.F_0_1));
+        copyValue(result, cocData, IVIMFields.F_0_1);
         // 车辆类别
-        result.put(IVIMFields.F_0_4, cocData.get(IVIMFields.F_0_4));
+        copyValue(result, cocData, IVIMFields.F_0_4);
         // 最高车速
-        result.put(IVIMFields.F_44, cocData.get(IVIMFields.F_44));
+        copyValue(result, cocData, IVIMFields.F_44);
         // 轮胎规格
-        result.put(IVIMFields.F_32A, cocData.get(IVIMFields.F_32A));
+        copyValue(result, cocData, IVIMFields.F_32A);
         // 轴距
-        result.put(IVIMFields.F_3, cocData.get(IVIMFields.F_3));
+        copyValue(result, cocData, IVIMFields.F_3);
         // 车辆名称
-        result.put(IVIMFields.F_0_2_1, cocData.get(IVIMFields.F_0_2_1));
+        copyValue(result, cocData, IVIMFields.F_0_2_1);
         // 座位排数
-        result.put(IVIMFields.D_17, cocData.get(IVIMFields.D_17));
+        copyValue(result, cocData, IVIMFields.D_17);
         // 额定载客
-        result.put(IVIMFields.F_42_1, cocData.get(IVIMFields.F_42_1));
+        copyValue(result, cocData, IVIMFields.F_42_1);
         // 前轮距
-        result.put(IVIMFields.F_5A, cocData.get(IVIMFields.F_5A));
+        copyValue(result, cocData, IVIMFields.F_5A);
         // 后轮距
-        result.put(IVIMFields.F_5B, cocData.get(IVIMFields.F_5B));
+        copyValue(result, cocData, IVIMFields.F_5B);
         // 销售车型
-        result.put(IVIMFields.D_20, cocData.get(IVIMFields.D_20));
+        copyValue(result, cocData, IVIMFields.D_20);
+        // 是否越野
+        copyValue(result, cocData, IVIMFields.D_30);
+        // 检测机构
+        copyValue(result, cocData, IVIMFields.D_31);
+        // 检测报告
+        copyValue(result, cocData, IVIMFields.D_32);
+        // 最大净功率
+        copyValue(result, cocData, IVIMFields.F_26);
+        // 气缸数量
+        copyValue(result, cocData, IVIMFields.F_23);
+        // 46.3 CO2排放量/燃油消耗量
+        copyValue(result, cocData, IVIMFields.F_46_3);
         // coc id
         result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
         return result;
+    }
+
+    private static void copyValue(DBObject target, DBObject source, String fieldname) {
+        target.put(fieldname, source.get(fieldname));
     }
 
     private static DBObject transferCOCData(DBObject cocData, DBObject confData,
@@ -1887,14 +1905,14 @@ public class VimUtils {
 
     private static VehicleBasicInfo getVehicleBasicInfo(DBObject data, boolean isUpdate, String memo)
             throws Exception {
-        Object cocId = data.get(IVIMFields.COC_ID);
-        DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCINFO);
-        DBObject cocData = col.findOne(new BasicDBObject().append("_id", cocId));
-        if(cocData==null){
-            throw new Exception("无法获得对应的车辆一致性信息");
-        }
-        data.putAll(cocData);
-        
+        // Object cocId = data.get(IVIMFields.COC_ID);
+        // DBCollection col = DBActivator.getCollection(IVIMFields.DB_NAME, IVIMFields.COL_COCINFO);
+        // DBObject cocData = col.findOne(new BasicDBObject().append("_id", cocId));
+        // if(cocData==null){
+        // throw new Exception("无法获得对应的车辆一致性信息");
+        // }
+        // data.putAll(cocData);
+
         VehicleBasicInfo info = new VehicleBasicInfo();
         // 序号 属性 中文名称 数据类型
         // （soap描述） 说明
@@ -1939,7 +1957,7 @@ public class VimUtils {
         info.setZj((String) data.get(IVIMFields.F_3));
 
         // Clzzrq 车辆制造日期/进口日期 s:string
-        String value = (String) data.get(IVIMFields.mVeh_Clzzrq);
+        String value = (String) data.get(IVIMFields.G_34);
         // Assert.isNotNull(value, "车辆制造日期");
         Date dValue = new SimpleDateFormat("yyyy年MM月dd日").parse(value);
         GregorianCalendar nowGregorianCalendar = new GregorianCalendar();

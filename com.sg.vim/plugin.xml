@@ -9537,12 +9537,13 @@
                      </field>
                      <field
                            computeField="false"
-                           editPart="Text(Single Line)"
+                           editPart="Combo(Read Only)"
                            editable="true"
                            id="d_22"
                            label="驱动形式"
                            labelVisible="true"
                            name="d_22"
+                           option="com.sg.vim.enum.type8"
                            persistable="true"
                            required="false"
                            type="String">
@@ -17948,6 +17949,25 @@
          </enumerate>
          <enumerate
                id="N.A">
+         </enumerate>
+      </enumerate>
+      <enumerate
+            id="com.sg.vim.enum.type8"
+            label="驱动形式">
+         <enumerate
+               id="前轮驱动">
+         </enumerate>
+         <enumerate
+               id="后轮驱动">
+         </enumerate>
+         <enumerate
+               id="分时全轮驱动">
+         </enumerate>
+         <enumerate
+               id="全时全轮驱动">
+         </enumerate>
+         <enumerate
+               id="智能(适时)全轮驱动">
          </enumerate>
       </enumerate>
    </extension>
