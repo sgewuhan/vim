@@ -6217,7 +6217,8 @@
             useHashlookup="false"
             virtual="true">
          <column
-               column="f_0_2c"
+               column="f_0_2c1"
+               displayContent="true"
                labelProvider="com.sg.vim.labelprovider.VehicleModelNameLabelProvider"
                name="车辆型号名称"
                sortable="true"
@@ -6226,17 +6227,20 @@
          </column>
          <column
                column="c_22"
+               displayContent="true"
                name="车辆类型"
                type="String">
          </column>
          <column
                column="c_23"
+               displayContent="true"
                labelProvider="com.sg.vim.labelprovider.C23Labelprovider"
                name="车辆状态信息"
                type="String">
          </column>
          <column
                column="f_c4"
+               displayContent="true"
                name="发动机型号"
                type="String">
          </column>
@@ -15768,6 +15772,7 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="e_02"
+                        inputValidator="com.sg.vim.validator.ProductCodeValidator"
                         label="成品码"
                         labelVisible="true"
                         name="e_02"
@@ -15795,11 +15800,14 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="manufacture_date"
+                        inputValidator="com.sg.vim.validator.MfgDateValidator"
                         label="制造日期"
                         labelVisible="true"
                         name="manufacture_date"
                         persistable="true"
                         required="true"
+                        textMessage="请输入yyyy-MM-dd格式，例如:2012-12-02"
+                        tooltips="请输入yyyy-MM-dd格式，例如：2012-12-02"
                         type="String">
                   </field>
                </section>
@@ -15922,10 +15930,6 @@
                style="push">
          </command>
       </menuContribution>
-   </extension>
-   <extension
-         name="print"
-         point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
             locationURI="toolbar:main?after=com.sg.ui.separator3">
@@ -16587,9 +16591,6 @@
                style="push">
          </command>
       </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
             locationURI="toolbar:main?after=com.sg.ui.separator3">
@@ -16741,10 +16742,19 @@
                label="删除"
                style="push">
          </command>
+         <separator
+               name="com.sg.vim.separator2"
+               visible="true">
+         </separator>
          <command
                commandId="com.sg.ui.command.addtocompare"
                icon="image/compare_24.png"
                label="加入对比"
+               style="push">
+         </command>
+         <command
+               commandId="com.sg.ui.command.selectorswitch"
+               label="切换选择方式"
                style="push">
          </command>
          <separator

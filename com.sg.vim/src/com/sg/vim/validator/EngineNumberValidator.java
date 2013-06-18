@@ -1,31 +1,20 @@
 package com.sg.vim.validator;
 
-import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.forms.IMessageManager;
-
 import com.sg.ui.model.DataObject;
-import com.sg.ui.part.editor.field.value.IFieldInputValidator;
-import com.sg.ui.registry.config.FieldConfigurator;
+import com.sg.ui.part.editor.field.value.AbstractValidator;
 
-public class EngineNumberValidator implements IFieldInputValidator {
+public class EngineNumberValidator extends AbstractValidator {
 
-    public EngineNumberValidator() {
-    }
+    private static final String ERR_MSG = "发动机号输入不合法，15位大写英文字母或数字";
 
     @Override
-    public boolean validate(DataObject data, FieldConfigurator fieldConfigurator,
-            Object valueForUpdate, IMessageManager messageManager, Control control) {
-        if (valueForUpdate instanceof String) {
-            boolean matched = ((String) valueForUpdate).matches("^[A-Z0-9]{15}");
-            if (!matched) {
-                messageManager.addMessage(fieldConfigurator.getId(), "发动机号输入不合法，15位大写英文字母或数字", null,
-                        IMessageProvider.ERROR, control);
-                return false;
-            }
+    protected String getValidMessage(DataObject data) {
+        Object valueForUpdate = getValueForUpdate();
+        if ((valueForUpdate instanceof String)
+                && ((String) valueForUpdate).matches("^[A-Z0-9]{15}")) {
+            return null;
         }
-        messageManager.removeMessage(fieldConfigurator.getId(), control);
-        return true;
+        return ERR_MSG;
     }
 
 }

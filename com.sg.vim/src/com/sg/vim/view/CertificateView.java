@@ -8,6 +8,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -59,6 +60,12 @@ public class CertificateView extends TableNavigator {
         parent.setLayout(new FormLayout());
         createBrowser(parent);
         super.createPartControl(parent);
+        addFilterTools();
+    }
+
+    private void addFilterTools() {
+        IToolBarManager manager = getToolBarManager();
+        manager.add(new ShortcutFilterAction(getNavigator(),"shortcut.cert"));
     }
 
     private void createBrowser(final Composite parent) {
