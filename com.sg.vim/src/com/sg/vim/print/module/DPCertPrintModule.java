@@ -6,7 +6,7 @@ import com.mobnut.commons.util.file.FileUtil;
 import com.sg.ui.UIUtils;
 import com.sg.ui.model.DataObjectEditorInput;
 import com.sg.vim.Vim;
-import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.VimUtils;
 import com.sg.vim.print.control.PrintContent;
 import com.sg.vim.print.module.action.DPCertPrintAction;
 import com.sg.vim.print.module.action.DPCertUploadAction;

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.mobnut.commons.util.Utils;
 import com.sg.ui.UIUtils;
-import com.sg.vim.datamodel.util.VimUtils;
+import com.sg.vim.VimUtils;
 import com.sg.vim.print.module.DPCertPrintModule;
 import com.sg.vim.print.module.PrintModule;
 import com.sg.vim.print.module.QXCertPrintModule;

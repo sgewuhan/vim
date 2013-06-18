@@ -326,41 +326,41 @@
             id="com.sg.vim.function.scenariosetting"
             image="image/scenarios_48.png"
             label="场景"
-            run="com.sg.vim.function.ScenarioSetting"
+            run="com.sg.vim.admin.ScenarioSetting"
             tooltip="设置系统的使用场景">
       </adminFunction>
       <adminFunction
             id="com.sg.vim.print.function.printersetting"
             image="image/printer_48.png"
             label="打印设置"
-            run="com.sg.vim.print.function.PrinterSetting"
+            run="com.sg.vim.admin.PrinterSetting"
             tooltip="设置系统的打印机">
       </adminFunction>
       <adminFunction
             id="com.sg.vim.print.function.ColorSetting"
             image="image/color_48.png"
             label="颜色设置"
-            run="com.sg.vim.print.function.ColorSetting"
+            run="com.sg.vim.admin.ColorSetting"
             tooltip="设置系统的打印机">
       </adminFunction>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="com.sg.vim.function.ScenarioSettingEditor"
+            class="com.sg.vim.admin.ScenarioSettingEditor"
             default="false"
             id="com.sg.vim.editor.scenariosetting"
             name="用户使用场景设置">
       </editor>
       <editor
-            class="com.sg.vim.print.function.PrinterSettingEditor"
+            class="com.sg.vim.admin.PrinterSettingEditor"
             default="false"
             icon="image/print_16.png"
             id="com.sg.vim.print.editor.printersetting"
             name="打印设置">
       </editor>
       <editor
-            class="com.sg.vim.print.function.ColorSettingEditor"
+            class="com.sg.vim.admin.ColorSettingEditor"
             default="false"
             icon="image/color_16.png"
             id="com.sg.vim.print.editor.colorsetting"
@@ -400,43 +400,43 @@
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.print.view.COCPaperView"
+            class="com.sg.vim.view.COCPaperView"
             id="com.sg.vim.view.cocpaper"
             name="车辆一致性证书"
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.print.view.FuelLabelView"
+            class="com.sg.vim.view.FuelLabelView"
             id="com.sg.vim.view.fuellabel"
             name="汽车燃料消耗量标识"
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.print.view.CertificateView"
+            class="com.sg.vim.view.CertificateView"
             id="com.sg.vim.view.certificate"
             name="合格证"
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.print.view.EnvView"
+            class="com.sg.vim.view.EnvView"
             id="com.sg.vim.view.env"
             name="型式核准"
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.print.view.PrintView"
+            class="com.sg.vim.view.PrintView"
             id="com.sg.vim.view.print"
             name="打印"
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.job.view.ProductBindTargetView"
+            class="com.sg.vim.view.ProductBindTargetView"
             id="com.sg.vim.job"
             name="整车一致性信息"
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.job.view.ProductBindTargetViewDP"
+            class="com.sg.vim.view.ProductBindTargetViewDP"
             id="com.sg.vim.cocinfo2"
             name="底盘一致性信息"
             restorable="true">
@@ -448,7 +448,7 @@
             restorable="true">
       </view>
       <view
-            class="com.sg.vim.job.view.ProductBindTargetView"
+            class="com.sg.vim.view.ProductBindTargetView"
             id="com.sg.vim.configcode"
             name="配置序列号"
             restorable="true">
@@ -3629,7 +3629,7 @@
             </column>
          </searchAction>
          <createEditor
-               createHandler="com.sg.vim.job.handler.CreateCOCHandler"
+               createHandler="com.sg.vim.handler.CreateCOCHandler"
                editorId="com.sg.vim.editor.cocinfo">
          </createEditor>
       </navigator>
@@ -4532,7 +4532,7 @@
             </column>
          </searchAction>
          <createEditor
-               createHandler="com.sg.vim.job.handler.CreateCOCHandler"
+               createHandler="com.sg.vim.handler.CreateCOCHandler"
                editorId="com.sg.vim.editor.cocinfo">
          </createEditor>
       </navigator>
@@ -4681,7 +4681,7 @@
             provideSelection="true"
             table="com.sg.vim.table.configcode">
          <createEditor
-               createHandler="com.sg.vim.job.handler.CreateCFGHandler"
+               createHandler="com.sg.vim.handler.CreateCFGHandler"
                editorId="com.sg.vim.editor.configcode">
          </createEditor>
          <filterAction>
@@ -5620,7 +5620,7 @@
             </column>
          </searchAction>
          <createEditor
-               createHandler="com.sg.vim.job.handler.CreateCOCHandler"
+               createHandler="com.sg.vim.handler.CreateCOCHandler"
                editorId="com.sg.vim.editor.cocinfo">
          </createEditor>
          <exportAction>
@@ -6081,7 +6081,7 @@
             provideSelection="true"
             table="com.sg.vim.table.configcode.mnt">
          <createEditor
-               createHandler="com.sg.vim.job.handler.CreateCFGHandler"
+               createHandler="com.sg.vim.handler.CreateCFGHandler"
                editorId="com.sg.vim.editor.configcode">
          </createEditor>
          <filterAction>
@@ -6209,7 +6209,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.basic"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.BasicInfoInput"
+            inputProvider="com.sg.vim.model.BasicInfoInput"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -6218,7 +6218,7 @@
             virtual="true">
          <column
                column="f_0_2c"
-               labelProvider="com.sg.vim.datamodel.labelprovider.VehicleModelNameLabelProvider"
+               labelProvider="com.sg.vim.labelprovider.VehicleModelNameLabelProvider"
                name="车辆型号名称"
                sortable="true"
                type="String"
@@ -6231,7 +6231,7 @@
          </column>
          <column
                column="c_23"
-               labelProvider="com.sg.vim.datamodel.labelprovider.C23Labelprovider"
+               labelProvider="com.sg.vim.labelprovider.C23Labelprovider"
                name="车辆状态信息"
                type="String">
          </column>
@@ -6333,13 +6333,13 @@
                name="尺寸，空间和载客">
             <column
                   column="f_6_1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.OverallSizeLabelProvider"
                   name="外廓\n长宽高"
                   type="String">
             </column>
             <column
                   column="f_c7_1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.CarriageSizeLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.CarriageSizeLabelProvider"
                   name="货箱内部\n长宽高"
                   type="String">
             </column>
@@ -6433,7 +6433,7 @@
             </column>
             <column
                   column="f_5"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.F5LabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.F5LabelProvider"
                   name="前/后轮距"
                   type="String">
             </column>
@@ -6449,13 +6449,13 @@
             </column>
             <column
                   column="f_c2"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.ApproachAndDepartureLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.ApproachAndDepartureLabelProvider"
                   name="接近角\n离去角"
                   type="String">
             </column>
             <column
                   column="f_c1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.OverHangLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.OverHangLabelProvider"
                   name="前悬\n后悬"
                   type="String">
             </column>
@@ -6616,7 +6616,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.nameplate"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.NameplateInput"
+            inputProvider="com.sg.vim.model.NameplateInput"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -6730,7 +6730,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.certificate"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.CertificateInput"
+            inputProvider="com.sg.vim.model.CertificateInput"
             limit="100"
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.certificate"
@@ -6740,7 +6740,7 @@
          n
          <column
                column="lifecycle"
-               labelProvider="com.sg.vim.print.labelprovider.LifecycleLabel"
+               labelProvider="com.sg.vim.labelprovider.LifecycleLabel"
                name="状态"
                type="String">
          </column>
@@ -7180,7 +7180,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.cocpaper"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.COCPaperInput"
+            inputProvider="com.sg.vim.model.COCPaperInput"
             limit="100"
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.cocpaper"
@@ -7371,7 +7371,7 @@
             </column>
             <column
                   column="f_6_1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.OverallSizeLabelProvider"
                   name="长宽高"
                   type="String">
             </column>
@@ -7392,13 +7392,13 @@
             </column>
             <column
                   column="f_c1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.OverHangLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.OverHangLabelProvider"
                   name="前悬\n后悬"
                   type="String">
             </column>
             <column
                   column="f_c2"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.ApproachAndDepartureLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.ApproachAndDepartureLabelProvider"
                   name="接近角\n离去角"
                   type="String">
             </column>
@@ -7620,7 +7620,7 @@
             </column>
             <column
                   column="f_c7_1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.CarriageSizeLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.CarriageSizeLabelProvider"
                   name="货厢长宽高"
                   type="String">
             </column>
@@ -7728,7 +7728,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.fuellabel"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.FuelLabelInput"
+            inputProvider="com.sg.vim.model.FuelLabelInput"
             limit="100"
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.fuellabel"
@@ -7866,7 +7866,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.env"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.EnvInput"
+            inputProvider="com.sg.vim.model.EnvInput"
             limit="100"
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.env"
@@ -7929,7 +7929,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.cocinfo"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.COCInfoInputQX"
+            inputProvider="com.sg.vim.model.COCInfoInputQX"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -7968,7 +7968,7 @@
          </column>
          <column
                column="f_6_1"
-               labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+               labelProvider="com.sg.vim.labelprovider.OverallSizeLabelProvider"
                name="长宽高"
                type="String">
          </column>
@@ -7986,7 +7986,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.cocinfo2"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.COCInfoInputDP"
+            inputProvider="com.sg.vim.model.COCInfoInputDP"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -8025,7 +8025,7 @@
          </column>
          <column
                column="f_6_1"
-               labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+               labelProvider="com.sg.vim.labelprovider.OverallSizeLabelProvider"
                name="长宽高"
                type="String">
          </column>
@@ -8043,17 +8043,17 @@
             headerVisiable="false"
             id="com.sg.vim.table.productcode"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ProductCodeInfoInput"
+            inputProvider="com.sg.vim.model.ProductCodeInfoInput"
             limit="100"
             markupEnabled="true"
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.productcode"
             queryMode="false"
-            selectionListener="com.sg.vim.job.table.ProductCodeTableSelectionListener"
+            selectionListener="com.sg.vim.table.ProductCodeTableSelectionListener"
             useHashlookup="false">
          <column
                column="e_01"
-               labelProvider="com.sg.vim.job.labelprovider.ProductCodeLabelProvider"
+               labelProvider="com.sg.vim.labelprovider.ProductCodeLabelProvider"
                name="成品码"
                type="String"
                width="-1">
@@ -8068,7 +8068,7 @@
             fullSelection="true"
             id="com.sg.vim.table.configcode"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput"
+            inputProvider="com.sg.vim.model.ConfigCodeInfoInput"
             popupMenu="popup:com.sg.vim.table.configcode"
             useHashlookup="false">
          <column
@@ -8116,7 +8116,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.cocinfo.mnt"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.COCInfoInput"
+            inputProvider="com.sg.vim.model.COCInfoInput"
             lineVisiable="true"
             markupEnabled="false"
             multiSelection="true"
@@ -8312,7 +8312,7 @@
             </column>
             <column
                   column="f_6_1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.OverallSizeLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.OverallSizeLabelProvider"
                   name="长宽高"
                   type="String">
             </column>
@@ -8333,13 +8333,13 @@
             </column>
             <column
                   column="f_c1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.OverHangLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.OverHangLabelProvider"
                   name="前悬\n后悬"
                   type="String">
             </column>
             <column
                   column="f_c2"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.ApproachAndDepartureLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.ApproachAndDepartureLabelProvider"
                   name="接近角\n离去角"
                   type="String">
             </column>
@@ -8556,7 +8556,7 @@
             </column>
             <column
                   column="f_c7_1"
-                  labelProvider="com.sg.vim.datamodel.labelprovider.CarriageSizeLabelProvider"
+                  labelProvider="com.sg.vim.labelprovider.CarriageSizeLabelProvider"
                   name="货厢长宽高"
                   type="String">
             </column>
@@ -8634,7 +8634,7 @@
             editorId="com.sg.vim.editor.configcode"
             id="com.sg.vim.table.configcode.mnt"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ConfigCodeInfoInput"
+            inputProvider="com.sg.vim.model.ConfigCodeInfoInput"
             popupMenu="popup:com.sg.ui.ctableviewer"
             useHashlookup="false">
          <column
@@ -8681,7 +8681,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.productvin"
             idfield="_id"
-            inputProvider="com.sg.vim.datamodel.ProductVINInputDP"
+            inputProvider="com.sg.vim.model.ProductVINInputDP"
             limit="200"
             lineVisiable="true"
             markupEnabled="false"
@@ -8764,7 +8764,7 @@
             labelFieldName="f_0_2c1"
             name="公告"
             recreateable="true"
-            saveHandler="com.sg.vim.publicdata.savehandler.BasicInfoSaveHandler">
+            saveHandler="com.sg.vim.savehandler.BasicInfoSaveHandler">
          <basicpage
                description="车辆和企业基本信息"
                id="com.sg.vim.basicpage1"
@@ -8849,7 +8849,7 @@
                            label="车辆类型"
                            labelVisible="true"
                            name="c_22"
-                           optionProvider="com.sg.vim.datamodel.option.C_22_Option"
+                           optionProvider="com.sg.vim.option.C_22_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -8871,7 +8871,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_0_2c1"
-                           inputValidator="com.sg.vim.publicdata.validator.F_02C1Validator"
+                           inputValidator="com.sg.vim.validator.F_02C1Validator"
                            label="产品型号"
                            labelVisible="true"
                            name="f_0_2c1"
@@ -9148,7 +9148,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_6_1s"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="外形尺寸(mm)长"
                            labelVisible="true"
                            name="f_6_1s"
@@ -9161,7 +9161,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_7_1s"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="宽"
                            labelVisible="true"
                            name="f_7_1s"
@@ -9174,7 +9174,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_8s"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="高"
                            labelVisible="true"
                            name="f_8s"
@@ -9187,7 +9187,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_c7_1s"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="货箱栏板内尺寸(mm)长"
                            labelVisible="true"
                            name="f_c7_1s"
@@ -9200,7 +9200,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_c7_2s"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="宽"
                            labelVisible="true"
                            name="f_c7_2s"
@@ -9213,7 +9213,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_c7_3s"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="高"
                            labelVisible="true"
                            name="f_c7_3s"
@@ -9229,7 +9229,7 @@
                            editPart="Text(Single Line)"
                            editable="true"
                            id="f_42_1b"
-                           inputValidator="com.sg.vim.datamodel.validator.NumberCommaValidator"
+                           inputValidator="com.sg.vim.validator.NumberCommaValidator"
                            label="额定载客(含驾驶员)(人)"
                            labelVisible="true"
                            name="f_42_1b"
@@ -10493,7 +10493,7 @@
                         id="Veh_Qlj"
                         label="轮距 前/后"
                         name="Veh_Qlj"
-                        presentation="com.sg.vim.print.presentation.Veh_LjPresentation"
+                        presentation="com.sg.vim.presentation.Veh_LjPresentation"
                         type="String">
                   </field>
                   <fieldgroup
@@ -10572,7 +10572,7 @@
                         id="Veh_Wkc"
                         label="外廓 长/宽/高"
                         name="Veh_Wkc"
-                        presentation="com.sg.vim.print.presentation.Veh_WkcPresentation"
+                        presentation="com.sg.vim.presentation.Veh_WkcPresentation"
                         type="String">
                   </field>
                   <field
@@ -10581,7 +10581,7 @@
                         id="Veh_Hxnbc"
                         label="货厢内部 长/宽/高"
                         name="Veh_Hxnbc"
-                        presentation="com.sg.vim.print.presentation.Veh_HxnbcPresentation"
+                        presentation="com.sg.vim.presentation.Veh_HxnbcPresentation"
                         type="String">
                   </field>
                </section>
@@ -11208,7 +11208,7 @@
                         id="Veh_Qlj"
                         label="轮距 前/后"
                         name="Veh_Qlj"
-                        presentation="com.sg.vim.print.presentation.Veh_LjPresentation"
+                        presentation="com.sg.vim.presentation.Veh_LjPresentation"
                         type="String">
                   </field>
                   <fieldgroup
@@ -11287,7 +11287,7 @@
                         id="Veh_Wkc"
                         label="外廓 长/宽/高"
                         name="Veh_Wkc"
-                        presentation="com.sg.vim.print.presentation.Veh_WkcPresentation"
+                        presentation="com.sg.vim.presentation.Veh_WkcPresentation"
                         type="String">
                   </field>
                   <field
@@ -11296,7 +11296,7 @@
                         id="Veh_Hxnbc"
                         label="货厢内部 长/宽/高"
                         name="Veh_Hxnbc"
-                        presentation="com.sg.vim.print.presentation.Veh_HxnbcPresentation"
+                        presentation="com.sg.vim.presentation.Veh_HxnbcPresentation"
                         type="String">
                   </field>
                </section>
@@ -11531,7 +11531,7 @@
             isDefault="false"
             isSaveAsAllowed="false"
             name="车辆一致性证书"
-            saveHandler="com.sg.vim.datamodel.savehandler.COCSave"
+            saveHandler="com.sg.vim.savehandler.COCSave"
             titleToolTips="车辆一致性证书">
          <basicpage
                description="第一部分 车辆总体信息"
@@ -11991,7 +11991,7 @@
                            label="6.1 长度(mm)"
                            labelVisible="true"
                            name="f_6_1"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12004,7 +12004,7 @@
                            label="7.1 宽度(mm)"
                            labelVisible="true"
                            name="f_7_1"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12017,7 +12017,7 @@
                            label="8 高度(mm)"
                            labelVisible="true"
                            name="f_8"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12490,7 +12490,7 @@
                         label="轮胎规格(合格证)"
                         labelVisible="true"
                         name="f_32a"
-                        optionProvider="com.sg.vim.datamodel.option.F32_Option"
+                        optionProvider="com.sg.vim.option.F32_Option"
                         persistable="true"
                         required="false"
                         type="String">
@@ -12649,7 +12649,7 @@
                            label="C7 货厢内部尺寸(mm) 长"
                            labelVisible="true"
                            name="f_c7_1"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12662,7 +12662,7 @@
                            label="宽"
                            labelVisible="true"
                            name="f_c7_2"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12675,7 +12675,7 @@
                            label="高"
                            labelVisible="true"
                            name="f_c7_3"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12691,7 +12691,7 @@
                            label="42.1 座位数(包括驾驶员座)"
                            labelVisible="true"
                            name="f_42_1"
-                           optionProvider="com.sg.vim.datamodel.option.F421_Option"
+                           optionProvider="com.sg.vim.option.F421_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -12798,7 +12798,7 @@
                   <field
                         computeField="false"
                         ctableId="com.sg.vim.job.table.co2"
-                        defaultValueProvider="com.sg.vim.datamodel.defualtvalue.CO2Default"
+                        defaultValueProvider="com.sg.vim.defaultvalue.CO2Default"
                         editPart="Table"
                         editable="true"
                         id="f_46_3"
@@ -14219,7 +14219,7 @@
             image="image/contact_32.png"
             labelFieldName="f_0_2c1"
             name="一致性信息"
-            saveHandler="com.sg.vim.job.savehandler.SaveCOCInfo"
+            saveHandler="com.sg.vim.savehandler.SaveCOCInfo"
             titleToolTips="车辆一致性信息">
          <basicpage
                description="第一部分 车辆总体信息"
@@ -14644,7 +14644,7 @@
                            label="6.1 长度(mm)"
                            labelVisible="true"
                            name="f_6_1"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -14657,7 +14657,7 @@
                            label="7.1 宽度(mm)"
                            labelVisible="true"
                            name="f_7_1"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -14670,7 +14670,7 @@
                            label="8 高度(mm)"
                            labelVisible="true"
                            name="f_8"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15143,7 +15143,7 @@
                         label="轮胎规格(合格证)"
                         labelVisible="true"
                         name="f_32a"
-                        optionProvider="com.sg.vim.datamodel.option.F32_Option"
+                        optionProvider="com.sg.vim.option.F32_Option"
                         persistable="true"
                         required="false"
                         type="String">
@@ -15290,7 +15290,7 @@
                            label="C7 货厢内部尺寸(mm) 长"
                            labelVisible="true"
                            name="f_c7_1"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15303,7 +15303,7 @@
                            label="宽"
                            labelVisible="true"
                            name="f_c7_2"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15316,7 +15316,7 @@
                            label="高"
                            labelVisible="true"
                            name="f_c7_3"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15332,7 +15332,7 @@
                            label="42.1 座位数(包括驾驶员座)"
                            labelVisible="true"
                            name="f_42_1"
-                           optionProvider="com.sg.vim.datamodel.option.F421_Option"
+                           optionProvider="com.sg.vim.option.F421_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15345,7 +15345,7 @@
                            label="驾驶室准乘人数(人)"
                            labelVisible="true"
                            name="c_02"
-                           optionProvider="com.sg.vim.datamodel.option.S_Option"
+                           optionProvider="com.sg.vim.option.S_Option"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15452,7 +15452,7 @@
                   <field
                         computeField="false"
                         ctableId="com.sg.vim.job.table.co2"
-                        defaultValueProvider="com.sg.vim.datamodel.defualtvalue.CO2Default"
+                        defaultValueProvider="com.sg.vim.defaultvalue.CO2Default"
                         editPart="Table"
                         editable="true"
                         id="f_46_3"
@@ -15694,7 +15694,7 @@
                         label="钢板弹簧片数"
                         labelVisible="true"
                         name="f_c6"
-                        optionProvider="com.sg.vim.datamodel.option.FC6_Option"
+                        optionProvider="com.sg.vim.option.FC6_Option"
                         persistable="true"
                         required="false"
                         type="String">
@@ -15754,11 +15754,13 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="vin"
+                        inputValidator="com.sg.vim.validator.VINValidator"
                         label="VIN"
                         labelVisible="true"
                         name="vin"
                         persistable="true"
-                        required="false"
+                        required="true"
+                        textLimit="17"
                         type="String">
                   </field>
                   <field
@@ -15770,7 +15772,8 @@
                         labelVisible="true"
                         name="e_02"
                         persistable="true"
-                        required="false"
+                        proposal="com.sg.vim.proposal.ProductCodeProposal"
+                        required="true"
                         type="String">
                   </field>
                   <field
@@ -15778,11 +15781,13 @@
                         editPart="Text(Single Line)"
                         editable="true"
                         id="safety_components_vin"
+                        inputValidator="com.sg.vim.validator.EngineNumberValidator"
                         label="发动机号"
                         labelVisible="true"
                         name="safety_components_vin"
                         persistable="true"
-                        required="false"
+                        required="true"
+                        textLimit="15"
                         type="String">
                   </field>
                   <field
@@ -15794,7 +15799,7 @@
                         labelVisible="true"
                         name="manufacture_date"
                         persistable="true"
-                        required="false"
+                        required="true"
                         type="String">
                   </field>
                </section>
@@ -15810,28 +15815,28 @@
    <extension
          point="org.eclipse.core.expressions.propertyTesters">
       <propertyTester
-            class="com.sg.vim.print.handler.LifecycleTester"
+            class="com.sg.vim.handler.LifecycleTester"
             id="com.sg.vim.print.test.action"
             namespace="com.sg.vim.print.test"
             properties="cando"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="com.sg.vim.print.handler.LifecycleTester2"
+            class="com.sg.vim.handler.LifecycleTester2"
             id="com.sg.vim.print.test2.action"
             namespace="com.sg.vim.print.test2"
             properties="cando"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="com.sg.vim.job.test.ActivePartPropertyTester"
+            class="com.sg.vim.test.ActivePartPropertyTester"
             id="com.sg.vim.test.activePart"
             namespace="com.sg.vim.test"
             properties="activePart"
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="com.sg.vim.job.test.ProductOpenTester"
+            class="com.sg.vim.test.ProductOpenTester"
             id="com.sg.vim.test.productcode.open"
             namespace="com.sg.vim.test.productcode"
             properties="open"
@@ -15917,28 +15922,6 @@
                style="push">
          </command>
       </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            id="com.sg.vim.publicdata.transfertococinfo"
-            name="复制公告数据">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="com.sg.vim.publicdata.handler.TransferToCOC"
-            commandId="com.sg.vim.publicdata.transfertococinfo">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <count
-                     value="+">
-               </count>
-            </with>
-         </enabledWhen>
-      </handler>
    </extension>
    <extension
          name="print"
@@ -16606,426 +16589,6 @@
       </menuContribution>
    </extension>
    <extension
-         point="org.eclipse.ui.commands">
-      <command
-            id="com.sg.vim.print.reprint"
-            name="补打">
-      </command>
-      <command
-            id="com.sg.vim.print.upload"
-            name="上传">
-      </command>
-      <command
-            id="com.sg.vim.print.reupload"
-            name="补传">
-      </command>
-      <command
-            id="com.sg.vim.print.cancel"
-            name="撤消">
-      </command>
-      <command
-            id="com.sg.vim.print.remove"
-            name="作废">
-      </command>
-      <command
-            id="com.sg.vim.print.edit"
-            name="修改">
-      </command>
-      <command
-            id="com.sg.vim.print.handler.syncmescert"
-            name="同步MES合格证数据">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            id="com.sg.vim.print.remove.coc"
-            name="作废">
-      </command>
-      <command
-            id="com.sg.vim.print.print.coc"
-            name="打印">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            id="com.sg.vim.print.remove.fuellabel"
-            name="作废">
-      </command>
-      <command
-            id="com.sg.vim.print.print.fuellabel"
-            name="打印">
-      </command>
-      <command
-            id="com.sg.vim.print.upload.fuellabel"
-            name="上传">
-      </command>
-      <command
-            id="com.sg.vim.print.reupload.fuellabel"
-            name="补传">
-      </command>
-      <command
-            id="com.sg.vim.print.cancel.fuellabel"
-            name="撤消">
-      </command>
-      <command
-            id="com.sg.vim.print.edit.fuellabel"
-            name="修改">
-      </command>
-      <command
-            id="com.sg.vim.print.reassemably"
-            name="重新组装数据">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            id="com.sg.vim.print.upload.env"
-            name="上传">
-      </command>
-      <command
-            id="com.sg.vim.print.cancel.env"
-            name="撤消">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="com.sg.vim.print.handler.Reprint"
-            commandId="com.sg.vim.print.reprint">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="reprint"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.Upload"
-            commandId="com.sg.vim.print.upload">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="upload"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.Reupload"
-            commandId="com.sg.vim.print.reupload">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="reupload"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.Cancel"
-            commandId="com.sg.vim.print.cancel">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="cancel"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.Remove"
-            commandId="com.sg.vim.print.remove">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="remove"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.Edit"
-            commandId="com.sg.vim.print.edit">
-         <enabledWhen>
-            <and>
-               <with
-                     variable="selection">
-                  <count
-                        value="1">
-                  </count>
-               </with>
-               <with
-                     variable="selection">
-                  <iterate
-                        ifEmpty="false"
-                        operator="and">
-                     <test
-                           args="edit"
-                           property="com.sg.vim.print.test.cando"
-                           value="true">
-                     </test>
-                  </iterate>
-               </with>
-            </and>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.SyncMESCert"
-            commandId="com.sg.vim.print.handler.syncmescert">
-      </handler>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="com.sg.vim.print.handler.RemoveCOC"
-            commandId="com.sg.vim.print.remove.coc">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="remove"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.PrintCOC"
-            commandId="com.sg.vim.print.print.coc">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="print"
-                        property="com.sg.vim.print.test.cando"
-                        value="cocRePrintable">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="com.sg.vim.print.handler.PrintFuelLabel"
-            commandId="com.sg.vim.print.print.fuellabel">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="print"
-                        property="com.sg.vim.print.test.cando"
-                        value="flRePrintable">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.RemoveFuelLabel"
-            commandId="com.sg.vim.print.remove.fuellabel">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="remove"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.UploadFuelLabel"
-            commandId="com.sg.vim.print.upload.fuellabel">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="upload"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.Reassemably"
-            commandId="com.sg.vim.print.reassemably">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="reassembly"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.ReuploadFuelLabel"
-            commandId="com.sg.vim.print.reupload.fuellabel">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="reupload"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.CancelFuelLabel"
-            commandId="com.sg.vim.print.cancel.fuellabel">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="cancel"
-                        property="com.sg.vim.print.test.cando"
-                        value="true">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.EditFuellabel"
-            commandId="com.sg.vim.print.edit.fuellabel">
-         <enabledWhen>
-            <and>
-               <with
-                     variable="selection">
-                  <count
-                        value="1">
-                  </count>
-               </with>
-               <with
-                     variable="selection">
-                  <iterate
-                        ifEmpty="false"
-                        operator="and">
-                     <test
-                           args="edit"
-                           property="com.sg.vim.print.test.cando"
-                           value="true">
-                     </test>
-                  </iterate>
-               </with>
-            </and>
-         </enabledWhen>
-      </handler>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="com.sg.vim.print.handler.UploadEnv"
-            commandId="com.sg.vim.print.upload.env">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="upload"
-                        property="com.sg.vim.print.test2.cando">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="com.sg.vim.print.handler.CancelEnv"
-            commandId="com.sg.vim.print.cancel.env">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate
-                     ifEmpty="false"
-                     operator="and">
-                  <test
-                        args="cancel"
-                        property="com.sg.vim.print.test2.cando">
-                  </test>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
-   </extension>
-   <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
@@ -17437,6 +17000,97 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
+            id="com.sg.vim.publicdata.transfertococinfo"
+            name="复制公告数据">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.sg.vim.print.reprint"
+            name="补打">
+      </command>
+      <command
+            id="com.sg.vim.print.upload"
+            name="上传">
+      </command>
+      <command
+            id="com.sg.vim.print.reupload"
+            name="补传">
+      </command>
+      <command
+            id="com.sg.vim.print.cancel"
+            name="撤消">
+      </command>
+      <command
+            id="com.sg.vim.print.remove"
+            name="作废">
+      </command>
+      <command
+            id="com.sg.vim.print.edit"
+            name="修改">
+      </command>
+      <command
+            id="com.sg.vim.print.handler.syncmescert"
+            name="同步MES合格证数据">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.sg.vim.print.remove.coc"
+            name="作废">
+      </command>
+      <command
+            id="com.sg.vim.print.print.coc"
+            name="打印">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.sg.vim.print.remove.fuellabel"
+            name="作废">
+      </command>
+      <command
+            id="com.sg.vim.print.print.fuellabel"
+            name="打印">
+      </command>
+      <command
+            id="com.sg.vim.print.upload.fuellabel"
+            name="上传">
+      </command>
+      <command
+            id="com.sg.vim.print.reupload.fuellabel"
+            name="补传">
+      </command>
+      <command
+            id="com.sg.vim.print.cancel.fuellabel"
+            name="撤消">
+      </command>
+      <command
+            id="com.sg.vim.print.edit.fuellabel"
+            name="修改">
+      </command>
+      <command
+            id="com.sg.vim.print.reassemably"
+            name="重新组装数据">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.sg.vim.print.upload.env"
+            name="上传">
+      </command>
+      <command
+            id="com.sg.vim.print.cancel.env"
+            name="撤消">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
             id="com.sg.vim.job.transfertoproductcode"
             name="绑定到成品码">
       </command>
@@ -17484,7 +17138,358 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.sg.vim.job.handler.BindingCOCInfoToProductcode"
+            class="com.sg.vim.handler.TransferToCOC"
+            commandId="com.sg.vim.publicdata.transfertococinfo">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="+">
+               </count>
+            </with>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.sg.vim.handler.Reprint"
+            commandId="com.sg.vim.print.reprint">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="reprint"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.Upload"
+            commandId="com.sg.vim.print.upload">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="upload"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.Reupload"
+            commandId="com.sg.vim.print.reupload">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="reupload"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.Cancel"
+            commandId="com.sg.vim.print.cancel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="cancel"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.Remove"
+            commandId="com.sg.vim.print.remove">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="remove"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.Edit"
+            commandId="com.sg.vim.print.edit">
+         <enabledWhen>
+            <and>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <test
+                           args="edit"
+                           property="com.sg.vim.print.test.cando"
+                           value="true">
+                     </test>
+                  </iterate>
+               </with>
+            </and>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.SyncMESCert"
+            commandId="com.sg.vim.print.handler.syncmescert">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.sg.vim.handler.RemoveCOC"
+            commandId="com.sg.vim.print.remove.coc">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="remove"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.PrintCOC"
+            commandId="com.sg.vim.print.print.coc">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="print"
+                        property="com.sg.vim.print.test.cando"
+                        value="cocRePrintable">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.sg.vim.handler.PrintFuelLabel"
+            commandId="com.sg.vim.print.print.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="print"
+                        property="com.sg.vim.print.test.cando"
+                        value="flRePrintable">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.RemoveFuelLabel"
+            commandId="com.sg.vim.print.remove.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="remove"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.UploadFuelLabel"
+            commandId="com.sg.vim.print.upload.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="upload"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.Reassemably"
+            commandId="com.sg.vim.print.reassemably">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="reassembly"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.ReuploadFuelLabel"
+            commandId="com.sg.vim.print.reupload.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="reupload"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.CancelFuelLabel"
+            commandId="com.sg.vim.print.cancel.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="cancel"
+                        property="com.sg.vim.print.test.cando"
+                        value="true">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.EditFuellabel"
+            commandId="com.sg.vim.print.edit.fuellabel">
+         <enabledWhen>
+            <and>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               </with>
+               <with
+                     variable="selection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <test
+                           args="edit"
+                           property="com.sg.vim.print.test.cando"
+                           value="true">
+                     </test>
+                  </iterate>
+               </with>
+            </and>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.sg.vim.handler.UploadEnv"
+            commandId="com.sg.vim.print.upload.env">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="upload"
+                        property="com.sg.vim.print.test2.cando">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.CancelEnv"
+            commandId="com.sg.vim.print.cancel.env">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <test
+                        args="cancel"
+                        property="com.sg.vim.print.test2.cando">
+                  </test>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.sg.vim.handler.BindingCOCInfoToProductcode"
             commandId="com.sg.vim.job.transfertoproductcode">
          <enabledWhen>
             <and>
@@ -17512,7 +17517,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.BindingCOCInfoToProductcode2"
+            class="com.sg.vim.handler.BindingCOCInfoToProductcode2"
             commandId="com.sg.vim.job.transfertoproductcode2">
          <enabledWhen>
             <and>
@@ -17540,7 +17545,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.BindingConfigCodeToProductcode"
+            class="com.sg.vim.handler.BindingConfigCodeToProductcode"
             commandId="com.sg.vim.configcode.transfertoproductcode">
          <enabledWhen>
             <and>
@@ -17568,7 +17573,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.CopyCreateCOCinfo"
+            class="com.sg.vim.handler.CopyCreateCOCinfo"
             commandId="com.sg.vim.command.copycreate.cocinfo">
          <enabledWhen>
             <with
@@ -17580,7 +17585,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.CopyCreateConfigCode"
+            class="com.sg.vim.handler.CopyCreateConfigCode"
             commandId="com.sg.vim.command.copycreate.configcode">
          <enabledWhen>
             <with
@@ -17592,11 +17597,11 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.ImportProductData"
+            class="com.sg.vim.handler.ImportProductData"
             commandId="com.sg.vim.command.importproductdata">
       </handler>
       <handler
-            class="com.sg.vim.job.handler.OpenConfCode"
+            class="com.sg.vim.handler.OpenConfCode"
             commandId="com.sg.vim.command.productcode.openconfcode">
          <activeWhen>
             <and>
@@ -17628,7 +17633,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.OpenCOC2"
+            class="com.sg.vim.handler.OpenCOC2"
             commandId="com.sg.vim.command.productcode.opencoc2">
          <activeWhen>
             <and>
@@ -17660,7 +17665,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.OpenCOC1"
+            class="com.sg.vim.handler.OpenCOC1"
             commandId="com.sg.vim.command.productcode.opencoc1">
          <activeWhen>
             <and>
@@ -17692,7 +17697,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.OpenBasic"
+            class="com.sg.vim.handler.OpenBasic"
             commandId="com.sg.vim.command.productcode.openbasic">
          <activeWhen>
             <and>
@@ -17724,7 +17729,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="com.sg.vim.job.handler.ExportProductToMES"
+            class="com.sg.vim.handler.ExportProductToMES"
             commandId="com.sg.vim.command.productcode.exportmes">
       </handler>
    </extension>

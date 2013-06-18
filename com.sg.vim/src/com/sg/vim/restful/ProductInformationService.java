@@ -19,7 +19,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
-import com.sg.vim.datamodel.IVIMFields;
+import com.sg.vim.model.IVIMFields;
 import com.sg.webdb.service.HTTPRequestException;
 
 public class ProductInformationService extends HttpServlet {

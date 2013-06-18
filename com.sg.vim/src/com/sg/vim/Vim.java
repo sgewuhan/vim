@@ -18,7 +18,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.mobnut.db.DBActivator;
-import com.sg.vim.datamodel.util.VimUtils;
 import com.sg.vim.job.SyncProductCodeData;
 
 
