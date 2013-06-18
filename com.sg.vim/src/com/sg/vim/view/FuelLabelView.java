@@ -123,6 +123,8 @@ public class FuelLabelView extends GenericPrintabelView {
     }
 
     public void doReUpload() {
+    	//
+    	
         IStructuredSelection selection = getNavigator().getViewer().getSelection();
         if (selection == null || selection.isEmpty()) {
             return;

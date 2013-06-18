@@ -58,10 +58,12 @@ import com.sg.vim.model.IVIMFields;
 import com.sg.vim.service.ArrayOfString;
 import com.sg.vim.service.NameValuePair;
 import com.sg.vim.service.OperateResult;
+import com.sg.vim.service.fuellabel.ArrayOfRllxParam;
 import com.sg.vim.service.fuellabel.ArrayOfRllxParamEntity;
 import com.sg.vim.service.fuellabel.ArrayOfVehicleBasicInfo;
 import com.sg.vim.service.fuellabel.FuelDataSysSTD;
 import com.sg.vim.service.fuellabel.FuelDataSysSTDSoap;
+import com.sg.vim.service.fuellabel.RllxParam;
 import com.sg.vim.service.fuellabel.RllxParamEntity;
 import com.sg.vim.service.fuellabel.VehicleBasicInfo;
 import com.sg.vim.service.vecc_sepa.WSVin;
@@ -1090,6 +1092,15 @@ public class VimUtils {
 
     public static void uploadFuelLabel2(List<DBObject> fuelLabelList, String memo) throws Exception {
         FuelDataSysSTDSoap service = getFUELDATAService();
+        
+        ArrayOfRllxParam pd = service.queryRllxParamData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD, FUELLABEL_OKEY);
+        List<RllxParam> rplist = pd.getRllxParam();
+        for (int i = 0; i < rplist.size(); i++) {
+			RllxParam row = rplist.get(i);
+			System.out.println("getControlType:"+row.getControlType()+">getControlValue>"+row.getControlValue()+">getFuelType>"+row.getFuelType()+">getOrderRule>"+row.getOrderRule()+">getParamCode>"+row.getParamCode()+">getParamName>"+row.getParamName()+">getStatus>"+row.getStatus()+">getParamRemark>"+row.getParamRemark());
+        }
+        
+        
         ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
 
         for (int i = 0; i < fuelLabelList.size(); i++) {
