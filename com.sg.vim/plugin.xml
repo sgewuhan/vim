@@ -12411,20 +12411,20 @@
                </section>
                <section
                      label="离合器，变速器，轮胎，转向和制动">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_27"
+                        label="27 离合器形式"
+                        labelVisible="true"
+                        name="f_27"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <fieldgroup
                         columnCount="2">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_27"
-                           label="27 离合器形式"
-                           labelVisible="true"
-                           name="f_27"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
@@ -12433,6 +12433,19 @@
                            label="28 变速器形式"
                            labelVisible="true"
                            name="f_28"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_28_1"
+                           label="变速器档位数"
+                           labelVisible="true"
+                           name="f_28_1"
+                           option="com.sg.vim.enum.type7"
                            persistable="true"
                            required="false"
                            type="String">
@@ -15064,20 +15077,20 @@
                </section>
                <section
                      label="离合器，变速器，轮胎，转向和制动">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_27"
+                        label="27 离合器形式"
+                        labelVisible="true"
+                        name="f_27"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
                   <fieldgroup
                         columnCount="2">
-                     <field
-                           computeField="false"
-                           editPart="Text(Single Line)"
-                           editable="true"
-                           id="f_27"
-                           label="27 离合器形式"
-                           labelVisible="true"
-                           name="f_27"
-                           persistable="true"
-                           required="false"
-                           type="String">
-                     </field>
                      <field
                            computeField="false"
                            editPart="Text(Single Line)"
@@ -15086,6 +15099,19 @@
                            label="28 变速器形式"
                            labelVisible="true"
                            name="f_28"
+                           persistable="true"
+                           required="false"
+                           type="String">
+                     </field>
+                     <field
+                           computeField="false"
+                           editPart="Combo(Read Only)"
+                           editable="true"
+                           id="f_28_1"
+                           label="变速器档位数"
+                           labelVisible="true"
+                           name="f_28_1"
+                           option="com.sg.vim.enum.type7"
                            persistable="true"
                            required="false"
                            type="String">
@@ -17885,6 +17911,43 @@
          </enumerate>
          <enumerate
                id="3">
+         </enumerate>
+      </enumerate>
+      <enumerate
+            id="com.sg.vim.enum.type7"
+            label="变速器档位数">
+         <enumerate
+               id="1">
+         </enumerate>
+         <enumerate
+               id="2">
+         </enumerate>
+         <enumerate
+               id="3">
+         </enumerate>
+         <enumerate
+               id="4">
+         </enumerate>
+         <enumerate
+               id="5">
+         </enumerate>
+         <enumerate
+               id="6">
+         </enumerate>
+         <enumerate
+               id="7">
+         </enumerate>
+         <enumerate
+               id="8">
+         </enumerate>
+         <enumerate
+               id="9">
+         </enumerate>
+         <enumerate
+               id="10">
+         </enumerate>
+         <enumerate
+               id="N.A">
          </enumerate>
       </enumerate>
    </extension>

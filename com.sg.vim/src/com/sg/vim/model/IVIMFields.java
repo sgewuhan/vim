@@ -46,7 +46,7 @@ public class IVIMFields {
     public static final String C_22 = "c_22";
     /** 车辆状态信息 **/
     public static final String C_23 = "c_23";
-    /**8位企业id**/
+    /** 8位企业id **/
     public static final String C_24 = "c_24";
 
     /** 车辆一致性证书编号 **/
@@ -84,7 +84,7 @@ public class IVIMFields {
     public static final String CFG_NAME = "configcodeinfo_name";
     /** COC ID **/
     public static final String COC_ID = "cocinfo_id";
-    /**DP COC ID**/
+    /** DP COC ID **/
     public static final String COC_ID2 = "cocinfo_id2";
     /** COC name **/
     public static final String COC_NAME = "cocinfo_name";
@@ -136,7 +136,7 @@ public class IVIMFields {
     public static final String D_24 = "d_24";
     /** 是否是越野车 **/
     public static final String D_30 = "d_30";
-    /** 检测机构**/
+    /** 检测机构 **/
     public static final String D_31 = "d_31";
     /** 检测报告 **/
     public static final String D_32 = "d_32";
@@ -238,6 +238,10 @@ public class IVIMFields {
     public static final String F_27 = "f_27";
     /** 28 变速器形式 **/
     public static final String F_28 = "f_28";
+    
+    /** 28 变速器档位数**/
+    public static final String F_28_1 = "f_28_1"; 
+
     /** 29 速比 **/
     public static final String F_29 = "f_29";
     /** 3 轴距(mm) **/
@@ -268,10 +272,9 @@ public class IVIMFields {
     public static final String F_4_1_1 = "f_4_1_1";
     /** 4.1.2牵引座前置距最小值(mm) **/
     public static final String F_4_1_2 = "f_4_1_2";
-    
+
     public static final String F_4_1_1_O = "f_4_1_1_o";
 
-    
     /** 40 起重机的最大力矩能力(kNm) **/
     public static final String F_40 = "f_40";
     /** 41 车门数量 **/
@@ -282,10 +285,10 @@ public class IVIMFields {
     public static final String F_42_1 = "f_42_1";
     /** 42.1 座位数(包括驾驶员座) **/
     public static final String F_42_1_ = "f_42_1_";
-    /** 42.1 座位数(包括驾驶员座) GONGGAO YONG**/
-	public static final String F_42_1b = "f_42_1b";
-    /** 42.1 座位数(包括驾驶员座) 打印时合并c_02**/
-	public static final String F_42_1_O = "f_42_1_o";
+    /** 42.1 座位数(包括驾驶员座) GONGGAO YONG **/
+    public static final String F_42_1b = "f_42_1b";
+    /** 42.1 座位数(包括驾驶员座) 打印时合并c_02 **/
+    public static final String F_42_1_O = "f_42_1_o";
 
     /** 布置方式 **/
     public static final String F_42_1a = "f_42_1a";
@@ -306,7 +309,7 @@ public class IVIMFields {
     public static final String F_46_2 = "f_46_2";
     /** 46.3 CO2排放量/燃油消耗量 **/
     public static final String F_46_3 = "f_46_3";
-    
+
     // 市区，Co2, 油耗
     // f_46_3_o11,f_46_3_o12
     // 市郊，Co2,油耗
@@ -379,7 +382,7 @@ public class IVIMFields {
     public static final String H_03 = "h_03";
     /** 配置 **/
     public static final String H_04 = "h_04";
-    
+
     public static final String mVeh_Clztxx = "Veh_Clztxx";// 车辆状态信息 字符 2 取值为QX和DP
     public static final String mVeh_Zchgzbh = "Veh_Zchgzbh";// 整车合格证编号 字符 14
                                                             // 4位企业代码+10位顺序号成功调用打印方法后可以通过该属性获得15位的整车合格证编号
@@ -477,9 +480,8 @@ public class IVIMFields {
     public static final String mVeh__Wzghzbh = "Veh_Wzghzbh";
 
     public static final String mVeh__Pzxlh = "Veh_Pzxlh";
-    
-    public static final String mVeh__Fdjscc = "Veh_fdkscc";
 
+    public static final String mVeh__Fdjscc = "Veh_fdkscc";
 
     // *********以下字段用于打印机设置数据的保存
     public static final String mVeh_A_PrinterFunction = "Veh_A_PrinterFunction";
@@ -503,7 +505,8 @@ public class IVIMFields {
     public static final String LC_CANCELED = "已撤消";
     public static final String LC_ABANDON = "已作废";
 
-    public static final String[] PRINTER_FUNCTIONS = new String[] { "打印整车合格证", "打印车辆一致性证书", "打印燃油标识","打印底盘合格证" };
+    public static final String[] PRINTER_FUNCTIONS = new String[] { "打印整车合格证", "打印车辆一致性证书",
+            "打印燃油标识", "打印底盘合格证" };
     public static final String ACTION_REC = "action_rec";
     public static final String ACTION_REC_DATE = "act_date";
     public static final String ACTION_REC_TYPE = "act_type";
@@ -518,17 +521,15 @@ public class IVIMFields {
     public static final String ACTION_REC_TYPE_VALUE_ABANDON = "作废";
     public static final String mVeh_A_update_memo = "updatememo";
 
-
     public static final String SEQ_GZBH = "hgzbh";
-    /**在COC证书上的合格证日期**/
+    /** 在COC证书上的合格证日期 **/
     public static final String CCC_21 = "ccc_21";
-    
+
     public static final String G_32 = "g_32";
     public static final String G_33 = "g_33";
     public static final String G_34 = "g_34";
     public static final String G_35 = "g_35";
-    
-    
+
     public static final String COL_CONFIGCODEINFO = "configcodeinfo";
     public static final String COL_COCINFO = "cocinfo";
     public static final String COL_CERF = "certificate";
@@ -538,12 +539,12 @@ public class IVIMFields {
 
     public static final String DB_NAME = "appportal";
     public static final String BASICINFO_ID = "basicinfo_id";
-    
+
     public static final String color_name = "color_name";
     public static final String color_code = "color_code";
     public static final String IS_DIRTY = "isdirty";
     public static final String COL_ENV = "env";
-    
+
     public static final String env_clxh = "clxh";
     public static final String env_vin = "vin";
     public static final String env_fdjxh = "fdjxh";
@@ -551,5 +552,32 @@ public class IVIMFields {
     public static final String env_mdate = "mdate";
     public static final String env_qdate = "qdate";
     public static final String COL_VIN = "vin";
+
+    /** 用于燃油标识上传的参数   变速器档位数  1/2/3/4/5/6/7/8/9/10/N.A**/
+    public static final String CT_BSQDWS = "CT_BSQDWS";
+    /** 用于燃油标识上传的参数   MT/AT/AMT/CVT/DCT/其它    变速器型式 **/
+    public static final String CT_BSQXS = "CT_BSQXS";
+    /** 用于燃油标识上传的参数   额定功率 **/
+    public static final String CT_EDGL = "CT_EDGL";
+    /** 用于燃油标识上传的参数   发动机型号 **/
+    public static final String CT_FDJXH = "CT_FDJXH"; 
+    /** 用于燃油标识上传的参数   最大净功率 **/
+    public static final String CT_JGL = "CT_JGL"; 
+    /** 用于燃油标识上传的参数   排量 **/
+    public static final String CT_PL = "CT_PL"; 
+    /** 用于燃油标识上传的参数   汽车节能技术 **/
+    public static final String CT_QCJNJS = "CT_QCJNJS"; 
+    /** 用于燃油标识上传的参数   气缸数 **/
+    public static final String CT_QGS = "CT_QGS"; 
+    /** 用于燃油标识上传的参数  其他信息 **/
+    public static final String CT_QTXX = "CT_QTXX";
+    /** 用于燃油标识上传的参数   市郊工况燃料消耗量 **/
+    public static final String CT_SJGKRLXHL = "CT_SJGKRLXHL"; 
+    /** 用于燃油标识上传的参数   市区工况燃料消耗量 **/
+    public static final String CT_SQGKRLXHL = "CT_SQGKRLXHL"; 
+    /** 用于燃油标识上传的参数  综合工况CO2排放量**/
+    public static final String CT_ZHGKCO2PFL = "CT_ZHGKCO2PFL"; 
+    /** 用于燃油标识上传的参数  综合工况燃料消耗量 **/
+    public static final String CT_ZHGKRLXHL = "CT_ZHGKRLXHL";
 
 }

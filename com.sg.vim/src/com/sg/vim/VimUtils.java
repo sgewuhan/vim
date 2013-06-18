@@ -205,7 +205,6 @@ public class VimUtils {
         String pattern = "[0-9ABCDEFGHJKLMNPQRSTUVWXYZ]{17}";
         return Utils.isPatternMatched(vin, pattern);
     }
-    
 
     /**
      * 查询数据库字段名 意思 vin VIN erp_product_code 成品码 safety_components_vin 发动机号 manufacture_date 制造日期
@@ -1092,15 +1091,15 @@ public class VimUtils {
 
     public static void uploadFuelLabel2(List<DBObject> fuelLabelList, String memo) throws Exception {
         FuelDataSysSTDSoap service = getFUELDATAService();
-        
-        ArrayOfRllxParam pd = service.queryRllxParamData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD, FUELLABEL_OKEY);
-        List<RllxParam> rplist = pd.getRllxParam();
-        for (int i = 0; i < rplist.size(); i++) {
-			RllxParam row = rplist.get(i);
-			System.out.println("getControlType:"+row.getControlType()+">getControlValue>"+row.getControlValue()+">getFuelType>"+row.getFuelType()+">getOrderRule>"+row.getOrderRule()+">getParamCode>"+row.getParamCode()+">getParamName>"+row.getParamName()+">getStatus>"+row.getStatus()+">getParamRemark>"+row.getParamRemark());
-        }
-        
-        
+
+        // ArrayOfRllxParam pd = service.queryRllxParamData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+        // FUELLABEL_OKEY);
+        // List<RllxParam> rplist = pd.getRllxParam();
+        // for (int i = 0; i < rplist.size(); i++) {
+        // RllxParam row = rplist.get(i);
+        // System.out.println("getControlType:"+row.getControlType()+">getControlValue>"+row.getControlValue()+">getFuelType>"+row.getFuelType()+">getOrderRule>"+row.getOrderRule()+">getParamCode>"+row.getParamCode()+">getParamName>"+row.getParamName()+">getStatus>"+row.getStatus()+">getParamRemark>"+row.getParamRemark());
+        // }
+
         ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
 
         for (int i = 0; i < fuelLabelList.size(); i++) {
@@ -1984,15 +1983,84 @@ public class VimUtils {
         // Check s:string 辅助字段，企业开发时忽略此字段
         // Reason 申请原因字段 s:string 在申请补传，申请修改时（即调用接口4: UploadOverTime，5 :ApplyUpdate）时此字段为必填项
         // EntityList 燃料参数数组 RllxParamEntity[] 数据结构见表四
-        ArrayOfRllxParamEntity arrayRllx = new ArrayOfRllxParamEntity();
-        RllxParamEntity e = new RllxParamEntity();
-        e.setParamCode("CT_BSRXS");
-        e.setParamValue("手动");
-        e.setVin((String) data.get(IVIMFields.F_0_6b));
+        // 只考虑了传统能源的情况
 
-        arrayRllx.getRllxParamEntity().add(e);
+        String vin = (String) data.get(IVIMFields.F_0_6b);
+
+        ArrayOfRllxParamEntity arrayRllx = new ArrayOfRllxParamEntity();
+        List<RllxParamEntity> rllxlist = arrayRllx.getRllxParamEntity();
+
+        // 变速器档位数
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_BSQDWS, (String) data.get(IVIMFields.F_28_1),
+                vin));
+
+        // 变速器形式
+        value = (String) data.get(IVIMFields.F_28);
+        if ("手动".equals(value)) {
+            rllxlist.add(getRllxParamEntity(IVIMFields.CT_BSQXS, "MT", vin));
+        } else if ("自动".equals(value)) {
+            rllxlist.add(getRllxParamEntity(IVIMFields.CT_BSQXS, "AT", vin));
+        } else {
+            rllxlist.add(getRllxParamEntity(IVIMFields.CT_BSQXS, "其他", vin));
+        }
+
+        // 额定功率
+        value = (String) data.get(IVIMFields.C_01);
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_EDGL, value, vin));
+
+        // 发动机型号
+        value = (String) data.get(IVIMFields.F_C4);
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_FDJXH, value, vin));
+
+        // 净功率
+        value = (String) data.get(IVIMFields.F_26);
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_JGL, value, vin));
+
+        // 排量
+        value = (String) data.get(IVIMFields.F_24);
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_PL, value, vin));
+
+        // 汽车节能技术
+        value = "";
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_QCJNJS, value, vin));
+
+        // 气缸数
+        value = (String) data.get(IVIMFields.F_23);
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_QGS, value, vin));
+
+        // 其他信息
+        value = "";
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_QTXX, value, vin));
+
+        Object d = data.get(IVIMFields.F_46_3);
+        if (d instanceof List) {
+            for (int i = 0; i < ((List) d).size(); i++) {
+                DBObject e = (DBObject) ((List) d).get(i);
+                if ("市区".equals(e.get("location"))) {
+                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_SQGKRLXHL,
+                            (String) e.get("fuelqty"), vin));
+                } else if ("市郊".equals(e.get("location"))) {
+                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_SJGKRLXHL,
+                            (String) e.get("fuelqty"), vin));
+                } else if ("综合".equals(e.get("location"))) {
+                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_ZHGKRLXHL,
+                            (String) e.get("fuelqty"), vin));
+                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_ZHGKCO2PFL,
+                            (String) e.get("co2"), vin));
+                }
+            }
+        }
+
         info.setEntityList(arrayRllx);
         return info;
+    }
+
+    private static RllxParamEntity getRllxParamEntity(String para, String value, String vin) {
+        RllxParamEntity e = new RllxParamEntity();
+        e.setParamCode(para);
+        e.setParamValue(value);
+        e.setVin(vin);
+        return e;
     }
 
     private static String getResultMessage(Object oResult) {
@@ -2021,9 +2089,10 @@ public class VimUtils {
         DBCursor cur = col.find(new BasicDBObject().append(IVIMFields.mVeh_Clsbdh, vin).append(
                 IVIMFields.mVeh_Clztxx, clztxx));
         DBObject ret = null;
-        while(cur.hasNext()){
+        while (cur.hasNext()) {
             DBObject certData = cur.next();
-            if (IVIMFields.LC_ABANDON.equals((String) certData.get(IVIMFields.LIFECYCLE))&&ret!=null){
+            if (IVIMFields.LC_ABANDON.equals((String) certData.get(IVIMFields.LIFECYCLE))
+                    && ret != null) {
                 continue;
             }
             ret = certData;
@@ -2732,7 +2801,6 @@ public class VimUtils {
         }
     }
 
-    
     public static CertificateRequestServiceSoap getVIDCService() {
         CertificateRequestServiceSoap service = new CertificateRequestService()
                 .getCertificateRequestServiceSoap();
