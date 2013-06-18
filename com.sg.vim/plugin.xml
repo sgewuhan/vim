@@ -6720,7 +6720,7 @@
       </table>
       <table
             canCreate="false"
-            canDelete="false"
+            canDelete="true"
             collectionName="certificate"
             dbName="appportal"
             doubleClickListener="com.sg.ui.viewer.table.DoubleClickOpenEditor"
