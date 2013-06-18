@@ -1,4 +1,4 @@
-package com.sg.vim.handler;
+package com.sg.vim.test;
 
 import org.eclipse.core.expressions.PropertyTester;
 
