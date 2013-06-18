@@ -16255,7 +16255,7 @@
                   <with
                         variable="activePartId">
                      <equals
-                           value="com.sg.vim.view.certificate">
+                           value="com.sg.vim.view.fuellabel">
                      </equals>
                   </with>
                   <with

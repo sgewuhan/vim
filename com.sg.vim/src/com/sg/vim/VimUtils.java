@@ -527,7 +527,22 @@ public class VimUtils {
         // 气缸数量
         copyValue(result, cocData, IVIMFields.F_23);
         // 46.3 CO2排放量/燃油消耗量
-        copyValue(result, cocData, IVIMFields.F_46_3);
+        // copyValue(result, cocData, IVIMFields.F_46_3);
+        Object d = cocData.get(IVIMFields.F_46_3);
+        if (d instanceof List) {
+            for (int i = 0; i < ((List) d).size(); i++) {
+                DBObject e = (DBObject) ((List) d).get(i);
+                if ("市区".equals(e.get("location"))) {
+                    result.put(IVIMFields.D_14, (String) e.get("fuelqty"));
+                } else if ("市郊".equals(e.get("location"))) {
+                    result.put(IVIMFields.D_15, (String) e.get("fuelqty"));
+                } else if ("综合".equals(e.get("location"))) {
+                    result.put(IVIMFields.D_16, (String) e.get("fuelqty"));
+                    result.put(IVIMFields.CT_ZHGKCO2PFL, (String) e.get("co2"));
+                }
+            }
+        }
+
         // coc id
         result.put(IVIMFields.COC_ID, cocData.get("_id"));
 
@@ -1032,54 +1047,71 @@ public class VimUtils {
         }
     }
 
-    public static void uploadFuelLabel(List<DBObject> fuelLabelList) throws Exception {
-        FuelDataSysSTDSoap service = getFUELDATAService();
-        ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
-
-        for (int i = 0; i < fuelLabelList.size(); i++) {
-            VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i));
-            vehicleInfoList.getVehicleBasicInfo().add(vbi);
-        }
-
-        OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
-                vehicleInfoList, FUELLABEL_OKEY);
-        int rCode = r.getResultCode();
-        if (rCode == 1) {
-            throw new Exception(getResultMessage(r));
-        }
-    }
-
-    public static void main(String[] args) throws ParserConfigurationException, SAXException,
-            IOException {
-        String res = "<result>\n" + "<succeed>\"true\"</succeed>\n"
-                + "<data>\"HHVESGTOTHLDUVUMMCQUNCPURNSFQLTW\"</data>\n" + "</result>";
-        DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = fac.newDocumentBuilder();
-        Document doc = builder.parse(new ByteArrayInputStream(res.getBytes()));
-        Element element = doc.getDocumentElement();
-        NodeList n = element.getChildNodes();
-
-        if (n != null) {
-            for (int i = 0; i < n.getLength(); i++) {
-                Node book = n.item(i);
-                for (Node node = book.getFirstChild(); node != null; node = node.getNextSibling()) {
-                    if (node.getNodeType() == Node.ELEMENT_NODE) {
-                        if (node.getNodeName().equals("succeed")) {
-                            String name = node.getNodeValue();
-                            String name1 = node.getFirstChild().getNodeValue();
-                            System.out.println(name);
-                            System.out.println(name1);
-                        }
-                        if (node.getNodeName().equals("data")) {
-                            String price = node.getFirstChild().getNodeValue();
-                            System.out.println(price);
-                        }
-                    }
-                }
+    public static void main(String[] args) {
+        ArrayList list = new ArrayList();
+        int count = 192;
+        for (int i = 0; i < count; i++) {
+            System.out.println(i);
+            list.add("" + i);
+            if (i != 0 && (i + 1) % 20 == 0) {
+                System.out.println("upload");
             }
         }
 
     }
+
+    public static void uploadFuelLabel(List<DBObject> fuelLabelList) throws Exception {
+        FuelDataSysSTDSoap service = getFUELDATAService();
+
+        ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
+        for (int i = 0; i < fuelLabelList.size(); i++) {
+            VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i));
+            vehicleInfoList.getVehicleBasicInfo().add(vbi);
+
+            if (i != 0 && (i + 1) % 20 == 0) {// 每20条上传一次
+                OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                        vehicleInfoList, FUELLABEL_OKEY);
+                int rCode = r.getResultCode();
+                if (rCode == 1) {
+                    throw new Exception(getResultMessage(r));
+                }
+                vehicleInfoList = new ArrayOfVehicleBasicInfo();
+            }
+        }
+
+    }
+
+    // public static void main(String[] args) throws ParserConfigurationException, SAXException,
+    // IOException {
+    // String res = "<result>\n" + "<succeed>\"true\"</succeed>\n"
+    // + "<data>\"HHVESGTOTHLDUVUMMCQUNCPURNSFQLTW\"</data>\n" + "</result>";
+    // DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
+    // DocumentBuilder builder = fac.newDocumentBuilder();
+    // Document doc = builder.parse(new ByteArrayInputStream(res.getBytes()));
+    // Element element = doc.getDocumentElement();
+    // NodeList n = element.getChildNodes();
+    //
+    // if (n != null) {
+    // for (int i = 0; i < n.getLength(); i++) {
+    // Node book = n.item(i);
+    // for (Node node = book.getFirstChild(); node != null; node = node.getNextSibling()) {
+    // if (node.getNodeType() == Node.ELEMENT_NODE) {
+    // if (node.getNodeName().equals("succeed")) {
+    // String name = node.getNodeValue();
+    // String name1 = node.getFirstChild().getNodeValue();
+    // System.out.println(name);
+    // System.out.println(name1);
+    // }
+    // if (node.getNodeName().equals("data")) {
+    // String price = node.getFirstChild().getNodeValue();
+    // System.out.println(price);
+    // }
+    // }
+    // }
+    // }
+    // }
+    //
+    // }
 
     public static void uploadEnv(List<DBObject> list) throws Exception {
         WSVinSoap service = getWVINService();
@@ -1110,27 +1142,23 @@ public class VimUtils {
     public static void uploadFuelLabel2(List<DBObject> fuelLabelList, String memo) throws Exception {
         FuelDataSysSTDSoap service = getFUELDATAService();
 
-        // ArrayOfRllxParam pd = service.queryRllxParamData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
-        // FUELLABEL_OKEY);
-        // List<RllxParam> rplist = pd.getRllxParam();
-        // for (int i = 0; i < rplist.size(); i++) {
-        // RllxParam row = rplist.get(i);
-        // System.out.println("getControlType:"+row.getControlType()+">getControlValue>"+row.getControlValue()+">getFuelType>"+row.getFuelType()+">getOrderRule>"+row.getOrderRule()+">getParamCode>"+row.getParamCode()+">getParamName>"+row.getParamName()+">getStatus>"+row.getStatus()+">getParamRemark>"+row.getParamRemark());
-        // }
-
         ArrayOfVehicleBasicInfo vehicleInfoList = new ArrayOfVehicleBasicInfo();
 
         for (int i = 0; i < fuelLabelList.size(); i++) {
             VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i), true, memo);
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
+
+            if (i != 0 && (i + 1) % 20 == 0) {// 每20条上传一次
+                OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                        vehicleInfoList, FUELLABEL_OKEY);
+                int rCode = r.getResultCode();
+                if (rCode == 1) {
+                    throw new Exception(getResultMessage(r));
+                }
+                vehicleInfoList = new ArrayOfVehicleBasicInfo();
+            }
         }
 
-        com.sg.vim.service.OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME,
-                FUELLABEL_PASSWORD, vehicleInfoList, FUELLABEL_OKEY);
-        int rCode = r.getResultCode();
-        if (rCode == 1) {
-            throw new Exception(getResultMessage(r));
-        }
     }
 
     public static void updateCert(List<DBObject> certList, String memo) throws Exception {
@@ -2058,24 +2086,14 @@ public class VimUtils {
         value = "";
         rllxlist.add(getRllxParamEntity(IVIMFields.CT_QTXX, value, vin));
 
-        Object d = data.get(IVIMFields.F_46_3);
-        if (d instanceof List) {
-            for (int i = 0; i < ((List) d).size(); i++) {
-                DBObject e = (DBObject) ((List) d).get(i);
-                if ("市区".equals(e.get("location"))) {
-                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_SQGKRLXHL,
-                            (String) e.get("fuelqty"), vin));
-                } else if ("市郊".equals(e.get("location"))) {
-                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_SJGKRLXHL,
-                            (String) e.get("fuelqty"), vin));
-                } else if ("综合".equals(e.get("location"))) {
-                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_ZHGKRLXHL,
-                            (String) e.get("fuelqty"), vin));
-                    rllxlist.add(getRllxParamEntity(IVIMFields.CT_ZHGKCO2PFL,
-                            (String) e.get("co2"), vin));
-                }
-            }
-        }
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_SQGKRLXHL,
+                (String) data.get(IVIMFields.D_14), vin));
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_SJGKRLXHL,
+                (String) data.get(IVIMFields.D_15), vin));
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_ZHGKRLXHL,
+                (String) data.get(IVIMFields.D_16), vin));
+        rllxlist.add(getRllxParamEntity(IVIMFields.CT_ZHGKCO2PFL,
+                (String) data.get(IVIMFields.CT_ZHGKCO2PFL), vin));
 
         info.setEntityList(arrayRllx);
         return info;

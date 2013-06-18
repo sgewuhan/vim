@@ -79,6 +79,7 @@ public class FuelLabelView extends GenericPrintabelView {
                 DBObject item = dataList.get(i);
                 item.putAll(setting);
             }
+            getNavigator().getViewer().update(dataList.toArray(), null);
         } catch (Exception e) {
             UIUtils.showMessage(getSite().getShell(), "燃油数据上传", e.getMessage(), SWT.ICON_ERROR
                     | SWT.OK);
