@@ -1609,6 +1609,36 @@
                   type="String">
             </column>
          </exportAction>
+         <importAction>
+            <column
+                  column="f_0_2_1"
+                  importRequired="true"
+                  isKey="true"
+                  name="车辆名称"
+                  type="String">
+            </column>
+            <column
+                  column="f_c0_2"
+                  importRequired="true"
+                  name="车辆品牌"
+                  type="String">
+            </column>
+            <column
+                  column="d_23"
+                  name="产品号"
+                  type="String">
+            </column>
+            <column
+                  column="d_18"
+                  name="批次"
+                  type="String">
+            </column>
+            <column
+                  column="d_01"
+                  name="生效日期"
+                  type="Date">
+            </column>
+         </importAction>
       </navigator>
       <navigator
             id="com.sg.vim.view.nameplate"
