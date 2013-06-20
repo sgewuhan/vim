@@ -17534,7 +17534,7 @@
          </enabledWhen>
       </handler>
       <handler
-            class="QueryStatus"
+            class="com.sg.vim.handler.QueryStatus"
             commandId="com.sg.vim.print.query.fuellabel">
          <enabledWhen>
             <with
