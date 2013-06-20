@@ -21,6 +21,7 @@ import com.sg.ui.part.editor.IEditorSaveHandler;
 import com.sg.vim.VimUtils;
 import com.sg.vim.job.DataAssembly;
 import com.sg.vim.model.IVIMFields;
+import com.sg.vim.service.fuellabel.ArrayOfVehicleBasicInfo;
 
 public class FuelLabelView extends GenericPrintabelView {
 
@@ -258,5 +259,15 @@ public class FuelLabelView extends GenericPrintabelView {
         }
 
     }
+
+	public void updateStatus() {
+		// TODO Auto-generated method stub
+		IStructuredSelection selection = navi.getViewer().getSelection();
+        if(selection.isEmpty()){
+        	return;
+        }	
+        DBObject dbo=(DBObject) selection.getFirstElement();
+        ArrayOfVehicleBasicInfo fuelList = VimUtils.getFUELDATAService().queryUploadedFuelData(VimUtils.FUELLABEL_USERNAME, VimUtils.FUELLABEL_PASSWORD, 0, 100, (String) dbo.get(IVIMFields.F_0_6b), null, null, null, null, null, null, VimUtils.FUELLABEL_OKEY);
+	}
 
 }
