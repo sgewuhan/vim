@@ -1078,6 +1078,13 @@ public class VimUtils {
                 vehicleInfoList = new ArrayOfVehicleBasicInfo();
             }
         }
+        
+        OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                vehicleInfoList, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
+        }
 
     }
 
