@@ -16293,6 +16293,20 @@
                </and>
             </visibleWhen>
          </command>
+         <command
+               commandId="com.sg.vim.print.query.fuellabel"
+               label="查询"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeWorkbenchWindow.activePerspective">
+                  <equals
+                        value="com.sg.vim.perspective.printdata">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </command>
       </menuContribution>
       <menuContribution
             allPopups="false"
@@ -17143,6 +17157,10 @@
             id="com.sg.vim.print.reassemably"
             name="重新组装数据">
       </command>
+      <command
+            id="com.sg.vim.print.query.fuellabel"
+            name="查询">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -17513,6 +17531,18 @@
                   </iterate>
                </with>
             </and>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="com.sg.vim.handler.QueryStatus"
+            commandId="com.sg.vim.print.query.fuellabel">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <count
+                     value="1">
+               </count>
+            </with>
          </enabledWhen>
       </handler>
    </extension>

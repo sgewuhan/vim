@@ -1068,6 +1068,7 @@ public class VimUtils {
             VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i));
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
 
+
             if (i != 0 && (i + 1) % 20 == 0) {// 每20条上传一次
                 com.sg.vim.service.fuellabel.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                         vehicleInfoList, FUELLABEL_OKEY);
@@ -1077,6 +1078,13 @@ public class VimUtils {
                 }
                 vehicleInfoList = new ArrayOfVehicleBasicInfo();
             }
+        }
+        
+        OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                vehicleInfoList, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
         }
 
     }
