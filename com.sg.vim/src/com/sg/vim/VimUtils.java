@@ -1080,7 +1080,7 @@ public class VimUtils {
             }
         }
         
-        OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+        com.sg.vim.service.fuellabel.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                 vehicleInfoList, FUELLABEL_OKEY);
         int rCode = r.getResultCode();
         if (rCode == 1) {
