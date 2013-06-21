@@ -1069,7 +1069,7 @@ public class VimUtils {
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
 
             if (i != 0 && (i + 1) % 20 == 0) {// 每20条上传一次
-                OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                com.sg.vim.service.fuellabel.OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                         vehicleInfoList, FUELLABEL_OKEY);
                 int rCode = r.getResultCode();
                 if (rCode == 1) {
@@ -1149,7 +1149,7 @@ public class VimUtils {
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
 
             if (i != 0 && (i + 1) % 20 == 0) {// 每20条上传一次
-                OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                com.sg.vim.service.fuellabel.OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                         vehicleInfoList, FUELLABEL_OKEY);
                 int rCode = r.getResultCode();
                 if (rCode == 1) {
@@ -1185,7 +1185,7 @@ public class VimUtils {
             VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i), true, memo);
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
         }
-        OperateResult r = service.applyUpdate(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+        com.sg.vim.service.fuellabel.OperateResult r = service.applyUpdate(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                 vehicleInfoList, FUELLABEL_OKEY);
         int rCode = r.getResultCode();
         if (rCode == 1) {
@@ -1209,11 +1209,11 @@ public class VimUtils {
 
     public static void deleteFuelLabel(List<String> vinList, String memo) throws Exception {
         FuelDataSysSTDSoap service = getFUELDATAService();
-        com.sg.vim.service.ArrayOfString vinStringList = new com.sg.vim.service.ArrayOfString();
+        com.sg.vim.service.fuellabel.ArrayOfString vinStringList = new com.sg.vim.service.fuellabel.ArrayOfString();
         for (int i = 0; i < vinList.size(); i++) {
             vinStringList.getString().add(vinList.get(i));
         }
-        OperateResult r = service.applyDelete(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+        com.sg.vim.service.fuellabel.OperateResult r = service.applyDelete(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                 vinStringList, memo, FUELLABEL_OKEY);
         int rCode = r.getResultCode();
         if (rCode == 1) {

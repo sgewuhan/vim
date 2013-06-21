@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "FuelDataSysSTD", targetNamespace = "http://soap.catarc.info/", wsdlLocation = "http://soap.catarc.info/FuelDataSysSTD.asmx?wsdl")
+@WebServiceClient(name = "FuelDataSysSTD", targetNamespace = "http://soap.catarc.info/", wsdlLocation = "http://soap.catarc.info/FuelDataSysSTD.asmx?WSDL")
 public class FuelDataSysSTD
     extends Service
 {
@@ -30,7 +30,7 @@ public class FuelDataSysSTD
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://soap.catarc.info/FuelDataSysSTD.asmx?wsdl");
+            url = new URL("http://soap.catarc.info/FuelDataSysSTD.asmx?WSDL");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

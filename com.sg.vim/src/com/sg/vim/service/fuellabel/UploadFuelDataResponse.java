@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.sg.vim.service.OperateResult;
-
 
 /**
  * <p>Java class for anonymous complex type.

@@ -3,16 +3,11 @@ package com.sg.vim.service.fuellabel;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
-import com.sg.vim.service.ArrayOfNameValuePair;
-import com.sg.vim.service.ArrayOfString;
-import com.sg.vim.service.NameValuePair;
-import com.sg.vim.service.OperateResult;
-
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the info.catarc.soap package. 
+ * generated in the com.sg.vim.service.fuellabel package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -28,7 +23,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: info.catarc.soap
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sg.vim.service.fuellabel
      * 
      */
     public ObjectFactory() {

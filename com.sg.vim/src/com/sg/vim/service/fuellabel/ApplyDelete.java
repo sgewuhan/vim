@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.sg.vim.service.ArrayOfString;
-
 
 /**
  * <p>Java class for anonymous complex type.
