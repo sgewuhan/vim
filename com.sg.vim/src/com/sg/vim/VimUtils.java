@@ -1068,6 +1068,7 @@ public class VimUtils {
             VehicleBasicInfo vbi = getVehicleBasicInfo(fuelLabelList.get(i));
             vehicleInfoList.getVehicleBasicInfo().add(vbi);
 
+
             if (i != 0 && (i + 1) % 20 == 0) {// 每20条上传一次
                 OperateResult r = service.uploadFuelData(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
                         vehicleInfoList, FUELLABEL_OKEY);
