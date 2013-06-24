@@ -489,6 +489,7 @@ public class IVIMFields {
 
     /** ´òÓ¡ÈÕÆÚ **/
     public static final String PRINTDATE = "pnt_date";
+    public static final String MANUFACTUREDATE = "_cdate";
     public static final String PRINTACCOUNT = "pnt_account";
     public static final String UPLOADDATE = "upl_date";
     public static final String UPLOADACCOUNT = "upl_account";

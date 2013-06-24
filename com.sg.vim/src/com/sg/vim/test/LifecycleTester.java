@@ -104,7 +104,7 @@ public class LifecycleTester extends PropertyTester {
         // 对于补传数据，要求填写补传原因
 
         if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
-            Object pdate = data.get(IVIMFields.PRINTDATE);
+            Object pdate = data.get(IVIMFields.MANUFACTUREDATE);
             if (pdate instanceof Date) {
                 long i = new Date().getTime() - ((Date) pdate).getTime();
                 return i > 2 * 24 * 60 * 60 * 1000;
