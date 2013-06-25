@@ -13166,6 +13166,141 @@
                </section>
             </pagecolumn>
          </basicpage>
+         <basicpage
+               id="com.sg.vim.basicpage3"
+               title="com.sg.vim.basicpage3">
+            <pagecolumn>
+               <section
+                     label="com.sg.vim.section3">
+                  <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_0_1"   label="汽车生产企业"             
+    labelVisible="true"                    
+         name="F_0_1"               
+    persistable="true"   required="false"   type="String">  </field>    
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_0_2C1"   label="车辆型号"             
+    labelVisible="true"                    
+         name="F_0_2C1"               
+    persistable="true"   required="false"   type="String">  </field> 
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_0_4"   label="车辆种类"             
+    labelVisible="true"                    
+         name="F_0_4"               
+    persistable="true"   required="false"   type="String">  </field> 
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_25"   label="燃料类型"             
+    labelVisible="true"                    
+         name="F_25"               
+    persistable="true"   required="false"   type="String">  </field> 
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="C_08"   label="整车装备质量"             
+    labelVisible="true"                    
+         name="C_08"               
+    persistable="true"   required="false"   type="String">  </field> 
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_44"   label="最高车速"             
+    labelVisible="true"                    
+         name="F_44"               
+    persistable="true"   required="false"   type="String">  </field> 
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_32A"   label="轮胎规格"             
+    labelVisible="true"                    
+         name="F_32A"               
+    persistable="true"   required="false"   type="String">  </field>    
+    
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_3"   label="轴距"             
+    labelVisible="true"                    
+         name="F_3"               
+    persistable="true"   required="false"   type="String">  </field>    
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="D_17"   label="座位排数"             
+    labelVisible="true"                    
+         name="D_17"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_42_1"   label="额定载客"             
+    labelVisible="true"                    
+         name="F_42_1"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="D_31"   label="检测机构名称"             
+    labelVisible="true"                    
+         name="D_31"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="D_32"   label="检测报告编号"             
+    labelVisible="true"                    
+         name="D_32"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_28_1"   label="变速器档位数"             
+    labelVisible="true"                    
+         name="F_28_1"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_26"   label="净功率"             
+    labelVisible="true"                    
+         name="F_26"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_3"   label="轴距"             
+    labelVisible="true"                    
+         name="F_3"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_23"   label="气缸数"             
+    labelVisible="true"                    
+         name="F_23"               
+    persistable="true"   required="false"   type="String">  </field>   
+    
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="G_34"   label="车辆制造日期"             
+    labelVisible="true"                    
+         name="G_34"               
+    persistable="true"   required="false"   type="String">  </field>    
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="D_20"   label="通用名称"             
+    labelVisible="true"                    
+         name="D_20"               
+    persistable="true"   required="false"   type="String">  </field>    
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="D_30"   label="越野车（G类）"             
+    labelVisible="true"                    
+         name="D_30"               
+    persistable="true"   required="false"   type="String">  </field>    
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_5A"   label="前轮距"             
+    labelVisible="true"                    
+         name="F_5A"               
+    persistable="true"   required="false"   type="String">  </field>    
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="F_5B "   label="后轮距"             
+    labelVisible="true"                    
+         name="F_5B "               
+    persistable="true"   required="false"   type="String">  </field>      
+            
+               </section>
+            </pagecolumn>
+         </basicpage>
       </editor>
       <pageExtendsions
             id="com.sg.vim.print.editor.fuellabel"
@@ -14165,6 +14300,27 @@
                   fieldname="all">
             </fieldname>
          </versionControl>
+         <basicpage
+               id="com.sg.vim.basicpage2"
+               title="com.sg.vim.basicpage2">
+            <pagecolumn>
+               <section
+                     label="上传参数">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="g_32"
+                        label="其它信息"
+                        labelVisible="true"
+                        name="g_32"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
+         </basicpage>
       </editor>
       <editor
             collectionName="env"
@@ -15907,6 +16063,13 @@
             properties="open"
             type="java.lang.Object">
       </propertyTester>
+      <propertyTester
+            class="com.sg.vim.test.LifecycleTesterFuelLabel"
+            id="com.sg.vim.print.fuellabel.test.action"
+            namespace="com.sg.vim.print.fuellabel.test"
+            properties="cando"
+            type="java.lang.Object">
+      </propertyTester>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -17410,7 +17573,7 @@
                      operator="and">
                   <test
                         args="print"
-                        property="com.sg.vim.print.test.cando"
+                        property="com.sg.vim.print.fuellabel.test.cando"
                         value="flRePrintable">
                   </test>
                </iterate>
@@ -17428,7 +17591,7 @@
                      operator="and">
                   <test
                         args="remove"
-                        property="com.sg.vim.print.test.cando"
+                        property="com.sg.vim.print.fuellabel.test.cando"
                         value="true">
                   </test>
                </iterate>
@@ -17446,7 +17609,7 @@
                      operator="and">
                   <test
                         args="upload"
-                        property="com.sg.vim.print.test.cando"
+                        property="com.sg.vim.print.fuellabel.test.cando"
                         value="true">
                   </test>
                </iterate>
@@ -17464,7 +17627,7 @@
                      operator="and">
                   <test
                         args="reassembly"
-                        property="com.sg.vim.print.test.cando"
+                        property="com.sg.vim.print.fuellabel.test.cando"
                         value="true">
                   </test>
                </iterate>
@@ -17482,7 +17645,7 @@
                      operator="and">
                   <test
                         args="reupload"
-                        property="com.sg.vim.print.test.cando"
+                        property="com.sg.vim.print.fuellabel.test.cando"
                         value="true">
                   </test>
                </iterate>
@@ -17500,7 +17663,7 @@
                      operator="and">
                   <test
                         args="cancel"
-                        property="com.sg.vim.print.test.cando"
+                        property="com.sg.vim.print.fuellabel.test.cando"
                         value="true">
                   </test>
                </iterate>
@@ -17525,7 +17688,7 @@
                         operator="and">
                      <test
                            args="edit"
-                           property="com.sg.vim.print.test.cando"
+                           property="com.sg.vim.print.fuellabel.test.cando"
                            value="true">
                      </test>
                   </iterate>

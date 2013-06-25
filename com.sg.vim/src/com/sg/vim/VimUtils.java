@@ -1161,6 +1161,12 @@ public class VimUtils {
                 vehicleInfoList = new ArrayOfVehicleBasicInfo();
             }
         }
+        com.sg.vim.service.fuellabel.OperateResult r = service.uploadOverTime(FUELLABEL_USERNAME, FUELLABEL_PASSWORD,
+                vehicleInfoList, FUELLABEL_OKEY);
+        int rCode = r.getResultCode();
+        if (rCode == 1) {
+            throw new Exception(getResultMessage(r));
+        }
 
     }
 

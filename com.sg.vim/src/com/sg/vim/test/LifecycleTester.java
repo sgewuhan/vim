@@ -60,12 +60,12 @@ public class LifecycleTester extends PropertyTester {
         return false;
     }
 
-    private boolean canReassembly(DBObject data) {
+    protected boolean canReassembly(DBObject data) {
         //已经撤销的可以
         return IVIMFields.LC_CANCELED.equals(getLifecycle(data));
     }
 
-    private boolean canPrint(DBObject data, Object type) {
+    protected boolean canPrint(DBObject data, Object type) {
         boolean b = IVIMFields.LC_ABANDON.equals(getLifecycle(data));
         if (!b) {
             return false;
@@ -82,11 +82,11 @@ public class LifecycleTester extends PropertyTester {
 
     }
 
-    private String getLifecycle(DBObject data) {
+    protected String getLifecycle(DBObject data) {
         return (String) data.get(IVIMFields.LIFECYCLE);
     }
 
-    private boolean canRemove(DBObject data) {
+    protected boolean canRemove(DBObject data) {
         // 针对已打印，未上传的数据，作废历史数据
         // 根据VIN生成作废的合格证编号，正常上传，也可能补传
         // 根据打印时间而定，只能打印新的，需要填写作废原因。
@@ -95,16 +95,16 @@ public class LifecycleTester extends PropertyTester {
         return IVIMFields.LC_PRINTED.equals(getLifecycle(data));
     }
 
-    private boolean canCancel(DBObject data) {
+    protected boolean canCancel(DBObject data) {
         return IVIMFields.LC_UPLOADED.equals(getLifecycle(data));
     }
 
-    private boolean canReUpload(DBObject data) {
+    protected boolean canReUpload(DBObject data) {
         // 对于打印后2天内未及时上传的数据为补传，对于正常数据，点击补传，弹出提示框，
         // 对于补传数据，要求填写补传原因
 
         if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
-            Object pdate = data.get(IVIMFields.MANUFACTUREDATE);
+            Object pdate = data.get(IVIMFields.PRINTDATE);
             if (pdate instanceof Date) {
                 long i = new Date().getTime() - ((Date) pdate).getTime();
                 return i > 2 * 24 * 60 * 60 * 1000;
@@ -114,9 +114,9 @@ public class LifecycleTester extends PropertyTester {
         return false;
     }
 
-    private boolean canUpload(DBObject data, Object expectedValue) {
+    protected boolean canUpload(DBObject data, Object expectedValue) {
         if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
-            Object pdate = data.get(IVIMFields.MANUFACTUREDATE);
+            Object pdate = data.get(IVIMFields.PRINTDATE);
             if (pdate instanceof Date) {
                 long i = new Date().getTime() - ((Date) pdate).getTime();
                 return i <= 2 * 24 * 60 * 60 * 1000;
@@ -126,7 +126,7 @@ public class LifecycleTester extends PropertyTester {
         return false;
     }
 
-    private boolean canReprint(DBObject data) {
+    protected boolean canReprint(DBObject data) {
         // 对于已打印，未上传的合格证，再继续打印的话，可以更改纸质编号，记录打印日期，并保留历史数据
         // 即状态为已打印。
         // 2、对于已上传如果不修改任何内容只改纸质编号的话可以补打
@@ -134,7 +134,7 @@ public class LifecycleTester extends PropertyTester {
                 || IVIMFields.LC_UPLOADED.equals(getLifecycle(data));
     }
 
-    private boolean canEdit(DBObject data) {
+    protected boolean canEdit(DBObject data) {
         return IVIMFields.LC_UPLOADED.equals(getLifecycle(data));
     }
 
