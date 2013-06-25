@@ -116,7 +116,7 @@ public class LifecycleTester extends PropertyTester {
 
     private boolean canUpload(DBObject data, Object expectedValue) {
         if (IVIMFields.LC_PRINTED.equals(getLifecycle(data))) {
-            Object pdate = data.get(IVIMFields.PRINTDATE);
+            Object pdate = data.get(IVIMFields.MANUFACTUREDATE);
             if (pdate instanceof Date) {
                 long i = new Date().getTime() - ((Date) pdate).getTime();
                 return i <= 2 * 24 * 60 * 60 * 1000;
