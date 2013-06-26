@@ -7900,7 +7900,7 @@
             headerVisiable="true"
             id="com.sg.vim.table.env"
             idfield="_id"
-            inputProvider="com.sg.vim.model.EnvInput"
+            inputProvider="com.sg.vim.model.EnvLabelInput"
             limit="100"
             multiSelection="true"
             popupMenu="popup:com.sg.vim.table.env"
@@ -12959,7 +12959,7 @@
             name="汽车燃料消耗量标识">
          <basicpage
                description="汽车燃料消耗量标识"
-               id="1"
+               id="com.sg.vim.print.basicpage2"
                image="image/contact_32.png"
                title="汽车燃料消耗量标识">
             <pagecolumn>
@@ -13167,140 +13167,215 @@
             </pagecolumn>
          </basicpage>
          <basicpage
-               id="com.sg.vim.basicpage3"
-               title="com.sg.vim.basicpage3">
+               id="com.sg.vim.print.addAtr"
+               title="更多属性">
             <pagecolumn>
                <section
-                     label="com.sg.vim.section3">
+                     label="更多属性">
                   <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_0_1"   label="汽车生产企业"             
+        id="f_0_1"   label="汽车生产企业"             
     labelVisible="true"                    
-         name="F_0_1"               
+         name="f_0_1"               
     persistable="true"   required="false"   type="String">  </field>    
 
  <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_0_2C1"   label="车辆型号"             
+        id="f_0_2c1"   label="车辆型号"             
     labelVisible="true"                    
-         name="F_0_2C1"               
+         name="f_0_2c1"               
     persistable="true"   required="false"   type="String">  </field> 
 
  <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_0_4"   label="车辆种类"             
+        id="f_0_4"   label="车辆种类"             
     labelVisible="true"                    
-         name="F_0_4"               
+         name="f_0_4"               
     persistable="true"   required="false"   type="String">  </field> 
 
  <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_25"   label="燃料类型"             
+        id="f_25"   label="燃料类型"             
     labelVisible="true"                    
-         name="F_25"               
+         name="f_25"               
+    persistable="true"   required="false"   type="String">  </field> 
+
+
+ <field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="f_44"   label="最高车速"             
+    labelVisible="true"                    
+         name="f_44"               
     persistable="true"   required="false"   type="String">  </field> 
 
  <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="C_08"   label="整车装备质量"             
+        id="f_32a"   label="轮胎规格"             
     labelVisible="true"                    
-         name="C_08"               
-    persistable="true"   required="false"   type="String">  </field> 
-
- <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_44"   label="最高车速"             
-    labelVisible="true"                    
-         name="F_44"               
-    persistable="true"   required="false"   type="String">  </field> 
-
- <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_32A"   label="轮胎规格"             
-    labelVisible="true"                    
-         name="F_32A"               
+         name="f_32a"               
     persistable="true"   required="false"   type="String">  </field>    
     
- <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_3"   label="轴距"             
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="d_17"   label="座位排数"             
     labelVisible="true"                    
-         name="F_3"               
+         name="d_17"               
+    persistable="true"   required="false"   type="String">  </field>   
+
+<field computeField="false" editPart="Text(Single Line)"  editable="true"
+        id="f_42_1"   label="额定载客"             
+    labelVisible="true"                    
+         name="f_42_1"               
     persistable="true"   required="false"   type="String">  </field>    
 
 <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="D_17"   label="座位排数"             
+        id="d_20"   label="通用名称"             
     labelVisible="true"                    
-         name="D_17"               
+         name="d_20"               
     persistable="true"   required="false"   type="String">  </field>   
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_42_1"   label="额定载客"             
-    labelVisible="true"                    
-         name="F_42_1"               
-    persistable="true"   required="false"   type="String">  </field>   
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="D_31"   label="检测机构名称"             
-    labelVisible="true"                    
-         name="D_31"               
-    persistable="true"   required="false"   type="String">  </field>   
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="D_32"   label="检测报告编号"             
-    labelVisible="true"                    
-         name="D_32"               
-    persistable="true"   required="false"   type="String">  </field>   
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_28_1"   label="变速器档位数"             
-    labelVisible="true"                    
-         name="F_28_1"               
-    persistable="true"   required="false"   type="String">  </field>   
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_26"   label="净功率"             
-    labelVisible="true"                    
-         name="F_26"               
-    persistable="true"   required="false"   type="String">  </field>   
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_3"   label="轴距"             
-    labelVisible="true"                    
-         name="F_3"               
-    persistable="true"   required="false"   type="String">  </field>   
-
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_23"   label="气缸数"             
-    labelVisible="true"                    
-         name="F_23"               
-    persistable="true"   required="false"   type="String">  </field>   
     
 <field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="G_34"   label="车辆制造日期"             
+        id="g_34"   label="车辆制造日期"             
     labelVisible="true"                    
-         name="G_34"               
+         name="g_34"               
     persistable="true"   required="false"   type="String">  </field>    
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="D_20"   label="通用名称"             
-    labelVisible="true"                    
-         name="D_20"               
-    persistable="true"   required="false"   type="String">  </field>    
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="D_30"   label="越野车（G类）"             
-    labelVisible="true"                    
-         name="D_30"               
-    persistable="true"   required="false"   type="String">  </field>    
 
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_5A"   label="前轮距"             
-    labelVisible="true"                    
-         name="F_5A"               
-    persistable="true"   required="false"   type="String">  </field>    
-
-<field computeField="false" editPart="Text(Single Line)"  editable="true"
-        id="F_5B "   label="后轮距"             
-    labelVisible="true"                    
-         name="F_5B "               
-    persistable="true"   required="false"   type="String">  </field>      
             
                </section>
             </pagecolumn>
+            <pagecolumn>
+               <section
+                     label="更多属性">
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_3"
+                        label="轴距"
+                        labelVisible="true"
+                        name="f_3"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_5A"
+                        label="前轮距"
+                        labelVisible="true"
+                        name="f_5A"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_5B "
+                        label="后轮距"
+                        labelVisible="true"
+                        name="f_5B "
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_26"
+                        label="净功率"
+                        labelVisible="true"
+                        name="f_26"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="d_30"
+                        label="越野车（G类）"
+                        labelVisible="true"
+                        name="d_30"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_23"
+                        label="气缸数"
+                        labelVisible="true"
+                        name="f_23"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="d_31"
+                        label="检测机构名称"
+                        labelVisible="true"
+                        name="d_31"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="d_32"
+                        label="检测报告编号"
+                        labelVisible="true"
+                        name="d_32"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="f_28_1"
+                        label="变速器档位数"
+                        labelVisible="true"
+                        name="f_28_1"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+                  <field
+                        computeField="false"
+                        editPart="Text(Single Line)"
+                        editable="true"
+                        id="c_08"
+                        label="整车装备质量"
+                        labelVisible="true"
+                        name="c_08"
+                        persistable="true"
+                        required="false"
+                        type="String">
+                  </field>
+               </section>
+            </pagecolumn>
          </basicpage>
+         <versionControl>
+            <fieldname
+                  fieldname="all">
+            </fieldname>
+         </versionControl>
       </editor>
       <pageExtendsions
             id="com.sg.vim.print.editor.fuellabel"

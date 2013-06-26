@@ -2007,7 +2007,7 @@ public class VimUtils {
         info.setTymc((String) data.get(IVIMFields.D_20));
 
         // Yyc 越野车（G类） s:string 是/否
-        info.setTymc((String) data.get(IVIMFields.D_30));
+        info.setYyc((String) data.get(IVIMFields.D_30));
 
         // Zwps 座位排数 s:string
         info.setZwps((String) data.get(IVIMFields.D_17));

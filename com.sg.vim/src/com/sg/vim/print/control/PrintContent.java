@@ -743,6 +743,11 @@ public class PrintContent extends Composite {
                 }
                 savePrintData(currentModule);
             }
+            
+            if (currentModule == qxCertPrintModule) {
+                // 生成环保数据
+                VimUtils.createEnvData(currentModule.getData());
+            }
         }
 
     }
